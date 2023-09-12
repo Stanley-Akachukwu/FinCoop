@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Deposits\SpecialDeposits\SpecialDepositApplications\**" />
+	  <EmbeddedResource Remove="Deposits\SpecialDeposits\SpecialDepositApplications\**" />
+	  <None Remove="Deposits\SpecialDeposits\SpecialDepositApplications\**" />
+	  <None Remove="Deposits\SpecialDeposits\SpecialDepositLoanTransaction\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Migrations\20230222225223_migrate_task_208.cs" />
+	  <Compile Remove="Migrations\20230222225223_migrate_task_208.Designer.cs" />
+	  <Compile Remove="Migrations\20230222225709_migrate_task_210.cs" />
+	  <Compile Remove="Migrations\20230222225709_migrate_task_210.Designer.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Audit.EntityFramework.Identity.Core" Version="21.0.1" />
+		<PackageReference Include="Audit.NET" Version="21.0.1" />
+		<PackageReference Include="Audit.NET.Serilog" Version="21.0.1" />
+		<PackageReference Include="DotEnv.Core" Version="3.0.0" />
+		<PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="7.1.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.8">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.8">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Migrations\SQL\" />
+		<Folder Include="Deposits\FixedDeposits\FixedDepositApplications\" />
+		<Folder Include="Deposits\FixedDeposits\FixedDepositAccounts\" />
+		<Folder Include="Deposits\SpecialDeposits\SpecialDepositAccounts\" />
+		<Folder Include="Loans\DepartmentLoanProductPublications\" />
+		<Folder Include="Deposits\SpecialDeposits\SpecialDepositLoanTransaction\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\AP.ChevronCoop.Commons\AP.ChevronCoop.Commons.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Deposits\FixedDepositApplications\" />
+	  <None Remove="Deposits\FixedDepositAccounts\" />
+	  <None Remove="Deposits\SpecialDepositAccounts\" />
+	  <None Remove="Deposits\SavingsAccounts\" />
+	  <None Remove="Deposits\FixedDepositInterestSchedule\" />
+	  <None Remove="Deposits\PayrollSchedule\" />
+	  <None Remove="Deposits\SavingDepositApplications\" />
+	  <None Remove="Deposits\SpecialDepositApplications\" />
+	  <None Remove="Deposits\SpecialDepositInterestSchedules\" />
+	  <None Remove="Loans\CustomerLoanProductPublications\" />
+	  <None Remove="Loans\DepartmentLoanProductPublications\" />
+	</ItemGroup>
+</Project>

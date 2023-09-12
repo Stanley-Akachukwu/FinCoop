@@ -1,0 +1,427 @@
+﻿@page "/depositaccountdetails/{PageType}/{Id}/{CustomerId}"
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.FixedDeposit
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.SavingsAccount
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.SpecialDeposit
+
+<main>
+
+	<div class="px-4 pt-6">
+		<div class="col-span-3 sm:col-span-3 mb-6 flex gap-2  items-center">
+
+			<a href="javascript: void(0)" @onclick="@(e => GoBack())">
+				<button class="@Tailwind.Back_Button"
+						type="submit">
+					@((MarkupString)SvgHelpers.BackArrowIcon) Back
+				</button>
+			</a>
+
+
+			<h1 class="font-semibold text-2xl">@PageTitle</h1>
+		</div>
+
+
+		<!-- Request Tabs -->
+
+		<div class="grid grid-cols-1 gap-2 mt-4 w-full md:grid-cols-2 xl:grid-cols-4">
+			<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+				<div class="flex flex-row items-center gap-x-3 py-4">
+
+					<div class="relative h-16 w-16">
+						<img src="@CustomerImage" alt="@CustomerImage" class="rounded-full h-full w-full object-cover" />
+					</div>
+
+					<div class="flex flex-col justify-startr">
+						<div class="md:text-left text-center">
+							@*<h3 class="text-base text-gray-500">Account name</h3>*@
+							<p class="font-semibold text-xl">@CustomerFullName</p>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+				<div class="flex flex-row items-center gap-x-3 py-4">
+
+
+					<div class="flex flex-col justify-start">
+						<div class="text-gray-500 text-sm">Account number</div>
+						<div class="text-base font-bold">@CustomerAccountNumber</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+				<div class="flex flex-row items-center gap-x-3 py-4">
+
+					<div class="flex flex-col justify-start">
+						<div class="text-gray-500 text-sm">Account Balance</div>
+						<div class="text-base font-bold">₦@LedgerBalance.ToString("N2")</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+				<div class="flex flex-row items-center gap-x-3 py-4">
+
+					<div class="flex flex-col justify-start">
+						<div class="text-gray-500 text-sm">@ContributionType</div>
+						@if (PageType == DepositProductType.FIXED_DEPOSIT.ToString().ToLowerInvariant())
+						{
+							<div class="text-base font-bold">@MonthlyContribution.ToString("N2")%</div>
+						}
+						else
+						{
+							<div class="text-base font-bold">₦@MonthlyContribution.ToString("N2")</div>
+						}
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-9 xl:gap-2 xl:space-x-10 dark:bg-gray-900">
+			<div class="col-span-2 mb-4">
+				<div class="bg-white  rounded-lg shadow   dark:bg-gray-800">
+
+					@*For Savings Menu*@
+
+					@if (showSavings)
+					{
+						<a @onclick='(() => ChangeMenu("savings_dashboard", nameof(DefaultMenu1)))'>
+							<div class="@DefaultMenu1">
+								<h3 class=" text-gray-900 font-semibold text-base">
+
+									@((MarkupString)@SvgHelpers.SavingsDashboard) Dashboard
+								</h3>
+							</div>
+						</a>
+
+						<a @onclick='(() => ChangeMenu("savings_transaction", nameof(DefaultMenu2)))'>
+							<div class="@DefaultMenu2">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.Transaction) Transactions
+								</h3>
+							</div>
+						</a>
+
+						<a @onclick='(() => ChangeMenu("savings_cashaddition", nameof(DefaultMenu3)))'>
+							<div class="@DefaultMenu3">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.SavingsCashAddition) Cash Addition
+								</h3>
+							</div>
+						</a>
+
+						<a @onclick='(() => ChangeMenu("savings_increase_decrease", nameof(DefaultMenu4)))'>
+							<div class="@DefaultMenu4">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.SavingsIncreaseDecrease) Increase/Decrease
+								</h3>
+							</div>
+						</a>
+					}
+
+
+					@*For Special Deposit Account Menu*@
+
+					@if (showSpecialDeposit)
+					{
+						<a @onclick='(() => ChangeMenu("special_dashboard", nameof(DefaultMenu5)))'>
+							<div class="@DefaultMenu5">
+								<h3 class="text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.SavingsDashboard) Dashboard
+								</h3>
+							</div>
+						</a>
+						<a @onclick='(() => ChangeMenu("special_transaction", nameof(DefaultMenu6)))'>
+							<div class="@DefaultMenu6">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.SavingsTransactions) Transactions
+								</h3>
+							</div>
+						</a>
+						<a @onclick='(() => ChangeMenu("special_cashaddition", nameof(DefaultMenu7)))'>
+							<div class="@DefaultMenu7">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.SavingsCashAddition) Cash Addition
+								</h3>
+							</div>
+						</a>
+						<a @onclick='(() => ChangeMenu("special_fundtransfer", nameof(DefaultMenu8)))'>
+							<div class="@DefaultMenu8">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.SpecialDepositFundTransfer) Fund Transfer
+								</h3>
+							</div>
+						</a>
+
+						<a @onclick='(() => ChangeMenu("special_withdrawal", nameof(DefaultMenu9)))'>
+							<div class="@DefaultMenu9">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.SpecialDepositWithdrawal) Withdrawal
+								</h3>
+							</div>
+						</a>
+						<a @onclick='(() => ChangeMenu("specialDeposit_increase_decrease", nameof(DefaultMenu14)))'>
+							<div class="@DefaultMenu14">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.SavingsIncreaseDecrease) Increase/Decrease
+								</h3>
+							</div>
+						</a>
+
+						<a @onclick='(() => ChangeMenu("specialDeposit_interest_addition", nameof(DefaultMenu16)))'>
+							<div class="@DefaultMenu16">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.SavingsIncreaseDecrease) Interest Addition
+								</h3>
+							</div>
+						</a>
+					}
+
+
+					@*Fixed Deposit Menu*@
+
+					@if (showFixedDeposit)
+					{
+						<a @onclick='(() => ChangeMenu("fixed_dashboard", nameof(DefaultMenu10)))'>
+							<div class="@DefaultMenu10">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)SvgHelpers.AccountDashboardIcon)
+									Account Dashboard
+								</h3>
+
+							</div>
+						</a>
+
+						<a @onclick='(() => ChangeMenu("fixed_transaction", nameof(DefaultMenu11)))'>
+							<div class="@DefaultMenu11">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)SvgHelpers.CashAddition)
+									Transactions
+								</h3>
+
+							</div>
+						</a>
+
+
+						<a @onclick='(() => ChangeMenu("fixed_changematurity", nameof(DefaultMenu13)))'>
+							<div class="@DefaultMenu13">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.EditIcon) Change Maturity Instruction
+								</h3>
+							</div>
+						</a>
+
+						<a @onclick='(() => ChangeMenu("fixed_imidiate_liquidation", nameof(DefaultMenu12)))'>
+							<div class="@DefaultMenu12">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)SvgHelpers.LiquidationIcon)
+									Immediate Liquidation
+								</h3>
+
+							</div>
+						</a>
+					<a @onclick='(() => ChangeMenu("fixed_interest_addition", nameof(DefaultMenu17)))'>
+							<div class="@DefaultMenu17">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)@SvgHelpers.SavingsIncreaseDecrease) Interest Addition
+								</h3>
+							</div>
+						</a>
+
+					}
+						@if (!showFixedDeposit)
+					{
+						<a @onclick='(() => ChangeMenu("payroll", nameof(DefaultMenu15)))'>
+							<div class="@DefaultMenu15">
+								<h3 class=" text-gray-900 font-semibold text-base">
+									@((MarkupString)SvgHelpers.LiquidationIcon)
+									Payroll
+								</h3>
+
+							</div>
+						</a>
+					}
+					<a @onclick='(() => ChangeMenu("ledger_account", nameof(DefaultMenu30)))'>
+						<div class="@DefaultMenu30">
+							<h3 class=" text-gray-900 font-semibold text-base">
+								@((MarkupString)@SvgHelpers.SavingsDashboard)
+								Ledger Accounts
+							</h3>
+						</div>
+					</a>
+
+
+
+				</div>
+			</div>
+			<div class="col-span-7">
+
+				@if (MenuToShow == "savings_dashboard")
+				{
+					<Dashboard LedgerBalance="@LedgerBalance" 
+						 
+						   IsAdmin=@IsAdmin
+						   CustomerID="@CustomerId"
+						   SavingsAccountID="@AccountsMasterView.Id"
+						   SavingsAccountNumber="@AccountsMasterView.AccountNo"
+						   MembersName="@CustomerFullName"
+						   MembersNumber="@MembershipNumber"
+						   AccountsMasterView=@AccountsMasterView
+						   MemberProfile=@MemberProfile />
+				}
+				else if (MenuToShow == "savings_transaction")
+				{
+					<Transaction CustomerID="@CustomerId" IsAdmin=@IsAdmin
+							 SavingsAccountID="@AccountsMasterView.Id"
+							 SavingsAccountNumber="@AccountsMasterView.AccountNo"
+							 MembersName="@CustomerFullName"
+							 MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "savings_cashaddition")
+				{
+					<CashAddition CustomerID="@CustomerId" IsAdmin=@IsAdmin
+							  SavingsAccountID="@AccountsMasterView.Id"
+							  SavingsAccountNumber="@AccountsMasterView.AccountNo"
+							  MembersName="@CustomerFullName"
+							  BankName="@companyBankAccountMasterView.BankId_Name"
+							  AccountNumber="@companyBankAccountMasterView.AccountNumber"
+							  AccountName="@companyBankAccountMasterView.AccountName"
+							  MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "special_cashaddition")
+				{
+					<SpecialDepositCashAddition CustomerID="@CustomerId" IsAdmin=@IsAdmin
+											SpecialDepositAccountId="@AccountsMasterView.Id"
+											SavingsAccountNumber="@AccountsMasterView.AccountNo"
+											BankName="@companyBankAccountMasterView.BankId_Name"
+											AccountNumber="@companyBankAccountMasterView.AccountNumber"
+											AccountName="@companyBankAccountMasterView.AccountName"
+											MembersName="@CustomerFullName"
+											AvailableBalance="@LedgerBalance"
+											MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "savings_increase_decrease")
+				{
+					<IncreaseDecrease CustomerID="@CustomerId" IsAdmin=@IsAdmin
+								  SavingsAccountID="@AccountsMasterView.Id"
+								  SavingsAccountNumber="@AccountsMasterView.AccountNo"
+								  MembersName="@CustomerFullName"
+								  AccountBalance="@LedgerBalance"
+								  MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "specialDeposit_increase_decrease")
+				{
+					<SpecialDepositIncreaseDecrease CustomerID="@CustomerId" IsAdmin=@IsAdmin
+												SpecialDepositAccountID="@AccountsMasterView.Id"
+												SpecialDepositAccountNumber="@AccountsMasterView.AccountNo"
+												MembersName="@CustomerFullName"
+				MonthlyContribution="@MonthlyContribution"
+												AccountBalance="@LedgerBalance"
+												MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "special_dashboard")
+				{
+					<SpecialDashboard CustomerID="@CustomerId" IsAdmin=@IsAdmin
+								  SpecialDepositAccountID="@AccountsMasterView.Id"
+			  SpecialDepositAccountNumber="@AccountsMasterView.AccountNo"
+								  MembersName="@CustomerFullName"
+								  MembersNumber="@MembershipNumber"
+								  LedgerBalance="@LedgerBalance"  
+								  AccountsMasterView=@AccountsMasterView
+			  MemberProfile=@MemberProfile />
+				}
+				else if (MenuToShow == "special_transaction")
+				{
+					<SpecialDepositTransactions CustomerID="@CustomerId" IsAdmin=@IsAdmin
+											SpecialDepositAccountID="@AccountsMasterView.Id"
+			   SpecialDepositAccountNumber="@AccountsMasterView.AccountNo"
+											MembersName="@CustomerFullName"
+											MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "special_fundtransfer")
+				{
+					<FundTransfer CustomerID="@CustomerId" IsAdmin=@IsAdmin
+							  AvailableBalance="@AvailableBalance"
+							  LedgerBalance="@LedgerBalance"
+			 SpecialDepositAccountID="@AccountsMasterView.Id"
+			 SpecialDepositAccountNumber="@AccountsMasterView.AccountNo"
+							  MembersName="@CustomerFullName"
+							  MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "special_withdrawal")
+				{
+					<Withdrawal CustomerID="@CustomerId" IsAdmin=@IsAdmin
+							AvailableBalance="@AvailableBalance"
+							LedgerBalance="@LedgerBalance"
+							SpecialDepositAccountID="@AccountsMasterView.Id"
+		   SpecialDepositAccountNumber="@AccountsMasterView.AccountNo"
+							MembersName="@CustomerFullName"
+							MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "specialDeposit_interest_addition")
+				{
+					<InterestAddition AccountNumber="@AccountsMasterView.AccountNo" AccType="Special Deposit Interest Addition" />
+				}	else if (MenuToShow == "fixed_interest_addition")
+				{
+					<FixedDepositInterestAddition AccountNumber="@AccountsMasterView.AccountNo" AccType="Fixed Deposit Interest Addition" />
+				}
+				else if (MenuToShow == "fixed_dashboard")
+				{
+					<FixedDepositDashboard CustomerID="@CustomerId" IsAdmin=@IsAdmin
+									   LedgerBalance="@LedgerBalance" AvailableBalance="@AvailableBalance"
+									   FixedDepositAccountID="@AccountsMasterView.Id"
+									   SavingsAccountNumber="@AccountsMasterView.AccountNo"
+									   MembersName="@CustomerFullName"
+				AccountsMasterView=@AccountsMasterView
+				MemberProfile=@MemberProfile
+									   MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "fixed_transaction")
+				{
+					<FixedDepositTransactions CustomerID="@CustomerId" IsAdmin=@IsAdmin
+										  FixedDepositAccountID="@AccountsMasterView.Id"
+										  FixedDepositAccountNumber="@AccountsMasterView.AccountNo"
+										  MembersName="@CustomerFullName"
+										  MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "fixed_changematurity")
+				{
+					<FixedDepositMaturityInstruction CustomerID="@CustomerId" IsAdmin=@IsAdmin
+												 FixedDepositAccountID="@AccountsMasterView.Id"
+												 FixedDepositAccountNumber="@AccountsMasterView.AccountNo"
+												 MembersName="@CustomerFullName"
+												 MembersNumber="@MembershipNumber" />
+				}
+				else if (MenuToShow == "fixed_imidiate_liquidation")
+				{
+					<FixedDepositLiquidation CustomerID="@CustomerId" IsAdmin=@IsAdmin
+										 FixedDepositAccountID="@AccountsMasterView.Id"
+										 FixedDepositAccountNumber="@AccountsMasterView.AccountNo"
+										 MembersName="@CustomerFullName"
+										 MembersNumber="@MembershipNumber" />
+				}
+
+				else if (MenuToShow == "ledger_account")
+				{
+					<LedgerAccount Model="@AccountsMasterView" IsAdmin=@IsAdmin />
+				}
+				else if (MenuToShow == "payroll")
+				{
+					<PayrollTransaction MembersNumber="@MembershipNumber" IsAdmin=@IsAdmin />
+				}
+
+
+			</div>
+		</div>
+
+	</div>
+
+</main>

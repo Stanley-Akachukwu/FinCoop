@@ -1,0 +1,43 @@
+﻿<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800 ">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Approval Routing
+    </h3>
+    <form action="">
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-span-full">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select Approval Workflow
+                </label>
+                <SfComboBox TValue="string" TItem="AP.ChevronCoop.Entities.Security.Approvals.ApprovalWorkflows.ApprovalWorkflowMasterView" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            @bind-Value=@Model Query="@Query_Combo"
+                            FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                            ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Approval Workflow">
+                    <SfDataManager Url="@DROPDOWN_API_RESOURCE_CHARGE_WORKFLOW" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                    <ComboBoxFieldSettings Text="WorkflowName" Value="Id"></ComboBoxFieldSettings>
+                </SfComboBox>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+<div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+    <div class="col-span-3 sm:col-span-3">
+        <a href="javascript: void(0)" @onclick=OnPrevious>
+            <button type="button" class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Back
+            </button>
+        </a>
+
+    </div>
+    <div class="col-span-3 sm:col-span-3">
+        <button href="javascript: void(0)" @onclick=OnSubmit class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                id="updateProductButton" data-modal-toggle="updateProductModal">
+            Proceed
+        </button>
+    </div>
+</div>

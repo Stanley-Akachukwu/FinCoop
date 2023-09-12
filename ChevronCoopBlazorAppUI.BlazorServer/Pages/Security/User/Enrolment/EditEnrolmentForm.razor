@@ -1,0 +1,149 @@
+﻿@using AP.ChevronCoop.Entities.Security;
+<EditForm Model="@Model">
+    <FluentValidationValidator/>
+    <ValidationSummary/>
+    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+
+
+        <div class="w-full">
+            <label for="MembershipId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Membership NO
+            </label>
+            <SfTextBox ID="MembershipId" Placeholder=" Enter Membership NO" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.MembershipId OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+        <div class="w-full">
+            <label for="FirstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                First Name
+            </label>
+            <SfTextBox ID="FirstName" Placeholder=" Enter First Name" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.FirstName OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+
+        <div class="w-full">
+            <label for="MiddleName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Middle Name
+            </label>
+            <SfTextBox ID="MiddleName" Placeholder="Enter Middle Name" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.MiddleName OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+        <div class="w-full">
+            <label for="LastName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Last Name
+            </label>
+            <SfTextBox ID="LastName" Placeholder="Enter Last Name" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.LastName OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+        <div class="w-full">
+            <label for="Email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Email
+            </label>
+            <SfTextBox ID="UserName" Placeholder=" Enter Email" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@MemberEmail OnBlur="OnBlur" Enabled=false>
+                >
+            </SfTextBox>
+        </div>
+        <div class="w-full">
+            <label for="DepartmentId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Select Staff Department
+            </label>
+
+            @{
+                var combobox_Department_res = $"{Config.ODATA_VIEWS_HOST}/{nameof(DepartmentMasterView)}";
+            }
+
+            <SfComboBox TValue="string" TItem="DepartmentMasterView" OnBlur="OnBlur"
+                        @bind-Value=@Model.DepartmentId Query="@Query_Combo"
+                        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Department">
+                <SfDataManager Url="@combobox_Department_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+            </SfComboBox>
+
+
+        </div>
+        <div class="w-full">
+            <label for="CurrencyId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Gender
+            </label>
+
+            @{
+                var genderTypes = Enum.GetNames(typeof(Gender)).ToList();
+
+            }
+
+            <SfComboBox id="Gender" DataSource=@genderTypes TValue="string" TItem="string" OnBlur="OnBlur" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        @bind-Value=@Model.Gender
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select gender">
+            </SfComboBox>
+
+        </div>
+        <div class="w-full">
+            <label for="Status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Status
+            </label>
+
+            @{
+                var profileStatuses = Enum.GetNames(typeof(MemberProfileStatus)).ToList();
+
+            }
+
+            <SfComboBox id="Status" DataSource=@profileStatuses TValue="string" TItem="string" OnBlur="OnBlur" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        @bind-Value=@Model.Status
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select status">
+            </SfComboBox>
+
+        </div>
+
+        <div class="w-full">
+            <label for="State" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Country
+            </label>
+            <SfTextBox ID="Country" Placeholder="Enter Country" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.Country OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+        <div class="w-full">
+            <label for="State" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                State
+            </label>
+            <SfTextBox ID="State" Placeholder="Enter State" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.State OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+
+        <div class="sm:col-span-2">
+            <label for="Address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Address
+            </label>
+            <SfTextBox Multiline="true" ID="Address" Placeholder="Enter Address" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.ResidentialAddress OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+    </div>
+    <br/>
+
+    <button type="button" @onclick="OnSave"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Save
+    </button>
+
+    <button type="button" @onclick="OnCancel"
+            class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+        Cancel
+    </button>
+</EditForm>
+<Modal Title="@("Notification")" Visible="@showPopup" DestroyOnClose="true"
+       OnOk="OnCancel" OkText="@("Ok")"
+       OnCancel="OnCancel" CancelText="@("Cancel")">
+    <p>@notificationText</p>
+</Modal>

@@ -1,0 +1,379 @@
+﻿@page "/security/guarantorapprovaldetail/{Id}"
+<main>
+
+<div class="px-4 pt-6">
+
+<div class="col-span-3 sm:col-span-3">
+    <a href="/security/guarantorapproval">
+        <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                type="submit">
+            <svg class="inline mr-1" width="14" height="12" viewBox="0 0 14 12" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 5.99967H13Z" fill="#1F82BD"/>
+                <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13"
+                      stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round"/>
+            </svg> Back
+        </button>
+    </a>
+
+</div>
+<!-- Request Tabs -->
+
+<div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-9 xl:gap-2 space-x-24 dark:bg-gray-900">
+
+<div class="col-span-6">
+      @if (showRejectedBadge)
+                {
+                    <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.9998 15.2C9.90936 15.2 11.7407 14.4414 13.091 13.0912C14.4412 11.7409 15.1998 9.90956 15.1998 8C15.1998 6.09044 14.4412 4.2591 13.091 2.90883C11.7407 1.55857 9.90936 0.800003 7.9998 0.800003C6.09025 0.800003 4.2589 1.55857 2.90864 2.90883C1.55837 4.2591 0.799805 6.09044 0.799805 8C0.799805 9.90956 1.55837 11.7409 2.90864 13.0912C4.2589 14.4414 6.09025 15.2 7.9998 15.2ZM11.3361 6.8363C11.5 6.66656 11.5908 6.43922 11.5887 6.20324C11.5867 5.96727 11.492 5.74153 11.3251 5.57467C11.1583 5.4078 10.9325 5.31315 10.6966 5.3111C10.4606 5.30905 10.2332 5.39976 10.0635 5.5637L7.0998 8.5274L5.9361 7.3637C5.76636 7.19976 5.53902 7.10905 5.30304 7.1111C5.06707 7.11315 4.84134 7.2078 4.67447 7.37467C4.5076 7.54153 4.41295 7.76727 4.4109 8.00324C4.40885 8.23922 4.49956 8.46656 4.66351 8.6363L6.46351 10.4363C6.63228 10.605 6.86116 10.6998 7.0998 10.6998C7.33845 10.6998 7.56733 10.605 7.7361 10.4363L11.3361 6.8363Z" fill="#C81E1E"></path>
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <span class="font-medium">Rejected</span>
+                            <ul class="mt-1.5 ml-4  list-inside">
+                                <li>You rejected this request</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                }
+                  @if (showApprovalBadge)
+                {
+                    <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+     role="alert">
+                        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.9998 15.2C9.90936 15.2 11.7407 14.4415 13.091 13.0912C14.4412 11.741 15.1998 9.90961 15.1998 8.00005C15.1998 6.09049 14.4412 4.25914 13.091 2.90888C11.7407 1.55862 9.90936 0.800049 7.9998 0.800049C6.09025 0.800049 4.2589 1.55862 2.90864 2.90888C1.55837 4.25914 0.799805 6.09049 0.799805 8.00005C0.799805 9.90961 1.55837 11.741 2.90864 13.0912C4.2589 14.4415 6.09025 15.2 7.9998 15.2ZM11.3361 6.83635C11.5 6.66661 11.5908 6.43927 11.5887 6.20329C11.5867 5.96731 11.492 5.74158 11.3251 5.57471C11.1583 5.40785 10.9325 5.31319 10.6966 5.31114C10.4606 5.30909 10.2332 5.39981 10.0635 5.56375L7.0998 8.52745L5.9361 7.36375C5.76636 7.19981 5.53902 7.10909 5.30304 7.11114C5.06707 7.11319 4.84134 7.20785 4.67447 7.37471C4.5076 7.54158 4.41295 7.76731 4.4109 8.00329C4.40885 8.23927 4.49956 8.46661 4.66351 8.63635L6.46351 10.4363C6.63228 10.6051 6.86116 10.6999 7.0998 10.6999C7.33845 10.6999 7.56733 10.6051 7.7361 10.4363L11.3361 6.83635Z" fill="#046C4E"/>
+                        </svg>
+
+                        <span class="sr-only">Danger</span>
+
+                        <div>
+                            <span class="font-medium">Approved</span>
+                            <ul class="mt-1.5 ml-4  list-inside">
+                                <li>You approved this request</li>
+                            </ul>
+                        </div>
+
+
+
+
+                    </div>
+                }
+                <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Loan Information
+    </h3>
+    <form action="">
+        <div class="grid grid-cols-6 gap-6">
+
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                        Membership Id
+                    </h2>
+                    <p>@LoanAppView.Applicant.MemberId</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                        Member
+                        Name
+                    </h2>
+                    <p>@LoanAppView.Applicant.FullName</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                        Loan Product Type
+                    </h2>
+                    <p>@LoanAppView.Product.LoanProductType</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                        Loan
+                        amount
+                    </h2>
+                    <p>@LoanAppView.LoanApplication.Principal.ToString("N2")</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                        Interest
+                        rate
+                    </h2>
+                                    <p>@LoanAppView.Product.InterestRate</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                        Tenor
+                        Unit
+                    </h2>
+                    <p>@LoanAppView.LoanApplication.TenureUnit</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                        Repayment
+                        tenor
+                    </h2>
+                    <p>@LoanAppView.LoanApplication.TenureValue</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                        Commencement of repayment
+                    </h2>
+                    <p>@LoanAppView.LoanApplication.RepaymentCommencementDate.ToString("d")</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                        Years of
+                        service
+                    </h2>
+                     <p>@LoanAppView.Applicant.YearsOfService</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                        Disbursement account
+                    </h2>
+                                    <p>@LoanAppView.LoanApplication.Principal.ToString("N2")</p>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+@if (showRemarks)
+{
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+        <h3 class="mb-4 text-xl font-bold dark:text-white">
+            Comment
+        </h3>
+        <h2>@LoanAppView.Comment</h2>
+    </div>
+}
+@if (showButton)
+{
+    <div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+        <div class="col-span-3 sm:col-span-3">
+
+            <button data-modal-target="rejectModalForm" data-modal-toggle="rejectModalForm"
+                    class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Reject
+            </button>
+
+            <!-- Rejection modal -->
+            <div id="rejectModalForm" tabindex="-1" aria-hidden="true"
+                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative w-full max-w-2xl max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex items-start justify-between px-6 pt-6 pb-2  rounded-t dark:border-gray-600">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                Reason for rejection
+                            </h3>
+                            <button type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    data-modal-hide="rejectModalForm">
+                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                          clip-rule="evenodd">
+                                    </path>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <div class="px-6">
+                            <h2 class=" text-gray-400">
+                                Please enter your reason for rejecting
+                                this request
+                            </h2>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-6 space-y-6">
+
+                            <textarea id="message" rows="4" @bind="@Comment" 
+                                                  class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                  placeholder="Add comments"></textarea>
+
+                        </div>
+                        <!-- Rejection Form modal -->
+                        <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button @onclick=@(e => SubmitAction(false)) type="button"
+                                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                Yes,
+                                I reject
+                            </button>
+                            <button data-modal-hide="rejectModalForm" type="button"
+                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Rejection success modal -->
+            <div id="approvalRejectModal" tabindex="-1" aria-hidden="true"
+                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+                    <!-- Modal content -->
+                    <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                        <!-- Modal header -->
+                        <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+                            <svg width="79" height="80" viewBox="0 0 79 80" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                                      stroke="#0E9F6E" stroke-width="4" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+
+                            <p class="break-words text-center my-8">
+                                You’ve successfully rejected this request
+                            </p>
+
+                            <form class="w-full">
+                                <a href="/security/guarantorapproval">
+
+                                    <button type="button"
+                                            class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                                        Done
+                                    </button>
+                                </a>
+                            </form>
+                        </div>
+                        <!-- Modal body -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-span-3 sm:col-span-3">
+
+            <button data-modal-target="approvalModalForm" data-modal-toggle="approvalModalForm"
+                    class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Approve
+            </button>
+            <!-- Approval Form modal -->
+            <div id="approvalModalForm" tabindex="-1" aria-hidden="true"
+                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative w-full max-w-2xl max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex items-start justify-between px-6 pt-6 pb-2  rounded-t dark:border-gray-600">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mr-1">
+                                Comment
+                                <h2 class="text-gray-300">(Optional)</h2>
+                            </h3>
+                            <button type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    data-modal-hide="approvalModalForm">
+                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                          clip-rule="evenodd">
+                                    </path>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <div class="px-6">
+                            <h2 class=" text-gray-400">Please enter your comment for this request</h2>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-6 space-y-6">
+
+                            <textarea id="message" rows="4" @bind="@Comment"
+                                                  class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                  placeholder="Add comments"></textarea>
+
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button @onclick=@(e => SubmitAction(true)) type="button"
+                                    class="text-white bg-CEMCS-Blue-100 bg-CEMCS-Blue-100 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-red-800">
+                                Yes,
+                                I approve
+                            </button>
+                            <button data-modal-hide="approvalModalForm" type="button"
+                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                Cancel
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approval success modal -->
+
+                            <Modal Visible="@showPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+                               class="overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+
+                                <!-- Modal content -->
+                                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                                    <!-- Modal header -->
+                                    <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+                                        <svg width="79" height="80" viewBox="0 0 79 80" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                                              stroke="#0E9F6E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+
+                                        <p class="break-words text-center my-8">
+                                            You’ve successfully approved this request
+                                        </p>
+
+                                        <form class="w-full">
+                                            <button @onclick=Done type="button"
+                                                class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                                                Done
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <!-- Modal body -->
+                                </div>
+
+
+                            </Modal>
+
+        </div>
+    </div>
+}
+
+
+</div>
+
+</div>
+</div>
+
+</main>

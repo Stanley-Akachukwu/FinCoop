@@ -1,0 +1,319 @@
+﻿@page "/approvals/{filter}"
+@using AP.ChevronCoop.Entities.Deposits.Products.DepositProducts;
+@using AP.ChevronCoop.Entities.Security.Approvals;
+@using AP.ChevronCoop.AppDomain.Security.Approvals
+@using AP.ChevronCoop.Entities.Security.Approvals.Approvals;
+@using AP.ChevronCoop.Entities.Security.MemberProfiles.MemberProfiles;
+@using ChevronCoop.Web.AppUI.BlazorServer.Helper;
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.DropDowns
+@using System.Dynamic
+
+@using AP.ChevronCoop.Entities.CoopCustomers.Customers;
+@using AP.ChevronCoop.Entities.Security.Approvals;
+@using AP.ChevronCoop.Entities.Security.MemberProfiles.MemberProfiles;
+
+<main>
+    @* @if (isLoading)
+    {
+    <LoadingComponent></LoadingComponent>
+    }
+    else
+    {*@
+
+    <div class="px-4 pt-6">
+        <div class="mb-4">
+            <nav class="flex mb-5" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="#"
+                           class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                            </svg>
+                            Approvals
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd">
+                                </path>
+                            </svg>
+
+                        </div>
+                    </li>
+
+                </ol>
+            </nav>
+        </div>
+        <div class="col-span-3 sm:col-span-3 mb-2">
+            <a href="/productSetup/get-started">
+
+                <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="submit">
+                    <svg class="inline mr-1" width="14" height="12" viewBox="0 0 14 12" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 5.99967H13Z" fill="#1F82BD" />
+                        <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13"
+                              stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                    </svg> Back
+                </button>
+            </a>
+        </div>
+
+
+        <!-- Request Tabs -->
+
+        <div class="mb-4 flex w-full items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+
+            <div class="w-full">
+                <div class="hidden md:flex">
+
+                    <div class="text-xs font-medium text-center text-gray-500  border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+                        <ul class="flex flex-wrap -mb-px">
+                            <li class="mr-2">
+                                <a href="javascript: void(0)" @onclick=@(e => onFiltering("all"))
+                                   class="inline-block p-4 @All  rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                                    <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                              d="M14.4001 7.99961C14.4001 9.69699 13.7258 11.3249 12.5256 12.5251C11.3253 13.7253 9.69748 14.3996 8.0001 14.3996C6.30271 14.3996 4.67485 13.7253 3.47461 12.5251C2.27438 11.3249 1.6001 9.69699 1.6001 7.99961C1.6001 6.30222 2.27438 4.67436 3.47461 3.47413C4.67485 2.27389 6.30271 1.59961 8.0001 1.59961C9.69748 1.59961 11.3253 2.27389 12.5256 3.47413C13.7258 4.67436 14.4001 6.30222 14.4001 7.99961ZM9.6001 5.59961C9.6001 6.02396 9.43153 6.43092 9.13147 6.73098C8.83141 7.03104 8.42444 7.19961 8.0001 7.19961C7.57575 7.19961 7.16879 7.03104 6.86873 6.73098C6.56867 6.43092 6.4001 6.02396 6.4001 5.59961C6.4001 5.17526 6.56867 4.7683 6.86873 4.46824C7.16879 4.16818 7.57575 3.99961 8.0001 3.99961C8.42444 3.99961 8.83141 4.16818 9.13147 4.46824C9.43153 4.7683 9.6001 5.17526 9.6001 5.59961ZM8.0001 8.79961C7.23418 8.79945 6.48432 9.0192 5.83963 9.43273C5.19494 9.84626 4.68253 10.4362 4.3633 11.1324C4.81344 11.6561 5.37151 12.0762 5.99925 12.364C6.62699 12.6518 7.30954 12.8004 8.0001 12.7996C8.69065 12.8004 9.3732 12.6518 10.0009 12.364C10.6287 12.0762 11.1868 11.6561 11.6369 11.1324C11.3177 10.4362 10.8053 9.84626 10.1606 9.43273C9.51588 9.0192 8.76602 8.79945 8.0001 8.79961Z"
+                                              fill="#1F82BD" />
+                                    </svg>
+
+                                    All
+                                </a>
+                            </li>
+                            <li class="mr-2">
+                                <a href="javascript: void(0)" @onclick=@(e => onFiltering("initiated"))
+                                   class="inline-block p-4 @Pending rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                                    <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.2001 4.3002H2.7001V4.8002V8.97999C2.59841 8.9281 2.50451 8.86024 2.42228 8.77801C2.21599 8.57172 2.1001 8.29193 2.1001 8.0002V4.8002C2.1001 4.50846 2.21599 4.22867 2.42228 4.02238C2.62857 3.81609 2.90836 3.7002 3.2001 3.7002H9.6001C9.89184 3.7002 10.1716 3.81609 10.3779 4.02238C10.4601 4.10461 10.528 4.19851 10.5799 4.3002H3.2001ZM5.3001 8.0002C5.3001 7.70846 5.41599 7.42867 5.62228 7.22238C5.82857 7.01609 6.10836 6.9002 6.4001 6.9002H12.8001C13.0918 6.9002 13.3716 7.01609 13.5779 7.22238C13.7842 7.42867 13.9001 7.70846 13.9001 8.0002V11.2002C13.9001 11.4919 13.7842 11.7717 13.5779 11.978C13.3716 12.1843 13.0918 12.3002 12.8001 12.3002H6.4001C6.10836 12.3002 5.82857 12.1843 5.62228 11.978C5.41599 11.7717 5.3001 11.4919 5.3001 11.2002V8.0002ZM9.6001 11.7002C10.1571 11.7002 10.6912 11.4789 11.085 11.0851C11.4788 10.6913 11.7001 10.1572 11.7001 9.6002C11.7001 9.04324 11.4788 8.5091 11.085 8.11527C10.6912 7.72145 10.1571 7.5002 9.6001 7.5002C9.04314 7.5002 8.509 7.72145 8.11517 8.11527C7.72135 8.5091 7.5001 9.04324 7.5001 9.6002C7.5001 10.1572 7.72135 10.6913 8.11517 11.0851C8.509 11.4789 9.04314 11.7002 9.6001 11.7002Z"
+                                              fill="#6B7280" stroke="#6B7280" />
+                                    </svg>
+                                    Initiated
+                                </a>
+                            </li>
+                            <li class="mr-2">
+                                <a href="javascript: void(0)" @onclick=@(e => onFiltering("created"))
+                                   class="inline-block p-4 @Pending rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                                    <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.2001 4.3002H2.7001V4.8002V8.97999C2.59841 8.9281 2.50451 8.86024 2.42228 8.77801C2.21599 8.57172 2.1001 8.29193 2.1001 8.0002V4.8002C2.1001 4.50846 2.21599 4.22867 2.42228 4.02238C2.62857 3.81609 2.90836 3.7002 3.2001 3.7002H9.6001C9.89184 3.7002 10.1716 3.81609 10.3779 4.02238C10.4601 4.10461 10.528 4.19851 10.5799 4.3002H3.2001ZM5.3001 8.0002C5.3001 7.70846 5.41599 7.42867 5.62228 7.22238C5.82857 7.01609 6.10836 6.9002 6.4001 6.9002H12.8001C13.0918 6.9002 13.3716 7.01609 13.5779 7.22238C13.7842 7.42867 13.9001 7.70846 13.9001 8.0002V11.2002C13.9001 11.4919 13.7842 11.7717 13.5779 11.978C13.3716 12.1843 13.0918 12.3002 12.8001 12.3002H6.4001C6.10836 12.3002 5.82857 12.1843 5.62228 11.978C5.41599 11.7717 5.3001 11.4919 5.3001 11.2002V8.0002ZM9.6001 11.7002C10.1571 11.7002 10.6912 11.4789 11.085 11.0851C11.4788 10.6913 11.7001 10.1572 11.7001 9.6002C11.7001 9.04324 11.4788 8.5091 11.085 8.11527C10.6912 7.72145 10.1571 7.5002 9.6001 7.5002C9.04314 7.5002 8.509 7.72145 8.11517 8.11527C7.72135 8.5091 7.5001 9.04324 7.5001 9.6002C7.5001 10.1572 7.72135 10.6913 8.11517 11.0851C8.509 11.4789 9.04314 11.7002 9.6001 11.7002Z"
+                                              fill="#6B7280" stroke="#6B7280" />
+                                    </svg>
+                                    Created
+                                </a>
+                            </li>
+                            <li class="mr-2">
+                                <a href="javascript: void(0)" @onclick=@(e => onFiltering("pending_approval"))
+                                   class="inline-block p-4 @Pending rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                                    <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.2001 4.3002H2.7001V4.8002V8.97999C2.59841 8.9281 2.50451 8.86024 2.42228 8.77801C2.21599 8.57172 2.1001 8.29193 2.1001 8.0002V4.8002C2.1001 4.50846 2.21599 4.22867 2.42228 4.02238C2.62857 3.81609 2.90836 3.7002 3.2001 3.7002H9.6001C9.89184 3.7002 10.1716 3.81609 10.3779 4.02238C10.4601 4.10461 10.528 4.19851 10.5799 4.3002H3.2001ZM5.3001 8.0002C5.3001 7.70846 5.41599 7.42867 5.62228 7.22238C5.82857 7.01609 6.10836 6.9002 6.4001 6.9002H12.8001C13.0918 6.9002 13.3716 7.01609 13.5779 7.22238C13.7842 7.42867 13.9001 7.70846 13.9001 8.0002V11.2002C13.9001 11.4919 13.7842 11.7717 13.5779 11.978C13.3716 12.1843 13.0918 12.3002 12.8001 12.3002H6.4001C6.10836 12.3002 5.82857 12.1843 5.62228 11.978C5.41599 11.7717 5.3001 11.4919 5.3001 11.2002V8.0002ZM9.6001 11.7002C10.1571 11.7002 10.6912 11.4789 11.085 11.0851C11.4788 10.6913 11.7001 10.1572 11.7001 9.6002C11.7001 9.04324 11.4788 8.5091 11.085 8.11527C10.6912 7.72145 10.1571 7.5002 9.6001 7.5002C9.04314 7.5002 8.509 7.72145 8.11517 8.11527C7.72135 8.5091 7.5001 9.04324 7.5001 9.6002C7.5001 10.1572 7.72135 10.6913 8.11517 11.0851C8.509 11.4789 9.04314 11.7002 9.6001 11.7002Z"
+                                              fill="#6B7280" stroke="#6B7280" />
+                                    </svg>
+                                    Awaiting approval
+                                </a>
+                            </li>
+                            <li class="mr-2">
+                                <a href="javascript: void(0)" @onclick=@(e => onFiltering("approved"))
+                                   class="inline-block p-4 @Approved rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                                    <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.2001 4.3002H2.7001V4.8002V8.97999C2.59841 8.9281 2.50451 8.86024 2.42228 8.77801C2.21599 8.57172 2.1001 8.29193 2.1001 8.0002V4.8002C2.1001 4.50846 2.21599 4.22867 2.42228 4.02238C2.62857 3.81609 2.90836 3.7002 3.2001 3.7002H9.6001C9.89184 3.7002 10.1716 3.81609 10.3779 4.02238C10.4601 4.10461 10.528 4.19851 10.5799 4.3002H3.2001ZM5.3001 8.0002C5.3001 7.70846 5.41599 7.42867 5.62228 7.22238C5.82857 7.01609 6.10836 6.9002 6.4001 6.9002H12.8001C13.0918 6.9002 13.3716 7.01609 13.5779 7.22238C13.7842 7.42867 13.9001 7.70846 13.9001 8.0002V11.2002C13.9001 11.4919 13.7842 11.7717 13.5779 11.978C13.3716 12.1843 13.0918 12.3002 12.8001 12.3002H6.4001C6.10836 12.3002 5.82857 12.1843 5.62228 11.978C5.41599 11.7717 5.3001 11.4919 5.3001 11.2002V8.0002ZM9.6001 11.7002C10.1571 11.7002 10.6912 11.4789 11.085 11.0851C11.4788 10.6913 11.7001 10.1572 11.7001 9.6002C11.7001 9.04324 11.4788 8.5091 11.085 8.11527C10.6912 7.72145 10.1571 7.5002 9.6001 7.5002C9.04314 7.5002 8.509 7.72145 8.11517 8.11527C7.72135 8.5091 7.5001 9.04324 7.5001 9.6002C7.5001 10.1572 7.72135 10.6913 8.11517 11.0851C8.509 11.4789 9.04314 11.7002 9.6001 11.7002Z"
+                                              fill="#6B7280" stroke="#6B7280" />
+                                    </svg>
+                                    Approved
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:  void(0)" @onclick=@(e => onFiltering("rejected"))
+                                   class="inline-block p-4 @Rejected rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                                    <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.2001 4.3002H2.7001V4.8002V8.97999C2.59841 8.9281 2.50451 8.86024 2.42228 8.77801C2.21599 8.57172 2.1001 8.29193 2.1001 8.0002V4.8002C2.1001 4.50846 2.21599 4.22867 2.42228 4.02238C2.62857 3.81609 2.90836 3.7002 3.2001 3.7002H9.6001C9.89184 3.7002 10.1716 3.81609 10.3779 4.02238C10.4601 4.10461 10.528 4.19851 10.5799 4.3002H3.2001ZM5.3001 8.0002C5.3001 7.70846 5.41599 7.42867 5.62228 7.22238C5.82857 7.01609 6.10836 6.9002 6.4001 6.9002H12.8001C13.0918 6.9002 13.3716 7.01609 13.5779 7.22238C13.7842 7.42867 13.9001 7.70846 13.9001 8.0002V11.2002C13.9001 11.4919 13.7842 11.7717 13.5779 11.978C13.3716 12.1843 13.0918 12.3002 12.8001 12.3002H6.4001C6.10836 12.3002 5.82857 12.1843 5.62228 11.978C5.41599 11.7717 5.3001 11.4919 5.3001 11.2002V8.0002ZM9.6001 11.7002C10.1571 11.7002 10.6912 11.4789 11.085 11.0851C11.4788 10.6913 11.7001 10.1572 11.7001 9.6002C11.7001 9.04324 11.4788 8.5091 11.085 8.11527C10.6912 7.72145 10.1571 7.5002 9.6001 7.5002C9.04314 7.5002 8.509 7.72145 8.11517 8.11527C7.72135 8.5091 7.5001 9.04324 7.5001 9.6002C7.5001 10.1572 7.72135 10.6913 8.11517 11.0851C8.509 11.4789 9.04314 11.7002 9.6001 11.7002Z"
+                                              fill="#6B7280" stroke="#6B7280" />
+                                    </svg>
+                                    Rejected
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+
+            <div class="w-full md:w-1/2">
+                <label for="mobile-search" class="sr-only">Search</label>
+                <div class="relative">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        @((MarkupString)SvgHelpers.SearchIcon)
+
+                    </div>
+
+                    <input type="text" name="email" id="mobile-search" autocomplete="off" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+                           class="@Tailwind.SearchText"
+                           placeholder="Search...">
+                    <button @onclick="OnSearch" class="@Tailwind.Search_Button_Blue">Search</button>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+
+        <div class="relative overflow-x-auto shadow mb-3  sm:rounded-lg">
+
+
+
+            <!--------------------- SYNCFUSION ----------------------------------------->
+            <SfGrid DataSource="@ApprovalViews" @ref="grid" ID="approvalGrid" TValue="ApprovalView" EnablePersistence="false"
+                    Query="@QueryGrid"
+                    AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                    AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="600"
+                    AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                    AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+                <GridPageSettings EnableQueryString="true" PageCount="25" PageSize="25" PageSizes="true"></GridPageSettings>
+
+                <GridEvents TValue="ApprovalView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure" QueryCellInfo="CellInfoHandler"></GridEvents>
+
+                <GridEditSettings AllowAdding="false" AllowEditing="true" AllowDeleting="false"
+                                  ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+                </GridEditSettings>
+
+                <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+                </GridFilterSettings>
+
+
+                <GridColumns>
+                    <GridColumn HeaderText="S/N" AutoFit="true">
+                        <Template Context="context">
+                            <span>@SortSerialNumber.GetSerialNumber(context)</span>
+                        </Template>
+                    </GridColumn>
+                    <GridColumn Field=@nameof(ApprovalView.Description) HeaderText="DESCRIPTION" AutoFit="false"></GridColumn>
+                    <GridColumn Field=@nameof(ApprovalView.ApprovalType) HeaderText="TYPE" AutoFit="true"></GridColumn>
+                    <GridColumn Field=@nameof(ApprovalView.DateCreated) HeaderText="DATE" Format="dd/MM/yyyy h:mm tt" AutoFit="true"></GridColumn>
+                    <GridColumn Field=@nameof(ApprovalView.Status) HeaderText="Status" AutoFit="true"></GridColumn>
+                    @* <GridColumn HeaderText="STATUS" AutoFit="false">
+                    <Template>
+                    @{
+                    var status = (context as UserApprovalViewModel);
+                    <div class="flex items-left">
+                    @if (status.Status.Contains(nameof(ApprovalStatus.APPROVED)))
+                    {
+                    <div class="inline flex flex-row items-center bg-gray-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">
+                    <div class="h-2.5 w-2.5 rounded-full bg-gradient-primary mr-2"></div>
+                    <div>@status.Status</div>
+                    </div>
+                    }
+                    else if (status.Status.Contains(nameof(ApprovalStatus.CREATED)))
+                    {
+                    <div class="inline flex flex-row items-center bg-gray-100 dark:gb-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">
+                    <div class="h-2.5 w-2.5 rounded-full bg-red-500100 mr-2"></div>
+                    <div>@status.Status</div>
+                    </div>
+                    }
+                    else if (status.Status.Contains(nameof(ApprovalStatus.REJECTED)))
+                    {
+                    <div class="inline flex flex-row items-center bg-gray-100 dark:gb-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">
+                    <div class="h-2.5 w-2.5 rounded-full bg-red-500100 mr-2"></div>
+                    <div>@status.Status</div>
+                    </div>
+                    }
+                    else if (status.Status.Contains(nameof(ApprovalStatus.PENDING_APPROVAL)) || status.Status == "PENDING APPROVAL")
+                    {
+                    <div class="inline flex flex-row items-center dark:gb-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">
+                    <div class="h-2.5 w-2.5 rounded-full bg-gradient-primary mr-2"></div>
+                    <div>@status.Status</div>
+                    </div>
+                    }
+                    else
+                    {
+                    <div class="inline flex flex-row items-center bg-gray-100 dark:bg-purple-200 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md justify-center">
+                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                    <div> @status.Status</div>
+                    </div>
+                    }
+                    </div>
+                    }
+
+                    </Template>
+                    </GridColumn>*@
+                    <GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                        <Template>
+                            @{
+                                var row = (context as ApprovalView);
+
+                                <span class="px-4 py-0 flex items-center justify-end">
+                                    <button id="apple-ipad-air-dropdown-button-@row.Id" data-dropdown-toggle="apple-ipad-air-dropdown-@row.Id"
+                                            class="@Tailwind.ThreeDotBtn"
+                                            type="button">
+                                        @((MarkupString)@SvgHelpers.ThreeDotIcon)
+
+                                    </button>
+                                    <div id="apple-ipad-air-dropdown-@row.Id" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+
+                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-ipad-air-dropdown-button-@row.Id">
+
+                                            @if (row.Status == nameof(ApprovalStatus.REJECTED) || row.Status == nameof(ApprovalStatus.APPROVED))
+                                            {
+                                                <li>
+                                                    <a href="javascript: void(0)" @onclick=@(e => PendingRecord(row)) class="@Tailwind.BlockLink">
+                                                        View
+                                                    </a>
+
+                                                </li>
+                                            }
+
+                                            else
+                                            {
+                                                if (row.Status == nameof(ApprovalStatus.INITIATED))
+                                                {
+                                                    <li>
+                                                        <a href="javascript: void(0)" @onclick=@(e => PendingRecord(row)) class="@Tailwind.BlockLink">
+                                                            Approve
+                                                        </a>
+
+                                                    </li>
+                                                }
+                                               
+                                            }
+
+                                        </ul>
+
+                                    </div>
+                                </span>
+                            }
+                        </Template>
+                    </GridColumn>
+                </GridColumns>
+            </SfGrid>
+            <!--------------------------------------END---------------------------------->
+
+        </div>
+
+    </div>
+    @* }*@
+
+</main>

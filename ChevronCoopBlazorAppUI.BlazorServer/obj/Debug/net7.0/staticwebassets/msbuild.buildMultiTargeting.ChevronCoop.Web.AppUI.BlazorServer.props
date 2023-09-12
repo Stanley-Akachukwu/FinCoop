@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ChevronCoop.Web.AppUI.BlazorServer.props" />
+</Project>

@@ -1,0 +1,361 @@
+﻿@page "/productCode/list"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.DropDowns
+@{
+    var productTypes = Enum.GetNames(typeof(GlobalCodeTypeKeys)).ToList().Where(c => c.EndsWith("PRODUCT_TYPE"));
+    ;
+}
+<main>
+<div class="px-4 pt-6">
+<div class="col-span-3 sm:col-span-3 mb-2">
+    <a href="#" type="button" @onclick="GoBack"
+       class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+        <svg class="inline mr-1" width="14" height="12" viewBox="0 0 14 12" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 5.99967H13Z" fill="#1F82BD"/>
+            <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13"
+                  stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+        </svg> Back
+
+    </a>
+</div>
+
+<div class="mb-4 flex w-full items-center font-semibold justify-between  ">
+    <h1>Product Code Setup</h1>
+
+    @{
+        if (enableCreatePermission)
+        {
+            <button type="button" @onclick="openAddDrawer"
+                    class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-green-500 hover:bg-green-500 focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                <svg class="mr-2 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                          clip-rule="evenodd">
+                    </path>
+                </svg>
+                Add Product Code
+            </button>
+        }
+    }
+</div>
+
+<div class="relative overflow-x-auto shadow mb-3  sm:rounded-lg">
+<!-- Search and Dropdown section -->
+<div class="mb-4 flex w-full items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+
+
+    <div class="flex gap-2 p-4">
+        <div>
+            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                    class="w-full text-gray-900 border border-gray-300 bg-gray-50 hover:bg-gray-300 focus:ring-4 focus:outline-gray-300 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex justify-between items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button">
+                Filter
+                <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none"
+                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M19 9l-7 7-7-7">
+                    </path>
+                </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdown"
+                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownDefaultButton">
+                    <li>
+                        <a href="#"
+                           class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            Earnings
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            Sign
+                            out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <form action="#" method="GET" class="">
+            <label for="mobile-search" class="sr-only">Search</label>
+            <div class="relative">
+                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                </div>
+                <input type="text" name="email" id="mobile-search"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       placeholder="Search..."><button type="submit" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Table -->
+<SfGrid @ref="grid" ID="gridMemberProfile" TValue="GlobalCodeMasterView" EnablePersistence="false"
+        Query="@QueryGrid"
+        AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+        AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="400"
+        AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+        AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+    <SfDataManager Url="@GRID_API_RESOURCE" Headers=@HeaderData CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+    <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+    <GridEvents TValue="GlobalCodeMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure"></GridEvents>
+
+    <GridEditSettings AllowAdding="false" AllowEditing="true" AllowDeleting="false"
+                      ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+    </GridEditSettings>
+
+    <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+    </GridFilterSettings>
+    <GridColumns>
+
+        <GridColumn Field=@nameof(GlobalCodeMasterView.Name) HeaderText="PRODUCT NAME" AutoFit="true"></GridColumn>
+        <GridColumn Field=@nameof(GlobalCodeMasterView.Code) HeaderText="PRODUCT CODE" AutoFit="true"></GridColumn>
+        <GridColumn Field=@nameof(GlobalCodeMasterView.CodeType) HeaderText="PRODUCT TYPE" AutoFit="false"></GridColumn>
+        <GridColumn Field=@nameof(GlobalCodeMasterView.DateCreated) HeaderText="DATE CREATED" AutoFit="false"></GridColumn>
+        <GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+            <Template>
+                @{
+                    var row = (context as GlobalCodeMasterView);
+                    <span class="px-4 py-0 flex items-center justify-end">
+                        <button id="apple-ipad-air-dropdown-button-@row.Id" data-dropdown-toggle="apple-ipad-air-dropdown-@row.Id"
+                                class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus::outline-none dark::text-gray-400 dark::hover:text-gray-100"
+                                type="button">
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>
+                            </svg>
+                        </button>
+                        <div id="apple-ipad-air-dropdown-@row.Id" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+
+                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-ipad-air-dropdown-button-@row.Id">
+
+                                <li>
+                                    <a href="javascript: void(0)"
+                                       class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" @onclick="@(e => OnEditProductCode(row))">
+                                        Edit
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript: void(0)" @onclick="@(e => OnDeleteProductCode(row))"
+                                       class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        Delete
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </span>
+                }
+
+
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</SfGrid>
+
+<!-- drawer component -->
+
+<Drawer @ref="@addDrawer" Closable="true" Visible="showAddChargesDrawer" Title='(" Product Code Setup ")'
+        OnClose="closeAddDrawer">
+    <EditForm Model="@CreateModel" OnValidSubmit="OnSaveClose">
+
+        <FluentValidationValidator/>
+        <ValidationSummary/>
+        <div>
+            <form action="" class="pb-20 flex flex-col justify-between h-full">
+                <div class="grid grid-cols-6 gap-6 ">
+                    <div class="col-span-3 sm:col-span-3">
+                        <label for="first-name"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Name of Product
+                        </label>
+
+                        <SfTextBox ID="product-name" required Placeholder=" Enter Product Name" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   @bind-Value=@CreateModel.Name>
+                        </SfTextBox>
+                    </div>
+
+                    <div class="col-span-3 sm:col-span-3">
+                        <label for="first-code"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Product Code
+                        </label>
+                        <SfTextBox ID="charge-code" required Placeholder=" Enter Code" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   @bind-Value=@CreateModel.Code>
+                        </SfTextBox>
+
+
+                    </div>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="countries"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Product Type <span class="text-red-500">*</span>
+                    </label>
+
+                    <SfComboBox id="target" DataSource=@productTypes TValue="string" TItem="string" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                @bind-Value=@CreateModel.CodeType
+                                ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select target">
+                    </SfComboBox>
+                </div>
+
+            </form>
+            <div class="flex col-span-6 sm:col-full space-x-4  justify-end">
+                <button @onclick="closeAddDrawer" class="text-CEMCS-Blue-100 border border-gray-300 focus:outline-none hover:bg-gray-100  focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="button">
+                    Cancel
+                </button>
+                <button id="successButton" @onclick="OnSaveClose" class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    Proceed
+                </button>
+            </div>
+        </div>
+    </EditForm>
+
+</Drawer>
+
+<!-- drawer component -->
+
+<Drawer @ref="@editDrawer" Closable="true" Visible="showEditChargesDrawer" Title='("Edit Product Code Setup ")'
+        OnClose="closeEditDrawer">
+    <EditForm Model="@UpdateModel" OnValidSubmit="OnEditClose">
+
+        <FluentValidationValidator/>
+        <ValidationSummary/>
+        <div>
+            <form action="" class="pb-20 flex flex-col justify-between h-full">
+                <div class="grid grid-cols-6 gap-6 ">
+                    <div class="col-span-3 sm:col-span-3">
+                        <label for="first-name"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Name of Product
+                        </label>
+
+                        <SfTextBox ID="edit-product-name" required Placeholder=" Enter Product Name" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   @bind-Value=@UpdateModel.Name>
+                        </SfTextBox>
+                    </div>
+
+                    <div class="col-span-3 sm:col-span-3">
+                        <label for="first-code"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Product Code
+                        </label>
+                        <SfTextBox ID="charge-code" required Placeholder=" Enter Code" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                   @bind-Value=@UpdateModel.Code>
+                        </SfTextBox>
+
+
+                    </div>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="countries"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Product Type <span class="text-red-500">*</span>
+                    </label>
+
+                    <SfComboBox id="edit-codetype" DataSource=@productTypes TValue="string" TItem="string" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                @bind-Value=@UpdateModel.CodeType
+                                ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select target">
+                    </SfComboBox>
+                </div>
+
+            </form>
+            <div class="flex col-span-6 sm:col-full space-x-4  justify-end">
+                <button @onclick="closeEditDrawer" class="text-CEMCS-Blue-100 border border-gray-300 focus:outline-none hover:bg-gray-100  focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="button">
+                    Cancel
+                </button>
+                <button id="successButton" @onclick="OnEditClose" class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    Proceed
+                </button>
+            </div>
+        </div>
+    </EditForm>
+
+</Drawer>
+
+
+<!-- delete popup -->
+<Modal Visible="@showDeletePopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")">
+    <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="popup-modal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-6 text-center">
+                    <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product code?</h3>
+                    <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2" @onclick="@(e => OnDeleteClose())">
+                        Yes, I'm sure
+                    </button>
+                    <button data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @onclick="@(e => openDeletePopup())">No, cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</Modal>
+<Modal Visible="@showPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+       class="overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+
+    <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <!-- Modal header -->
+            <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+                <svg width="79" height="80" viewBox="0 0 79 80" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                          stroke="#0E9F6E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                <p class="break-words text-center my-8">
+                    Product code has been setup successfully
+                    <span class="text-CEMCS-Blue-100">.</span>
+                </p>
+
+                <form class="w-full">
+                    <button type="submit"
+                            class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                        Done
+                    </button>
+                </form>
+            </div>
+            <!-- Modal body -->
+        </div>
+    </div>
+
+</Modal>
+
+</div>
+
+</div>
+</main>

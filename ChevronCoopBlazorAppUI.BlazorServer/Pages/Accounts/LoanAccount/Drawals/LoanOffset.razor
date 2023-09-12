@@ -1,0 +1,265 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.Savings.SavingsAccounts;
+@using AP.ChevronCoop.Entities.Deposits.SpecialDeposits.SpecialDepositAccounts;
+@using AP.ChevronCoop.Entities.Loans.LoanRepaymentSchedules;
+@using Syncfusion.Blazor.DropDowns
+<div>
+    <EditForm Model="@Model" OnValidSubmit="ProceedToOffsetAsync">
+<FluentValidationValidator @ref="_fluentValidationValidator"/>
+<ValidationSummary/>
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+
+    <div class="grid grid-cols-6 gap-6">
+                <div class="col-span-6 sm:col-span-3">
+            <label for="country"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Loan Amount
+            </label>
+
+            <div class="relative ">
+                <SfNumericTextBox Enabled="false" TValue="decimal" ID="Amount" Placeholder="50000"
+                                    CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        @bind-Value=@Model.PrincipalBalance OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.PrincipalBalance" class="mt-2 text-sm text-red-600 dark:text-red-500" />
+            </div>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Repayment period
+            </label>
+            <div class="relative ">
+
+                <input type="text"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="" readonly value="@Model.OffSetRepaymentDate.ToString("dd/MMMM/yyyy")"/>
+            </div>
+        </div>
+       
+        <div class="col-span-6 sm:col-full">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Select
+                preferred offset type
+            </label>
+
+                    <SfDropDownList @bind-Value=Model.AllowedOffsetType TItem="string" Placeholder="Select Deposit Product Type" DataSource=@allowedOffsetType TValue="string"
+                    CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <DropDownListEvents TItem="string" TValue="string" ValueChange="@GetOffsetType"></DropDownListEvents>
+                <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+            </SfDropDownList>
+            <ValidationMessage For="() => Model.AllowedOffsetType" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+        </div>
+        @if (isPaymentWithPayroll){
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select
+                    Month You want to Offset
+                </label>
+                        <SfDropDownList @bind-Value=Model.RepaymentScheduleId TItem="LoanRepaymentScheduleMasterView" TValue="string" PopupHeight="auto" AllowFiltering=true CssClass="@Tailwind.ComboBox_General" DataSource="@LoanRepaymentScheduleMasterViews">
+                            <DropDownListEvents TItem="LoanRepaymentScheduleMasterView" ValueChange="GetScheduledPaymentAmount" TValue="string"></DropDownListEvents>
+                            <DropDownListFieldSettings Value="Id" Text="Caption">
+
+                            </DropDownListFieldSettings>
+                        </SfDropDownList>
+
+                        <ValidationMessage For="() => Model.RepaymentScheduleId" class="mt-2 text-sm text-red-600 dark:text-red-500" />
+            </div>
+        }
+
+        <div class="col-span-6 sm:col-full">
+            <label for="country"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Offset Amount
+            </label>
+
+            <div class="relative ">
+                        <SfNumericTextBox Enabled="@IsPartialOffset" TValue="decimal" ID="Amount" Placeholder="50000"
+                                          CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                  @bind-Value=@Model.OffsetAmount OnChange="UpdateTransferAmount" OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.OffsetAmount" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+            </div>
+        </div>
+        <div class="col-span-6 sm:col-full">
+            <h3 class="font-medium mb-3">Source account</h3>
+            <div class="flex">
+
+
+                <div class="flex items-center mr-4">
+                    <SfRadioButton Label="Special  Deposit" @onclick=ShowSpecialDepositAccounts CssClass="@Tailwind.RadioButton" Name="DestinationAccount"
+                        Value="false" @bind-Checked="@AccountIsProvided"></SfRadioButton>
+
+                </div>
+                <div class="flex items-center mr-4">
+                    <SfRadioButton Label="Savings" @onclick=ShowPreferredAccounts CssClass="@Tailwind.RadioButton" Name="DestinationAccount"
+                                    Value="false" @bind-Checked="@AccountIsProvided"></SfRadioButton>
+
+                </div>
+                <div class="flex items-center mr-4">
+                            <SfRadioButton Label="Bank transfer" @onclick=SpecialBankValueChangeHandler CssClass="@Tailwind.RadioButton" Name="DestinationAccount"
+                                           Value="false" @bind-Checked="@AccountIsProvided"></SfRadioButton>
+
+                </div>
+
+            </div>
+        </div>
+
+        @if (showSpecialDepositAccount)
+        {
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select
+                    preferred special deposit account
+                </label>
+
+                <SfDropDownList @bind-Value=Model.SpecialDepositId TItem="SpecialDepositAccountMasterView" Placeholder="Select Special Deposit Account" TValue="string" 
+                CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <SfDataManager Url="@combobox_preferredSpecialAccounts" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                    <DropDownListEvents TItem="SpecialDepositAccountMasterView" TValue="string"></DropDownListEvents>
+                    <DropDownListFieldSettings Text="Details" Value="Id"></DropDownListFieldSettings>
+                </SfDropDownList>
+                <ValidationMessage For="() => Model.SpecialDepositId" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+        }
+        @if (showPreferredAccount)
+        {
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select
+                    preferred bank account deposit account
+                </label>
+
+                <SfDropDownList @bind-Value=Model.DestinationAccountId TItem="SavingsAccountMasterView" Placeholder="Select Existing Bank" TValue="string" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <SfDataManager Url="@combobox_preferredAccounts" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                    <DropDownListEvents TItem="SavingsAccountMasterView" TValue="string" ValueChange="@BankValueChangeHandler"></DropDownListEvents>
+                    <DropDownListFieldSettings Text="AccountNo" Value="Id"></DropDownListFieldSettings>
+                </SfDropDownList>
+                <ValidationMessage For="() => Model.DestinationAccountId" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+        }
+        @if (showIfTransfer)
+        {
+            <div class="col-span-6 space-y-4 my-2" id="viewBox-bankTransfer">
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Bank
+                        transfer amount
+                    </label>
+                            <div class="relative ">
+                                <SfNumericTextBox Enabled="false" TValue="decimal" ID="Amount" Placeholder="50000"
+                                                  CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                @bind-Value=@Model.BankTransferAmount OnBlur="OnBlur">
+                                </SfNumericTextBox>
+                                <ValidationMessage For="() => Model.BankTransferAmount" class="mt-2 text-sm text-red-600 dark:text-red-500" />
+
+                            </div>
+                    
+                </div>
+
+                <div class="flex items-center flex-col justify-center rounded-lg px-16 py-4 border border-gray-300 bg-gray-50 text-center">
+                                <p class="test-base font-medium"> @LoanProductMasterView.BankDepositAccountId_BranchName</p>
+                    <p class="text-2xl font-bold text-CEMCS-Blue-100">
+                                    @LoanProductMasterView.BankDepositAccountId_AccountNumber
+                    </p>
+                    <p class="text-sm text-bankCard font-normal">
+                        Use this account for this transaction only
+                        Account<br/>
+                        expires in 15 minutes
+                    </p>
+                </div>
+
+                <div class="col-span-6 sm:col-full">
+                    <label for="Primary bank sort code"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Upload file<span class="text-red-500">*</span>
+                    </label>
+                    <SfUploader AutoUpload="true" AllowMultiple="false">
+                                <UploaderEvents OnRemove="@OnRemoveHandler" ValueChange="OnChangeDocumentUpload"></UploaderEvents>
+                    </SfUploader>
+                    @if (showDocumentError)
+                    {
+                        <span class="text-red-500">@ErrorMessage</span>
+                    }
+                    @if (showFileUploadSuccess)
+                    {
+                        <span class="text-green-500">@ErrorMessage</span>
+                    }
+
+                </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+
+                            <img src="@UploadedImage" />
+
+                        </div>
+
+
+            </div>
+        }
+    </div>
+
+</div>
+
+<div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+    <div class="col-span-3 sm:col-span-3">
+        <a href="/Account/loanproductApplication">
+            <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Back
+            </button>
+        </a>
+
+    </div>
+    <div class="col-span-3 sm:col-span-3">
+
+        <button type="submit" class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+            Proceed
+        </button>
+
+    </div>
+</div>
+</EditForm>
+</div>
+<Modal Visible="@showPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+       class="overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+
+    <!-- Modal content -->
+    <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+        <!-- Modal header -->
+        <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+            <svg width="79" height="80" viewBox="0 0 79 80" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                      stroke="#0E9F6E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <p class="break-words text-center my-8">
+                Your loan offset application has been sent to Internal control for
+                approval.
+                <span class="text-CEMCS-Blue-100">
+                    We'll notify you once your
+                    application has been
+                    approved.
+                </span>
+            </p>
+
+            <form class="w-full">
+                <button @onclick=Done type="button"
+                        class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                    Done
+                </button>
+            </form>
+        </div>
+        <!-- Modal body -->
+    </div>
+</Modal>
+
+
+@code {
+
+}

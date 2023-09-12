@@ -1,0 +1,185 @@
+﻿@page "/financials/company/bank"
+@layout AppUIMainLayout
+
+
+<main>
+
+    <div class="px-4 pt-6">
+        <div class="mb-4">
+            <nav class="flex mb-5" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center text-2xl">
+                        <a href="javascript: void(0)"
+                           class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                            </svg>
+                            Manage Company Bank Accounts
+                        </a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            <!-- Start coding here -->
+
+            <span class="error p-2">@ErrorDetails</span>
+
+
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                <div class="w-full md:w-1/2">
+
+                    <div class="sm:col-span-2">
+                        <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                            <input type="search" id="default-search" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+                                   class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search...">
+
+                            <button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                @*<button @onclick="DownloadList" type="button" class="flex items-center justify-center text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                
+                Download
+            </button>*@
+
+                <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                    <button @onclick=@onCreate type="button" class="flex items-center justify-center text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                        <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                        </svg>
+                        Add new
+                    </button>
+
+                </div>
+
+
+            </div>
+
+            <div class="overflow-x-auto">
+
+
+                <SfGrid @ref="grid" ID="gridCompanyBankAccount" TValue="CompanyBankAccountMasterView" EnablePersistence="false"
+                        Query="@QueryGrid"
+                        AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                        AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="500"
+                        AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                        AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+
+                    <SfDataManager Url="@GRID_API_RESOURCE" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                    <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 50 }"></GridPageSettings>
+
+                    <GridEvents TValue="CompanyBankAccountMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure"></GridEvents>
+
+                    <GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false"
+                                      ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+                    </GridEditSettings>
+
+
+                    <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+                    </GridFilterSettings>
+
+
+                    <GridColumns>
+                        @*<GridColumn HeaderText="Id" Field=@nameof(CompanyBankAccountMasterView.Id) TextAlign=TextAlign.Center AutoFit="true" Width="50"></GridColumn>*@
+                        <GridColumn HeaderText="Bank" Field=@nameof(CompanyBankAccountMasterView.BankId_Name) TextAlign=TextAlign.Center AutoFit="false" Width="100"></GridColumn>
+                        <GridColumn HeaderText="Acc. Name" Field=@nameof(CompanyBankAccountMasterView.AccountName) TextAlign=TextAlign.Center AutoFit="false" Width="200"></GridColumn>
+                        <GridColumn HeaderText="Acc. No" Field=@nameof(CompanyBankAccountMasterView.AccountNumber) TextAlign=TextAlign.Center AutoFit="false" Width="200"></GridColumn>
+                        <GridColumn HeaderText="BVN" Field=@nameof(CompanyBankAccountMasterView.BVN) TextAlign=TextAlign.Center AutoFit="false" Width="200"></GridColumn>
+                        <GridColumn HeaderText="Ccy" Field=@nameof(CompanyBankAccountMasterView.CurrencyId_Code) TextAlign=TextAlign.Center AutoFit="false" Width="200"></GridColumn>
+                        <GridColumn HeaderText="GL Code" Field=@nameof(CompanyBankAccountMasterView.LedgerAccountId_Code) TextAlign=TextAlign.Center AutoFit="false" Width="200"></GridColumn>
+                        <GridColumn HeaderText="GL Name" Field=@nameof(CompanyBankAccountMasterView.LedgerAccountId_Name) TextAlign=TextAlign.Center AutoFit="false" Width="200"></GridColumn>
+
+                        <GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                            <Template>
+                                @{
+                                    var row = (context as CompanyBankAccountMasterView);
+
+                                    <span class="px-4 py-0 flex items-center justify-end">
+                                        <button id="apple-ipad-air-dropdown-button-@row.Id" data-dropdown-toggle="apple-ipad-air-dropdown-@row.Id"
+                                                class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus::outline-none dark::text-gray-400 dark::hover:text-gray-100"
+                                                type="button">
+                                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                            </svg>
+                                        </button>
+                                        <div id="apple-ipad-air-dropdown-@row.Id" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+
+
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-ipad-air-dropdown-button-@row.Id">
+
+
+                                                <li>
+                                                    <a href="javascript: void(0)" @onclick=@onCreate class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                        Add new bank account
+                                                    </a>
+
+                                                </li>
+                                                <li>
+                                                    <a href="javascript: void(0)" @onclick="@(e => OnEditRow(row))"
+                                                       class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                        Edit bank account
+                                                    </a>
+                                                </li>
+
+                                                <li class="divide-gray-200">
+                                                    <a href="javascript: void(0)" @onclick="@(e => OnDeleteRow(row))"
+                                                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                        Delete bank account
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            @* <div class="py-1"> *@
+                                            @*     <a href="javascript: void(0)" @onclick="@(e => OnDeleteRow(row))" *@
+                                            @*        class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"> *@
+                                            @*         Delete bank account *@
+                                            @*     </a> *@
+                                            @* </div> *@
+                                        </div>
+                                    </span>
+
+
+                                }
+
+
+                            </Template>
+                        </GridColumn>
+                    </GridColumns>
+                </SfGrid>
+
+
+            </div>
+
+        </div>
+    </div>
+</main>
+
+
+<Drawer @ref="@createDrawer" Closable="true" Visible="showCreateDrawer" Title='("Add New Company Bank Account")'
+        OnClose="onCreateDone">
+
+    <CompanyBankAccountCreateForm @ref="@createForm" @bind-Model="@CreateModel" @bind-ShowModal="@showCreateDrawer"></CompanyBankAccountCreateForm>
+
+</Drawer>
+
+
+<Drawer @ref="@editDrawer" Closable="true" Visible="showEditDrawer" Title='("Edit Company Bank Account")'
+        OnClose="onEditDone">
+
+    <CompanyBankAccountEditForm @ref="@editForm" @bind-Model="@UpdateModel" @bind-ShowModal="@showEditDrawer"
+                                @bind-ActiveTabKey="@editFormActiveTabKey" @bind-MasterView=@MasterView>
+    </CompanyBankAccountEditForm>
+
+</Drawer>

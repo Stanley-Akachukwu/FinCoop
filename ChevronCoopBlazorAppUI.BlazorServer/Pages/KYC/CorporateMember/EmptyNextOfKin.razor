@@ -1,0 +1,698 @@
+﻿@page "/KYC/EMPTY-NEXT-OF-KIN"
+@using ChevronCoop.Web.AppUI.BlazorServer.Data
+@using Microsoft.AspNetCore.Components.Forms
+@using Refit;
+@inject ILogger<EmptyNextOfKin> Logger 
+@inject IEntityDataService DataService
+@inject NotificationService notificationService
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@layout AppUIMainLayout
+
+<div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+<div class="col-span-2">
+    <section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5">
+        <div class="mx-auto max-w-screen-2xl">
+            <!-- Start coding here -->
+            <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4 border-b dark:border-gray-700">
+                    <div class="w-full flex flex-col">
+                        <h5 class="dark:text-white font-semibold">
+                            Next of Kin
+                        </h5>
+                        <div class="text-gray-500 font-normal">
+                            Register a maximum of 5 Next of Kin
+                        </div>
+                    </div>
+                    <div class="w-full flex flex-row items-center justify-end space-x-3">
+                        <button class="w-full md:w-auto flex items-center justify-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                                type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+                            <svg class="h-3.5 w-3.5 mr-2"
+                                 fill="currentColor"
+                                 viewbox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 aria-hidden="true">
+                                <path clip-rule="evenodd"
+                                      fill-rule="evenodd"
+                                      d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                            </svg>
+                            Add Next Kin
+                        </button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th scope="col" class="p-4">
+                                <div class="flex items-center">
+                                    <input id="checkbox-all"
+                                           type="checkbox"
+                                           class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                                    <label for="checkbox-all" class="sr-only">checkbox</label>
+                                </div>
+                            </th>
+
+                            <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                Name
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                Phone Number
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[14rem]">
+                                Address
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[6rem]">
+                                Relationship
+                            </th>
+                            <th scope="col"
+                                class="px-4 py-3 min-w-[6rem]">
+                            </th>
+                        </tr>
+                        </thead>
+
+
+                    </table>
+                    <div class="flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                        <svg width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.3479 11.6667H17.5798C16.3152 11.6667 15.1024 12.1583 14.2082 13.0335C13.314 13.9087 12.8116 15.0957 12.8116 16.3333V44.3333C12.8116 45.571 13.314 46.758 14.2082 47.6332C15.1024 48.5083 16.3152 49 17.5798 49H41.4203C42.6849 49 43.8977 48.5083 44.7919 47.6332C45.6861 46.758 46.1885 45.571 46.1885 44.3333V16.3333C46.1885 15.0957 45.6861 13.9087 44.7919 13.0335C43.8977 12.1583 42.6849 11.6667 41.4203 11.6667H36.6522M22.3479 11.6667C22.3479 12.9043 22.8502 14.0913 23.7444 14.9665C24.6386 15.8417 25.8514 16.3333 27.116 16.3333H31.8841C33.1487 16.3333 34.3615 15.8417 35.2557 14.9665C36.1499 14.0913 36.6522 12.9043 36.6522 11.6667M22.3479 11.6667C22.3479 10.429 22.8502 9.242 23.7444 8.36683C24.6386 7.49167 25.8514 7 27.116 7H31.8841C33.1487 7 34.3615 7.49167 35.2557 8.36683C36.1499 9.242 36.6522 10.429 36.6522 11.6667" stroke="#0E9F6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M25.2391 26.7822L33.7609 34.0866M25.2391 34.0866L33.7609 26.7822L25.2391 34.0866Z" stroke="#0E9F6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+
+                        <h5 class="text-base font-medium text-gray-900 my-4">
+                            No data yet
+                        </h5>
+
+                        <p class=" font-medium text-sm text-gray-500 mb-6 text-center">
+                            To add a next of kin, simply click the "Add <br/> Next of Kin" button below.
+                        </p>
+
+                        <button class="w-full md:w-auto flex items-center justify-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                                type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+                            <svg class="h-3.5 w-3.5 mr-2"
+                                 fill="currentColor"
+                                 viewbox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 aria-hidden="true">
+                                <path clip-rule="evenodd"
+                                      fill-rule="evenodd"
+                                      d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                            </svg>
+                            Add Next Kin
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-6 sm:col-full my-4">
+            <button class="text-white cursor-not-allowed bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    type="button"
+                    disabled>
+                Save & Continue
+            </button>
+        </div>
+    </section>
+</div>
+
+
+<!-- drawer component -->
+<div id="drawer-right-example" class="fixed top-0 right-0 z-40 h-screen p-4  transition-transform translate-x-full bg-white w-2/5 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
+    <h5 id="drawer-right-label" class="inline-flex items-center mb-4 text-base font-bold text-gray-900 dark:text-gray-400">Next of Kin</h5>
+    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+        <span class="sr-only">Close menu</span>
+    </button>
+    <EditForm Model="@Model" OnValidSubmit="SubmitValidForm">
+        <FluentValidationValidator/>
+        @*<ValidationSummary />*@
+        <div class="pb-20 flex flex-col justify-between h-full">
+            <div class="grid grid-cols-6 gap-6 ">
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="first-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        First Name*
+                    </label>
+                    @*<input type="text"
+                           name="first-name"
+                           id="first-name"
+                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                           placeholder="Bonnie"
+                           required />*@
+                    <SfTextBox ID="FirstName" @bind-Value=@Model.firstName Placeholder="Bonnie" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => Model.firstName" CssClass="mt-2 text-sm text-red-600 dark:text-red-500"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="last-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Last Name*
+                    </label>
+                    @* <input type="text"
+                           name="last-name"
+                           id="last-name"
+                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                           placeholder="Green"
+                           required />*@
+                    <SfTextBox ID="LastName" @bind-Value=@Model.lastName Placeholder="Green" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => Model.lastName"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="phone-number"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Phone number*
+                    </label>
+                    @* <input type="text"
+                           name="phone-number"
+                           id="phone-number"
+                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                           placeholder="234 081 048 0392"
+                           required />*@
+                    <SfTextBox ID="PhoneNo" @bind-Value=@Model.phone Placeholder="234 081 048 0392" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => Model.phone"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="address"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Address*
+                    </label>
+                    @* <input type="text"
+                           name="address"
+                           id="address"
+                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                           placeholder="No. 2 Oniru"
+                           required />*@
+                    <SfTextBox ID="Address" @bind-Value=@Model.address Placeholder="No. 2 Oniru" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => Model.address"/>
+
+                </div>
+
+
+                <div class=" col-span-6 sm:col-span-3">
+                    <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Relationship*</label>
+                    @*<select id="settings-language" name="countries" class="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <option>Brother</option>
+                        <option>Sister</option>
+                        <option>Father</option>
+                        <option>Mother</option>
+                    </select>*@
+                    <SfDropDownList TValue="string" CssClass="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" Placeholder="e.g. Father" TItem="NextOfKinRelationships" Width="300px" @bind-Value=@Model.relationship DataSource="@KinRelationships">
+                        <DropDownListFieldSettings Value="Code" Text="Name"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                    <ValidationMessage For="() => Model.relationship"/>
+                </div>
+
+            </div>
+            <div class="flex col-span-6 sm:col-full space-x-4  justify-end">
+                <button data-drawer-hide="drawer-right-example"
+                        aria-controls="drawer-right-example"
+                        class="text-CEMCS-Blue-100 border border-gray-300 focus:outline-none hover:bg-gray-100  focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="button" @onclick="Cancel">
+                    Cancel
+                </button>
+                <button class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="submit">
+                    Add Next of Kin
+                </button>
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+<div class="bg-white rounded-lg shadow xl:ml-20 sm:p-6 xl:p-8 dark:bg-gray-800">
+<div class="items-start pb-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
+<h3 class="pb-4 text-gray-900 font-bold text-xl">
+    KYC Progress
+</h3>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="10" fill="#1F82BD"/>
+            <path d="M5.33337 10.6666L8.00004 13.3333L14.6667 6.66663"
+                  stroke="#F9FAFB"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-semibold">Biodata</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#1F82BD"
+                    stroke-width="2"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">Next of Kin</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#9CA3AF"
+                    stroke-width="2"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">Beneficiary</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#9CA3AF"
+                    stroke-width="2"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">Company data</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#9CA3AF"
+                    stroke-width="2"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">Staff enrolment data</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#9CA3AF"
+                    stroke-width="2"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">Member account data</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#9CA3AF"
+                    stroke-width="2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">KYC Documents</p>
+</div>
+</div>
+</div>
+</div>
+
+@code {
+
+    public NextOfKinCreateModel Model { get; set; }
+
+    List<NextOfKinRelationships> KinRelationships { get; set; }
+
+    /// public MemberNextOfKinViewResult Model { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    //Model = new MemberNextOfKinViewResult();
+        Model = new NextOfKinCreateModel();
+
+        KinRelationships = new List<NextOfKinRelationships>
+        {
+            new NextOfKinRelationships { Name = "Brother", Code = "Brother" },
+            new NextOfKinRelationships { Name = "Sister", Code = "Sister" },
+            new NextOfKinRelationships { Name = "Father", Code = "Father" },
+            new NextOfKinRelationships { Name = "Mother", Code = "Mother" },
+            new NextOfKinRelationships { Name = "Uncle", Code = "Uncle" },
+            new NextOfKinRelationships { Name = "Aunty", Code = "Aunty" },
+            new NextOfKinRelationships { Name = "Other", Code = "Other" },
+        };
+    }
+
+    private async Task SubmitValidForm()
+    {
+        var authenticated = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var Principal = authenticated.User.Identity.Name;
+        if (!string.IsNullOrEmpty(Principal))
+        {
+            var claims = authenticated.User.Claims;
+            if (claims.Any())
+            {
+    //if (authenticated.User.IsInRole("Regular") || authenticated.User.IsInRole("Coop Memeber"))
+    //{
+                var sid = claims.ElementAt(2).Value;
+
+                Model.createdByUserId = sid;
+    //var rsp = await DataService.GetMemberProfiles<IEnumerable<MemberProfileModel>>();
+                var rsp1 = await DataService.GetMemberProfileViewResult<IEnumerable<MemberProfileViewModelResult>>();
+
+
+                if (rsp1.IsSuccessStatusCode)
+                {
+                    IEnumerable<MemberProfileViewModelResult> memberProfiles = rsp1.Content;
+
+                    if (memberProfiles.Any())
+                    {
+                        var returnedProfile = memberProfiles.FirstOrDefault(p => p.applicationUserId == sid);
+
+                        if (returnedProfile != null)
+                        {
+                            Model.profileId = returnedProfile.id;
+    // await sessionStorage.SetAsync("UserProfileID", returnedProfile.id);
+                        }
+                    }
+                }
+    //await ReloadGridAsync(sid);
+    //}
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/Identity/Account/LogIn");
+            }
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/Identity/Account/LogIn");
+        }
+
+        var rsp = await DataService.AddNewNextOfKin<NextOfKinCreateModel, CommandResult<string>>(Model);
+        Logger.LogInformation($"rsp content->{JsonSerializer.Serialize(Model)}");
+        if (!rsp.IsSuccessStatusCode)
+        {
+            await DisplayErrorAfterNewNextOfKinAdditionAsync(rsp);
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/kyc/new-next-of-kin", true);
+        }
+    }
+
+    private async Task Cancel()
+    {
+        Model = new NextOfKinCreateModel();
+    }
+
+    private async Task DisplayErrorAfterNewNextOfKinAdditionAsync(ApiResponse<CommandResult<string>> rsp)
+    {
+        var rspContent = JsonSerializer.Deserialize<CommandResult<string>>(rsp.Error.Content);
+
+        var msg = rspContent?.Response;
+        if (rspContent != null && rspContent.ValidationErrors != null && rspContent.ValidationErrors.Any())
+        {
+            msg = rspContent.ValidationErrors[0].Error;
+        }
+        await notificationService.Open(new NotificationConfig()
+        {
+            Message = "Error",
+            Description = msg,
+            NotificationType = NotificationType.Error
+        });
+    }
+
+
+}

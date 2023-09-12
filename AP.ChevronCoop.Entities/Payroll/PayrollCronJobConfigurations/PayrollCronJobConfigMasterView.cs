@@ -1,0 +1,60 @@
+﻿namespace AP.ChevronCoop.Entities.Payroll.PayrollCronJobConfigurations;
+
+public class PayrollCronJobConfigMasterView
+{
+  public long? RowNumber { get; set; }
+  public string Id { get; set; }
+  public string? DeductionScheduleId { get; set; }
+  public string CronJobType { get; set; }
+  public string? JobName { get; set; }
+  public DateTime JobDate { get; set; }
+  public string JobStatus { get; set; }
+  public DateTime ComputationStartDate { get; set; }
+  public DateTime ComputationEndDate { get; set; }
+  public int RecordsProcessed { get; set; }
+  public string? Description { get; set; }
+  public bool IsActive { get; set; }
+  public string? CreatedByUserId { get; set; }
+  public DateTimeOffset? DateCreated { get; set; }
+  public string? UpdatedByUserId { get; set; }
+  public DateTimeOffset? DateUpdated { get; set; }
+  public string? DeletedByUserId { get; set; }
+  public bool IsDeleted { get; set; }
+  public DateTimeOffset? DateDeleted { get; set; }
+  public Guid RowVersion { get; set; }
+  public string? FullText { get; set; }
+  public string? Tags { get; set; }
+  public string? Caption { get; set; }
+  public decimal TotalAmount { get; set; }
+  public long TotalCount { get; set; }
+  public string? DeductionScheduleId_ScheduleName { get; set; }
+  public string? DeductionScheduleId_ScheduleType { get; set; }
+  public string? DeductionScheduleId_BankAccountId { get; set; }
+  public string? DeductionScheduleId_SpecialDepositBankAccountId { get; set; }
+  public string? DeductionScheduleId_FixedDepositBankAccountId { get; set; }
+  public int? DeductionScheduleId_DeductionsCount { get; set; }
+  public decimal? DeductionScheduleId_TotalDeductions { get; set; }
+  public int? DeductionScheduleId_MinDecimalPlace { get; set; }
+  public int? DeductionScheduleId_MaxDecimalPlace { get; set; }
+  public DateTime? DeductionScheduleId_AdviseDate { get; set; }
+  public DateTime? DeductionScheduleId_ExpectedDate { get; set; }
+  public bool? DeductionScheduleId_IsPosted { get; set; }
+  public DateTime? DeductionScheduleId_PayrollDate { get; set; }
+  public bool? DeductionScheduleId_IsUploaded { get; set; }
+  public DateTime? DeductionScheduleId_LastUploadedDate { get; set; }
+  public bool? DeductionScheduleId_IsProcessed { get; set; }
+  public DateTime? DeductionScheduleId_ProcessedDate { get; set; }
+  public int? DeductionScheduleId_GenerateDeductionCronJobStatus { get; set; }
+  public DateTime? DeductionScheduleId_GenerateDeductionCronJobStartedDate { get; set; }
+  public DateTime? DeductionScheduleId_GenerateDeductionCronJobCompletedDate { get; set; }
+  public int? DeductionScheduleId_ProcessDeductionCronJobStatus { get; set; }
+  public DateTime? DeductionScheduleId_ProcessDeductionCronJobStartedDate { get; set; }
+  public DateTime? DeductionScheduleId_ProcessDeductionCronJobCompletedDate { get; set; }
+  public bool? DeductionScheduleId_IsActive { get; set; }
+  public string? DeductionScheduleId_CreatedByUserId { get; set; }
+  public string? DeductionScheduleId_UpdatedByUserId { get; set; }
+  public string? DeductionScheduleId_DeletedByUserId { get; set; }
+  public bool? DeductionScheduleId_IsDeleted { get; set; }
+  public string? DeductionScheduleId_Tags { get; set; }
+  public string? DeductionScheduleId_Caption { get; set; }
+}

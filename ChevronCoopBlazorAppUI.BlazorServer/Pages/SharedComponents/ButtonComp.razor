@@ -1,0 +1,48 @@
+﻿@using Syncfusion.Blazor.Spinner
+<button disabled="@IsButtonDisabled" id="updateProductButton"
+        class="@CSSClass"
+@onclick="HandleButtonClick"
+        type="submitType">
+    @ButtonText
+
+    @if (IsButtonDisabled)
+    {
+        <i class="fas fa-spinner fa-spin"></i>
+    }
+    
+</button>
+
+
+
+@code {
+    [Parameter] public string EditFormSubmission { get; set; } = "yes"; //No call back is required
+
+    bool IsButtonDisabled = false;
+
+    [Parameter] public string CSSClass { get; set; } = @Tailwind.Button_Blue;
+
+    [Parameter]
+    public string ButtonText { get; set; } = "Submit";
+
+    [Parameter] public EventCallback OnClick { get; set; }
+
+    [Parameter] public string submitType { get; set; } = "submit"; //Type: submit, button
+
+    private async Task HandleButtonClick()
+    {
+        try
+        {
+            IsButtonDisabled = true; 
+
+            await OnClick.InvokeAsync();
+
+            IsButtonDisabled = false;
+        }
+        catch (Exception ex)
+        {
+           
+            IsButtonDisabled = false;
+        }
+    }
+
+}

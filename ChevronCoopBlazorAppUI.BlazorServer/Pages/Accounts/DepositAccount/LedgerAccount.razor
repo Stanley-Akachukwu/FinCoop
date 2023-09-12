@@ -1,0 +1,170 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.DepositApplications;
+@using AP.ChevronCoop.Entities.Deposits.Products.DepositProducts;
+
+<!-- Table -->
+<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <!-- Card Title -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+                Ledger Accounts
+            </h3>
+
+        </div>
+    </div>
+    <!-- Table -->
+    <div class="flex flex-col mt-8">
+        <div class="overflow-x-auto rounded-lg">
+            <div class="inline-block min-w-full align-middle">
+                <div class="overflow-hidden shadow sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col"
+                                    class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                    GL CODE
+                                </th>
+                                <th scope="col"
+                                    class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                    GL NAME
+                                </th>
+                                <th scope="col"
+                                    class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                    GL TYPE
+                                </th>
+                               
+                                <th scope="col"
+                                    class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                    LEDGER BALANCE
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800">
+                            
+                            <tr>
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold">@Model.AccountNo </span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.Caption
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.AccountType
+                                </td>
+                               
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.LedgerBalance.ToString("N2")
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold">@Model.InterestEarnedAccountId_Code </span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.InterestEarnedAccountId_Name
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.InterestEarnedAccountId_AccountType
+                                </td>
+
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.InterestEarnedAccountId_LedgerBalance
+                                </td>
+                            </tr>
+
+                            @if (IsAdmin)
+                            {
+                                <tr>
+                                    <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                        <span class="font-semibold">@Model.ChargesIncomeAccountId_Code </span>
+                                    </td>
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.ChargesIncomeAccountId_Name
+                                    </td>
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.ChargesIncomeAccountId_AccountType
+                                    </td>
+
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.ChargesIncomeAccountId_LedgerBalance
+                                    </td>
+                                </tr>
+
+                                <tr class="bg-gray-50 dark:bg-gray-700">
+
+                                    <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                        <span class="font-semibold">@Model.ChargesAccruedAccountId_Code </span>
+                                    </td>
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.ChargesAccruedAccountId_Name
+                                    </td>
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.ChargesAccruedAccountId_AccountType
+                                    </td>
+
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.ChargesAccruedAccountId_LedgerBalance
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                        <span class="font-semibold">@Model.ChargesWaivedAccountId_Code </span>
+                                    </td>
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.ChargesWaivedAccountId_Name
+                                    </td>
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.ChargesWaivedAccountId_AccountType
+                                    </td>
+
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.ChargesWaivedAccountId_LedgerBalance
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                        <span class="font-semibold">@Model.InterestPayoutAccountId_Code </span>
+                                    </td>
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.InterestPayoutAccountId_Name
+                                    </td>
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.InterestPayoutAccountId_AccountType
+                                    </td>
+
+                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                        @Model.InterestPayoutAccountId_LedgerBalance
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter] public DepositAccountsMasterView Model { get; set; }
+
+    [Parameter] public bool IsAdmin { get; set; }
+}

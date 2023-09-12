@@ -1,0 +1,289 @@
+﻿@page "/payroll/jobsProcessing/{filter}/{schedulename}/{scheduleId}"
+@using AP.ChevronCoop.Entities.Payroll.PayrollCronJobConfigurations;
+@using System.Globalization;
+<main>
+
+    <div class="px-4 pt-6">
+
+        <div class="mb-4">
+            <nav class="flex mb-5" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="#"
+                           class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                            </svg>
+                            @schedulename
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd">
+                                </path>
+                            </svg>
+
+                        </div>
+                    </li>
+
+                </ol>
+            </nav>
+        </div>
+        <div class="col-span-3 sm:col-span-3 mb-2">
+             <a href="/schedule/payrollScheduleList/">
+
+                <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="submit">
+                    <svg class="inline mr-1" width="14" height="12" viewBox="0 0 14 12" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 5.99967H13Z" fill="#1F82BD" />
+                        <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13"
+                              stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                    </svg> Back
+                </button>
+            </a>
+        </div>
+         
+        <div class="relative overflow-x-auto shadow mb-3  sm:rounded-lg">
+            <!-- Search and Dropdown section -->
+            <!-- Search and Dropdown section -->
+            <div class="mb-4 flex w-full items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+                <div class="w-2/3">
+                    <div class="hidden  space-x-1 md:flex ">
+
+                        <div class="text-sm font-medium text-center text-gray-500  border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+                            <ul class="flex flex-wrap -mb-px">
+                                <li class="mr-2">
+                                    <a href="javascript: void(0)" @onclick=@(e => onFiltering("all"))
+                                       class="inline-block p-4 text-gray-500 border-b-2 @All  rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                                        <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M14.4001 7.99961C14.4001 9.69699 13.7258 11.3249 12.5256 12.5251C11.3253 13.7253 9.69748 14.3996 8.0001 14.3996C6.30271 14.3996 4.67485 13.7253 3.47461 12.5251C2.27438 11.3249 1.6001 9.69699 1.6001 7.99961C1.6001 6.30222 2.27438 4.67436 3.47461 3.47413C4.67485 2.27389 6.30271 1.59961 8.0001 1.59961C9.69748 1.59961 11.3253 2.27389 12.5256 3.47413C13.7258 4.67436 14.4001 6.30222 14.4001 7.99961ZM9.6001 5.59961C9.6001 6.02396 9.43153 6.43092 9.13147 6.73098C8.83141 7.03104 8.42444 7.19961 8.0001 7.19961C7.57575 7.19961 7.16879 7.03104 6.86873 6.73098C6.56867 6.43092 6.4001 6.02396 6.4001 5.59961C6.4001 5.17526 6.56867 4.7683 6.86873 4.46824C7.16879 4.16818 7.57575 3.99961 8.0001 3.99961C8.42444 3.99961 8.83141 4.16818 9.13147 4.46824C9.43153 4.7683 9.6001 5.17526 9.6001 5.59961ZM8.0001 8.79961C7.23418 8.79945 6.48432 9.0192 5.83963 9.43273C5.19494 9.84626 4.68253 10.4362 4.3633 11.1324C4.81344 11.6561 5.37151 12.0762 5.99925 12.364C6.62699 12.6518 7.30954 12.8004 8.0001 12.7996C8.69065 12.8004 9.3732 12.6518 10.0009 12.364C10.6287 12.0762 11.1868 11.6561 11.6369 11.1324C11.3177 10.4362 10.8053 9.84626 10.1606 9.43273C9.51588 9.0192 8.76602 8.79945 8.0001 8.79961Z"
+                                                  fill="#1F82BD" />
+                                        </svg>
+
+                                        All
+                                    </a>
+                                </li>
+                                <li class="mr-2">
+
+
+                                    <a href="javascript: void(0)" @onclick=@(e => onFiltering(nameof(CronJobStatus.PENDING)))
+                                       class="inline-block p-4 text-gray-500 border-b-2 @Pending  dark:text-blue-500 dark:border-blue-500"
+                                       aria-current="page">
+                                        <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.1999 1.59961C6.98773 1.59961 6.78425 1.68389 6.63422 1.83392C6.48419 1.98395 6.3999 2.18744 6.3999 2.39961C6.3999 2.61178 6.48419 2.81527 6.63422 2.96529C6.78425 3.11532 6.98773 3.19961 7.1999 3.19961H8.7999C9.01208 3.19961 9.21556 3.11532 9.36559 2.96529C9.51562 2.81527 9.5999 2.61178 9.5999 2.39961C9.5999 2.18744 9.51562 1.98395 9.36559 1.83392C9.21556 1.68389 9.01208 1.59961 8.7999 1.59961H7.1999Z"
+                                                  fill="#6B7280" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M3.19995 4.00039C3.19995 3.57604 3.36852 3.16908 3.66858 2.86902C3.96864 2.56896 4.3756 2.40039 4.79995 2.40039C4.79995 3.03691 5.05281 3.64736 5.5029 4.09745C5.95298 4.54753 6.56343 4.80039 7.19995 4.80039H8.79995C9.43647 4.80039 10.0469 4.54753 10.497 4.09745C10.9471 3.64736 11.2 3.03691 11.2 2.40039C11.6243 2.40039 12.0313 2.56896 12.3313 2.86902C12.6314 3.16908 12.8 3.57604 12.8 4.00039V12.8004C12.8 13.2247 12.6314 13.6317 12.3313 13.9318C12.0313 14.2318 11.6243 14.4004 11.2 14.4004H4.79995C4.3756 14.4004 3.96864 14.2318 3.66858 13.9318C3.36852 13.6317 3.19995 13.2247 3.19995 12.8004V4.00039ZM5.59995 7.20039C5.38778 7.20039 5.1843 7.28468 5.03427 7.43471C4.88424 7.58473 4.79995 7.78822 4.79995 8.00039C4.79995 8.21256 4.88424 8.41605 5.03427 8.56608C5.1843 8.7161 5.38778 8.80039 5.59995 8.80039H5.60795C5.82012 8.80039 6.02361 8.7161 6.17364 8.56608C6.32367 8.41605 6.40795 8.21256 6.40795 8.00039C6.40795 7.78822 6.32367 7.58473 6.17364 7.43471C6.02361 7.28468 5.82012 7.20039 5.60795 7.20039H5.59995ZM7.99995 7.20039C7.78778 7.20039 7.5843 7.28468 7.43427 7.43471C7.28424 7.58473 7.19995 7.78822 7.19995 8.00039C7.19995 8.21256 7.28424 8.41605 7.43427 8.56608C7.5843 8.7161 7.78778 8.80039 7.99995 8.80039H10.4C10.6121 8.80039 10.8156 8.7161 10.9656 8.56608C11.1157 8.41605 11.2 8.21256 11.2 8.00039C11.2 7.78822 11.1157 7.58473 10.9656 7.43471C10.8156 7.28468 10.6121 7.20039 10.4 7.20039H7.99995ZM5.59995 10.4004C5.38778 10.4004 5.1843 10.4847 5.03427 10.6347C4.88424 10.7847 4.79995 10.9882 4.79995 11.2004C4.79995 11.4126 4.88424 11.616 5.03427 11.7661C5.1843 11.9161 5.38778 12.0004 5.59995 12.0004H5.60795C5.82012 12.0004 6.02361 11.9161 6.17364 11.7661C6.32367 11.616 6.40795 11.4126 6.40795 11.2004C6.40795 10.9882 6.32367 10.7847 6.17364 10.6347C6.02361 10.4847 5.82012 10.4004 5.60795 10.4004H5.59995ZM7.99995 10.4004C7.78778 10.4004 7.5843 10.4847 7.43427 10.6347C7.28424 10.7847 7.19995 10.9882 7.19995 11.2004C7.19995 11.4126 7.28424 11.616 7.43427 11.7661C7.5843 11.9161 7.78778 12.0004 7.99995 12.0004H10.4C10.6121 12.0004 10.8156 11.9161 10.9656 11.7661C11.1157 11.616 11.2 11.4126 11.2 11.2004C11.2 10.9882 11.1157 10.7847 10.9656 10.6347C10.8156 10.4847 10.6121 10.4004 10.4 10.4004H7.99995Z"
+                                                  fill="#6B7280" />
+                                        </svg>
+
+                                        @nameof(CronJobStatus.PENDING)
+                                    </a>
+
+                                </li>
+                                <li class="mr-2">
+
+
+                                    <a href="javascript: void(0)" @onclick=@(e => onFiltering(nameof(CronJobStatus.STARTED)))
+                                       class="inline-block p-4 text-gray-500 border-b-2 @Started  dark:text-blue-500 dark:border-blue-500"
+                                       aria-current="page">
+                                        <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.1999 1.59961C6.98773 1.59961 6.78425 1.68389 6.63422 1.83392C6.48419 1.98395 6.3999 2.18744 6.3999 2.39961C6.3999 2.61178 6.48419 2.81527 6.63422 2.96529C6.78425 3.11532 6.98773 3.19961 7.1999 3.19961H8.7999C9.01208 3.19961 9.21556 3.11532 9.36559 2.96529C9.51562 2.81527 9.5999 2.61178 9.5999 2.39961C9.5999 2.18744 9.51562 1.98395 9.36559 1.83392C9.21556 1.68389 9.01208 1.59961 8.7999 1.59961H7.1999Z"
+                                                  fill="#6B7280" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M3.19995 4.00039C3.19995 3.57604 3.36852 3.16908 3.66858 2.86902C3.96864 2.56896 4.3756 2.40039 4.79995 2.40039C4.79995 3.03691 5.05281 3.64736 5.5029 4.09745C5.95298 4.54753 6.56343 4.80039 7.19995 4.80039H8.79995C9.43647 4.80039 10.0469 4.54753 10.497 4.09745C10.9471 3.64736 11.2 3.03691 11.2 2.40039C11.6243 2.40039 12.0313 2.56896 12.3313 2.86902C12.6314 3.16908 12.8 3.57604 12.8 4.00039V12.8004C12.8 13.2247 12.6314 13.6317 12.3313 13.9318C12.0313 14.2318 11.6243 14.4004 11.2 14.4004H4.79995C4.3756 14.4004 3.96864 14.2318 3.66858 13.9318C3.36852 13.6317 3.19995 13.2247 3.19995 12.8004V4.00039ZM5.59995 7.20039C5.38778 7.20039 5.1843 7.28468 5.03427 7.43471C4.88424 7.58473 4.79995 7.78822 4.79995 8.00039C4.79995 8.21256 4.88424 8.41605 5.03427 8.56608C5.1843 8.7161 5.38778 8.80039 5.59995 8.80039H5.60795C5.82012 8.80039 6.02361 8.7161 6.17364 8.56608C6.32367 8.41605 6.40795 8.21256 6.40795 8.00039C6.40795 7.78822 6.32367 7.58473 6.17364 7.43471C6.02361 7.28468 5.82012 7.20039 5.60795 7.20039H5.59995ZM7.99995 7.20039C7.78778 7.20039 7.5843 7.28468 7.43427 7.43471C7.28424 7.58473 7.19995 7.78822 7.19995 8.00039C7.19995 8.21256 7.28424 8.41605 7.43427 8.56608C7.5843 8.7161 7.78778 8.80039 7.99995 8.80039H10.4C10.6121 8.80039 10.8156 8.7161 10.9656 8.56608C11.1157 8.41605 11.2 8.21256 11.2 8.00039C11.2 7.78822 11.1157 7.58473 10.9656 7.43471C10.8156 7.28468 10.6121 7.20039 10.4 7.20039H7.99995ZM5.59995 10.4004C5.38778 10.4004 5.1843 10.4847 5.03427 10.6347C4.88424 10.7847 4.79995 10.9882 4.79995 11.2004C4.79995 11.4126 4.88424 11.616 5.03427 11.7661C5.1843 11.9161 5.38778 12.0004 5.59995 12.0004H5.60795C5.82012 12.0004 6.02361 11.9161 6.17364 11.7661C6.32367 11.616 6.40795 11.4126 6.40795 11.2004C6.40795 10.9882 6.32367 10.7847 6.17364 10.6347C6.02361 10.4847 5.82012 10.4004 5.60795 10.4004H5.59995ZM7.99995 10.4004C7.78778 10.4004 7.5843 10.4847 7.43427 10.6347C7.28424 10.7847 7.19995 10.9882 7.19995 11.2004C7.19995 11.4126 7.28424 11.616 7.43427 11.7661C7.5843 11.9161 7.78778 12.0004 7.99995 12.0004H10.4C10.6121 12.0004 10.8156 11.9161 10.9656 11.7661C11.1157 11.616 11.2 11.4126 11.2 11.2004C11.2 10.9882 11.1157 10.7847 10.9656 10.6347C10.8156 10.4847 10.6121 10.4004 10.4 10.4004H7.99995Z"
+                                                  fill="#6B7280" />
+                                        </svg>
+
+                                        @nameof(CronJobStatus.STARTED)
+                                    </a>
+
+                                </li>
+                                <li class="mr-2">
+
+
+                                    <a href="javascript: void(0)" @onclick=@(e => onFiltering(nameof(CronJobStatus.COMPLETED)))
+                                       class="inline-block p-4 text-gray-500 border-b-2 @Complete  dark:text-blue-500 dark:border-blue-500"
+                                       aria-current="page">
+                                        <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.1999 1.59961C6.98773 1.59961 6.78425 1.68389 6.63422 1.83392C6.48419 1.98395 6.3999 2.18744 6.3999 2.39961C6.3999 2.61178 6.48419 2.81527 6.63422 2.96529C6.78425 3.11532 6.98773 3.19961 7.1999 3.19961H8.7999C9.01208 3.19961 9.21556 3.11532 9.36559 2.96529C9.51562 2.81527 9.5999 2.61178 9.5999 2.39961C9.5999 2.18744 9.51562 1.98395 9.36559 1.83392C9.21556 1.68389 9.01208 1.59961 8.7999 1.59961H7.1999Z"
+                                                  fill="#6B7280" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M3.19995 4.00039C3.19995 3.57604 3.36852 3.16908 3.66858 2.86902C3.96864 2.56896 4.3756 2.40039 4.79995 2.40039C4.79995 3.03691 5.05281 3.64736 5.5029 4.09745C5.95298 4.54753 6.56343 4.80039 7.19995 4.80039H8.79995C9.43647 4.80039 10.0469 4.54753 10.497 4.09745C10.9471 3.64736 11.2 3.03691 11.2 2.40039C11.6243 2.40039 12.0313 2.56896 12.3313 2.86902C12.6314 3.16908 12.8 3.57604 12.8 4.00039V12.8004C12.8 13.2247 12.6314 13.6317 12.3313 13.9318C12.0313 14.2318 11.6243 14.4004 11.2 14.4004H4.79995C4.3756 14.4004 3.96864 14.2318 3.66858 13.9318C3.36852 13.6317 3.19995 13.2247 3.19995 12.8004V4.00039ZM5.59995 7.20039C5.38778 7.20039 5.1843 7.28468 5.03427 7.43471C4.88424 7.58473 4.79995 7.78822 4.79995 8.00039C4.79995 8.21256 4.88424 8.41605 5.03427 8.56608C5.1843 8.7161 5.38778 8.80039 5.59995 8.80039H5.60795C5.82012 8.80039 6.02361 8.7161 6.17364 8.56608C6.32367 8.41605 6.40795 8.21256 6.40795 8.00039C6.40795 7.78822 6.32367 7.58473 6.17364 7.43471C6.02361 7.28468 5.82012 7.20039 5.60795 7.20039H5.59995ZM7.99995 7.20039C7.78778 7.20039 7.5843 7.28468 7.43427 7.43471C7.28424 7.58473 7.19995 7.78822 7.19995 8.00039C7.19995 8.21256 7.28424 8.41605 7.43427 8.56608C7.5843 8.7161 7.78778 8.80039 7.99995 8.80039H10.4C10.6121 8.80039 10.8156 8.7161 10.9656 8.56608C11.1157 8.41605 11.2 8.21256 11.2 8.00039C11.2 7.78822 11.1157 7.58473 10.9656 7.43471C10.8156 7.28468 10.6121 7.20039 10.4 7.20039H7.99995ZM5.59995 10.4004C5.38778 10.4004 5.1843 10.4847 5.03427 10.6347C4.88424 10.7847 4.79995 10.9882 4.79995 11.2004C4.79995 11.4126 4.88424 11.616 5.03427 11.7661C5.1843 11.9161 5.38778 12.0004 5.59995 12.0004H5.60795C5.82012 12.0004 6.02361 11.9161 6.17364 11.7661C6.32367 11.616 6.40795 11.4126 6.40795 11.2004C6.40795 10.9882 6.32367 10.7847 6.17364 10.6347C6.02361 10.4847 5.82012 10.4004 5.60795 10.4004H5.59995ZM7.99995 10.4004C7.78778 10.4004 7.5843 10.4847 7.43427 10.6347C7.28424 10.7847 7.19995 10.9882 7.19995 11.2004C7.19995 11.4126 7.28424 11.616 7.43427 11.7661C7.5843 11.9161 7.78778 12.0004 7.99995 12.0004H10.4C10.6121 12.0004 10.8156 11.9161 10.9656 11.7661C11.1157 11.616 11.2 11.4126 11.2 11.2004C11.2 10.9882 11.1157 10.7847 10.9656 10.6347C10.8156 10.4847 10.6121 10.4004 10.4 10.4004H7.99995Z"
+                                                  fill="#6B7280" />
+                                        </svg>
+
+                                        @nameof(CronJobStatus.COMPLETED)
+                                    </a>
+
+                                </li>
+
+                                <li class="mr-2">
+                                    <a href="javascript: void(0)" @onclick=@(e => onFiltering(nameof(CronJobStatus.FAILED)))
+                                      class="inline-block p-4 text-gray-500 border-b-2 @Failed  dark:text-blue-500 dark:border-blue-500">
+                                        <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3.2001 4.3002H2.7001V4.8002V8.97999C2.59841 8.9281 2.50451 8.86024 2.42228 8.77801C2.21599 8.57172 2.1001 8.29193 2.1001 8.0002V4.8002C2.1001 4.50846 2.21599 4.22867 2.42228 4.02238C2.62857 3.81609 2.90836 3.7002 3.2001 3.7002H9.6001C9.89184 3.7002 10.1716 3.81609 10.3779 4.02238C10.4601 4.10461 10.528 4.19851 10.5799 4.3002H3.2001ZM5.3001 8.0002C5.3001 7.70846 5.41599 7.42867 5.62228 7.22238C5.82857 7.01609 6.10836 6.9002 6.4001 6.9002H12.8001C13.0918 6.9002 13.3716 7.01609 13.5779 7.22238C13.7842 7.42867 13.9001 7.70846 13.9001 8.0002V11.2002C13.9001 11.4919 13.7842 11.7717 13.5779 11.978C13.3716 12.1843 13.0918 12.3002 12.8001 12.3002H6.4001C6.10836 12.3002 5.82857 12.1843 5.62228 11.978C5.41599 11.7717 5.3001 11.4919 5.3001 11.2002V8.0002ZM9.6001 11.7002C10.1571 11.7002 10.6912 11.4789 11.085 11.0851C11.4788 10.6913 11.7001 10.1572 11.7001 9.6002C11.7001 9.04324 11.4788 8.5091 11.085 8.11527C10.6912 7.72145 10.1571 7.5002 9.6001 7.5002C9.04314 7.5002 8.509 7.72145 8.11517 8.11527C7.72135 8.5091 7.5001 9.04324 7.5001 9.6002C7.5001 10.1572 7.72135 10.6913 8.11517 11.0851C8.509 11.4789 9.04314 11.7002 9.6001 11.7002Z"
+                                                  fill="#6B7280" stroke="#6B7280" />
+                                        </svg>
+                                        @nameof(CronJobStatus.FAILED)
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="flex gap-2">
+
+
+                    <label for="mobile-search" class="sr-only">Search</label>
+                    <div class="relative">
+                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                      clip-rule="evenodd">
+                                </path>
+                            </svg>
+                        </div>
+
+
+                        <input type="text" name="email" id="mobile-search" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                               placeholder="Search..."><button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="relative overflow-x-auto shadow mb-3  sm:rounded-lg">
+                <!--------------------- SYNCFUSION ----------------------------------------->
+                <SfGrid @ref="grid" ID="jobProcessingGrid" TValue="PayrollCronJobConfigMasterView" EnablePersistence="false"
+                        Query="@QueryGrid" DataSource=PayrollCronJobConfigMasterViewSrc
+                        AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                        AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="400"
+                        AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                        AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+                    <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+                    <GridEvents TValue="PayrollCronJobConfigMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure"></GridEvents>
+
+                    <GridEditSettings AllowAdding="false" AllowEditing="true" AllowDeleting="false"
+                                      ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+                    </GridEditSettings>
+
+                    <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+                    </GridFilterSettings>
+
+
+                    <GridColumns>
+                        <GridColumn Field=@nameof(PayrollCronJobConfigMasterView.JobName) HeaderText="NAME" AutoFit="true"></GridColumn>
+                        <GridColumn Field=@nameof(PayrollCronJobConfigMasterView.CronJobType) HeaderText="TYPE" AutoFit="true"></GridColumn>	 
+                                    
+                        <GridColumn Field=@nameof(PayrollCronJobConfigMasterView.JobDate) HeaderText="JOB DATE" AutoFit="false" Format="dd/MM/yyyy" Type="ColumnType.Date"> </GridColumn>
+                        <GridColumn Field=@nameof(PayrollCronJobConfigMasterView.ComputationStartDate) HeaderText="COMPUTATION TIME" AutoFit="false" Format="h:mm tt" Type="ColumnType.Number">
+                        </GridColumn>
+
+                        <GridColumn HeaderText="STATUS" AutoFit="false">
+                            <Template>
+                                @{
+                                    var status = (context as PayrollCronJobConfigMasterView);
+                                    <div class="flex items-left">
+                                        @if (status.JobStatus.Contains(nameof(CronJobStatus.COMPLETED)))
+                                        {
+                                            <div class="inline flex flex-row items-center bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md justify-center">
+                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                                                <div> @status.JobStatus</div>
+                                            </div>
+                                        }
+                                        else if (status.JobStatus.Contains(nameof(CronJobStatus.FAILED)))
+                                        {
+                                            <div class="inline flex flex-row items-center bg-red-100 dark:bg-red-200 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md justify-center">
+                                                <div class="h-2.5 w-2.5 rounded-full bg-red-600 mr-2"></div>
+                                                <div> @status.JobStatus</div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="inline flex flex-row items-center bg-purple-100 dark:bg-purple-200 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md justify-center">
+                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                                                <div> @status.JobStatus</div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+
+                            </Template>
+                        </GridColumn>
+                        <GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                            <Template>
+
+
+                                @{
+                                    var row = (context as PayrollCronJobConfigMasterView);
+
+                                    <span class="px-4 py-0 flex items-center justify-end">
+                                        <button id="apple-ipad-air-dropdown-button-@row.Id" data-dropdown-toggle="apple-ipad-air-dropdown-@row.Id"
+                                                class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus::outline-none dark::text-gray-400 dark::hover:text-gray-100"
+                                                type="button">
+                                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                            </svg>
+                                        </button>
+                                        <div id="apple-ipad-air-dropdown-@row.Id" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-ipad-air-dropdown-button-@row.Id">
+                                                <li>
+
+                                                    <a href="javascript: void(0)" @onclick="@(e => NavigateToComponent(row))"
+                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                        View
+                                                    </a>
+
+                                                </li>
+
+
+
+                                            </ul>
+
+                                        </div>
+                                    </span>
+                                }
+
+
+                            </Template>
+                        </GridColumn>
+                    </GridColumns>
+                </SfGrid>
+
+                <!--------------------------------------END---------------------------------->
+
+
+            </div>
+ 
+
+
+
+        </div>
+
+
+    </div>
+</main>
+ 

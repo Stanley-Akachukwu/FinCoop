@@ -1,0 +1,119 @@
+﻿@using AP.ChevronCoop.AppDomain.Deposits.Savings.SavingsAccountApplications;
+@using AP.ChevronCoop.Entities.CoopCustomers.CustomerBankAccounts;
+@using AP.ChevronCoop.Entities.Deposits.DepositApplications;
+@using AP.ChevronCoop.Entities.Deposits.Products.DepositProducts;
+
+@if (ShowAlertPage)
+{
+    <SuccessMessageModal Message="We'll notify you once this setup has been approved."
+                         showPopup="true"
+                         NavigateToPage="false"
+                         PageURL="/account/DepositProduct/Applications"
+                         Header="Your special deposit account application has been sent to Internal control for approval."/>
+}
+
+
+<Drawer @ref="@addDrawer" Closable="true" Visible="showAddDrawer" Title='("Fund Transfer")'
+        OnClose="onAddDone">
+
+
+    <EditForm Model="@Command" OnValidSubmit="OnSave">
+        @*<FluentValidationValidator @ref="_fluentValidationValidator" />*@
+
+        <div class="pb-20 flex flex-col justify-between h-full">
+
+            <div class="grid grid-cols-6 gap-6">
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Membership number
+                    </label>
+                    <input type="input"
+                           value="@MembersNumber"
+                           name="member-number"
+                           id="member-number"
+                           class="@Tailwind.TextBox_General"
+                           placeholder=""
+                           readonly
+                           required/>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Member name
+                    </label>
+                    <input type="input"
+                           name="member-name"
+                           id="member-name"
+                           value="@MembersName"
+                           class="@Tailwind.TextBox_General"
+                           placeholder=""
+                           readonly
+                           required/>
+                </div>
+
+                <div class="col-span-6 sm:col-span-full">
+                    <label for="preferred-fixed-deposit"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Source Account
+                    </label>
+
+                    <input type="input"
+                           name="member-name"
+                           id="member-name"
+                           value="@SpecialDepositAccountNumber (₦@AvailableBalance.ToString("N0"))"
+                           class="@Tailwind.TextBox_General"
+                           placeholder=""
+                           readonly
+                           required/>
+
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Transfer Amount <br/>
+                    </label>
+                    <SfNumericTextBox TValue="decimal" CssClass="@Tailwind.TextBox_General"  @bind-Value="Command.Amount" Format="N2" Decimals=2></SfNumericTextBox>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark :text-white">
+                        Destination Account
+                    </label>
+
+                    <SfDropDownList TItem="DepositAccountsMasterView" TValue="string" PopupHeight="auto" AllowFiltering=true CssClass="@Tailwind.ComboBox_General" DataSource="@GetCustomerChevronAccounts">
+                        <DropDownListEvents TItem="DepositAccountsMasterView" ValueChange="GetCoopAccount" TValue="string"></DropDownListEvents>
+                        <DropDownListFieldSettings Text="Tags" Value="Id"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                </div>
+            </div>
+
+
+        </div>
+
+        <ValidationSummary/>
+
+        <div class="flex col-span-6 sm:col-full space-x-4 justify-end">
+            <button class="@Tailwind.Button_Cancel"
+                    @onclick="onAddDone"
+                    type="button">
+                Back
+            </button>
+
+
+            <button id="updateProductButton"
+                    disabled="@IsButtonDisabled"
+                    class="@Tailwind.Button_Blue"
+                    type="submit">
+                Submit
+            </button>
+        </div>
+
+    </EditForm>
+
+</Drawer>

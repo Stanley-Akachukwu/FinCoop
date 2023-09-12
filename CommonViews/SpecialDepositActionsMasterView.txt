@@ -1,0 +1,45 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER   VIEW [Deposits].[SpecialDepositActionsMasterView]
+as select
+     ROW_NUMBER() OVER (ORDER BY addition.[Id]) AS RowNumber,addition.[Id],addition.[Amount],
+     'Cash Addition' as TransactionType, addition.[DateCreated], addition.[SpecialDepositAccountId],
+     SpecialDepositAccountId.CustomerId as CustomerId,addition.[ApprovalId], ApprovalId.[Status] as ApprovalId_Status,
+     SpecialDepositAccountId.AccountNo as SpecialDepositAccountId_AccountNumber,
+    'Special Deposit Account.('+SpecialDepositAccountId.AccountNo+') Transaction' as [Description],
+    ApprovalId.DateUpdated as TransactionDate
+
+   from Deposits.SpecialDepositCashAddition addition
+  left join [Deposits].SpecialDepositAccount SpecialDepositAccountId on SpecialDepositAccountId.Id=addition.SpecialDepositAccountId
+  left join [Security].Approval ApprovalId on ApprovalId.Id=addition.ApprovalId
+
+   UNION select
+
+ ROW_NUMBER() OVER (ORDER BY fundtransfer.[Id]) AS RowNumber,fundtransfer.[Id],fundtransfer.[Amount],
+     'Fund Transfer' as TransactionType, fundtransfer.[DateCreated], fundtransfer.[SpecialDepositAccountId],
+     SpecialDepositAccountId.CustomerId as CustomerId,fundtransfer.[ApprovalId], ApprovalId.[Status] as ApprovalId_Status,
+     SpecialDepositAccountId.AccountNo as SpecialDepositAccountId_AccountNumber,
+      'Special Deposit Account.('+SpecialDepositAccountId.AccountNo+') Transaction' as [Description],
+      ApprovalId.DateUpdated as TransactionDate
+
+
+   from Deposits.SpecialDepositFundTransfer fundtransfer
+  left join [Deposits].SpecialDepositAccount SpecialDepositAccountId on SpecialDepositAccountId.Id=fundtransfer.SpecialDepositAccountId
+  left join [Security].Approval ApprovalId on ApprovalId.Id=fundtransfer.ApprovalId
+
+  UNION select
+
+ ROW_NUMBER() OVER (ORDER BY withdraw.[Id]) AS RowNumber,withdraw.[Id],withdraw.[Amount],
+     'Withdrawal' as TransactionType, withdraw.[DateCreated], withdraw.[SpecialDepositSourceAccountId],
+     SpecialDepositSourceAccountId.CustomerId as CustomerId,withdraw.[ApprovalId], ApprovalId.[Status] as ApprovalId_Status,
+     SpecialDepositSourceAccountId.AccountNo as SpecialDepositAccountId_AccountNumber,
+      'Special Deposit Account.('+SpecialDepositSourceAccountId.AccountNo+') Transaction' as [Description],
+      ApprovalId.DateUpdated as TransactionDate
+
+
+   from Deposits.SpecialDepositWithdrawal withdraw
+  left join [Deposits].SpecialDepositAccount SpecialDepositSourceAccountId on SpecialDepositSourceAccountId.Id=withdraw.SpecialDepositSourceAccountId
+  left join [Security].Approval ApprovalId on ApprovalId.Id=withdraw.ApprovalId
+GO

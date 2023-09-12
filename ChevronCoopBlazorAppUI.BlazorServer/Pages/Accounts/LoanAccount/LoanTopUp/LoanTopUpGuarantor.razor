@@ -1,0 +1,94 @@
+﻿<EditForm Model="@Model">
+    <FluentValidationValidator/>
+    <ValidationSummary/>
+    <!-- drawer component -->
+    <div class="pb-20 flex flex-col justify-between h-full">
+        <div class="grid grid-cols-6 gap-6 border-b pb-20">
+            <div class="col-span-6 sm:col-full">
+                <h3 class="font-medium mb-3">Select guarantor type</h3>
+                <div class="flex ">
+                    <div class="flex items-center mr-4">
+                        <input id="inline-radio"
+                               type="radio"
+                               value=""
+                               name="inline-radio-group"
+                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="inline-radio"
+                               class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Employee
+                        </label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <input id="inline-2-radio"
+                               type="radio"
+                               value=""
+                               name="inline-radio-group"
+                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="inline-2-radio"
+                               class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Retiree
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-6">
+                <label for="first-name"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Membership Number
+                </label>
+                <input type="text"
+                       name="first-name"
+                       id="first-name"
+                       class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       placeholder="Bonnie"
+                       required/>
+            </div>
+
+            <a href="./guarantorInformation.html">
+                <button class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="button">
+                    Search
+                </button>
+            </a>
+        </div>
+
+        <div class="flex flex-col space-x-4">
+            <h5 class="text-lg font-semibold pl-4 text-gray-900 my-4">Member details</h5>
+            <div class="my-2">
+                <p class="text-sm font-medium text-gray-900">Member name</p>
+                <p class="text-base font-semibold text-gray-900">Sunny Pepple</p>
+            </div>
+
+            <div class="my-2">
+                <p class="text-sm font-medium text-gray-900">Membership number</p>
+                <p class="text-base font-semibold text-gray-900">293KE3</p>
+            </div>
+
+            <div class="my-2">
+                <p class="text-sm font-medium text-gray-900">Member type</p>
+                <p class="text-base font-semibold text-gray-900">293KE3</p>
+            </div>
+
+        </div>
+        <div class="flex col-span-6 sm:col-full space-x-4 justify-end">
+            <button data-drawer-hide="drawer-right-example"
+                    aria-controls="drawer-right-example"
+                    class="text-CEMCS-Blue-100 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    type="button">
+                Cancel
+            </button>
+            <a href="./guarantorInformation.html">
+                <button class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="button">
+                    Save
+                </button>
+            </a>
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+
+}

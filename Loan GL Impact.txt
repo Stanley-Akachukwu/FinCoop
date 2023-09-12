@@ -1,0 +1,36 @@
+// Loan GL Triggers
+Loan Repayment
+- Payroll payment (Omolaja)
+
+
+Loan Disbursement
+- Disbursement payment: LoanDisbursementApprovalFactory.Process()
+
+
+Loan Offset: LoanOffsetCommandHandler.Handle(ProcessLoanOffsetCommand)
+- Loan offset using special deposit (Debit Special Deposit and Credit Loan Account)
+- Loan offset using Saving (Debit Savings and Credit Loan Account)
+- Loan offset using Transfer (Credit Loan Account)
+
+
+Loan Topup: LoanTopupCommandHandler.Handle(ProcessLoanTopupCommand)
+- Loan topup payment: (Close existing account and open a new one)
+* Loan Topup transaction actions
+    Running loan Principal Balance = 50k  
+    Running loan Interest Balance = 0 (Because all earned interest has been paid) 
+    Requested loan topup: 200k
+    Disbursed amount: 200k (The new amount requested is disbursed to user account)
+    
+    - Update old principal: 50k 
+    - Update new principal: 250k (Running loan Principal Balance + Requested loan topup)
+    - Update old interest: 0
+    - Update new interest: Summation of the projected interest for the new principal
+    - Generate new repayment schedule for the 250k using the interest in the loan product: Using InterestCalculatorHelper class
+    - Close existing account by setting isClosed = true
+    - Create new account with the new Principal balance referencing the old account as parentId
+    - Record new disbursement of 200k done. (Log to disbursement table)
+    - Update the GL to impact the disbursement.
+    - Transferable charges like topup charge is transferred or billed on the new account
+    
+    
+    *** Ask CEMCS how the collect charges

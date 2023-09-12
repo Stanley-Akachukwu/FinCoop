@@ -1,0 +1,137 @@
+﻿<EditForm Model="@Model">
+    <FluentValidationValidator @ref="_fluentValidationValidator"/>
+    <ValidationSummary/>
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+        <h3 class="mb-4 text-xl font-bold dark:text-white">
+            KYC document
+        </h3>
+
+        <p class="text-gray-500 text-sm font-normal">
+            Please upload any of the following means of identification:
+            National Identification, international passport, Company
+            Identification.
+        </p>
+
+        <p class="text-uploadGray text-sm font-semibold pt-2 pb-6">
+            All files must be an image (.jpg, .jpeg, .png or .pdf), with
+            max size of 10MB.
+        </p>
+        <!-- <form action="./KYCInformation.html"> -->
+
+        <div class="grid grid-cols-6 gap-6">
+            @if (IsApproved != "ACTIVE" || string.IsNullOrEmpty(Passport))
+            {
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="mb-4">
+                        <label for="Primary bank sort code"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Your Passport Photograph (png, jpeg, jgp)<span class="text-red-500">*</span>
+                        </label>
+                        <SfUploader AutoUpload="true" AllowedExtensions=".png, .jpeg, .jpg" AllowMultiple="false">
+                            <UploaderEvents ValueChange="OnChangePassportUpload"></UploaderEvents>
+                        </SfUploader>
+                     
+                    </div>
+                </div>
+            }
+
+            <div class="col-span-6 sm:col-span-3">
+
+                @if (!string.IsNullOrEmpty(Passport))
+                {
+                    <div class="" width="100" height="100">
+                        <img src="@Passport" class="@Tailwind.ShadowImages"/>
+                    </div>
+                }
+
+
+            </div>
+
+
+            <div class="col-span-6 sm:col-full">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Document Type<span class="text-red-500">*</span>
+                </label>
+
+                <SfDropDownList TValue="string" CssClass="@Tailwind.DropDownList_blue" Placeholder="Ex. National ID" TItem="DropDown" Width="300px" @bind-Value=@Model.DocumentTypeId DataSource="@DocumentType">
+                    <DropDownListFieldSettings Value="Code" Text="Name"></DropDownListFieldSettings>
+                </SfDropDownList>
+                <ValidationMessage For="() => Model.DocumentTypeId" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+
+            <div class="col-span-6 sm:col-full">
+                <label for="DocumentNumber"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Identification Number<span class="text-red-500">*</span>
+                </label>
+                <SfTextBox ID="DocumentNumber" Placeholder="Ex. John Smith" CssClass="@Tailwind.TextBox_General"
+                           @bind-Value=@Model.DocumentNumber>
+                </SfTextBox>
+                <ValidationMessage For="() => Model.DocumentNumber" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+            @if (IsApproved != "ACTIVE" || string.IsNullOrEmpty(Member_Document))
+            {
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="Primary bank sort code"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Identification Document (png, jpeg, jgp, pdf)<span class="text-red-500">*</span>
+                    </label>
+                    <SfUploader AutoUpload="true" AllowedExtensions=".png, .jpeg, .jpg, .pdf, .pmb, .gif" AllowMultiple="false">
+                        <UploaderEvents ValueChange="OnChangeDocumentUpload"></UploaderEvents>
+                    </SfUploader>
+                    @if (showDocumentError)
+                    {
+                        <span class="text-red-500">@ErrorMessage</span>
+                    }
+                    @if (showPassportSuccess)
+                    {
+                        <span class="text-green-500">@ErrorMessage</span>
+                    }
+
+                </div>
+            }
+
+
+            <div class="col-span-6 sm:col-span-3">
+
+
+
+                @if (!string.IsNullOrEmpty(Member_Document))
+                {
+                    if (Member_Document.Contains("data:image/"))
+                    {
+                        <div class="">
+                            <img src="@Member_Document" class="@Tailwind.ShadowImages"/>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="">
+                            <a href="@Member_Document" target="_blank">
+                                <img src="../images/pdf_icon.svg" class="@Tailwind.ShadowImages" width="100" height="100"/>
+                            </a>
+                        </div>
+                    }
+                }
+
+
+            </div>
+
+
+            <div class="col-span-6 sm:col-full">
+                <button disabled=@Disable @onclick=OnSave
+                        class="@Tailwind.Button_Blue">
+                    @SubmitBtn
+                </button>
+            </div>
+
+
+        </div>
+        <!-- </form> -->
+    </div>
+</EditForm>
+
+@code {
+
+}

@@ -1,0 +1,78 @@
+﻿@page "/get-started"
+<main>
+    <div class="px-4 pt-6">
+        <div class="mb-4">
+            <nav class="flex mb-5" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="#"
+                           class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                            </svg>
+                            Configuration
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center ">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd">
+                                </path>
+                            </svg>
+                            KYC Form
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd">
+                                </path>
+                            </svg>
+
+                        </div>
+                    </li>
+
+                </ol>
+            </nav>
+        </div>
+        <section class="bg-white dark:bg-gray-900">
+            <div class="py-8 px-4 mx-auto max-w-screen-lg text-center sm:py-16 lg:px-6">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Welcome to your dashboard</h2>
+               
+                <div class="flex items-center justify-center" style="padding-top: 20px;">
+                     
+                    <div class="flex flex-col  items-center justify-center max-w-sm p-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity="0.5" cx="24" cy="24" r="24" fill="#1F82BD" fill-opacity="0.2"/>
+                            <path d="M21.5 32L16.053 29.276C15.8869 29.193 15.7472 29.0654 15.6496 28.9075C15.5519 28.7496 15.5001 28.5677 15.5 28.382V17.618C15.5001 17.4476 15.5437 17.2801 15.6267 17.1313C15.7098 16.9825 15.8294 16.8574 15.9744 16.7678C16.1194 16.6782 16.2848 16.6272 16.455 16.6195C16.6252 16.6119 16.7946 16.6478 16.947 16.724L21.5 19M21.5 32V19M21.5 32L27.5 29M21.5 19L27.5 16M27.5 29L32.053 31.276C32.2054 31.3522 32.3748 31.3881 32.545 31.3805C32.7152 31.3728 32.8806 31.3218 33.0256 31.2322C33.1706 31.1426 33.2902 31.0175 33.3733 30.8687C33.4563 30.7199 33.4999 30.5524 33.5 30.382V19.618C33.4999 19.4323 33.4481 19.2504 33.3504 19.0925C33.2528 18.9346 33.1131 18.807 32.947 18.724L27.5 16M27.5 29V16" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+
+                        <a href="#">
+                            <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">
+                                Activate your account by completing your KYC
+                            </h5>
+                        </a>
+                     
+
+                        <form action="/complete-kyc">
+                            <button type="submit" class="mt-4  py-2 px-8 w-full text-xs font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Complete KYC</button>
+                        </form>
+                    </div>
+                
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+@code {
+
+}

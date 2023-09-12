@@ -1,0 +1,35 @@
+﻿
+Process flow for cron job
+-----------------------
+
+1. Process starts from Creating a schedule via the interface
+
+   On making an API call to create schedule find below list of activies
+
+2.  if scheduleType  == Payroll
+     3 Jobs will be created ( savings , special deposit , loan repayment)
+    if  scheduleType = interest
+     2 jobs will be created (special deposit , fixed deposit)
+
+
+3.  For each payroll job to run (Hangfire service)
+    - check the job for the pending , scheduletype is payroll and current date = jobdate = payroll rundate
+    - Check the account information (saving account, sd account, loan repayment shceu) active and not deleted
+    - Store information on the payroll schedule item and also respective schedule tables (savinschedule , sdschedule)
+    -  Movement of fund to BalanceLedgerAccount (interest due & Balance) - (specific for loans)
+    - update payroll job schedule table
+
+4. Upon upload of the deduction schedule coming from CNL
+
+   - Upload the csv to deduction table ( schedule - june (selected))
+   - (Match deduction to payroll) Run validations on deductions e.g. Min +=0.2 and Max decimal place.
+   - Merge the deduction to payroll deduction - extract failed deduction/ exception
+
+5. Payroll Transaction postings / Triggers
+
+   - Upon succesful comparism of deductions and payroll schedule
+   - Transaction posting on either Deposit or loans occurs 
+   
+
+  
+

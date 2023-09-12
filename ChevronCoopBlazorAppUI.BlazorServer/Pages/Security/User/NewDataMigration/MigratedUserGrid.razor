@@ -1,0 +1,421 @@
+﻿@page "/security/data-migration"
+@using AP.ChevronCoop.Entities.Security.Auth;
+@using AP.ChevronCoop.Entities.Security.MemberProfiles.MemberProfiles
+@using Syncfusion.Blazor.Grids
+@layout AppUIMainLayout
+@attribute [Authorize]
+<div class="px-4 pt-6">
+    <div class="mb-4">
+        <nav class="flex mb-5" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                <li class="inline-flex items-center">
+                    <a href="javascript: void(0)" @onclick=OnPage class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                        <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                        </svg>
+                        Data Migration
+                    </a>
+                </li>
+
+
+            </ol>
+        </nav>
+    </div>
+
+
+    <!-- Request Tabs -->
+    <div class="w-full md:w-1/2">
+
+        <div class="sm:col-span-2">
+            <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <input type="search" id="default-search" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+                       class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search...">
+
+                <button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="mb-4 flex w-full items-center font-semibold justify-between  ">
+        <h1>All Users</h1>
+  
+        <div class="flex flex-row gap-2 items-center justify-center">
+        <button @onclick=OnGetTemplate type="button" class="inline-flex items-center py-2.5 px-3 text-sm font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+
+            Download Template
+
+        </button>
+        <button @onclick=OnShowUpload type="button" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+            <svg class="mr-2 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+            </svg>
+            Upload Data
+        </button>
+        </div>
+    </div>
+
+
+    <div class="relative overflow-x-auto shadow  sm:rounded-lg">
+
+        <SfGrid @ref="grid" ID="gridMemberProfile" TValue="MemberProfileViaUploadMasterView" EnablePersistence="false"
+                Query="@QueryGrid"
+                AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="400"
+                AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+            <SfDataManager Url="@GRID_API_RESOURCE" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+            <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+            <GridEvents TValue="MemberProfileViaUploadMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure" QueryCellInfo="CellInfoHandler"></GridEvents>
+
+            <GridEditSettings AllowAdding="false" AllowEditing="true" AllowDeleting="false"
+                              ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+            </GridEditSettings>
+
+            <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+            </GridFilterSettings>
+
+
+            <GridColumns>
+                <GridColumn Field=@nameof(MemberProfileViaUploadMasterView.RowNumber) HeaderText="S/N" AutoFit="false"></GridColumn>
+                <GridColumn Field=@nameof(MemberProfileViaUploadMasterView.FirstName) HeaderText="FIRST NAME" AutoFit="true"></GridColumn>
+                <GridColumn Field=@nameof(MemberProfileViaUploadMasterView.LastName) HeaderText="LAST NAME" AutoFit="true"></GridColumn>
+                <GridColumn Field=@nameof(MemberProfileViaUploadMasterView.Gender) HeaderText="GENDER" AutoFit="true"></GridColumn>
+                <GridColumn Field=@nameof(MemberProfileViaUploadMasterView.PrimaryEmail) HeaderText="EMAIL" AutoFit="false"></GridColumn>
+                <GridColumn Field=@nameof(MemberProfileViaUploadMasterView.PrimaryPhone) HeaderText="PHONE NO." AutoFit="false"></GridColumn>
+                <GridColumn Field=@nameof(MemberProfileViaUploadMasterView.MemberBulkUploadTempId_MembershipNumber) HeaderText="MEMBERSHIP NO." AutoFit="false"></GridColumn>
+               
+
+                <GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                    <Template>
+
+
+                        @{
+                            var row = (context as MemberProfileViaUploadMasterView);
+                            <div class="flex items-center">
+                                <a href="javascript: void(0)" @onclick="@(e => OnViewRow(row))">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+
+                            </div>
+                        }
+
+
+                    </Template>
+                </GridColumn>
+
+            </GridColumns>
+
+        </SfGrid>
+
+
+    </div>
+
+
+</div>
+<Drawer @ref="@previewDrawer" Closable="true" Visible="showPreviewDrawer" Title='("Upload File")'
+        OnClose="onPreviewDone">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between">
+            <div>
+                <svg class="inline mr-1" width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M25.4585 3.91663H11.7502C10.7114 3.91663 9.71518 4.32927 8.98066 5.06379C8.24614 5.79831 7.8335 6.79453 7.8335 7.83329V39.1666C7.8335 40.2054 8.24614 41.2016 8.98066 41.9361C9.71518 42.6706 10.7114 43.0833 11.7502 43.0833H35.2502C36.2889 43.0833 37.2851 42.6706 38.0197 41.9361C38.7542 41.2016 39.1668 40.2054 39.1668 39.1666V17.625L25.4585 3.91663Z" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M25.4585 3.91663V17.625H39.1668" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div>
+                <h2>@fileName</h2>
+                <h3 class="font-light text-gray-400">@fileSize</h3>
+            </div>
+        </div>
+
+    </div>
+    <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px justify-between">
+            <li class="mr-2 w-5/12">
+                <a href="javascript: void(0)" @onclick=LoadValidEntry class="inline-block p-4  rounded-t-lg @ValidActive dark:text-blue-500 dark:border-blue-500">Valid Entries</a>
+            </li>
+            <li class="mr-2 w-6/12">
+                <a href="javascript: void(0)" @onclick=LoadInValidEntry class="inline-block p-4  rounded-t-lg @InValidActive hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" aria-current="page">Invalid Entries</a>
+            </li>
+
+        </ul>
+    </div>
+
+    @if (isValidRecord && UploadDataModel.AcceptedMemberDataUpload.Count > 0)
+    {
+        <div class="flex items-center justify-between mt-4 mb-4 gap-1">
+            <div class="w-6/12">
+                <h3>@UploadDataModel.AcceptedMemberDataUpload.Count Valid Entries</h3>
+            </div>
+            <div class="flex items-center justify-between gap-1 w-6/12">
+
+                <div class="w-6/12">
+                    <button type="button" @onclick="@OnExport" class="inline-flex items-center py-4 w-full justify-center px-3 border-CEMCS-Blue-100 border-2 text-sm font-medium text-center text-CEMCS-Blue-100 rounded-lg bg-white hover:bg-CEMCS-Blue-100 hover:text-white focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <svg class="inline mr-1" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_2731_62607)">
+                                <path d="M2.49984 5.67079H5.67067V2.49996H9.99984V5.99163H10.8332V2.49996C10.8332 2.27895 10.7454 2.06698 10.5891 1.9107C10.4328 1.75442 10.2209 1.66663 9.99984 1.66663H4.529L1.6665 4.52913V12.5C1.6665 12.721 1.7543 12.9329 1.91058 13.0892C2.06686 13.2455 2.27882 13.3333 2.49984 13.3333H9.99984C10.2209 13.3333 10.4328 13.2455 10.5891 13.0892C10.7454 12.9329 10.8332 12.721 10.8332 12.5H2.49984V5.67079ZM2.49984 4.87079L4.87067 2.49996H4.99984V4.99996H2.49984V4.87079Z" fill="#1F82BD"/>
+                                <path d="M11.8002 6.81247C11.7205 6.74421 11.6179 6.70854 11.5131 6.71259C11.4082 6.71664 11.3087 6.76011 11.2345 6.83432C11.1603 6.90853 11.1168 7.008 11.1128 7.11286C11.1087 7.21773 11.1444 7.32026 11.2127 7.39997L12.5668 8.74997H7.50016C7.38966 8.74997 7.28367 8.79387 7.20553 8.87201C7.12739 8.95015 7.0835 9.05613 7.0835 9.16664C7.0835 9.27714 7.12739 9.38313 7.20553 9.46127C7.28367 9.53941 7.38966 9.5833 7.50016 9.5833H12.5793L11.2127 10.95C11.169 10.9873 11.1336 11.0333 11.1086 11.085C11.0836 11.1367 11.0695 11.193 11.0673 11.2504C11.0651 11.3077 11.0748 11.365 11.0957 11.4184C11.1167 11.4719 11.1485 11.5205 11.1891 11.5611C11.2297 11.6017 11.2782 11.6335 11.3317 11.6544C11.3852 11.6754 11.4424 11.685 11.4998 11.6828C11.5572 11.6806 11.6135 11.6665 11.6652 11.6415C11.7168 11.6165 11.7628 11.5811 11.8002 11.5375L14.1668 9.16664L11.8002 6.81247Z" fill="#1F82BD"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_2731_62607">
+                                    <rect width="15" height="15" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        Export
+                    </button>
+                </div>
+                <div class="w-6/12">
+                    <button type="button" @onclick="@OnCommit" class="inline-flex items-center py-4 w-full justify-center px-3 text-sm font-medium text-center text-white rounded-lg bg-green-500 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <svg class="mr-1 inline" width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_2733_64371)">
+                                <path d="M13.1023 10.452V13.0546C13.1023 13.3997 12.9739 13.7307 12.7455 13.9747C12.517 14.2188 12.2071 14.3559 11.884 14.3559H3.35598C3.03287 14.3559 2.723 14.2188 2.49452 13.9747C2.26605 13.7307 2.1377 13.3997 2.1377 13.0546V10.452" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10.6657 5.89749L7.61994 2.64429L4.57422 5.89749" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7.61963 2.64429V10.452" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_2733_64371">
+                                    <rect width="14.6195" height="15.6154" fill="white" transform="translate(0.310059 0.692383)"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        Commit
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+    @if (isInValidRecord && UploadDataModel.RejectedMemberDataUpload.Count > 0)
+    {
+        <div class="flex items-center justify-between mt-4 mb-4 gap-1">
+            <div class="w-6/12">
+                <h3>@UploadDataModel.RejectedMemberDataUpload.Count Invalid Entries</h3>
+            </div>
+            <div class="">
+
+                <div class="">
+                    <button @onclick=OnDownload class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+
+                        <svg class="mr-1 inline" width="15" height="17" viewBox="0 0 15 17"
+                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_2733_64371)">
+                                <path d="M13.1023 10.452V13.0546C13.1023 13.3997 12.9739 13.7307 12.7455 13.9747C12.517 14.2188 12.2071 14.3559 11.884 14.3559H3.35598C3.03287 14.3559 2.723 14.2188 2.49452 13.9747C2.26605 13.7307 2.1377 13.3997 2.1377 13.0546V10.452"
+                                      stroke="white" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                                <path d="M10.6657 5.89749L7.61994 2.64429L4.57422 5.89749"
+                                      stroke="white" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                                <path d="M7.61963 2.64429V10.452" stroke="white" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_2733_64371">
+                                    <rect width="14.6195" height="15.6154" fill="white"
+                                          transform="translate(0.310059 0.692383)"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+
+    </div>
+    @if (isValidRecord)
+    {
+        <div class="relative overflow-x-auto overflow-y-auto shadow-md  w-full">
+            <DataMigrationUploadPreviewGrid @bind-Model="@UploadDataModel.AcceptedMemberDataUpload"></DataMigrationUploadPreviewGrid>
+        </div>
+    }
+
+    @if (isInValidRecord)
+    {
+        <div class="relative overflow-x-auto overflow-y-auto shadow-md  w-full">
+            <DataMigrationUploadPreviewGrid @bind-Model="@UploadDataModel.RejectedMemberDataUpload" OnShowMemberDataUploadErrorChanged="OnShowMemberDataUploadErrorChangedHandler"></DataMigrationUploadPreviewGrid>
+        </div>
+    }
+    @if (showNotification)
+    {
+        <div class="relative overflow-x-auto overflow-y-auto shadow-md  w-full">
+            <DataMigrationNotification/>
+        </div>
+    }
+
+
+
+</Drawer>
+
+<Drawer @ref="@uploadDrawer" Closable="true" Visible="showUploadDrawer" Title='("Upload File")'
+        OnClose="onUploadDone">
+
+    <div class="p-6 text-center flex flex-col ">
+        <div class="flex flex-col items-start justify-start ">
+            <h3 class="mb-3 text-lg  text-2xl text-black font-semibold text-gray-500 dark:text-gray-400">File Upload</h3>
+            <h2 class="mb-2 font-light">Kindly click on the browse icon to upload file </h2>
+
+
+        </div>
+
+        <div class="flex items-center justify-center w-full col-span-2">
+            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Max. File Size: 30M B</p>
+
+
+                    <InputFile id="dropzone-file" type="file" class="hidden"
+                               name="fileUpload"
+                               accept=".csv,.xlsx"
+                               required
+                               multiple="false" OnChange="@OnChange"/>
+                </div>
+
+            </label>
+        </div>
+
+
+        <div>
+            @if (showProgressbar)
+            {
+                <div class="flex flex-col items-start justify-start mt-6 ">
+                    <h3 class="mb-1">File is currently uploading</h3>
+                    <div class="flex flex-row bg-green-100 justify-center items-center w-full p-4 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <h2>Uploading @progressPercentage%</h2>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+        @if (showCompleteUpload)
+        {
+            <div>
+                <div class="flex flex-col items-start justify-start mt-6 ">
+                    <h3 class="mb-1">The file has been uploaded</h3>
+                    <div class="flex flex-row justify-between w-full p-4 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <h2>@fileName</h2>
+                        <h2 class="text-CEMCS-Blue-100" @onclick=ViewRecords>View Documents</h2>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+
+</Drawer>
+<Drawer @ref="@errorDrawer" Closable="true" Visible="showErrorDrawer" Title='("Error Reporting")'
+        OnClose="onErrorDone">
+    <div class="flex items-center justify-between">
+        <div>
+        </div>
+        <div class="flex items-center justify-between">
+
+
+            <div class="flex flex-row gap-1 items-center">
+                <div>
+                    <svg class="inline mr-1" width="47" height="47"
+                         viewBox="0 0 47 47" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M25.4585 3.91663H11.7502C10.7114 3.91663 9.71518 4.32927 8.98066 5.06379C8.24614 5.79831 7.8335 6.79453 7.8335 7.83329V39.1666C7.8335 40.2054 8.24614 41.2016 8.98066 41.9361C9.71518 42.6706 10.7114 43.0833 11.7502 43.0833H35.2502C36.2889 43.0833 37.2851 42.6706 38.0197 41.9361C38.7542 41.2016 39.1668 40.2054 39.1668 39.1666V17.625L25.4585 3.91663Z"
+                              stroke="#374151" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M25.4585 3.91663V17.625H39.1668"
+                              stroke="#374151" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2>@fileName Error reporting</h2>
+
+            </div>
+        </div>
+    @*    <div class="flex items-center justify-between gap-1">
+            <button type="button" @onclick=onErrorDone
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clip-rule="evenodd">
+                    </path>
+                </svg>
+                <span class="sr-only">Close menu</span>
+            </button>
+
+        </div>*@
+    </div>
+
+    <div class="flex items-center justify-between mt-4 mb-4 gap-1">
+        <div class="w-6/12">
+        </div>
+
+    </div>
+
+    <div>
+        <div class="relative overflow-x-auto overflow-y-auto shadow-md  w-full">
+            @if (ErrorRecord != null && ErrorRecord.Messages != null && ErrorRecord.Messages.Count > 0)
+            {
+                <table class="w-full text-sm text-left text-blue-100 dark:text-blue-100">
+                    <thead class="text-xs text-black uppercase bg-white border-b border-black dark:text-black">
+                    <tr>
+
+                        <th scope="col"
+                            class="px-6 py-3 bg-white border-r-2 border-l-2 border-t-2 border-black bg-neutral-300">
+                            Field Name
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 bg-white border-r-2 border-t-2 border-black bg-neutral-300">
+                            Error Type
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 bg-white border-r-2 border-t-2 border-black bg-neutral-300">
+                            Error Reporting
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in ErrorRecord.Messages)
+                    {
+                        <tr class="bg-white border-b border-black">
+
+                            <td class="px-6 py-4 text-black border-l-2 bg-white border-black border-r-2 border-b-2">
+                                @item.FieldName
+                            </td>
+                            <td class="px-6 py-4 text-black bg-white border-black border-r-2 border-b-2">
+                                @item.ErrorType
+                            </td>
+
+                            <td class="px-6 py-4 text-black bg-white border-black border-r-2 border-b-2">
+                                @item.ErrorReport
+                            </td>
+
+                        </tr>
+                    }
+
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+
+</Drawer>

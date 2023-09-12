@@ -1,0 +1,273 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.Savings.SavingsAccountApplications;
+@using System.Globalization;
+@using AP.ChevronCoop.Entities.Deposits.Savings.SavingsAccounts;
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+
+    @if (ViewMode == "saving_only")
+    {
+        <h3 class="mb-4 text-xl font-bold dark:text-white">
+            @ApprovalType.Replace("_", " ")
+        </h3>
+
+        @foreach (var item in _SavingsAccountApplicationMasterView)
+        {
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Product Name
+                            </h2>
+                            <p>@item.DepositProductId_Name</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Description
+                            </h2>
+                            <p>@item.Description</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Application Number
+                            </h2>
+                            <p>@item.ApplicationNo</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Type of Account
+                            </h2>
+                            <p>@item.Tags</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Customer Type
+                            </h2>
+                            <p>@item.CustomerId_MemberType</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Customer Name
+                            </h2>
+                            <p>@item.CustomerId_FirstName @item.CustomerId_LastName</p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Customer Phone Number
+                            </h2>
+                            <p>@item.CustomerId_PrimaryPhone</p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Product Tenure
+                            </h2>
+                            <p>@item.DepositProductId_Tenure</p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Product Tenure Value
+                            </h2>
+                            <p>@item.DepositProductId_TenureValue</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Deposit Amount
+                            </h2>
+                            <p>@item.Amount.ToString("N2", new CultureInfo("en-US"))</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Date Created
+                            </h2>
+                            <p>@item.DateCreated.GetValueOrDefault().ToString("M/d/yyyy")</p>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        }
+    }
+    else if (ViewMode == "savings_actions")
+    {
+        @foreach (var item in _SavingsAccountMasterView)
+        {
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                   
+
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Product Name
+                            </h2>
+                            <p>@item.DepositProductId_Name</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Customer Type
+                            </h2>
+                            <p>@item.CustomerId_MemberType</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Customer Name
+                            </h2>
+                            <p>@item.CustomerId_FirstName @item.CustomerId_LastName</p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Account Number
+                            </h2>
+                            <p>@item.AccountNo</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Payroll Amount
+                            </h2>
+                            <p>@item.PayrollAmount</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Account Status
+                            </h2>
+                            <p>@item.IsActive</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                               Members Type
+                            </h2>
+                            <p>@item.CustomerId_MemberType</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Members Type
+                            </h2>
+                            <p>@item.CustomerId_MemberType</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Customer Phone Number
+                            </h2>
+                            <p>@item.CustomerId_PrimaryPhone</p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Product Tenure
+                            </h2>
+                            <p>@item.DepositProductId_Tenure</p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Product Tenure Value
+                            </h2>
+                            <p>@item.DepositProductId_TenureValue</p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                                Date Created
+                            </h2>
+                            <p>@item.DateCreated.GetValueOrDefault().ToString("M/d/yyyy")</p>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        }
+    }
+
+   
+
+</div>
+
+
+@code {
+
+    [Parameter] public string ApprovalType { get; set; } = "";
+
+    [Parameter] public string ViewMode { get; set; } = "saving_only";
+
+    [Parameter]
+    public List<SavingsAccountApplicationMasterView> _SavingsAccountApplicationMasterView { get; set; } = new List<SavingsAccountApplicationMasterView>();
+
+    [Parameter]
+    public List<SavingsAccountMasterView> _SavingsAccountMasterView { get; set; } = new List<SavingsAccountMasterView>();
+
+}

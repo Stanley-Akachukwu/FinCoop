@@ -1,0 +1,51 @@
+Savings Deposit Transaction:
+1. On Application: Logs to SavingsAccountApplication table
+
+2. On Approval of the application: an account is created and saved on savingsAccount   
+
+3. Monthly Deduction: Monthly Deduction defaults to payroll
+             -  Savings Schedule  50k (Initial Amount)                                                                     
+         
+             Monthly Savings Schedule Job:
+                - Get the day payroll should run from Deposit Configuration Table e.g 15th of the month
+                If payroll day match current day
+                    - Spool Savings accounts for the month that the funding source is payroll 
+                    - Pick current contribution amount for each savings account
+                        - Schedule PayrollDeductionItemSchedule for each account
+                        - Then add it to PayrollDeductionSchedule() for advice for the current month
+                
+             ACTION:  `
+
+             Use Case 2: Increase/Decrease(Not a transaction)  
+                 - Log the amount for approval
+                 - Upon approval, set the SavingsAccount funding amount = +- New Amount
+                 Example:
+                 - Increase: Request amount is 30k then the  SavingsAccount PayrollAmount  = + 30k 
+                 - Decrease: Request amount is 20k then the  SavingsAccount PayrollAmount = - 20k  
+                             (Update funding amount only if funding amount is not less than required contribution amount)
+
+                 
+
+             Use Case 3: Savings Account Cash Addition (posting to SavingsAccount & SavingsCashAddition)
+                 - User request for cash addition of 15k (save in SavingsCashAddition)
+                 - Upon approval
+                 - Create journal entry for debit and credit
+                 - Add to Transactionjournal
+                 - Update SavingsAccount: Previous Amount(30k) + cash addition(15k)
+                   eg ledgeAccount.Balance =+ 15k
+                 - Notify Customer via email
+
+
+         
+       
+            
+
+
+       
+/**Note  
+
+
+   on upload of paymentSchedule.
+   We find the matching items in paymentScheduleItem using (batchNoRef , payrollCode, PayrollDate)
+
+**/

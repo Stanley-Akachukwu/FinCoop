@@ -1,0 +1,254 @@
+﻿@page "/approval/notification/settings"
+@using AP.ChevronCoop.Entities.Security.Auth.ApplicationRoles;
+@using AP.ChevronCoop.Entities.Security.Auth.ApplicationUserRoles;
+@using AP.ChevronCoop.Entities.Security.MemberProfiles.MemberProfiles;
+<EditForm Model="@Model">
+<FluentValidationValidator/>
+<ValidationSummary/>
+
+<div class="px-4 pt-6">
+    <div class="col-span-3 sm:col-span-3">
+        <a href="/approval/workflows/create">
+            <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    type="submit">
+                <svg class="inline mr-1"
+                     width="14"
+                     height="12"
+                     viewBox="0 0 14 12"
+                     fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 5.99967H13Z" fill="#1F82BD"/>
+                    <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13"
+                          stroke="#1F82BD"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+                Back
+            </button>
+        </a>
+    </div>
+
+    <!-- Request Tabs -->
+
+    <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-9 xl:gap-2 space-x-24 dark:bg-gray-900">
+        <div class="col-span-2">
+            <div class="bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                <div class="items-start pb-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
+                    <h3 class="pb-4 text-gray-900 font-bold text-xl">
+                        Approval workflow
+                    </h3>
+                    <div class="flex flex-row">
+                        <div class="flex flex-col items-center justify-center max-w-max">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="10" cy="10" r="10" fill="#1F82BD"/>
+                                <path d="M5.33337 10.6666L8.00004 13.3333L14.6667 6.66663" stroke="#F9FAFB" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="1"
+                                 height="34"
+                                 viewBox="0 0 1 34"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <line x1="0.5"
+                                      y1="0.5"
+                                      x2="0.5"
+                                      y2="33.5"
+                                      stroke="#9CA3AF"
+                                      stroke-linecap="round"
+                                      stroke-dasharray="2 2"/>
+                                <line x1="0.5"
+                                      y1="0.5"
+                                      x2="0.5"
+                                      y2="33.5"
+                                      stroke="#9CA3AF"
+                                      stroke-linecap="round"
+                                      stroke-dasharray="2 2"/>
+                                <line x1="0.5"
+                                      y1="0.5"
+                                      x2="0.5"
+                                      y2="33.5"
+                                      stroke="#9CA3AF"
+                                      stroke-linecap="round"
+                                      stroke-dasharray="2 2"/>
+                                <line x1="0.5"
+                                      y1="0.5"
+                                      x2="0.5"
+                                      y2="33.5"
+                                      stroke="#9CA3AF"
+                                      stroke-linecap="round"
+                                      stroke-dasharray="2 2"/>
+                                <line x1="0.5"
+                                      y1="0.5"
+                                      x2="0.5"
+                                      y2="33.5"
+                                      stroke="#9CA3AF"
+                                      stroke-linecap="round"
+                                      stroke-dasharray="2 2"/>
+                            </svg>
+                        </div>
+                        <p class="pl-4 text-sm font-semibold">Basic information</p>
+                    </div>
+                    <div class="flex flex-row">
+                        <div class="flex flex-col items-center justify-center max-w-max">
+                            <svg width="20"
+                                 height="20"
+                                 viewBox="0 0 20 20"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="10"
+                                        cy="10"
+                                        r="9"
+                                        stroke="#1F82BD"
+                                        stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <p class="pl-4 text-sm font-medium">SLA configuration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-6">
+            <div class="max-w-2xl w-full">
+                <div class="w-full p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                    <h3 class="mb-4 text-xl font-bold dark:text-white">
+                        Approval Notification Settings
+                    </h3>
+
+                </div>
+                <div class="w-full p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+
+                    <p class="mb-4 text-base font-bold dark:text-white">
+                        Reminder
+                    </p>
+                    <br/>
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 ">
+                            <label for="workflow-name"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Trigger time
+                            </label>
+                                <SfNumericTextBox TValue="int?"  CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                              @bind-Value=@Model.ReminderTriggerTime Placeholder="e.g., 1, 2, 3, etc.(minutes)" Min="1" Max="60" FloatLabelType="@FloatLabelType.Auto" OnBlur="OnBlur">
+                            </SfNumericTextBox>
+                        </div>
+
+                        <div class="col-span-6 ">
+                            <label for="workflow-name"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Maximum reminder count
+                            </label>
+                                <SfNumericTextBox TValue="int?"  CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                              @bind-Value=@Model.MaxReminderCount Placeholder="e.g., 1, 2, 3, etc." Min="1" Max="5" FloatLabelType="@FloatLabelType.Auto" OnBlur="OnBlur">
+                            </SfNumericTextBox>
+                        </div>
+
+                        <div class="col-span-6 ">
+                            <label for="workflow-name"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Members to be excluded for reminder
+                            </label>
+                            <SfMultiSelect TValue="string[]" TItem="MemberProfileMasterView" FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains" OnBlur="OnBlur" Query="@Query_Combo" ShowSelectAll=true FilterBarPlaceholder="Roles" EnableGroupCheckBox=false Mode="@VisualMode.CheckBox"
+                                           CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                           ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Members to be excluded for reminder">
+                                <MultiSelectEvents TItem="MemberProfileMasterView" TValue="string[]" ValueChange="@ExcludeForReminderValueChangeHandler"></MultiSelectEvents>
+                                <SfDataManager Url="@Members_API_RESOURCE" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                                <MultiSelectFieldSettings Text="FullName" Value="Id"></MultiSelectFieldSettings>
+                            </SfMultiSelect>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                    <h3 class="mb-4 text-xl font-bold dark:text-white">
+                        Escalation
+                    </h3>
+
+                    <div class="grid grid-cols-6 gap-6">
+
+                        <div class="col-span-6 ">
+                            <label for="workflow-name"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Members to be escalated to.
+                            </label>
+                            <SfMultiSelect TValue="string[]" TItem="MemberProfileMasterView" FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains" OnBlur="OnBlur" Query="@Query_Combo" ShowSelectAll=true FilterBarPlaceholder="Roles" EnableGroupCheckBox=false Mode="@VisualMode.CheckBox"
+                                           CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                           ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Members to be escalated to.">
+                                <MultiSelectEvents TItem="MemberProfileMasterView" TValue="string[]" ValueChange="@IncludeForEscalationValueChangeHandler"></MultiSelectEvents>
+                                <SfDataManager Url="@Members_API_RESOURCE" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                                <MultiSelectFieldSettings Text="FullName" Value="Id"></MultiSelectFieldSettings>
+                            </SfMultiSelect>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-span-6 sm:col-span-3 flex gap-2 mt-2 mb-8">
+                    <div class="col-span-3 sm:col-span-3">
+                        <form action="/approval/workflows/list">
+                            <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                    type="submit">
+                                Back
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-span-3 sm:col-span-3">
+                        <button type="submit" @onclick="@OnSaveApprovalNotification"
+                                id="createWrkflButtonSuccess"
+                                class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</EditForm>
+
+
+<Modal Visible="@showWorkflowCreationSuccessVisibility" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+       class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+
+    <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <!-- Modal header -->
+            <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+                <svg width="79"
+                     height="80"
+                     viewBox="0 0 79 80"
+                     fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                          stroke="#0E9F6E"
+                          stroke-width="4"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+
+                <p class="break-words text-center my-8">
+                    Approval workflow created successfully.
+                    <span class="text-CEMCS-Blue-100">
+                        And sent to internal control for approval.
+                    </span>
+                </p>
+
+                <form action="/approval/workflows/list" class="w-full">
+                    <button type="submit"
+                            class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                        Done
+                    </button>
+                </form>
+            </div>
+            <!-- Modal body -->
+        </div>
+    </div>
+</Modal>
+
+<Modal Title="@("Notification")" Visible="@showPopup" DestroyOnClose="true"
+       OnOk="OnCancel" OkText="@("Ok")"
+       OnCancel="OnCancel" CancelText="@("Cancel")">
+    <p>@notificationText</p>
+</Modal>

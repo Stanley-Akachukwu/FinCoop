@@ -1,0 +1,105 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.CommonViews;
+@using AP.ChevronCoop.Entities.Loans.LoanApplications;
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.Drawals
+
+<div class="grid grid-cols-1 gap-2  mb-4 w-full md:grid-cols-2 ">
+   
+     <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Principal Balance </div>
+                <div class="text-base font-bold">₦@LoanAccountMasterView.PrincipalBalanceAccountId_LedgerBalance.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Interest Balance </div>
+                <div class="text-base font-bold">₦@LoanAccountMasterView?.UnearnedInterestAccountId_LedgerBalance.GetValueOrDefault().ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+
+            @((MarkupString)@SvgHelpers.AvailableBalance)
+
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Principal Paid</div>
+                <div class="text-base font-bold">₦@PrincipalPaid.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Interest Paid </div>
+                <div class="text-base font-bold">₦@LoanAccountMasterView.EarnedInterestAccountId_LedgerBalance.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Table -->
+<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    @{
+        if(LoanAccountMasterView != null)
+        {
+            <!-- Table -->
+            <Descriptions Title="Loan Account Details" Bordered Size=@DescriptionsSize.Small>
+                <DescriptionsItem Title="Loan Account Number" Span="2">
+                    @LoanAccountMasterView?.AccountNo
+                </DescriptionsItem>
+
+                <DescriptionsItem Title="Customer Fullname" Span="2">@LoanAccountMasterView?.CustomerId_LastName  @LoanAccountMasterView?.CustomerId_FirstName</DescriptionsItem>
+                <DescriptionsItem Title="Customer Email" Span="2">@LoanAccountMasterView?.CustomerId_PrimaryEmail</DescriptionsItem>
+                <DescriptionsItem Title="Loan Product Name" Span="2">@LoanProductMasterView?.Name</DescriptionsItem>
+                <DescriptionsItem Title="Loan Interest Rate" Span="2">@LoanProductMasterView?.InterestRate</DescriptionsItem>
+                <DescriptionsItem Title="Loan Interest Method" Span="2">@LoanProductMasterView?.InterestMethod</DescriptionsItem>
+                <DescriptionsItem Title="Loan Interest Calculation Method" Span="2">@LoanProductMasterView?.InterestCalculationMethod</DescriptionsItem>
+                <DescriptionsItem Title="Loan Application Principal" Span="2">@LoanAccountMasterView?.Principal.ToString("N2")</DescriptionsItem>
+                <DescriptionsItem Title="Interest Balance" Span="2">@LoanAccountMasterView?.InterestBalanceAccountId_LedgerBalance.GetValueOrDefault().ToString("N2")</DescriptionsItem>
+                <DescriptionsItem Title="Tenure Unit" Span="2">@LoanAccountMasterView?.TenureUnit</DescriptionsItem>
+                <DescriptionsItem Title="Tenure Value" Span="2">@LoanAccountMasterView?.TenureValue</DescriptionsItem>
+                <DescriptionsItem Title="Repayment Commencement Date" Span="2">@LoanAccountMasterView?.RepaymentCommencementDate.ToString("dd-MMM-yyyy")</DescriptionsItem>
+                <DescriptionsItem Title="Loan Application No" Span="2">@LoanAccountMasterView?.LoanApplicationId_ApplicationNo</DescriptionsItem>
+                <DescriptionsItem Title="Loan Application Status" Span="2">@LoanAccountMasterView?.LoanApplicationId_Status</DescriptionsItem>
+                <DescriptionsItem Title="Customer No" Span="2">@LoanAccountMasterView?.CustomerId_CustomerNo</DescriptionsItem>
+                <DescriptionsItem Title="Years Of Service" Span="2">@LoanAccountMasterView?.CustomerId_YearsOfService</DescriptionsItem>
+                <DescriptionsItem Title="Customer Status" Span="2">@LoanAccountMasterView?.CustomerId_Status</DescriptionsItem>
+                <DescriptionsItem Title="Customer MemberType" Span="2">@LoanAccountMasterView?.CustomerId_MemberType</DescriptionsItem>
+                <DescriptionsItem Title="Customer Gender" Span="2">@LoanAccountMasterView?.CustomerId_Gender</DescriptionsItem>
+                <DescriptionsItem Title="Date Created" Span="2">@LoanAccountMasterView?.DateCreated.GetValueOrDefault().ToString("dd-MMM-yyyy")</DescriptionsItem>
+                @if(!IsAccountOpened)
+                {
+                    <DescriptionsItem Title="Loan Account Status" Span="2">Inactive Account</DescriptionsItem>
+                    <DescriptionsItem Title="Date Closed" Span="2">@LoanAccountMasterView?.DateClosed.GetValueOrDefault().ToString("dd-MMM-yyyy")</DescriptionsItem>
+
+                }
+                else
+                {
+                    <DescriptionsItem Title="Loan Account Status" Span="2">Active Account</DescriptionsItem>
+                    <DescriptionsItem Title="Date Opened" Span="2">@LoanAccountMasterView?.DateCreated.GetValueOrDefault().ToString("dd-MMM-yyyy")</DescriptionsItem>
+
+                }
+            </Descriptions>
+        }
+    }
+   
+
+</div>
+

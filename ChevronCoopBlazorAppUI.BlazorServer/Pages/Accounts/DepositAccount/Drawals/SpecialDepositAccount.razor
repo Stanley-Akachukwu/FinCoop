@@ -1,0 +1,187 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.Products.DepositProducts;
+
+
+@if (ShowAlertPage)
+{
+    <SuccessMessageModal Message="We'll notify you once this setup has been approved."
+                         NavigateToPage="true"
+                         PageURL="/account/DepositProduct/Applications"
+                         Header="Your special deposit account application has been sent to Internal control for approval.">
+    </SuccessMessageModal>
+}
+
+
+<Drawer @ref="@addDrawer" Closable="true" Visible="showAddDrawer" Title='("Special Deposit Application")'
+        OnClose="onAddDone">
+
+
+    <EditForm Model="@SpecialDepositModel" OnValidSubmit="OnSave">
+        <FluentValidationValidator @ref="_fluentValidationValidator"/>
+
+        <ValidationSummary/>
+
+        <div class="pb-20 flex flex-col justify-between h-full">
+
+            <div class="grid grid-cols-6 gap-6">
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Membership number
+                    </label>
+                    <input type="input"
+                           value="@Model.MemberId"
+                           name="member-number"
+                           id="member-number"
+                           class="@Tailwind.TextBox_General"
+                           placeholder=""
+                           readonly
+                           required/>
+                    <ValidationMessage For="() => SpecialDepositModel.ApplicationNo" class="@Tailwind.Validation_Red"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Member name
+                    </label>
+                    <input type="input"
+                           name="member-name"
+                           id="member-name"
+                           value="@Model.FirstName @Model.LastName"
+                           class="@Tailwind.TextBox_General"
+                           placeholder=""
+                           readonly
+                           required/>
+                </div>
+
+                <div class="col-span-6">
+                    <label for="preferred-fixed-deposit"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Select preferred special deposit product
+                    </label>
+
+
+                    <SfDropDownList TItem="DepositProduct" TValue="string" PopupHeight="auto" AllowFiltering=true CssClass="@Tailwind.ComboBox_General" DataSource="@DepositProductMasterViews">
+                        <DropDownListEvents TItem="DepositProduct" ValueChange="GetInterestRate" TValue="string"></DropDownListEvents>
+                        <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                    <ValidationMessage For="() => SpecialDepositModel.DepositProductId" class="@Tailwind.Validation_Red"/>
+
+                    @if (DepositProductMasterViews.Count < 1)
+                    {
+                        <p class="@Tailwind.Validation_Red">No published products available. Contact customer support for assistance.</p>
+                    }
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Amount
+                    </label>
+                    <SfNumericTextBox TValue="decimal" CssClass="@Tailwind.TextBox_General"  Format="N2" Decimals=2 @bind-Value=@SpecialDepositModel.Amount></SfNumericTextBox>
+                    <ValidationMessage For="() => SpecialDepositModel.Amount" class="@Tailwind.Validation_Red"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Interest rate
+                    </label>
+                    <input type="input"
+                           name="interest-rate"
+                           id="interest-rate"
+                           value="@SpecialDepositModel.InterestRate.ToString("N2")%"
+                           readonly
+                           class="@Tailwind.TextBox_General"
+                           placeholder="4.0%"
+                           required/>
+
+                </div>
+            </div>
+
+            <div class="w-full px-8 my-8">
+                <p class="text-gray-900 font-semibold text-lg">
+                    Funding source
+                </p>
+                <p class="text-sm font-medium py-4">
+                    Select funding source
+                </p>
+
+                <ValidationMessage For="() => SpecialDepositModel.ModeOfPayment" class="@Tailwind.Validation_Red"/>
+
+                <div class="flex flex-row w-1/2 justify-between">
+
+                    <div class="flex items-center mb-4">
+
+                        <SfRadioButton Label="Payroll" @onclick='(() => ShowBankMenu("hidden", DepositFundingSourceType.PAYROLL))' CssClass="@Tailwind.RadioButton" Name="options"
+                                       Value="Payroll" @bind-Checked="FundingSourceChecked">
+
+                        </SfRadioButton>
+
+                    </div>
+                    <div class="flex items-center mb-4">
+
+                        <SfRadioButton Label="Bank transfer" @onclick='(() => ShowBankMenu("", DepositFundingSourceType.BANK_TRANSFER))' CssClass="@Tailwind.RadioButton" Name="options"
+                                       Value="Bank transfer" @bind-Checked="FundingSourceChecked">
+
+                        </SfRadioButton>
+
+                    </div>
+                </div>
+
+                <div class="col-span-6 hidden"
+                     id="viewBox-selectFields">
+                </div>
+
+                <div class="col-span-6  space-y-4 @ShowBank" id="viewBox-wrappers">
+                    <div class="flex items-center flex-col justify-center rounded-lg px-16 py-4 border border-gray-300 bg-gray-50 text-center">
+                        <p class="test-base font-medium">Access Bank</p>
+                        <p class="text-2xl font-bold text-CEMCS-Blue-100">
+                            2938473849
+                        </p>
+                        <p class="text-sm text-bankCard font-normal">
+                            Use this account for this transaction only Account<br/>
+                        </p>
+                    </div>
+
+                    <div class="col-span-6 sm:col-full">
+
+                        <label for="Primary bank sort code"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Upload receipt ( File type: PDF, PNG, JPG, JPEG)
+                        </label>
+
+
+                        <SfUploader AutoUpload="true" AllowedExtensions=".png, .jpeg, .jpg, .pmb, .gif" AllowMultiple="false">
+                            <UploaderEvents OnRemove="@OnRemoveHandler" ValueChange="OnChangeDocumentUpload"></UploaderEvents>
+                        </SfUploader>
+                      
+                        <ValidationMessage For="() => SpecialDepositModel.ModeOfPayment" class="@Tailwind.Validation_Red"/>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+
+                        <img src="@UploadedImage" />
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="flex col-span-6 sm:col-full space-x-4 justify-end items-end">
+                <button
+                    class="@Tailwind.Button_Cancel"
+                    @onclick="onAddDone"
+                    type="button">
+                    Back
+                </button>
+                <button disabled="@IsButtonDisabled" id="updateProductButton"
+                        class="@Tailwind.Button_Blue"
+                        type="submit">
+                    Submit
+                </button>
+            </div>
+
+        </div>
+
+    </EditForm>
+
+</Drawer>

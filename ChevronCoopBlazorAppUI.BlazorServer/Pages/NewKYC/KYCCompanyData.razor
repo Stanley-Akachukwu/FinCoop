@@ -1,0 +1,113 @@
+﻿@code {
+
+}
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Company data
+    </h3>
+    <EditForm Model="@Model" OnValidSubmit="OnSave">
+        <FluentValidationValidator @ref="_fluentValidationValidator"/>
+        <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-span-3">
+                <label for="first-name"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Membership number<span class="text-red-500">*</span>
+                </label>
+                <SfTextBox ID="MembershipId" Placeholder="Ex. 3134455443" maxlength="10" CssClass="@Tailwind.TextBox_General"
+                           @bind-Value=@Model.MembershipId Readonly="true">
+                </SfTextBox>
+                <ValidationMessage For="() => Model.MembershipId" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+
+            <div class="col-span-6 sm:col-span-3">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Job role
+                </label>
+                <SfTextBox ID="Job Role" Placeholder="Ex. Green" CssClass="@Tailwind.TextBox_General"
+                           @bind-Value=@Model.JobRole>
+                </SfTextBox>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="phone-number"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    CAI
+                </label>
+                <SfTextBox ID="CAI" Placeholder="Ex. DRMD" maxlength="4" CssClass="@Tailwind.TextBox_General"
+                           @bind-Value=@Model.CAI>
+                </SfTextBox>
+            </div>
+
+            <div class="col-span-6 sm:col-span-3">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Rank
+                </label>
+                <SfTextBox ID="Rank" Placeholder="Ex. Assistant Manager" CssClass="@Tailwind.TextBox_General"
+                           @bind-Value=@Model.Rank>
+                </SfTextBox>
+            </div>
+
+           @* <div class="col-span-6 sm:col-span-3">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Year of Service
+                </label>
+                <SfNumericTextBox TValue="int" ID="YOS" Min="0" Placeholder="1" CssClass="@Tailwind.TextBox_General"
+                                  @bind-Value=@Model.YOS>
+                </SfNumericTextBox>
+            </div>*@
+            <div class="col-span-6 sm:col-span-3">
+                <label for="country"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Date of Employment
+                </label>
+                <div class="relative max-w-sm">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg aria-hidden="true"
+                             class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                    </div>
+                    <SfDatePicker TValue="DateTime" Max="@DateTime.UtcNow.AddDays(1)" @bind-Value=@Model.DateOfEmployment Placeholder='Select Date' CssClass="@Tailwind.DateTimePicker_1"></SfDatePicker>
+
+                </div>
+            </div>
+
+           @* <div class="col-span-6 sm:col-span-3">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Department
+                </label>
+
+                @{
+                    var combobox_Department_res = $"{Config.ODATA_VIEWS_HOST}/{nameof(DepartmentMasterView)}";
+                }
+
+                <SfComboBox TValue="string" TItem="DepartmentMasterView" CssClass="@Tailwind.ComboBox_General"
+                            @bind-Value=@Model.DepartmentId Query="@Query_Combo"
+                            FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                            ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Department">
+                    <SfDataManager Url="@combobox_Department_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                    <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+                </SfComboBox>
+            </div>*@
+
+
+            <div class="col-span-6 sm:col-full">
+                <button class="@Tailwind.Button_Blue"
+                        type="submit">
+                    Save & Continue
+                </button>
+            </div>
+        </div>
+    </EditForm>
+</div>

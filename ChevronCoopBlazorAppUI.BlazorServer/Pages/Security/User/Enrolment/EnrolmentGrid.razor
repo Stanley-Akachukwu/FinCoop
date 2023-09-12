@@ -1,0 +1,309 @@
+﻿@page "/security/enrolmentgrid"
+@using AP.ChevronCoop.Entities.Security.Auth;
+@using AP.ChevronCoop.Entities.Security.MemberProfiles.MemberProfiles
+@using Syncfusion.Blazor.Grids
+@using AP.ChevronCoop.Entities.Security;
+@using ChevronCoop.Web.AppUI.BlazorServer.Helper;
+@layout AppUIMainLayout
+
+<style>
+.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+}
+</style>
+<div class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5 pt-10">
+
+<div class="mb-4">
+    <nav class="flex mb-5" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2">
+            <li class="inline-flex items-center">
+                <a href="/security/enrollments"
+                   class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                    </svg>
+                    Enrollments
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                    List
+                </div>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                </div>
+            </li>
+        </ol>
+    </nav>
+</div>
+<!-- Start coding here -->
+<div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+
+<span class="error p-2">@ErrorDetails</span>
+
+
+<div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+
+    <div class="w-full md:w-1/2">
+
+        <div class="sm:col-span-2">
+            <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <input type="search" id="default-search" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+                       class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search...">
+
+                <button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+            </div>
+        </div>
+
+    </div>
+
+    <button @onclick="DownloadList" type="button" class="flex items-center justify-center text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+
+        Download
+    </button>
+
+    <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+
+        <div class="flex items-center space-x-3 w-full md:w-auto">
+            <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button">
+                <svg class="-ml-1 mr-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                </svg>
+                Actions
+            </button>
+            <div id="actionsDropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="actionsDropdownButton">
+                    <li>
+                        <a href="javascript: void(0)" @onclick=@onEdit class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            Action 1
+                        </a>
+                    </li>
+                </ul>
+                <div class="py-1">
+                    <a href="javascript: void(0)" @onclick=@onApprove class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                        Action 2
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="overflow-x-auto">
+
+    <SfGrid @ref="grid" ID="gridMemberProfile" TValue="MemberProfileMasterView" EnablePersistence="false"
+            Query="@QueryGrid"
+            AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+            AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="400"
+            AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+            AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+
+        <SfDataManager Url="@GRID_API_RESOURCE" Headers=@HeaderData CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+        <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="20" PageSizes="true"></GridPageSettings>
+
+        <GridEvents TValue="MemberProfileMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure" QueryCellInfo="CellInfoHandler"></GridEvents>
+
+        <GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false" ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog"></GridEditSettings>
+
+        <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true"> </GridFilterSettings>
+
+        <GridColumns>
+                    <GridColumn HeaderText="S/N" AutoFit="true">
+                        <Template Context="context">
+
+                            <span>@SortSerialNumber.GetSerialNumber(context)</span>
+                        </Template>
+                    </GridColumn>
+            <GridColumn Field=@nameof(MemberProfileMasterView.FullName) HeaderText="NAME" AutoFit="true"></GridColumn>
+
+            <GridColumn Field=@nameof(MemberProfileMasterView.ApplicationUserId_Email) HeaderText="EMAIL" AutoFit="true"></GridColumn>
+            <GridColumn Field=@nameof(MemberProfileMasterView.MembershipId) HeaderText="MEMBERSHIP NO" AutoFit="false"></GridColumn>
+            <GridColumn Field=@nameof(MemberProfileMasterView.MemberType) HeaderText="MEMBERSHIP TYPE" AutoFit="false"></GridColumn>
+            <GridColumn Field=@nameof(MemberProfileMasterView.Country) HeaderText="COUNTRY" AutoFit="false"></GridColumn>
+            @* <GridColumn Field=@nameof(MemberProfileMasterView.ApplicationUserId_PhoneNumber) HeaderText="PHONE NO." AutoFit="false"></GridColumn>*@
+                    <GridColumn Field=@nameof(MemberProfileMasterView.DateCreated) HeaderText="DATE CREATED." AutoFit="false" Format="dd MMM yyyy hh:mm tt" Type="ColumnType.DateTime"></GridColumn>
+            <GridColumn HeaderText="STATUS" AutoFit="false">
+                <Template>
+                    @{
+                        var status = (context as MemberProfileMasterView);
+                        <div class="flex items-left">
+                            @if (status.Status.Contains(nameof(MemberProfileStatus.ACTIVE)))
+                            {
+                                <div class="inline flex flex-row items-center bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md justify-center">
+                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                                    <div> @status.Status</div>
+                                </div>
+                            }
+
+                            else
+                            {
+                                <div class="inline flex flex-row items-center bg-purple-100 dark:bg-purple-200 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md justify-center">
+                                    <div class="h-2.5 w-2.5 rounded-full bg-purple-500 mr-2"></div>
+                                    <div> @status.Status</div>
+                                </div>
+                            }
+                        </div>
+                    }
+
+                </Template>
+            </GridColumn>
+            <GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                <Template>
+                    @{
+                        var row = (context as MemberProfileMasterView);
+
+                        <span class="px-4 py-0 flex items-center justify-end">
+                            <button id="apple-ipad-air-dropdown-button-@row.Id" data-dropdown-toggle="apple-ipad-air-dropdown-@row.Id"
+                                    class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus::outline-none dark::text-gray-400 dark::hover:text-gray-100"
+                                    type="button">
+                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                </svg>
+                            </button>
+
+                            <div id="apple-ipad-air-dropdown-@row.Id" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+
+                                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-ipad-air-dropdown-button-@row.Id">
+                                    @if (row.Status == ApprovalStatus.PENDING_APPROVAL.ToString())
+                                    {
+                                        <li>
+
+                                            <a href="javascript: void(0)" @onclick=@(e => OnApproveEnrolment(row)) class="block py-2 px-4 hover:bg-green-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                Activate Enrolment
+                                            </a>
+
+                                        </li>
+                                    }
+                                    @{
+                                        var memberShipId = row.MembershipId;
+                                    }
+                                    @if (!string.IsNullOrEmpty(memberShipId))
+                                    {
+                                        if (memberShipId.Contains('R'))
+                                        {
+                                            <li>
+                                                <a href="javascript: void(0)" @onclick=@(e => OnRetireMemberRow(row)) class="isDisabled block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    <svg class="inline mr-1" width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_2304_58451)">
+                                                            <path d="M10 14.5V13.1667C10 12.4594 9.73661 11.7811 9.26777 11.281C8.79893 10.781 8.16304 10.5 7.5 10.5H3.125C2.46196 10.5 1.82607 10.781 1.35723 11.281C0.888392 11.7811 0.625 12.4594 0.625 13.1667V14.5" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M5.3125 7.83333C6.69321 7.83333 7.8125 6.63943 7.8125 5.16667C7.8125 3.69391 6.69321 2.5 5.3125 2.5C3.93179 2.5 2.8125 3.69391 2.8125 5.16667C2.8125 6.63943 3.93179 7.83333 5.3125 7.83333Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M12.5 5.83301V9.83301" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M14.375 7.83301H10.625" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_2304_58451">
+                                                                <rect width="15" height="16" fill="white" transform="translate(0 0.5)"/>
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                    Retire Member
+                                                </a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a href="javascript: void(0)" @onclick=@(e => OnRetireMemberRow(row)) class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    <svg class="inline mr-1" width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_2304_58451)">
+                                                            <path d="M10 14.5V13.1667C10 12.4594 9.73661 11.7811 9.26777 11.281C8.79893 10.781 8.16304 10.5 7.5 10.5H3.125C2.46196 10.5 1.82607 10.781 1.35723 11.281C0.888392 11.7811 0.625 12.4594 0.625 13.1667V14.5" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M5.3125 7.83333C6.69321 7.83333 7.8125 6.63943 7.8125 5.16667C7.8125 3.69391 6.69321 2.5 5.3125 2.5C3.93179 2.5 2.8125 3.69391 2.8125 5.16667C2.8125 6.63943 3.93179 7.83333 5.3125 7.83333Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M12.5 5.83301V9.83301" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M14.375 7.83301H10.625" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_2304_58451">
+                                                                <rect width="15" height="16" fill="white" transform="translate(0 0.5)"/>
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                    Retire Member
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    <li>
+                                        <a href="javascript: void(0)" @onclick=@(e => OnEditRow(row)) class="block py-2 px-4 hover:bg-blue-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                            Update Enrollment
+                                        </a>
+
+                                    </li>
+                                     <li>
+                                            <a href="javascript: void(0)" @onclick="@(e => OnEditRole(row))"
+                                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                Edit User Role
+                                            </a>
+                                     </li>
+                                </ul>
+
+                            </div>
+                        </span>
+
+
+                    }
+
+
+                </Template>
+            </GridColumn>
+        </GridColumns>
+    </SfGrid>
+</div>
+
+
+</div>
+</div>
+<Drawer @ref="@approveDrawer" Closable="true" Visible="showApproveDrawer" Title='("Activate Member Enrolment")'
+        OnClose="onApproveDone">
+    <ApproveEnrolmentForm @ref="@approveForm" @bind-Model="@ApproveModel" @bind-ShowModal="@showApproveDrawer" @bind-ShowStatus="@showStatusType"></ApproveEnrolmentForm>
+</Drawer>
+
+
+<Drawer @ref="@editDrawer" Closable="true" Visible="showEditDrawer" Title='("Edit Member Profile")'
+        OnClose="onEditDone">
+    <EditEnrolmentForm @ref="@editEnrolmentForm" @bind-Model="@UpdateModel" MemberEmail="@MemberEmail" @bind-ShowModal="@showEditDrawer"
+                       @bind-ActiveTabKey="@editFormActiveTabKey">
+    </EditEnrolmentForm>
+</Drawer>
+
+<Drawer @ref="@editRoleDrawer" Closable="true" Visible="showEditRoleDrawer" Title='("Edit User Role")'
+        OnClose="onEditRoleDone">
+
+    <EditUserRoleForm @ref="@editUserRoleForm" @bind-Model="@UpdateRolesForUserModel" @bind-ShowModal="@showEditRoleDrawer"></EditUserRoleForm>
+
+</Drawer>

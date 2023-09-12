@@ -1,0 +1,190 @@
+<EditForm Model="@Model">
+    <FluentValidationValidator/>
+
+
+    <ValidationSummary/>
+
+
+    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+
+        <div class="sm:col-span-2">
+            <label for="ParentId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Select Parent
+            </label>
+
+            @{
+                var combobox_Parent_res = $"{Config.ODATA_VIEWS_HOST}/{nameof(LedgerAccountMasterView)}";
+            }
+            <SfComboBox TValue="string" TItem="LedgerAccountMasterView" OnBlur="OnBlur"
+                        @bind-Value=@Model.ParentId Query="@Query_Combo"
+                        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select parent">
+                <SfDataManager Url="@combobox_Parent_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+            </SfComboBox>
+
+
+        </div>
+
+        <div class="sm:col-span-2">
+            <label for="Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Name
+            </label>
+            <SfTextBox Multiline="true" ID="Name" Placeholder="Name" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.Name OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+        <div class="w-full">
+            <label for="Code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Code
+            </label>
+            <SfTextBox Multiline="false" ID="Code" Placeholder="Code" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.Code OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+        <div class="w-full">
+            <label for="AccountType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Account Type
+            </label>
+            @{
+                var coaTypes = Enum.GetNames(typeof(COAType)).ToList();
+
+            }
+
+            <SfComboBox ID="AccountType" DataSource=@coaTypes TValue="string" TItem="string" OnBlur="OnBlur"
+                        @bind-Value=@Model.AccountType
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select type">
+            </SfComboBox>
+
+
+        </div>
+
+        <div class="w-full">
+            <label for="UOM" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Value unit
+            </label>
+            @{
+                var uomTypes = Enum.GetNames(typeof(LedgerBalanceUOM)).ToList();
+
+            }
+
+            <SfComboBox id="UOM" DataSource=@uomTypes TValue="string" TItem="string" OnBlur="OnBlur"
+                        @bind-Value=@Model.UOM
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select UOM">
+            </SfComboBox>
+        </div>
+
+        <div class="w-full">
+            <label for="CurrencyId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Select Currency
+            </label>
+            @{
+                var combobox_Currency_res = $"{Config.ODATA_VIEWS_HOST}/{nameof(CurrencyMasterView)}";
+            }
+            <SfComboBox TValue="string" TItem="CurrencyMasterView" OnBlur="OnBlur"
+                        @bind-Value=@Model.CurrencyId Query="@Query_Combo"
+                        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select currency">
+                <SfDataManager Url="@combobox_Currency_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+            </SfComboBox>
+
+
+        </div>
+
+
+        <div class="w-full">
+            <label for="ClearedBalance" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Cleared Balance
+            </label>
+
+            <SfNumericTextBox ID="ClearedBalance" Enabled=false TValue="decimal" @bind-Value="@Model.ClearedBalance"></SfNumericTextBox>
+        </div>
+
+
+        <div class="w-full">
+            <label for="UnclearedBalance" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Uncleared Balance
+            </label>
+
+            <SfNumericTextBox ID="UnclearedBalance" Enabled=false TValue="decimal" @bind-Value="@Model.UnclearedBalance"></SfNumericTextBox>
+        </div>
+
+
+        <div class="w-full">
+            <label for="LedgerBalance" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Ledger Balance
+            </label>
+
+            <SfNumericTextBox ID="LedgerBalance" Enabled=false TValue="decimal" @bind-Value="@Model.LedgerBalance"></SfNumericTextBox>
+        </div>
+
+
+        <div class="w-full">
+            <label for="AvailableBalance" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Available Balance
+            </label>
+
+            <SfNumericTextBox ID="AvailableBalance" Enabled=false TValue="decimal" @bind-Value="@Model.AvailableBalance"></SfNumericTextBox>
+        </div>
+
+
+        <div class="w-full">
+            <label for="IsOfficeAccount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Is Office Account?
+            </label>
+
+            <SfSwitch ID="IsOfficeAccount" @bind-Checked="@Model.IsOfficeAccount" @onblur="@OnBlur"/>
+        </div>
+
+
+        <div class="w-full">
+            <label for="AllowManualEntry" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Allow Manual Entry?
+            </label>
+
+            <SfSwitch ID="AllowManualEntry" @bind-Checked="@Model.AllowManualEntry" @onblur="@OnBlur"/>
+        </div>
+
+        <div class="w-full">
+            <label for="IsActive" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Is Active?
+            </label>
+
+            <SfSwitch ID="IsActive" @bind-Checked="@Model.IsActive" @onblur="@OnBlur"/>
+
+        </div>
+
+        <div class="sm:col-span-2">
+            <label for="Description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Description
+            </label>
+            <SfTextBox Multiline="true" ID="Description" Placeholder="Description" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.Description OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+
+    </div>
+    <br/>
+
+
+    <button type="button" @onclick="OnSave"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Save
+    </button>
+    <button type="button" @onclick="OnCancel"
+            class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+        Cancel
+    </button>
+
+</EditForm>
+
+
+<Modal Title="@("Notification")" Visible="@showPopup" DestroyOnClose="true"
+       OnOk="OnCancel" OkText="@("Ok")"
+       OnCancel="OnCancel" CancelText="@("Cancel")">
+    <p>@notificationText</p>
+</Modal>

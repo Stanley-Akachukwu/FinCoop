@@ -1,0 +1,135 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.DepositApplications;
+@using ChevronCoop.Web.AppUI.BlazorServer.Helper;
+
+<div class="py-6 px-4 flex w-full items-center font-semibold justify-between  ">
+    <h3 class="font-semibold text-xl">Applications </h3>
+
+</div>
+
+<div class="flex justify-end gap-2 py-4 pr-4 w-full">
+    <div>
+        <button @ref="dropdownButtonRef" id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                class="w-full text-gray-900 border border-gray-300 bg-gray-50 hover:bg-gray-300 focus:ring-4 focus:outline-gray-300 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex justify-between items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button">
+            Filter
+            <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none"
+                 stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7">
+                </path>
+            </svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div id="dropdown"
+             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownDefaultButton">
+
+                <li>
+                    <a href="javascript:void(0)" @onclick=@(e => onFiltering("all"))
+                       class="@Tailwind.FilterLink">
+                        ALL
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" @onclick=@(e => onFiltering(ApprovalStatus.INITIATED.ToString()))
+                       class="@Tailwind.FilterLink">
+                        INITIATED
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)" @onclick=@(e => onFiltering(ApprovalStatus.PENDING_APPROVAL.ToString()))
+                       class="@Tailwind.FilterLink">
+                        PENDING APPROVAL
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)" @onclick=@(e => onFiltering(ApprovalStatus.APPROVED.ToString()))
+                       class="@Tailwind.FilterLink">
+                        APPROVED
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="md:w-1/2">
+        <div class="sm:col-span-2">
+            <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <input type="search" id="default-search" @bind="@searchText" @oninput="SearchApplication"
+                       class="@Tailwind.SearchInput" placeholder="Search by App no, Deposit type, product name, or status">
+
+                <button class="@Tailwind.Search_Button_Blue">Search</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="relative overflow-x-auto shadow mb-3 sm:rounded-lg">
+
+    <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+        <!-- Start coding here -->
+
+        <span class="error p-2">@ErrorDetails</span>
+
+        <div class="overflow-x-auto">
+            <SfGrid ID="gridDepositApplication" TValue="DepositApplicationsMasterView"
+                    DataSource="DepositApplicationMasterViewSrc"
+                    AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                    AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="100%"
+                    AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                    AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+
+                <GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false"
+                                  ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+                </GridEditSettings>
+
+                <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+                </GridFilterSettings>
+
+                <GridPageSettings PageCount="10" PageSize="25" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+                <GridEvents TValue="DepositApplicationsMasterView" QueryCellInfo="CellInfoHandler"></GridEvents>
+                <GridColumns>
+                    <GridColumn HeaderText="S/N" AutoFit="true">
+                        <Template Context="context">
+                            <span>@SortSerialNumber.GetSerialNumber(context)</span>
+                        </Template>
+                    </GridColumn>
+                    <GridColumn Field=@nameof(DepositApplicationsMasterView.ApplicationNo) HeaderText="APPLICATION NO" AutoFit="true"></GridColumn>
+                    <GridColumn Field=@nameof(DepositApplicationsMasterView.FullText) HeaderText="DESCRIPTION" AutoFit="true"></GridColumn>
+                    <GridColumn Field=@nameof(DepositApplicationsMasterView.ProductId_Name) HeaderText="PRODUCT NAME" AutoFit="true"></GridColumn>
+                    <GridColumn Field=@nameof(DepositApplicationsMasterView.DateCreated) HeaderText="DATE APPLIED" Format="dd MMM yyyy hh:mm tt" AutoFit="true"></GridColumn>
+                    <GridColumn HeaderText="APPROVAL STATUS" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center>
+                        <Template>
+
+                            @{
+                                var row = (context as DepositApplicationsMasterView);
+
+                                <ApprovalStatusComp approvalName="@row.ApprovalId_Status"></ApprovalStatusComp>
+
+
+                            }
+
+                        </Template>
+                    </GridColumn>
+
+                </GridColumns>
+            </SfGrid>
+        </div>
+
+    </div>
+
+
+</div>
+

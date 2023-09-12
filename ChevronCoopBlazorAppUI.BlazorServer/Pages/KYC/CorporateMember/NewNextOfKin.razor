@@ -1,0 +1,1171 @@
+﻿@page "/KYC/NEW-NEXT-OF-KIN"
+@using ChevronCoop.Web.AppUI.BlazorServer.Data
+@using Microsoft.AspNetCore.Components.Forms
+@using Refit;
+@using AP.ChevronCoop.AppDomain.Security.MemberProfiles.MemberNextOfKins;
+@using AP.ChevronCoop.Entities.Security.MemberProfiles.MemberNextOfKins;
+@using AP.ChevronCoop.Entities.Security.MemberProfiles.MemberProfiles;
+@inject ILogger<NewNextOfKin> Logger
+@inject IEntityDataService DataService
+@inject NotificationService notificationService
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@layout AppUIMainLayout
+
+<div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+<div class="col-span-2">
+    <section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5">
+        <div class="mx-auto max-w-screen-2xl">
+            <!-- Start coding here -->
+            <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4 border-b dark:border-gray-700">
+                    <div class="w-full flex flex-col">
+                        <h5 class="dark:text-white font-semibold">
+                            Next of Kin
+                        </h5>
+                        <div class="text-gray-500 font-normal">
+                            Register a maximum of 5 Next of Kin
+                        </div>
+                    </div>
+                    @if (!DisableAddButton)
+                    {
+                        <div class="w-full flex flex-row items-center justify-end space-x-3">
+                            <button @onclick="CheckNextOfKinCount" class="w-full md:w-auto flex items-center justify-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                                    type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+                                <svg class="h-3.5 w-3.5 mr-2"
+                                     fill="currentColor"
+                                     viewbox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     aria-hidden="true">
+                                    <path clip-rule="evenodd"
+                                          fill-rule="evenodd"
+                                          d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                                </svg>
+                                Add Next Of Kin
+                            </button>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700">
+                        <tr>
+
+
+                            <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                Name
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                Phone Number
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[14rem]">
+                                Address
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[6rem]">
+                                Relationship
+                            </th>
+                            <th scope="col"
+                                class="px-4 py-3 min-w-[6rem]">
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody data-accordion="table-column">
+                        @foreach (var item in NextOfKinList)
+                        {
+                            <tr class="border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+                                id="table-column-header-9"
+                                data-accordion-target="#table-column-body-9"
+                                aria-expanded="false"
+                                aria-controls="table-column-body-9">
+
+
+                                <th scope="row"
+                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white ">
+                                    @item.FullName
+                                </th>
+                                <td class="px-4 py-3 text-gray-500">
+                                    @item.PhoneNumber
+                                </td>
+                                <td class="px-4 py-3 font-normal text-gray-500 whitespace-nowrap dark:text-white">
+                                    @item.Address
+                                </td>
+                                <td class="px-4 py-3 font-normal text-gray-500 whitespace-nowrap dark:text-white">
+                                    @item.Relationship
+                                </td>
+                                <td class="p-4 space-x-2 whitespace-nowrap">
+
+
+                                    <button data-drawer-target="drawer-right-edit" data-drawer-show="drawer-right-edit" data-drawer-placement="right" aria-controls="drawer-right-edit" @onclick=@(e => EditNextOfKin(item))>
+                                        <svg class=" inline-flex items-center mr-2 w-5 h-5"
+                                             fill="currentColor"
+                                             viewBox="0 0 20 20"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
+                                            <path fill-rule="evenodd"
+                                                  d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                  clip-rule="evenodd">
+                                            </path>
+                                        </svg>
+                                    </button>
+
+                                    <button type="button" @onclick="() => DeleteNextOfKin(item)">
+                                        <svg class="inline-flex items-center mr-2 w-5 h-5"
+                                             fill="currentColor"
+                                             viewBox="0 0 20 20"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                  d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                  clip-rule="evenodd">
+                                            </path>
+                                        </svg>
+                                    </button>
+
+
+                                </td>
+                            </tr>
+                        }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-span-6 sm:col-full my-4">
+            <button class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    type="submit" @onclick="RedirectToBeneficiary">
+                Save & Continue
+            </button>
+        </div>
+
+
+    </section>
+</div>
+
+
+<!-- drawer component -->
+<div id="drawer-right-example" class="fixed top-0 right-0 z-40 h-screen p-4  transition-transform translate-x-full bg-white w-2/5 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
+    <h5 id="drawer-right-label" class="inline-flex items-center mb-4 text-base font-bold text-gray-900 dark:text-gray-400">Next of Kin</h5>
+    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+        <span class="sr-only">Close menu</span>
+    </button>
+    <EditForm Model="@Model" OnValidSubmit="SubmitValidForm">
+        <FluentValidationValidator/>
+        <div class="pb-20 flex flex-col justify-between h-full">
+            <div class="grid grid-cols-6 gap-6 ">
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="first-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        First Name*
+                    </label>
+                    @*<input type="text"
+                        name="first-name"
+                        id="first-name"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="Bonnie"
+                        required />*@
+                    <SfTextBox ID="FirstName" @bind-Value=@Model.firstName Placeholder="Bonnie" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => Model.firstName"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="last-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Last Name*
+                    </label>
+                    @* <input type="text"
+                        name="last-name"
+                        id="last-name"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="Green"
+                        required />*@
+
+                    <SfTextBox ID="LastName" @bind-Value=@Model.lastName Placeholder="Green" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => Model.lastName"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="phone-number"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Phone number*
+                    </label>
+                    @*<input type="text"
+                        name="phone-number"
+                        id="phone-number"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="234 081 048 0392"
+                        required />*@
+
+                    <SfTextBox ID="PhoneNo" @bind-Value=@Model.phone Placeholder="234 081 048 0392" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => Model.phone"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="address"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Address*
+                    </label>
+                    @* <input type="text"
+                        name="address"
+                        id="address"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="No. 2 Oniru"
+                        required />*@
+                    <SfTextBox ID="Address" @bind-Value=@Model.address Placeholder="No. 2 Oniru" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => Model.address"/>
+                </div>
+
+
+                <div class=" col-span-6 sm:col-span-3">
+                    <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Relationship*</label>
+                    @* <select id="settings-language" name="countries" class="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <option>Brother</option>
+                        <option>Sister</option>
+                        <option>Father</option>
+                        <option>Mother</option>
+                        </select>*@
+                    <SfDropDownList TValue="string" CssClass="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" Placeholder="e.g. Father" TItem="NextOfKinRelationships" Width="300px" @bind-Value=@Model.relationship DataSource="@KinRelationships">
+                        <DropDownListFieldSettings Value="Code" Text="Name"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                    <ValidationMessage For="() => Model.relationship"/>
+                </div>
+
+            </div>
+            <div class="flex col-span-6 sm:col-full space-x-4  justify-end">
+                <button data-drawer-hide="drawer-right-example"
+                        aria-controls="drawer-right-example"
+                        class="text-CEMCS-Blue-100 border border-gray-300 focus:outline-none hover:bg-gray-100  focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="button" @onclick="Cancel">
+                    Cancel
+                </button>
+                <button class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="submit">
+                    Add Next of Kin
+                </button>
+            </div>
+        </div>
+    </EditForm>
+
+</div>
+
+
+<div class="bg-white rounded-lg shadow xl:ml-20 sm:p-6 xl:p-8 dark:bg-gray-800">
+<div class="items-start pb-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
+<h3 class="pb-4 text-gray-900 font-bold text-xl">
+    KYC Progress
+</h3>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="10" fill="#1F82BD"/>
+            <path d="M5.33337 10.6666L8.00004 13.3333L14.6667 6.66663"
+                  stroke="#F9FAFB"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-semibold">Biodata</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#1F82BD"
+                    stroke-width="2"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">Next of Kin</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#9CA3AF"
+                    stroke-width="2"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">Beneficiary</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#9CA3AF"
+                    stroke-width="2"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">Company data</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#9CA3AF"
+                    stroke-width="2"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">Staff enrolment data</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#9CA3AF"
+                    stroke-width="2"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">Member account data</p>
+</div>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20"
+             height="20"
+             viewBox="0 0 20 20"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10"
+                    cy="10"
+                    r="9"
+                    stroke="#9CA3AF"
+                    stroke-width="2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">KYC Documents</p>
+</div>
+</div>
+</div>
+<Drawer @ref="@editDrawer" Closable="true" Visible="showEditNextOfKinDrawer" Title='("Edit NextofKin")'
+        OnClose="onEditNextOfKinDone">
+
+
+    <EditForm Model="@UpdateModel" OnValidSubmit="SaveEditForm">
+        <FluentValidationValidator/>
+        <div class="pb-20 flex flex-col justify-between h-full">
+            <div class="grid grid-cols-6 gap-6 ">
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="first-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        First Name*
+                    </label>
+
+                    <SfTextBox ID="FirstName" @bind-Value=@UpdateModel.FirstName Placeholder="Bonnie" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => UpdateModel.FirstName"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="last-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Last Name*
+                    </label>
+
+
+                    <SfTextBox ID="LastName" @bind-Value=@UpdateModel.LastName Placeholder="Green" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => UpdateModel.LastName"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="phone-number"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Phone number*
+                    </label>
+
+
+                    <SfTextBox ID="PhoneNo" maxlength="11" minlength="11" @bind-Value=@UpdateModel.PhoneNumber Placeholder="081 048 0392" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => UpdateModel.PhoneNumber"/>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="address"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Address*
+                    </label>
+
+                    <SfTextBox ID="Address" @bind-Value=@UpdateModel.Address Placeholder="No. 2 Oniru" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></SfTextBox>
+                    <ValidationMessage For="() => UpdateModel.Address"/>
+                </div>
+
+
+                <div class=" col-span-6 sm:col-span-3">
+                    <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Relationship*</label>
+
+                    <SfDropDownList TValue="string" CssClass="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" Placeholder="e.g. Father" TItem="NextOfKinRelationships" Width="300px" @bind-Value=@UpdateModel.Relationship DataSource="@KinRelationships">
+                        <DropDownListFieldSettings Value="Code" Text="Name"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                    <ValidationMessage For="() => UpdateModel.Relationship"/>
+                </div>
+
+            </div>
+            <div class="flex col-span-6 sm:col-full space-x-4  justify-end">
+                <button data-drawer-hide="drawer-right-edit"
+                        aria-controls="drawer-right-edit"
+                        class="text-CEMCS-Blue-100 border border-gray-300 focus:outline-none hover:bg-gray-100  focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="button" @onclick="Cancel">
+                    Cancel
+                </button>
+                <button class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="submit">
+                    Save
+                </button>
+            </div>
+        </div>
+    </EditForm>
+
+
+</Drawer>
+
+</div>
+
+@code {
+
+    public NextOfKinCreateModel Model { get; set; }
+
+    List<NextOfKinRelationships> KinRelationships { get; set; }
+
+    protected List<NextOfKinData> NextOfKinList { get; set; }
+    protected NextOfKinData[] NextOfKins { get; set; }
+
+    protected string UserSID { get; set; }
+    private bool DisableAddButton { get; set; } = false;
+
+    private NextOfKinData UpdateModel { get; set; }
+    public MemberProfileMasterView ProfileModel { get; set; }
+    private bool showEditNextOfKinDrawer { get; set; } = false;
+
+    [Inject]
+    BrowserService BrowserService { get; set; }
+
+    [Inject]
+    protected IJSRuntime jsRuntime { get; set; }
+
+    BrowserDimension BrowserDimension;
+    Drawer editDrawer;
+
+    /// public MemberNextOfKinViewResult Model { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    //Model = new MemberNextOfKinViewResult();
+        UpdateModel = new NextOfKinData();
+        NextOfKinList = new List<NextOfKinData>();
+
+
+        Model = new NextOfKinCreateModel();
+
+        KinRelationships = new List<NextOfKinRelationships>
+        {
+            new NextOfKinRelationships { Name = "Brother", Code = "Brother" },
+            new NextOfKinRelationships { Name = "Sister", Code = "Sister" },
+            new NextOfKinRelationships { Name = "Father", Code = "Father" },
+            new NextOfKinRelationships { Name = "Mother", Code = "Mother" },
+            new NextOfKinRelationships { Name = "Uncle", Code = "Uncle" },
+            new NextOfKinRelationships { Name = "Aunty", Code = "Aunty" },
+            new NextOfKinRelationships { Name = "Other", Code = "Other" },
+        };
+
+        Model = new NextOfKinCreateModel();
+        Model.fullText = "";
+        Model.caption = "";
+        Model.comments = "";
+        Model.tags = "";
+        Model.dateCreated = DateTime.Now;
+        Model.description = "";
+        Model.email = "";
+        Model.isActive = true;
+
+
+    //Model = new MemberNextOfKinViewResult();
+        var authenticated = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var Principal = authenticated.User.Identity.Name;
+
+        if (!string.IsNullOrEmpty(Principal))
+        {
+            var claims = authenticated.User.Claims;
+            if (claims.Any())
+            {
+                await GetProfileDetail();
+                await GetUserNextOfKin();
+    //if (authenticated.User.IsInRole("Regular") || authenticated.User.IsInRole("Coop Memeber"))
+    //{
+    //         var sid = claims.ElementAt(2).Value;
+    //         UserSID = sid;
+    //         Model.createdByUserId = sid;
+    //         //var rsp = await DataService.GetMemberProfiles<IEnumerable<MemberProfileModel>>();
+    //         //var rsp = await DataService.GetMemberProfileViewResult<IEnumerable<MemberProfileViewModelResult>>();
+
+    //         //var payload = $"filter=applicationUserId eq '{sid}'";
+    //         var payload = ProfileModel.Id;
+    //         var rsp = await DataService.GetNextOfKinValue<List<MemberNextOfKinMasterView>>(
+    //nameof(MemberNextOfKinMasterView), payload);
+
+    //         if (rsp.IsSuccessStatusCode)
+    //         {
+    //             List<MemberNextOfKinMasterView> rspResponse = JsonSerializer.Deserialize<List<MemberNextOfKinMasterView>>(rsp.Content.ToJson());
+    //             //IEnumerable<MemberProfileViewModelResult> memberProfiles = rsp.Content;
+    //             if (rspResponse?.Count > 0)
+    //             {
+    //                 NextOfKinList=new List<NextOfKinData>();
+    //                 foreach(var item in rspResponse)
+    //                 {
+    //                     NextOfKinData eachNextOfKinRecord=new NextOfKinData()
+    //                     {
+    //                         Address=item.Address,
+    //                         LastName=item.LastName,
+    //                         Id=item.Id,
+    //                         Relationship=item.Relationship,
+    //                         Email=item.Email,
+    //                         PhoneNumber=item.Phone,
+    //                         FirstName=item.FirstName
+    //                     };
+    //                     NextOfKinList.Add(eachNextOfKinRecord);
+
+    //                 }
+    //             }
+    //             //if (memberProfiles.Any())
+    //             //{
+
+
+    //             //    var returnedProfile = memberProfiles.FirstOrDefault(p => p.applicationUserId == sid);
+
+    //             //    if (returnedProfile != null)
+    //             //    {
+    //             //        Model.profileId = returnedProfile.id;
+    //             //        // await sessionStorage.SetAsync("UserProfileID", returnedProfile.id);
+
+
+    //             //    }
+    //             //}
+    //         }
+    //         await ReloadGridAsync(sid);
+    //         //}
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/Identity/Account/LogIn");
+            }
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/Identity/Account/LogIn");
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (firstRender)
+        {
+            BrowserDimension = await BrowserService.GetDimensions();
+
+            editDrawer.Width = (int)(BrowserDimension.Width * 0.50);
+        }
+    //await jsRuntime.InvokeVoidAsync("initFlowbiteJS");
+    }
+
+    private async Task ReloadGridAsync(string sid)
+    {
+        var rsp = await DataService.GetMemberNextOfKinMasterView<IEnumerable<MemberNextOfKinViewResult>>();
+
+
+        if (rsp.IsSuccessStatusCode)
+        {
+            IEnumerable<MemberNextOfKinViewResult> memberNextOfKins = rsp.Content;
+
+            if (memberNextOfKins != null)
+            {
+                if (memberNextOfKins.Any())
+                {
+                    var returnedNextOfKins = memberNextOfKins.Where(p => p.profileId_ApplicationUserId == sid).ToList();
+
+                    if (returnedNextOfKins.Any())
+                    {
+                        int serial = 1;
+                        var nextOfKinList = new List<NextOfKinData>();
+                        foreach (var item in returnedNextOfKins)
+                        {
+                            nextOfKinList.Add(new NextOfKinData { Serial = serial, Address = item.address, FirstName = item.firstName, LastName = item.lastName, PhoneNumber = item.phone, Relationship = item.relationship });
+                            serial++;
+                        }
+
+                        NextOfKinList = nextOfKinList;
+
+                        NextOfKins = nextOfKinList.ToArray();
+                        if (NextOfKinList != null && NextOfKinList.Count >= 5)
+                            DisableAddButton = true;
+                    }
+                }
+            }
+        }
+    }
+
+    private async Task SubmitValidForm()
+    {
+        if (NextOfKinList != null && NextOfKinList.Count >= 6)
+        {
+            await notificationService.Open(new NotificationConfig()
+            {
+                Message = "Info",
+                Description = "You can not add more than 5 Next of Kin",
+                NotificationType = NotificationType.Error
+            });
+        }
+        else
+        {
+            var authenticated = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var Principal = authenticated.User.Identity.Name;
+            if (!string.IsNullOrEmpty(Principal))
+            {
+                var claims = authenticated.User.Claims;
+                if (claims.Any())
+                {
+    //if (authenticated.User.IsInRole("Regular") || authenticated.User.IsInRole("Coop Memeber"))
+    //{
+                    var sid = claims.ElementAt(2).Value;
+
+                    Model.createdByUserId = sid;
+    //var rsp = await DataService.GetMemberProfiles<IEnumerable<MemberProfileModel>>();
+                    var rsp1 = await DataService.GetMemberProfileViewResult<IEnumerable<MemberProfileViewModelResult>>();
+
+
+                    if (rsp1.IsSuccessStatusCode)
+                    {
+                        IEnumerable<MemberProfileViewModelResult> memberProfiles = rsp1.Content;
+
+                        if (memberProfiles.Any())
+                        {
+                            var returnedProfile = memberProfiles.FirstOrDefault(p => p.applicationUserId == sid);
+
+                            if (returnedProfile != null)
+                            {
+                                Model.profileId = returnedProfile.id;
+                            }
+                        }
+                    }
+    //await ReloadGridAsync(sid);
+    //}
+                }
+                else
+                {
+                    NavigationManager.NavigateTo("/Identity/Account/LogIn");
+                }
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/Identity/Account/LogIn");
+            }
+
+            var rsp = await DataService.AddNewNextOfKin<NextOfKinCreateModel, CommandResult<string>>(Model);
+            Logger.LogInformation($"rsp content->{JsonSerializer.Serialize(Model)}");
+            if (!rsp.IsSuccessStatusCode)
+            {
+                await DisplayErrorAfterNewNextOfKinAdditionAsync(rsp);
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/kyc/new-next-of-kin", true);
+            }
+        }
+    }
+
+    private void RedirectToBeneficiary()
+    {
+        NavigationManager.NavigateTo("/KYC/BENEFICIARY-SWITCH", true);
+    }
+
+    private async Task DeleteNextOfKin(NextOfKinData itemToBeDeleted)
+    {
+        var authenticated = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var Principal = authenticated.User.Identity.Name;
+        if (!string.IsNullOrEmpty(Principal))
+        {
+            var claims = authenticated.User.Claims;
+
+            var sid = claims.ElementAt(2).Value;
+            UserSID = sid;
+            Model.createdByUserId = sid;
+    //var rsp = await DataService.GetMemberProfiles<IEnumerable<MemberProfileModel>>();
+            var rsp = await DataService.GetMemberNextOfKinMasterView<IEnumerable<MemberNextOfKinViewResult>>();
+
+
+            if (rsp.IsSuccessStatusCode)
+            {
+                IEnumerable<MemberNextOfKinViewResult> memberNextOfKins = rsp.Content;
+
+                if (memberNextOfKins != null)
+                {
+                    if (memberNextOfKins.Any())
+                    {
+                        var returnedNextOfKins = memberNextOfKins.Where(p => p.profileId_ApplicationUserId == sid).ToList();
+
+                        if (returnedNextOfKins.Any())
+                        {
+                            var selectedNextOfKin = returnedNextOfKins.Where(p => p.firstName == itemToBeDeleted.FirstName && p.lastName == itemToBeDeleted.LastName && p.phone == itemToBeDeleted.PhoneNumber && p.address == itemToBeDeleted.Address && p.relationship == itemToBeDeleted.Relationship).FirstOrDefault();
+                            if (selectedNextOfKin != null)
+                            {
+                                NextOfKinDeleteModel deleteModel = new NextOfKinDeleteModel { dateDeleted = DateTime.Now, deletedByUserId = sid, id = selectedNextOfKin.id, rowVersion = selectedNextOfKin.rowVersion };
+
+                                var rsp4 = await DataService.DeleteNextOfKin<NextOfKinDeleteModel, CommandResult<string>>(deleteModel);
+
+                                Logger.LogInformation($"rsp content->{JsonSerializer.Serialize(deleteModel)}");
+                                if (!rsp4.IsSuccessStatusCode)
+                                {
+                                    var rspContent = JsonSerializer.Deserialize<CommandResult<string>>(rsp4.Error.Content);
+
+                                    var msg = rspContent?.Response;
+                                    if (rspContent != null && rspContent.ValidationErrors != null && rspContent.ValidationErrors.Any())
+                                    {
+                                        msg = rspContent.ValidationErrors[0].Error;
+                                    }
+                                    await notificationService.Open(new NotificationConfig()
+                                    {
+                                        Message = "Error",
+                                        Description = msg,
+                                        NotificationType = NotificationType.Error
+                                    });
+                                }
+                                else
+                                {
+    //notificationText = $"Corporate Member Biodata Successfully Updated!";
+    // showPopup = true;
+
+
+                                    NavigationManager.NavigateTo("/KYC/NOK-SWITCH", true);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private async Task Cancel()
+    {
+        Model = new NextOfKinCreateModel();
+    }
+
+    private async Task DisplayErrorAfterNewNextOfKinAdditionAsync(ApiResponse<CommandResult<string>> rsp)
+    {
+        var rspContent = JsonSerializer.Deserialize<CommandResult<string>>(rsp.Error.Content);
+
+        var msg = rspContent?.Response;
+        if (rspContent != null && rspContent.ValidationErrors != null && rspContent.ValidationErrors.Any())
+        {
+            msg = rspContent.ValidationErrors[0].Error;
+        }
+        await notificationService.Open(new NotificationConfig()
+        {
+            Message = "Error",
+            Description = msg,
+            NotificationType = NotificationType.Error
+        });
+    }
+
+    private async Task CheckNextOfKinCount()
+    {
+        if (NextOfKinList != null && NextOfKinList.Count >= 6)
+        {
+            await notificationService.Open(new NotificationConfig()
+            {
+                Message = "Info",
+                Description = "You can not add more than 5 Next of Kin",
+                NotificationType = NotificationType.Error
+            });
+        }
+    }
+
+    private async Task SaveEditForm()
+    {
+        UpdateMemberNextOfKinCommand command = new UpdateMemberNextOfKinCommand()
+        {
+            FirstName = UpdateModel.FirstName,
+            LastName = UpdateModel.LastName,
+            Email = UpdateModel.Email,
+            Relationship = UpdateModel.Relationship,
+            Phone = UpdateModel.PhoneNumber,
+            Id = UpdateModel.Id,
+            Address = UpdateModel.Address,
+            ProfileId = ProfileModel.Id
+        };
+
+        var rsp = await DataService.NextOfKin<UpdateMemberNextOfKinCommand, CommandResult<string>>("update", command);
+        Logger.LogInformation($"rsp content->{JsonSerializer.Serialize(Model)}");
+        if (!rsp.IsSuccessStatusCode)
+        {
+            await DisplayErrorAfterNewNextOfKinAdditionAsync(rsp);
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/kyc/new-next-of-kin", true);
+        }
+    }
+
+    private void EditNextOfKin(NextOfKinData itemToUpdate)
+    {
+        UpdateModel = new NextOfKinData();
+        UpdateModel = itemToUpdate;
+        showEditNextOfKinDrawer = true;
+    }
+
+    private async Task CancelEdit()
+    {
+        UpdateModel = new NextOfKinData();
+    }
+
+    private async Task GetProfileDetail()
+    {
+        var authenticated = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var Principal = authenticated.User.Identity.Name;
+
+        if (!string.IsNullOrEmpty(Principal))
+        {
+            var claims = authenticated.User.Claims;
+            if (claims.Any())
+            {
+                var sid = claims.ElementAt(2).Value;
+                UserSID = sid;
+                var payload = sid;
+                var rsp = await DataService.GetValue<List<MemberProfileMasterView>>(
+                    nameof(MemberProfileMasterView), payload);
+
+
+                if (rsp.IsSuccessStatusCode)
+                {
+                    List<MemberProfileMasterView> rspResponse = JsonSerializer.Deserialize<List<MemberProfileMasterView>>(rsp.Content.ToJson());
+                    if (rspResponse != null && rspResponse.Count > 0 && !string.IsNullOrEmpty(rspResponse.FirstOrDefault().ApplicationUserId) && rspResponse.FirstOrDefault().ApplicationUserId == sid)
+                    {
+                        ProfileModel = rspResponse.FirstOrDefault();
+                    }
+                }
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/Identity/Account/LogIn");
+            }
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/Identity/Account/LogIn");
+        }
+    }
+
+    private async Task GetUserNextOfKin()
+    {
+        var payload = ProfileModel.Id;
+        var rsp = await DataService.GetNextOfKinValue<List<MemberNextOfKinMasterView>>(
+            nameof(MemberNextOfKinMasterView), payload);
+
+        if (rsp.IsSuccessStatusCode)
+        {
+            List<MemberNextOfKinMasterView> rspResponse = JsonSerializer.Deserialize<List<MemberNextOfKinMasterView>>(rsp.Content.ToJson());
+
+            if (rspResponse?.Count > 0)
+            {
+                NextOfKinList = new List<NextOfKinData>();
+                foreach (var item in rspResponse)
+                {
+                    NextOfKinData eachNextOfKinRecord = new NextOfKinData()
+                    {
+                        Address = item.Address,
+                        LastName = item.LastName,
+                        Id = item.Id,
+                        Relationship = item.Relationship,
+                        Email = item.Email,
+                        PhoneNumber = item.Phone,
+                        FirstName = item.FirstName
+                    };
+                    NextOfKinList.Add(eachNextOfKinRecord);
+                }
+                NextOfKins = NextOfKinList.ToArray();
+                if (NextOfKinList != null && NextOfKinList.Count >= 5)
+                    DisableAddButton = true;
+            }
+        }
+    }
+
+    async Task onEditNextOfKinDone()
+    {
+        showEditNextOfKinDrawer = false;
+    }
+
+}

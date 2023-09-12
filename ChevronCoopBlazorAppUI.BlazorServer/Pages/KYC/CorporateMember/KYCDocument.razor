@@ -1,0 +1,529 @@
+﻿@page "/KYC/KYC-DOCUMENT"
+@layout AppUIMainLayout
+
+<EditForm Model="@Model">
+<FluentValidationValidator/>
+<ValidationSummary/>
+
+<main>
+<div class="px-4 pt-6">
+<div class="mb-4">
+    <nav class="flex mb-5" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2">
+            <li class="inline-flex items-center">
+                <a href="#"
+                   class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                    </svg>
+                    Profile
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                    KYC Details
+                </div>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                </div>
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<!-- Request Tabs -->
+
+<div class="mb-4 flex w-full items-center">
+    <div class="sm:hidden border border-red-200">
+        <label for="tabs" class="sr-only">Select Request</label>
+        <select id="tabs"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option>Personal Information</option>
+            <option>KYC Details</option>
+            <option>Security Setting</option>
+        </select>
+    </div>
+    <ul class="w-2/5 hidden text-xs font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+        <li class="w-full">
+            <a href="#"
+               class="inline-block w-full px-2 py-4 bg-white hover:bg-CEMCS-Blue-100 text-gray-600 hover:text-white rounded-lg focus:ring-4 focus:ring-CEMCS-Blue-100 active focus:outline-none"
+               aria-current="page">
+                Personal Information
+            </a>
+        </li>
+        <li class="w-full">
+            <a href="#"
+               class="inline-block w-full py-4 bg-CEMCS-Blue-100 text-white hover:text-gray-600 rounded-lg focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-white">
+                KYC Details
+            </a>
+        </li>
+        <li class="w-full">
+            <a href="/Change-Password"
+               class="inline-block w-full py-4 bg-CEMCS-Blue-100 text-white hover:text-gray-600 rounded-lg focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-white">
+                Security Settings
+            </a>
+        </li>
+
+    </ul>
+</div>
+<div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+<div class="col-span-2">
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+        <a href="/kyc/member-account-data" class="mb-6 inline-flex items-center px-4 py-2 mr-3 text-sm font-medium ring-2 ring-primary-300 text-CEMCS-Blue-100 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
+            </svg>
+            Back
+        </a>
+        <h3 class="mb-4 text-xl font-bold dark:text-white">
+            KYC document
+        </h3>
+        <!-- <form action="./KYCInformation.html"> -->
+        <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-full">
+                <label for="Primary bank sort code"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Upload Photo
+                </label>
+                <div class="flex items-center justify-center w-full">
+                    @* <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-16 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                        <div class="flex flex-col items-center justify-center pt-2 pb-2">
+                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Choose file</span></p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                        </div>
+                                         
+                                    </label>*@
+                    <SfUploader AutoUpload="true">
+                        <UploaderEvents ValueChange="OnChange1"></UploaderEvents>
+                    </SfUploader>
+                </div>
+            </div>
+            <div class="col-span-6 sm:col-full">
+                <label for="Primary bank sort code"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Upload ID
+                </label>
+                <div class="flex items-center justify-center w-full">
+                    @* <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-16 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                        <div class="flex flex-col items-center justify-center pt-2 pb-2">
+                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Choose file</span></p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                        </div>
+      
+                                    </label>*@
+                    <SfUploader AutoUpload="true">
+                        <UploaderEvents ValueChange="OnChange2">
+
+                        </UploaderEvents>
+                    </SfUploader>
+                </div>
+
+                <div class="col-span-full pt-4">
+                    <div class="mb-1 text-sm font-normal text-gray-500 dark:text-gray-400">Upload one of the following 3 documents </div>
+                    <ul class="pl-4 space-y-1 text-gray-500 dark:text-gray-400">
+                        <li class="text-xs font-normal">1. National identity card</li>
+                        <li class="text-xs font-normal">2. International passport</li>
+                        <li class="text-xs font-normal">3. Company identity card</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-span-6 sm:col-full">
+                <button id="updateProductButton" data-modal-toggle="updateProductModal"
+                        class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" @onclick="OnSave">
+                    Submit
+                </button>
+            </div>
+
+            <div id="updateProductModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+                    <!-- Modal content -->
+                    <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                        <!-- Modal header -->
+                        <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+                            <svg width="79" height="80" viewBox="0 0 79 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M26.9305 40L35.2639 48.3333L51.9305 31.6667M22.0764 9.57082C25.0651 9.33228 27.9025 8.15708 30.1847 6.21249C32.7635 4.01361 36.0415 2.80579 39.4305 2.80579C42.8195 2.80579 46.0976 4.01361 48.6764 6.21249C50.9585 8.15708 53.7959 9.33228 56.7847 9.57082C60.1628 9.83958 63.3346 11.3034 65.7309 13.6997C68.1271 16.0959 69.5909 19.2677 69.8597 22.6458C70.0982 25.6346 71.2734 28.472 73.218 30.7542C75.4169 33.333 76.6247 36.611 76.6247 40C76.6247 43.389 75.4169 46.667 73.218 49.2458C71.2734 51.528 70.0982 54.3654 69.8597 57.3542C69.5909 60.7323 68.1271 63.9041 65.7309 66.3003C63.3346 68.6966 60.1628 70.1604 56.7847 70.4292C53.7959 70.6677 50.9585 71.8429 48.6764 73.7875C46.0976 75.9864 42.8195 77.1942 39.4305 77.1942C36.0415 77.1942 32.7635 75.9864 30.1847 73.7875C27.9025 71.8429 25.0651 70.6677 22.0764 70.4292C18.6982 70.1604 15.5265 68.6966 13.1302 66.3003C10.734 63.9041 9.27012 60.7323 9.00137 57.3542C8.76282 54.3654 7.58762 51.528 5.64303 49.2458C3.44415 46.667 2.23633 43.389 2.23633 40C2.23633 36.611 3.44415 33.333 5.64303 30.7542C7.58762 28.472 8.76282 25.6346 9.00137 22.6458C9.27012 19.2677 10.734 16.0959 13.1302 13.6997C15.5265 11.3034 18.6982 9.83958 22.0764 9.57082Z" stroke="#1F82BD" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+
+                            <p class="break-words text-center my-8">Your KYC information has been submitted successfully. <span class="text-CEMCS-Blue-100">We'll notify you once your application has been approved.</span></p>
+
+                            <form method="post" action="/Identity/Account/SwitchAccount" class="w-full">
+
+                                <button type="submit"
+                                        class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                                    Done
+                                </button>
+                            </form>
+                        </div>
+                        <!-- Modal body -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- </form> -->
+    </div>
+</div>
+<div class=" bg-white rounded-lg shadow xl:ml-20  sm:p-6 xl:p-8 dark:bg-gray-800 ">
+<div class="items-start pb-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
+<h3 class="pb-4 text-gray-900 font-bold text-xl">KYC Progress</h3>
+<div class="flex flex-row">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="10" fill="#1F82BD"/>
+            <path d="M5.33337 10.6666L8.00004 13.3333L14.6667 6.66663" stroke="#F9FAFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+
+    </div>
+    <p class="pl-4 text-sm font-semibold">Biodata</p>
+</div>
+<div class="flex flex-row ">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="10" fill="#1F82BD"/>
+            <path d="M5.33337 10.6666L8.00004 13.3333L14.6667 6.66663" stroke="#F9FAFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+
+    </div>
+    <p class="pl-4 text-sm font-medium">Next of Kin</p>
+</div>
+<div class="flex flex-row ">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="10" fill="#1F82BD"/>
+            <path d="M5.33337 10.6666L8.00004 13.3333L14.6667 6.66663" stroke="#F9FAFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+
+    </div>
+    <p class="pl-4 text-sm font-medium">Beneficiary</p>
+</div>
+<div class="flex flex-row ">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="10" fill="#1F82BD"/>
+            <path d="M5.33337 10.6666L8.00004 13.3333L14.6667 6.66663" stroke="#F9FAFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+
+    </div>
+    <p class="pl-4 text-sm font-medium">Company data</p>
+</div>
+@*<div class="flex flex-row ">
+                        <div class="flex flex-col items-center justify-center max-w-max">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="10" fill="#1F82BD"/>
+                        <path d="M5.33337 10.6666L8.00004 13.3333L14.6667 6.66663" stroke="#F9FAFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <svg
+                        width="1"
+                        height="34"
+                        viewBox="0 0 1 34"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        >
+                        <line
+                        x1="0.5"
+                        y1="0.5"
+                        x2="0.5"
+                        y2="33.5"
+                        stroke="#9CA3AF"
+                        stroke-linecap="round"
+                        stroke-dasharray="2 2"
+                        />
+                        <line
+                        x1="0.5"
+                        y1="0.5"
+                        x2="0.5"
+                        y2="33.5"
+                        stroke="#9CA3AF"
+                        stroke-linecap="round"
+                        stroke-dasharray="2 2"
+                        />
+                        <line
+                        x1="0.5"
+                        y1="0.5"
+                        x2="0.5"
+                        y2="33.5"
+                        stroke="#9CA3AF"
+                        stroke-linecap="round"
+                        stroke-dasharray="2 2"
+                        />
+                        <line
+                        x1="0.5"
+                        y1="0.5"
+                        x2="0.5"
+                        y2="33.5"
+                        stroke="#9CA3AF"
+                        stroke-linecap="round"
+                        stroke-dasharray="2 2"
+                        />
+                        <line
+                        x1="0.5"
+                        y1="0.5"
+                        x2="0.5"
+                        y2="33.5"
+                        stroke="#9CA3AF"
+                        stroke-linecap="round"
+                        stroke-dasharray="2 2"
+                        />
+                        </svg>
+
+                        </div>
+                        <p class="pl-4 text-sm font-medium">Staff enrolment data</p>
+                        </div>*@
+<div class="flex flex-row ">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="10" fill="#1F82BD"/>
+            <path d="M5.33337 10.6666L8.00004 13.3333L14.6667 6.66663" stroke="#F9FAFB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg width="1"
+             height="34"
+             viewBox="0 0 1 34"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+            <line x1="0.5"
+                  y1="0.5"
+                  x2="0.5"
+                  y2="33.5"
+                  stroke="#9CA3AF"
+                  stroke-linecap="round"
+                  stroke-dasharray="2 2"/>
+        </svg>
+
+    </div>
+    <p class="pl-4 text-sm font-medium">Member account data</p>
+</div>
+<div class="flex flex-row ">
+    <div class="flex flex-col items-center justify-center max-w-max">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="9" stroke="#1F82BD" stroke-width="2"/>
+        </svg>
+    </div>
+    <p class="pl-4 text-sm font-medium">KYC Documents</p>
+</div>
+
+</div>
+</div>
+</div>
+
+
+</div>
+</main>
+</EditForm>

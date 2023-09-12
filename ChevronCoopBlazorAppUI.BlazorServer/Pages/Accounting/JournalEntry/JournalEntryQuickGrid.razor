@@ -1,0 +1,110 @@
+﻿<h2 class="text-2xl font-extrabold dark:text-white">
+    @JournalMasterView?.Title
+    <span class="text-blue-600 dark:text-blue-500">(@JournalMasterView?.TransactionNo)</span>
+
+</h2>
+
+<br/>
+
+<div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+
+
+    <div class="sm:col-span-2">
+        <label for="ParentId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Select Ledger Account
+        </label>
+
+        @{
+            var combobox_Parent_res = $"{Config.ODATA_VIEWS_HOST}/{nameof(LedgerAccountMasterView)}";
+        }
+        <SfComboBox TValue="string" TItem="LedgerAccountMasterView" OnBlur="OnBlur"
+                    @bind-Value=@Model.AccountId Query="@Query_Combo"
+                    FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                    ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select ledger">
+            <SfDataManager Url="@combobox_Parent_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+            <ComboBoxFieldSettings Text="Name" Value="Code"></ComboBoxFieldSettings>
+        </SfComboBox>
+
+
+    </div>
+
+    <div class="w-full">
+        <label for="AccountType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Entry Type
+        </label>
+        @{
+            var entryTypes = Enum.GetNames(typeof(TransactionEntryType)).ToList();
+
+        }
+
+        <SfComboBox DataSource=@entryTypes TValue="string" TItem="string" OnBlur="OnBlur"
+                    @bind-Value=@Model.EntryType
+                    ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select type">
+        </SfComboBox>
+
+
+    </div>
+
+    <div class="sm:col-span-2">
+        <label for="Memo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Memo
+        </label>
+        <SfTextBox Multiline="true" ID="Memo" Placeholder="Memo" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                   @bind-Value=@Model.Memo OnBlur="OnBlur">
+        </SfTextBox>
+    </div>
+
+    <div class="w-full">
+        <label for="Debit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Debit
+        </label>
+
+        <SfNumericTextBox ID="Debit" TValue="decimal" @bind-Value="@Model.Debit"></SfNumericTextBox>
+    </div>
+
+    <div class="w-full">
+        <label for="Credit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Credit
+        </label>
+
+        <SfNumericTextBox ID="Credit" TValue="decimal" @bind-Value="@Model.Credit"></SfNumericTextBox>
+    </div>
+
+    <div class="sm:col-span-2">
+        <button type="button" @onclick="AddEntry"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Add Entry
+        </button>
+
+        <button type="button"
+                class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            Post entries
+        </button>
+    </div>
+
+</div>
+
+
+<br/>
+
+
+<div class="overflow-x-auto">
+    <SfGrid @ref="grid" ID="gridEntries" TValue="JournalEntry" EnablePersistence="false" DataSource="@Items"
+            AllowPaging="true" AllowFiltering="false" AllowSelection="true" EnableAltRow="false"
+            AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Height="100%"
+            AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+            AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false"
+            class="w-fullx text-sm text-left text-gray-500 dark:text-gray-400">
+        <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 50 }">
+        </GridPageSettings>
+
+        <GridColumns>
+            <GridColumn HeaderText="GL Code" Field="AccountId" TextAlign=TextAlign.Center AutoFit="true" Width="100"></GridColumn>
+            <GridColumn HeaderText="Entry type" Field="EntryType" TextAlign=TextAlign.Center AutoFit="true" Width="100"></GridColumn>
+            <GridColumn HeaderText="Debit" Field="Debit" TextAlign=TextAlign.Center AutoFit="true" Width="100"></GridColumn>
+            <GridColumn HeaderText="Credit" Field="Credit" TextAlign=TextAlign.Center AutoFit="true" Width="100"></GridColumn>
+
+
+        </GridColumns>
+    </SfGrid>
+</div>

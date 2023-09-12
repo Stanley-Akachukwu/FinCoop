@@ -1,0 +1,141 @@
+﻿@page "/Security/MigrationApproval"
+@using AP.ChevronCoop.Entities.Security.MemberProfiles.MemberBulkUploads;
+@using Syncfusion.Blazor.Grids
+@layout AppUIMainLayout
+@attribute [Authorize]
+
+
+<section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5 pt-10">
+
+    <div class="mx-auto max-w-screen-2xl px-4 lg:px-20">
+        <!-- Start coding here -->@*
+		<h3>Session Data Migration Approval Module</h3>*@
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+
+            <span class="error p-2">@ErrorDetails</span>
+
+
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                <div class="w-full md:w-1/2">
+
+                    <div class="sm:col-span-2">
+                        <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                            <input type="search" id="default-search" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+                                   class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search...">
+
+                            <button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="overflow-x-auto">
+
+                <SfGrid @ref="grid" ID="gridMemberProfile" TValue="MemberBulkUploadSessionMasterView" EnablePersistence="false"
+                        Query="@QueryGrid"
+                        AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                        AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="400"
+                        AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                        AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+
+                    <SfDataManager Url="@GRID_API_RESOURCE" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                    <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+                    <GridEvents TValue="MemberBulkUploadSessionMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure" QueryCellInfo="CellInfoHandler"></GridEvents>
+
+                    <GridEditSettings AllowAdding="false" AllowEditing="true" AllowDeleting="false"
+                                      ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+                    </GridEditSettings>
+
+                    <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+                    </GridFilterSettings>
+
+
+                    <GridColumns>
+                        <GridColumn Field=@nameof(MemberBulkUploadSessionMasterView.Description) HeaderText="DESCRIPTION" AutoFit="false"></GridColumn>
+                        <GridColumn Field=@nameof(MemberBulkUploadSessionMasterView.Size) HeaderText="COUNT" AutoFit="true">
+                            <Template>
+                                @{
+                                    var record = (context as MemberBulkUploadSessionMasterView);
+                                    <td class="px-6 py-4">
+                                        <p class="inline bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">@record.Size</p>
+                                    </td>
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Field=@nameof(MemberBulkUploadSessionMasterView.Status) HeaderText="STATUS" AutoFit="true"></GridColumn>
+                        <GridColumn Field=@nameof(MemberBulkUploadSessionMasterView.UserId_UserName) HeaderText="INITIATED BY" AutoFit="false"></GridColumn>
+                        <GridColumn Field=@nameof(MemberBulkUploadSessionMasterView.DateCreated) HeaderText="UPLOAD DATE" AutoFit="false" Format="dd/MM/yyyy h:mm tt" Type="ColumnType.DateTime"></GridColumn>
+
+                        <GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                            <Template>
+
+
+                                @{
+                                    var row = (context as MemberBulkUploadSessionMasterView);
+
+                                    <span class="px-4 py-0 flex items-center justify-end">
+                                        <button id="apple-ipad-air-dropdown-button-@row.MemberBulkUploadSessionId" data-dropdown-toggle="apple-ipad-air-dropdown-@row.MemberBulkUploadSessionId"
+                                                class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus::outline-none dark::text-gray-400 dark::hover:text-gray-100"
+                                                type="button">
+                                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                            </svg>
+                                        </button>
+                                        <div id="apple-ipad-air-dropdown-@row.MemberBulkUploadSessionId" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-ipad-air-dropdown-button-@row.MemberBulkUploadSessionId">
+                                                @if (row.Status != "ACTIVE")
+                                                {
+                                                    <li>
+                                                        <a href="javascript: void(0)" @onclick=@(e => onApproveRow(row)) class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                            <svg class="inline mr-1" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.60005 3.2002C3.12266 3.2002 2.66482 3.38984 2.32726 3.7274C1.98969 4.06497 1.80005 4.52281 1.80005 5.0002C1.80005 5.47759 1.98969 5.93542 2.32726 6.27299C2.66482 6.61055 3.12266 6.8002 3.60005 6.8002H14.4C14.8774 6.8002 15.3353 6.61055 15.6728 6.27299C16.0104 5.93542 16.2 5.47759 16.2 5.0002C16.2 4.52281 16.0104 4.06497 15.6728 3.7274C15.3353 3.38984 14.8774 3.2002 14.4 3.2002H3.60005Z" fill="#6B7280"/>
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.69995 7.7002H15.3V14.0002C15.3 14.4776 15.1103 14.9354 14.7727 15.273C14.4352 15.6106 13.9773 15.8002 13.5 15.8002H4.49995C4.02256 15.8002 3.56472 15.6106 3.22716 15.273C2.88959 14.9354 2.69995 14.4776 2.69995 14.0002V7.7002ZM7.19995 10.4002C7.19995 10.1615 7.29477 9.93258 7.46356 9.7638C7.63234 9.59502 7.86126 9.5002 8.09995 9.5002H9.89995C10.1386 9.5002 10.3676 9.59502 10.5363 9.7638C10.7051 9.93258 10.8 10.1615 10.8 10.4002C10.8 10.6389 10.7051 10.8678 10.5363 11.0366C10.3676 11.2054 10.1386 11.3002 9.89995 11.3002H8.09995C7.86126 11.3002 7.63234 11.2054 7.46356 11.0366C7.29477 10.8678 7.19995 10.6389 7.19995 10.4002Z" fill="#6B7280"/>
+                                                            </svg>
+                                                            Approve
+                                                        </a>
+                                                    </li>
+                                                }
+                                                <li>
+                                                    <a href="javascript: void(0)" @onclick="@(e => OnViewRow(row))" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                        <svg class="inline mr-1" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M11 2.5C12.8387 2.49389 14.6419 3.00678 16.2021 3.97973C17.7624 4.95267 19.0164 6.34616 19.82 8C18.17 11.37 14.8 13.5 11 13.5C7.2 13.5 3.83 11.37 2.18 8C2.98362 6.34616 4.23763 4.95267 5.79788 3.97973C7.35813 3.00678 9.16126 2.49389 11 2.5ZM11 0.5C6 0.5 1.73 3.61 0 8C1.73 12.39 6 15.5 11 15.5C16 15.5 20.27 12.39 22 8C20.27 3.61 16 0.5 11 0.5ZM11 5.5C11.663 5.5 12.2989 5.76339 12.7678 6.23223C13.2366 6.70107 13.5 7.33696 13.5 8C13.5 8.66304 13.2366 9.29893 12.7678 9.76777C12.2989 10.2366 11.663 10.5 11 10.5C10.337 10.5 9.70107 10.2366 9.23223 9.76777C8.76339 9.29893 8.5 8.66304 8.5 8C8.5 7.33696 8.76339 6.70107 9.23223 6.23223C9.70107 5.76339 10.337 5.5 11 5.5ZM11 3.5C8.52 3.5 6.5 5.52 6.5 8C6.5 10.48 8.52 12.5 11 12.5C13.48 12.5 15.5 10.48 15.5 8C15.5 5.52 13.48 3.5 11 3.5Z" fill="#6B7280"/>
+                                                        </svg>
+                                                        View
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+
+                                        </div>
+                                    </span>
+                                }
+
+
+                            </Template>
+                        </GridColumn>
+                    </GridColumns>
+                </SfGrid>
+            </div>
+        </div>
+    </div>
+</section>
+<Drawer @ref="@viewDrawer" Closable="true" Visible="showViewDrawer" Title='("Migrated Data")'
+        OnClose="onViewDone">
+
+    <DataMigrationForApprovalGrid @ref="@viewForm" Model="@MemberBulkUploadTempModel" @bind-ShowModal="@showViewDrawer"></DataMigrationForApprovalGrid>
+
+</Drawer>

@@ -1,0 +1,317 @@
+Special Deposit Transaction:
+
+1. On Application: Logs to SpecialDepositAccountApplication table
+ 
+2. On Approval of the application: an account is created and saved  on SpecialDepositAccount 
+
+      Case 1:  Bank Transfer
+        - (Uploads payment evidence)
+        - Upon Approval 
+        - Create journal entry for debit and credit
+        - Add to Transactionjournal
+        - Credit the Special Deposit Account (LedgerDepositAccount)  with amount present in payment evidence 
+          eg  LedgerDepositAccount.LedgerBalance =+ AmountTransferred
+        - Applicant is notified via email about transaction
+
+
+            
+     Case 2:  Payroll -> handled by Payroll Schedule Job on payroll day  
+
+               - Get the day payroll should run from Deposit Configuration Table e.g 15th of the month
+               - If payroll day = curent day
+                    - Spool all accounts from Special Deposit Account that the funding source is Payroll,
+                    - For each S.D Account, advise 
+                    - Schedule PayrollDeductionItemSchedule for each account
+                    - Then add it to PayrollDeductionSchedule() for advice for the current month
+
+
+
+ ACTIONS
+
+ Special Deposit Cash Addition
+
+      Case 1:  Bank Transfer
+        - User logs for special deposit addition (--uploads payment evidence)
+        - Upon Approval 
+        - Create journal entry for debit and credit
+        - Add to Transactionjournal
+        - Credit the Special Deposit Account (LedgerDepositAccount) with amount present in payment evidence
+          eg  LedgerDepositAccount.LedgerBalance =+ AmountTransferred
+        - Applicant is notified via email about transaction
+     
+
+
+  Fund Transfer
+         
+       Case 1: User select fixed deposit account as destination Account
+
+        - log transaction
+        - Source (Special Deposit Account)
+        - Destination (Fixed Deposit Account)    
+        - Upon Approval 
+        - create journal entry for debit and credit
+        - Add to Transactionjournal
+        - Credit the Fixed Deposit (LedgerDepositAccount) with amount from Selected SD account
+          eg  
+           
+           //debit
+           SDSource.LedgerBalance = SDSource.LedgerBalance - Amount
+           //cedit
+           FDDestnation.LedgerBalance  = FDDestination.LedgerBalance + Amount
+
+        - Applicant is notified via email about transaction
+      
+      Case 2: User select saving deposit account as destination Account
+       
+       - log transaction
+        - Source (Special Deposit Account)
+        - Destination (savings Deposit Account)
+        - Upon Approval
+        - create journal entry for debit and credit
+        - Add to Transactionjournal
+        -  Credit the Savings Deposit LedgerDepositAccount with amount from Special Deposit
+          eg
+              //debit
+              SpecialDeposit.LedgerBalance = SpecialDeposit.LedgerBalance - Amount
+             //credit
+             Savings.LedgerBalance = Savings.LedgerBalance + Amount
+           
+        - Applicant is notified via email about transaction
+
+
+
+
+
+  Special Deposit Fund WithDrawal
+         
+       Case 1: User select existing bank account as destination Account
+
+        - log transaction (Fund Withdrawal)
+        - Source (Customer Special Deposit Account)
+        - Destination (Customer bank Account)
+        - Upon Approval 
+        - Create journal entry for debit and credit
+        - Add to Transactionjournal
+        - Credit the customer bank account from special deposit source selected
+                eg  
+                //debit
+                SpecialDeposit.LedgerAccountBalance = SpecialDeposit.LedgerBalance - Amount
+                //credit
+                CustomerBankAccount.LedgerAccountBalance = CustomerBankAccount.LedgerAccountBalance + Amount
+
+        - Applicant is notified via email about transaction
+
+        
+
+
+        Case 2: (To get clarity)
+
+
+       ** Special Deposit Interest Addition Log:
+        To compute addition, 
+        -Use SpecialDepositInterestSchedule to generate list of SpecialDepositInterestScheduleItems, 
+        - Log the computed Interest on SpecialDepositCashAddition
+        - Post to Transaction Journal
+        - Impact the calculated balance in the respective DepositAccount(Ledger)  -----------Same flow to be applied for Fixed Deposit
+
+             ----------Handling Cron Jobs (Payroll/Interest)-------------- 
+  
+ (A.)Payroll schedule: 
+   - Get the day payroll should run from Deposit Configuration Table e.g 15th of the month
+   - If payroll day = curent day
+        - Spool all accounts from Special Deposit Account that the funding source is Payroll,
+        - For each S.D Account, advise 
+        - Schedule PayrollDeductionItemSchedule for each account
+        - Then add it to PayrollDeductionSchedule() for advice for the current month
+       
+
+ (B.) Interest computation For Special Deposit(Cron runs everyday): //TO BE  UPDATED
+
+        Case 1: Check the computation date type and it  equals (day basis)  from DepositCronJobConfiguration
+          If it is day basis then we pick the day and compare against current time day,
+             if both days match, run the interest computation job on each special deposit account 
+
+        Case 2: Check the computation date type and it equals (end of month | 29, 30 ,31) from DepositCronJobConfiguration
+          If it is end of month basis then we pick the day of the calender for the month and compare against current time day,
+             if both days match, run the interest computation job on each special deposit account 
+
+
+       If(B.case1 or B.case2 is true):
+
+         1. Cron start from deposit account table
+          Check if funding source == Payroll & account balance > 0 & computation_date - application_date > MinimumComputationDays & DepositAccountActionType == none then
+         Apply(use case 2)
+         Post into SpecialDepositInterestSchedule
+
+
+         2. Check if funding source == BankTransfer Or Cash addition && account balance > 0
+         & computation_date - application_date > MinimumComputationDays & DepositAccountActionType == none
+         Apply(use case 1)
+         Post into SpecialDepositInterestSchedule
+
+         3.
+         Check if funding source == BankTransfer Or Cash addition && account balance > 0
+         & computation_date - application_date > MinimumComputationDays & DepositAccountActionType == cash deposit | Withdrawal
+         Apply(use case 3)
+         Post into SpecialDepositInterestSchedule
+
+         4.
+         Cron start from deposit account table
+          Check if funding source == Payroll & account balance > 0 & computation_date - application_date > MinimumComputationDays
+         DepositAccountActionType == Payroll
+         Apply(use case 4)
+         Post into SpecialDepositInterestSchedule
+
+
+
+
+ -------------------------Special Deposit Use Cases----------------------------------------- 
+
+Note: Cash addition, Fund transfer and withdrawal impact interest computation because one of the parameters for Special deposit interest computation is the SD balance.
+ SD Interest computation is saved monthly and done at the end of the month. It is as follows.
+
+
+    (A.) Use case 1 (As as long as there is existing bal.):
+   
+       Conditions: No monthly contribution action(Bank transfer or cash addition) and no payroll contribution.
+        
+        Using flat interest rate converted into monthly.
+        
+        Interest-for-the-month = (SDIntRate/100)/12 * SDBalance-as-at-month-end-being-considered 
+             
+        SDAccount.InterestPayableAccount = + Interest-for-the-month
+  
+
+    (B.) Use case 2
+
+     Conditions: Monthly contribution(Payroll) and no contribution action 
+
+     Using flat interest converted into monthly  and first week interest(rate% * new monthly balance/365) * 7 
+
+     Interest-for-the-month = ((SDIntRate/100 * SDBalance-as-at-month-end-being-considered) /12) + (SDIntRate/100 * (MonthlyContribAmount/365) * 7) 
+  
+     SDAccount.InterestPayableAccount = + Interest-for-the-month
+      
+
+     (C.)Use case 3  
+
+     Conditions:  No monthly contribution(Payroll) but has cash addition, SD withdrawal, Deposit transfer and/or loan offset for the month being considered.
+
+      Using flat interest converted into monthly  + daily interest rate(nth computation) (rate%* existing balance/365) - for daily 
+
+    Computation is as follows: 
+
+    (i) Calculate the SD balance as at the previous month end as SDBalPreviousMonthend 
+
+    (ii)Calculate daily interest on the month being considered as follows: 
+
+    - Interest-for-the-first-day-of-month = (SDIntRate /100) * cum-balance-as-at-first-day-of-the-month-being-considered / 365 
+    - Interest-for-the-second-day-of-month = (SDIntRate /100) * cum-balance-as-at-second-day-of-the-month-being-considered / 365 
+    - . . .
+     - Interest-for-the-nth-day-of-month = (SDIntRate /100) * cum-balance-as-at-nth-day-of-the-month-being-considered / 365 
+
+    (iii)Therefore, Interest-for-the-month = (SDIntRate / 100 * SDBalPreviousMonthend / 12) + (Interest -for-the-first-day-of-month + Interest-for-the-second-day-of-month + … + Interest-for-the-last-day-of-month) 
+    
+    
+     ChargesAccruedAccounts = + Interest-for-the-month
+
+     (D.) Use case 4 
+     Conditions: Monthly contribution(Payroll) & action(cash addition, withdrawal , transfer, loan offset) 
+
+     using flat interest converted into monthly + daily interest rate(nth computation) (rate%* existing balance/365) - for daily + first week interest(rate% * new monthly balance/365) * 7 
+
+  
+    Computation is as follows:
+    (i) Calculate the SD balance as at the previous month end – SDBalPreviousMonthend 
+               
+   (ii)   Calculate daily interest on the month being considered. 
+
+                             Interest-for-the-first-day-of-month = SDIntRate / 100 * cum-balance-as-at-first-day-of-the-month-being-considered / 365 
+                             Interest-for-the-second-day-of-month = SDIntRate / 100 * cum-balance-as-at-second-day-of-the-month-being-considered / 365 
+
+  (iii) Therefore, Interest-for-the-month = (SDIntRate / 100 * SDBalPreviousMonthend / 12) + (Interest -for-the-first-day-of-month + Interest-for-the-second-day-of-month + … + Interest-for-the-last-day-of-month) + (SDIntRate/100 * MonthlyContribAmount/365 * 7) 
+   
+   ChargesAccruedAccounts = + Interest-for-the-month
+
+
+
+Job Processing Schedule
+
+Admin set the payroll/Interest Computation Monthly
+
+
+Eg
+
+-- Configuration --
+ Id JobName     ProcessingDate   ProcessingTime  Status
+ 1   Payroll   15/05/2023       21:00           Pending 
+ 2   Payroll   15/06/2023       22:00           Pending 
+ 3   Payroll   24/06/2023       22:00           Successfully  
+ 
+     
+ID JobName                ProcessingDate     ProcessingTime Status
+4  Interest Computation   31/05/2023         21:00          Successfully
+
+
+
+
+
+
+INTEREST COMPUTATION
+Apr 2023, comp date->last day
+May 2023, comp date->last day
+June 2023, comp date->last day
+
+ 
+
+1. at what does time does this job run? morning, noon, midnight
+2. how many times does this job run per day?
+3. what period? if monthly, which month then resolve last day of month
+
+ 
+
+var now = DateTime.Now;
+var startOfMonth = new DateTime(now.Year, now.Month, 1);
+
+ 
+
+var DaysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
+
+ 
+
+var lastDay = new DateTime(now.Year, now.Month, DaysInMonth);
+
+ 
+
+April --13, April 31
+May --13, May 30
+
+ 
+
+ProcessingDay
+Frequency{DAILY,LAST_DAY}
+
+ 
+
+
+Title->Interest computation for May 2023 sucessfully run
+
+
+----------------------------------------
+
+
+
+
+
+        DR Customer Bank Account/Product Suspense Account
+        CR Company bank account fundingAmount COMPANY_BANK_CREDIT
+
+        DR Deposit Product Suspense account 
+        CR Product deposit account fundingAmount
+
+        DR Deposit Product Account Suspense account 
+        CR Account deposit account fundingAmount
+
+        Deposit Product Charges Suspense account 
+
+      

@@ -1,0 +1,202 @@
+﻿@*<div class="inline-flex rounded-md shadow-sm" role="group">
+    <button @onclick="PostEntries" type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+        <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3" />
+        </svg>
+        Post journal entries
+    </button>
+
+    <button @onclick="ReverseEntries" type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-gray-700 focus:text-gray-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:text-white">
+        <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 14 3-3m-3 3 3 3m-3-3h16v-3m2-7-3 3m3-3-3-3m3 3H3v3" />
+        </svg>
+        Reverse journal entries
+    </button>
+</div>
+
+
+
+<br />*@
+
+
+
+<Spin Spinning=isProcessing Tip=@processingMessage>
+
+
+
+
+    <Space Size="@("small")">
+        <SpaceItem>
+            <Button @ref=@btnPost Disabled=@MasterView.IsPosted Type="@AntDesign.ButtonType.Primary" Shape="@ButtonShape.Round" OnClick=@PostEntries>
+                <Icon Type="check-circle" Theme="outline" Class="text-lg font-bold" />
+                <span class="text-sm font-medium">Post journal entries</span>
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Danger Disabled=@MasterView.IsReversed Type="@AntDesign.ButtonType.Primary" Shape="@ButtonShape.Round" OnClick="ReverseEntries">
+                <Icon Type="undo" Theme="outline" Class="text-lg font-bold" />
+                <span class="text-sm font-medium">Reverse journal entries</span>
+            </Button>
+        </SpaceItem>
+
+        @*<SpaceItem>
+        <Button @ref=@btnReverse Disabled=@MasterView.IsReversed Danger Shape="@ButtonShape.Round" OnClick="ReverseEntries">
+        <Icon Type="undo" Theme="outline" Class="text-lg font-bold" />
+        <span class="text-sm font-medium">Reverse journal entries</span>
+        </Button>
+        </SpaceItem>*@
+
+
+    </Space>
+
+    <br />
+    <br />
+    <Descriptions Title="Transaction Journal Details" Bordered Size=@DescriptionsSize.Small>
+        <DescriptionsItem Title="Transaction No">
+            @MasterView?.TransactionNo
+        </DescriptionsItem>
+        <DescriptionsItem Title="Transaction Type" Span="2">@MasterView?.TransactionType</DescriptionsItem>
+        <DescriptionsItem Title="Document Ref" Span="1">@MasterView?.DocumentRef</DescriptionsItem>
+        <DescriptionsItem Title="Document Ref Id" Span="2">@MasterView?.DocumentRefId</DescriptionsItem>
+        <DescriptionsItem Title="Entity Ref" Span="1">@MasterView?.EntityRef</DescriptionsItem>
+        <DescriptionsItem Title="Entity Ref Id" Span="2">@MasterView?.EntityRefId</DescriptionsItem>
+        <DescriptionsItem Title="Transaction Date">@MasterView?.TransactionDate.ToString("dd-MMM-yyyy hh:mm tt")</DescriptionsItem>
+        <DescriptionsItem Title="Is Posted?">@MasterView?.IsPosted</DescriptionsItem>
+        <DescriptionsItem Title="Date Posted">@MasterView?.DatePosted?.ToString("dd-MMM-yyyy hh:mm tt")</DescriptionsItem>
+        <DescriptionsItem Title="Is Reversed?">@MasterView?.IsReversed</DescriptionsItem>
+        <DescriptionsItem Title="Date Reversed">@MasterView?.ReversalDate?.ToString("dd-MMM-yyyy hh:mm tt")</DescriptionsItem>
+        <DescriptionsItem Title="Description" Span="5">
+            @MasterView?.Description
+        </DescriptionsItem>
+        <DescriptionsItem Title="Memo" Span="5">
+            @MasterView?.Memo
+        </DescriptionsItem>
+    </Descriptions>
+
+    <br />
+    <span class="error p-2">@ErrorDetails</span>
+    <br />
+
+
+    <p class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
+        @JournalEntries?.Count Journal entries
+    </p>
+
+    <div class="overflow-x-auto">
+
+        @*
+        <SfGrid @ref="grid" ID="gridJournalEntry" TValue="JournalEntryMasterView" EnablePersistence="false"
+        Query="@QueryGrid" Toolbar=@ToolBar
+        AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+        AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="400"
+        AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+        AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+
+        <SfDataManager Url="@GRID_API_RESOURCE" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+        <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[]{5,10,15,20,30,50}"></GridPageSettings>
+
+        <GridEvents TValue="JournalEntryMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure"></GridEvents>
+
+        <GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false"
+        ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog"></GridEditSettings>
+
+
+        <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+        </GridFilterSettings>*@
+
+        <SfGrid @ref="grid" ID="gridJournalEntry" DataSource=@JournalEntries TValue="JournalEntryMasterView" EnablePersistence="false"
+                AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="500"
+                AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+
+            <GridSearchSettings Operator=Syncfusion.Blazor.Operator.Contains IgnoreAccent=true IgnoreCase="true"></GridSearchSettings>
+            <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="20" PageSizes="new int[]{5,10,15,20,30,50}"></GridPageSettings>
+
+            <GridEvents TValue="JournalEntryMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure"></GridEvents>
+
+            <GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false"
+                              ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog"></GridEditSettings>
+
+
+            <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+            </GridFilterSettings>
+            <GridGroupSettings Columns="@GroupedColumns"></GridGroupSettings>
+            <SfToolbar>
+                <ToolbarItems>
+                    <ToolbarItem Type="ItemType.Input" Align="Syncfusion.Blazor.Navigations.ItemAlign.Left">
+                        <Template>
+                            <SfTextBox Placeholder="Enter values to search" Input="OnGridSearch"></SfTextBox>
+                            <span class="e-search-icon e-icons"></span>
+                        </Template>
+                    </ToolbarItem>
+                </ToolbarItems>
+            </SfToolbar>
+
+            <GridAggregates>
+                <GridAggregate>
+                    <GridAggregateColumns>
+                        <GridAggregateColumn Field=@nameof(JournalEntryMasterView.Debit) Type="AggregateType.Sum" Format="n2">
+                            <FooterTemplate>
+                                @{
+                                    var aggregate = (context as AggregateTemplateContext);
+                                    <div>
+                                        <p>Total Debits: @aggregate.Sum</p>
+                                    </div>
+                                }
+                            </FooterTemplate>
+                        </GridAggregateColumn>
+                    </GridAggregateColumns>
+                </GridAggregate>
+                <GridAggregate>
+                    <GridAggregateColumns>
+                        <GridAggregateColumn Field=@nameof(JournalEntryMasterView.Credit) Type="AggregateType.Sum" Format="n2">
+                            <FooterTemplate>
+                                @{
+                                    var aggregate = (context as AggregateTemplateContext);
+                                    <div>
+                                        <p>Total Credits: @aggregate.Sum</p>
+                                    </div>
+                                }
+                            </FooterTemplate>
+                        </GridAggregateColumn>
+                    </GridAggregateColumns>
+                </GridAggregate>
+            </GridAggregates>
+
+            <GridColumns>
+
+                <GridColumn Field=@nameof(JournalEntryMasterView.TransactionJournalId_TransactionNo) HeaderText="Jrnl No." AutoFit="true"></GridColumn>
+
+                <GridColumn Field=@nameof(JournalEntryMasterView.TransactionEntryNo) HeaderText="Entry No" AutoFit="true"></GridColumn>
+
+
+                <GridColumn Field=@nameof(JournalEntryMasterView.AccountId_Code) HeaderText="GL Code" AutoFit="true"></GridColumn>
+                <GridColumn Field=@nameof(JournalEntryMasterView.AccountId_Name) HeaderText="GL Name" AutoFit="true"></GridColumn>
+
+                <GridColumn Field=@nameof(JournalEntryMasterView.EntryType) HeaderText="Type" AutoFit="true"></GridColumn>
+
+                <GridColumn Field=@nameof(JournalEntryMasterView.Debit) HeaderText="Debit" Format="n2" AutoFit="true"></GridColumn>
+
+                <GridColumn Field=@nameof(JournalEntryMasterView.Credit) HeaderText="Credit" Format="n2" AutoFit="true"></GridColumn>
+
+                <GridColumn Field=@nameof(JournalEntryMasterView.TransactionDate) HeaderText="Txn Date" AutoFit="true" Format="dd-MMM-yyy hh:mm tt"></GridColumn>
+
+                <GridColumn Field=@nameof(JournalEntryMasterView.IsPosted) HeaderText="Is Posted" AutoFit="true"></GridColumn>
+
+                <GridColumn Field=@nameof(JournalEntryMasterView.DatePosted) HeaderText="Date Posted" AutoFit="true" Format="dd-MMM-yyy hh:mm tt"></GridColumn>
+
+
+
+            </GridColumns>
+        </SfGrid>
+    </div>
+
+</Spin>
+
+
+
+
+

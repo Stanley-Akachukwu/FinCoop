@@ -1,0 +1,113 @@
+﻿@using AP.ChevronCoop.Entities.MasterData.Charges;
+<EditForm Model="@Model" OnValidSubmit="OnProceed">
+    <FluentValidationValidator @ref="_fluentValidationValidator"/>
+    <ValidationSummary/>
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+        <h3 class="mb-4 text-xl font-bold dark:text-white">
+            Top-up Information
+        </h3>
+
+        <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Enable
+                    Top-up
+                </label>
+                <div class="flex flex-wrap">
+                    <div class="flex items-center mr-4">
+
+                        <SfRadioButton Name="EnableToup" Value=true @bind-Checked="@Model.EnableTopUp" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton Name="EnableToup" Value=false @bind-Checked="@Model.EnableTopUp" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+
+
+        <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Enable
+                    Top-up charges
+                </label>
+                <div class="flex flex-wrap">
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=ShowTopUpForm Name="EnableToupcharge" Value=true @bind-Checked="@Model.EnableTopUpCharges" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=HideTopUpForm Name="EnableToupcharge" Value=false @bind-Checked="@Model.EnableTopUpCharges" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                    </div>
+
+
+                </div>
+                <div class="grid grid-cols-6 gap-6 mt-3 hidden" id="viewBox">
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    @if (showTopUpInfoForm)
+    {
+        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800" id="viewBox2">
+
+
+            <div class="grid grid-cols-6 gap-6">
+
+
+                <div class="col-span-6 sm:col-full">
+                    <label for="countries"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Select Top-up Charges
+                    </label>
+                    <SfMultiSelect TValue="string[]" @bind-Value=@preselectedCharges TItem="ChargeMasterView" FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains" Query="@Query_Combo" ShowSelectAll=true FilterBarPlaceholder="Charges" EnableGroupCheckBox=false Mode="@VisualMode.CheckBox" ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Charge" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <MultiSelectEvents TItem="ChargeMasterView" TValue="string[]" ValueChange="@TopupValueChangeHandler"></MultiSelectEvents>
+                        <SfDataManager Url="@DROPDOWN_API_RESOURCE_CHARGE" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                        <MultiSelectFieldSettings Text="Name" Value="Id"></MultiSelectFieldSettings>
+                    </SfMultiSelect>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+
+    <div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+        <div class="col-span-3 sm:col-span-3">
+            <a href="javascript: void(0)" @onclick=OnPrevious>
+                <button type="button" class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    Back
+                </button>
+            </a>
+
+        </div>
+        <div class="col-span-3 sm:col-span-3">
+            <a href="javascript: void(0)" @onclick=OnProceed>
+
+
+                <button class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    Proceed
+                </button>
+            </a>
+        </div>
+    </div>
+</EditForm>

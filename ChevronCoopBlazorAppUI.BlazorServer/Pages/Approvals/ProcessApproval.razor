@@ -1,0 +1,459 @@
+﻿@page "/approval/process"
+@using AP.ChevronCoop.Entities.Security.Approvals;
+@using AP.ChevronCoop.AppDomain.Security.Approvals
+@using System.Globalization;
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Approvals.DepositApprovals;
+
+
+<main>
+
+    @if (isLoading)
+    {
+        <LoadingComponent></LoadingComponent>
+    }
+    else
+    {
+        <div class="px-4 pt-6">
+
+            <div class="col-span-3 sm:col-span-3">
+                <button @onclick="GoToApprovals" class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="submit">
+                    <svg class="inline mr-1" width="14" height="12" viewBox="0 0 14 12" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 5.99967H13Z" fill="#1F82BD" />
+                        <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13"
+                              stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                    </svg> Back
+                </button>
+            </div>
+            <!-- Request Tabs -->
+            @if (ViewModel != null)
+            {
+                @if (ViewModel.Status == ApprovalStatus.REJECTED)
+                {
+                    <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                         role="alert">
+                        @((MarkupString)@SvgHelpers.ApprovalRejected)
+
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <span class="font-medium">Rejected</span>
+                            <ul class="mt-1.5 ml-4  list-inside">
+                                <li>The application was rejected</li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+                @if (ViewModel.Status == ApprovalStatus.APPROVED)
+                {
+                    <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                         role="alert">
+
+                        @((MarkupString)@SvgHelpers.ApprovalSuccess)
+
+
+                        <span class="sr-only">Approved</span>
+                        <div>
+                            <span class="font-medium">Approved</span>
+                            <ul class="mt-1.5 ml-4  list-inside">
+                                <li>You approved this request</li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+
+                <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-10 xl:gap-2 space-x-24 dark:bg-gray-900">
+
+                    <div class="col-span-6">
+                        @if (ViewModel != null)
+                        {
+                            @if (ViewModel.ApprovalPartialViews.Any())
+                            {
+                                @foreach (var partialView in ViewModel?.ApprovalPartialViews)
+                                {
+                                    @if (!partialView.IsTabularView)
+                                    {
+                                        <br />
+                                         <Descriptions Title="@partialView.Title" Bordered Layout="@DescriptionsLayout.Vertical"></Descriptions>
+
+                                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                                           
+                                            <tbody class="bg-gray-50 dark:bg-gray-700">
+                                                @foreach (var childView in partialView?.Children)
+                                                {
+                                                    @if(tableCounter % 2 == 0)
+                                                    {
+                                                        tableCSS = "bg-gray-50 dark:bg-gray-800";
+                                                    }
+                                                    else
+                                                    {
+                                                        tableCSS = "bg-white dark:bg-gray-800";
+                                                    }
+                                                    @if (childView.IsFileDownload == true)
+                                                    {
+                                                        <tr class="@tableCSS">
+                                                            <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                                                                @childView?.FieldLabel
+                                                            </td>
+                                                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                <img src="@childView?.FieldValue" height="450" width="450" />
+                                                            </td>
+
+                                                        </tr>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr class="@tableCSS">
+                                                            <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                                                                @childView?.FieldLabel
+                                                            </td>
+                                                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                @childView?.FieldValue
+                                                            </td>
+
+                                                        </tr>
+                                                    }
+                                                    tableCounter++;
+                                                }
+                                               
+                                            </tbody>
+                                        </table>
+
+
+                                    }
+                                    @if (partialView.IsTabularView)
+                                    {
+                                        @if (!partialView.IsMultipleFields)
+                                        {
+                                            <div class="col-span-6">
+                                                <section class="bg-gray-50 dark:bg-gray-900">
+                                                    <div class="mx-auto max-w-screen-2xl">
+                                                        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mb-3">
+                                                            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 px-4 py-8 border-b dark:border-gray-700">
+                                                                <div class="w-full flex flex-col">
+                                                                    <h5 class="dark:text-white font-bold text-xl dark:bg-gray-300">
+                                                                        @partialView.Title
+                                                                    </h5>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="overflow-x-auto">
+                                                                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                                                    <tbody data-accordion="table-column">
+                                                                        
+                                                                            @foreach (var tblView in partialView?.ChildRows)
+                                                                            {
+                                                                                <tr class="border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+                                                                            id="table-column-header-9"
+                                                                            data-accordion-target="#table-column-body-9"
+                                                                            aria-expanded="false"
+                                                                            aria-controls="table-column-body-9">
+                                                                                <td class="px-4 py-3 text-gray-500 font-bold">@tblView?.FieldSN</td>
+                                                                                <td class="px-4 py-3 text-gray-500 font-bold">@tblView?.FieldValue</td>
+                                                                                <td class="px-4 py-3 text-gray-500 font-bold">@tblView?.FieldValue2</td>
+                                                                            </tr>
+                                                                            }
+                                                                       
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                           
+
+                                            <div class="col-span-6">
+                                                <section class="bg-gray-50 dark:bg-gray-900">
+                                                    <div class="mx-auto max-w-screen-2xl">
+                                                        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mb-3">
+                                                            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 px-4 py-8 border-b dark:border-gray-700">
+                                                                <div class="w-full flex flex-col">
+                                                                    <h5 class="dark:text-white font-bold text-xl">
+                                                                        @partialView.Title
+                                                                    </h5>
+                                                                    
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="overflow-x-auto">
+                                                                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                                                    <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-300">
+                                                                        <tr>
+                                                                           
+                                                                            @foreach (var hItem in partialView.FieldHeaders)
+                                                                            {
+                                                                                <th scope="col" class="px-4 py-3 min-w-[10rem] font-extrabold bg-gray-900">
+                                                                                    @hItem
+                                                                                </th>
+                                                                            }
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody data-accordion="table-column">
+                                                                        
+                                                                            @foreach (var tblView in partialView?.ChildRows)
+                                                                            {
+                                                                            <tr class="border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+                                                                                id="table-column-header-9"
+                                                                                data-accordion-target="#table-column-body-9"
+                                                                                aria-expanded="false"
+                                                                                aria-controls="table-column-body-9">
+                                                                                    <td class="px-4 py-3 text-gray-500">@tblView?.FieldSN</td>
+                                                                                    <td class="px-4 py-3 text-gray-500">@tblView?.FieldValue</td>
+                                                                                    <td class="px-4 py-3 text-gray-500">@tblView?.FieldValue2</td>
+                                                                                    <td class="px-4 py-3 text-gray-500">@tblView?.FieldValue3</td>
+                                                                                    <td class="px-4 py-3 text-gray-500">@tblView?.FieldValue4</td>
+                                                                                    <td class="px-4 py-3 text-gray-500">@tblView?.FieldValue5</td>
+                                                                                    <td class="px-4 py-3 text-gray-500">@tblView?.FieldValue6</td>
+                                                                                    <td class="px-4 py-3 text-gray-500">@tblView?.FieldValue7</td>
+                                                                                    <td class="px-4 py-3 text-gray-500">@tblView?.FieldValue8</td>
+                                                                                </tr>
+                                                                            }
+                                                                        
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                        @if (ViewModel.Status != ApprovalStatus.APPROVED)
+                        {
+                            <div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+                                <div class="col-span-3 sm:col-span-3">
+
+                                    <button @onclick="ShowReject" class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                        Reject
+                                    </button>
+
+                                    <!-- Rejection modal -->
+                                    <Modal Visible="@showRejectPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+                                           class="overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                                        <div class="relative w-full max-w-2xl max-h-full">
+                                            <!-- Modal content -->
+                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                <!-- Modal header -->
+                                                <div class="flex items-start justify-between px-6 pt-6 pb-2  rounded-t dark:border-gray-600">
+                                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                        Reason for rejection
+                                                    </h3>
+                                                    <button type="button" @onclick="Cancel"
+                                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd"
+                                                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                                  clip-rule="evenodd">
+                                                            </path>
+                                                        </svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                </div>
+                                                <div class="px-6">
+                                                    <h2 class=" text-gray-400">
+                                                        Please enter your reason for rejecting
+                                                        this request
+                                                    </h2>
+                                                </div>
+                                                <!-- Modal body -->
+                                                <EditForm Model="Model" OnValidSubmit="RejectAsync">
+                                                    <FluentValidationValidator @ref="_fluentValidationValidator" />
+                                                    <ValidationSummary />
+                                                    <div class="p-6 space-y-6">
+
+                                                        <textarea id="message" rows="4"
+                                                                  class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                  placeholder="Add comments" @bind=@Model.Comment></textarea>
+                                                    </div>
+                                                    <!-- Modal footer -->
+                                                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                        <button type="submit"
+                                                                class="text-white bg-CEMCS-Blue-100 bg-CEMCS-Blue-100 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-red-800">
+                                                            Yes,
+                                                            I reject
+
+                                                            @if (DisableButton)
+                                                            {
+                                                                <i class="fas fa-spinner fa-spin"></i>
+                                                            }
+                                                        </button>
+                                                        <button @onclick="Cancel" type="button"
+                                                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                                            Cancel
+                                                        </button>
+
+                                                    </div>
+
+                                                </EditForm>
+                                            </div>
+                                        </div>
+                                    </Modal>
+                                    <!-- Rejection success modal -->
+                                    <Modal Visible="@showRejectSuccessPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+                                           class="overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                                        <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+                                            <!-- Modal content -->
+                                            <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                                                <!-- Modal header -->
+                                                <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+                                                    <svg width="79" height="80" viewBox="0 0 79 80" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                                                              stroke="#0E9F6E" stroke-width="4" stroke-linecap="round"
+                                                              stroke-linejoin="round" />
+                                                    </svg>
+
+                                                    <p class="break-words text-center my-8">
+                                                        You’ve successfully rejected this request
+                                                    </p>
+
+                                                    <form class="w-full">
+                                                        <button @onclick="GoToApprovals" type="button"
+                                                                class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                                                            Done
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <!-- Modal body -->
+                                            </div>
+                                        </div>
+                                    </Modal>
+                                </div>
+                                <div class="col-span-3 sm:col-span-3">
+
+                                    <button @onclick="ShowApproval" class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                        Approve
+                                    </button>
+                                    <!-- Approval Form modal -->
+                                    <Modal Visible="@showApprovalPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+                                           class="overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                                        <div class="relative w-full max-w-2xl max-h-full">
+                                            <!-- Modal content -->
+                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                <!-- Modal header -->
+                                                <div class="flex items-start justify-between px-6 pt-6 pb-2  rounded-t dark:border-gray-600">
+                                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mr-1">
+                                                        Comment
+                                                        <h2 class="text-gray-300">(Optional)</h2>
+                                                    </h3>
+                                                    <button @onclick="Cancel" type="button"
+                                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                            data-modal-hide="approvalModalForm">
+                                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd"
+                                                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                                  clip-rule="evenodd">
+                                                            </path>
+                                                        </svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                </div>
+                                                <div class="px-6">
+                                                    <h2 class=" text-gray-400">Please enter your comment for this request</h2>
+                                                </div>
+                                                <!-- Modal body -->
+                                                <EditForm Model="Model" OnValidSubmit="ApproveAsync">
+                                                    <FluentValidationValidator @ref="_fluentValidationValidator" />
+                                                    <ValidationSummary />
+                                                    <div class="p-6 space-y-6">
+
+                                                        <textarea id="message" rows="4"
+                                                                  class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                  placeholder="Add comments" @bind=@Model.Comment></textarea>
+                                                    </div>
+                                                    <!-- Modal footer -->
+                                                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                        <button type="submit" disabled="@DisableButton"
+                                                                class="text-white bg-CEMCS-Blue-100 bg-CEMCS-Blue-100 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-red-800">
+                                                            Yes,
+                                                            I approve
+
+                                                            @if (DisableButton)
+                                                            {
+                                                                <i class="fas fa-spinner fa-spin"></i>
+                                                            }
+
+                                                        </button>
+
+                                                       @* <ButtonComp ButtonText="Yes, I approve" submitType="submit"></ButtonComp>*@
+
+                                                        <button @onclick="Cancel" type="button"
+                                                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                                            Cancel
+                                                        </button>
+
+                                                    </div>
+
+                                                </EditForm>
+
+                                            </div>
+                                        </div>
+                                    </Modal>
+                                    <!-- Approval success modal -->
+                                    <Modal Visible="@showApprovalSuccessPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+                                           class="overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                                        <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+                                            <!-- Modal content -->
+                                            <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                                                <!-- Modal header -->
+                                                <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+                                                    <svg width="79" height="80" viewBox="0 0 79 80" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                                                              stroke="#0E9F6E" stroke-width="4" stroke-linecap="round"
+                                                              stroke-linejoin="round" />
+                                                    </svg>
+
+                                                    <p class="break-words text-center my-8">
+                                                        You’ve successfully approved this request
+                                                    </p>
+
+                                                    <form class="w-full">
+                                                        <button @onclick="GoToApprovals" type="button"
+                                                                class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                                                            Done
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <!-- Modal body -->
+                                            </div>
+                                        </div>
+                                    </Modal>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+            }
+
+        </div>
+     }
+
+</main>
+
+ 
+@code {
+    private string size = DescriptionsSize.Default;
+
+    private int tableCounter = 1;
+
+    string tableCSS = "bg-gray-50 dark:bg-gray-700";
+}

@@ -1,0 +1,151 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.FixedDeposits.FixedDepositApplications;
+@using AP.ChevronCoop.Entities.Deposits.Savings.SavingsAccountApplications;
+@using System.Globalization;
+@using AP.ChevronCoop.Entities.Deposits.Savings.SavingsAccounts;
+@using AP.ChevronCoop.Entities.Deposits.Savings.SavingsCashAdditions;
+@using AP.ChevronCoop.Entities.Deposits.Savings.SavingsIncreaseDecreases;
+@using ChevronCoop.Web.AppUI.BlazorServer.Helper;
+@using Newtonsoft.Json;
+@using AntDesign;
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        @ApprovalType.Replace("_", " ")
+    </h3>
+
+
+
+    @foreach (var item in _SavingsCashAdditionMasterView)
+    {
+        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+           
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Description
+                            </h2>
+                            <p>@item.Description</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Account Number
+                            </h2>
+                            <p>@item.SavingsAccountId_AccountNo</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Amount
+                            </h2>
+                            <p>@item.Amount.ToString("N2", new CultureInfo("en-US"))</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Mode of Payment
+                            </h2>
+                            <p>@item.ModeOfPayment</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Approval Status
+                            </h2>
+                            <p>@item.ApprovalId_Status</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Date Created
+                            </h2>
+                            <p>@item.DateCreated.GetValueOrDefault().ToString("M/d/yyyy")</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-6">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Image
+                            </h2>
+                            <p>
+                                <img src="@item.CustomerPaymentDocumentId_DocumentData" />
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    }
+
+    <SavingsAndActions _SavingsAccountMasterView="_SavingsAccountMasterView" ViewMode="@ViewModeType"></SavingsAndActions>
+
+
+</div>
+
+
+@code {
+
+    [Inject]
+    NotificationService notificationService { get; set; }
+
+    [Parameter] public string ApprovalType { get; set; } = "";
+
+    public string ViewModeType = "savings_actions";
+
+    [Inject]
+    IEntityDataService DataService { get; set; }
+
+    public List<SavingsAccountMasterView> _SavingsAccountMasterView { get; set; } = new List<SavingsAccountMasterView>();
+
+    [Parameter]
+    public List<SavingsCashAdditionMasterView> _SavingsCashAdditionMasterView { get; set; } = new List<SavingsCashAdditionMasterView>();
+
+    public string savingsAccountId { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        savingsAccountId = _SavingsCashAdditionMasterView.FirstOrDefault().SavingsAccountId ?? "";
+
+        var rsped = await DataService.GetValue<List<SavingsAccountMasterView>>(
+                     nameof(SavingsAccountMasterView), "id", savingsAccountId);
+        if (rsped.IsSuccessStatusCode)
+        {
+            _SavingsAccountMasterView = new List<SavingsAccountMasterView>();
+            var jsonDocument = JsonDocument.Parse(rsped.Content.ToJson());
+            _SavingsAccountMasterView =
+                JsonConvert.DeserializeObject<List<SavingsAccountMasterView>>(
+                    rsped.Content.ToJson());
+        }
+        else
+        {
+            await notificationService.Open(new NotificationConfig()
+                {
+                    Message = MessageBox.ServerErrorHeader,
+                    Description = MessageBox.ServerErrorDescription,
+                    NotificationType = NotificationType.Error
+                });
+        }
+
+    }
+
+
+
+}

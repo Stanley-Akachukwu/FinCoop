@@ -1,0 +1,31 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER     VIEW [Deposits].[SavingsActionsMasterView]
+as select
+     ROW_NUMBER() OVER (ORDER BY addition.[Id]) AS RowNumber,addition.[Id],addition.[Amount],
+     'Cash Addition' as TransactionType, addition.[DateCreated], addition.[SavingsAccountId],
+     SavingsAccountId.CustomerId as CustomerId,addition.[ApprovalId], ApprovalId.[Status] as ApprovalId_Status,
+     SavingsAccountId.AccountNo as SavingsAccountId_AccountNumber,
+    'Savings Account.('+SavingsAccountId.AccountNo+') Transaction' as [Description],
+    ApprovalId.DateUpdated as TransactionDate
+
+   from Deposits.SavingsCashAddition addition
+  left join [Deposits].SavingsAccount SavingsAccountId on SavingsAccountId.Id=addition.SavingsAccountId
+  left join [Security].Approval ApprovalId on ApprovalId.Id=addition.ApprovalId
+
+   UNION select
+
+ ROW_NUMBER() OVER (ORDER BY increase.[Id]) AS RowNumber,increase.[Id],increase.[Amount],
+     'Increase/Decrease' as TransactionType, increase.[DateCreated], increase.[SavingsAccountId],
+     SavingsAccountId.CustomerId as CustomerId,increase.[ApprovalId], ApprovalId.[Status] as ApprovalId_Status,
+     SavingsAccountId.AccountNo as SavingsAccountId_AccountNumber,
+      'Savings Account.('+SavingsAccountId.AccountNo+') Transaction' as [Description],
+      ApprovalId.DateUpdated as TransactionDate
+
+
+   from Deposits.SavingsIncreaseDecrease increase
+  left join [Deposits].SavingsAccount SavingsAccountId on SavingsAccountId.Id=increase.SavingsAccountId
+  left join [Security].Approval ApprovalId on ApprovalId.Id=increase.ApprovalId
+GO

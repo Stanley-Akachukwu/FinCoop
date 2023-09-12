@@ -1,0 +1,159 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.FixedDeposits.FixedDepositAccounts;
+@using AP.ChevronCoop.Entities.Deposits.FixedDeposits.FixedDepositImmediateLiquidations;
+@using ChevronCoop.Web.AppUI.BlazorServer.Helper;
+@using Newtonsoft.Json;
+@using System.Globalization;
+@foreach (var item in _FixedDepositLiquidationMasterView)
+{
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+        <h3 class="mb-4 text-xl font-bold dark:text-white">
+            @ApprovalType.Replace("_", " ")
+        </h3>
+        <form action="">
+            <div class="grid grid-cols-6 gap-6">
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Description
+                        </h2>
+                        <p>@item.Description</p>
+                    </div>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Account Number
+                        </h2>
+                        <p>@item.FixedDepositAccountId_AccountNo</p>
+                    </div>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Fixed Deposit Amount
+                        </h2>
+                        <p>@item.FixedDepositAccountId_Amount.GetValueOrDefault().ToString("N2", new CultureInfo("en-US"))</p>
+                    </div>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Tenure Unit
+                        </h2>
+                        <p>@item.FixedDepositAccountId_TenureUnit</p>
+                    </div>
+
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Tenure Value
+                        </h2>
+                        <p>@item.FixedDepositAccountId_TenureValue</p>
+                    </div>
+
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Date Created
+                        </h2>
+                        <p>@item.DateCreated.GetValueOrDefault().ToString("M/d/yyyy")</p>
+                    </div>
+
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Interest Rate
+                        </h2>
+                        <p>@item.FixedDepositAccountId_InterestRate</p>
+                    </div>
+
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Maturity Instruction Type
+                        </h2>
+                        <p>@item.FixedDepositAccountId_MaturityInstructionType</p>
+                    </div>
+
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Liquidation Type
+                        </h2>
+                        <p>@item.FixedDepositAccountId_LiquidationAccountType</p>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </form>
+    </div>
+
+    <FixedDepositApplication _FixedDepositAccountMasterView="_FixedDepositAccountMasterView" ViewMode="@ViewModeType"></FixedDepositApplication>
+}
+@code {
+
+    [Parameter] public List<FixedDepositLiquidationMasterView> _FixedDepositLiquidationMasterView { get; set; } = new List<FixedDepositLiquidationMasterView>();
+
+    public List<FixedDepositAccountMasterView> _FixedDepositAccountMasterView { get; set; } = new List<FixedDepositAccountMasterView>();
+
+    [Inject]
+    NotificationService notificationService { get; set; }
+
+    [Parameter] public string ApprovalType { get; set; } = "";
+
+    public string ViewModeType = "fixed_actions";
+
+    [Inject]
+    IEntityDataService DataService { get; set; }
+
+   
+    public string FixedDepositAccountId { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        FixedDepositAccountId = _FixedDepositLiquidationMasterView.FirstOrDefault().FixedDepositAccountId ?? "";
+
+        var rsped = await DataService.GetValue<List<FixedDepositAccountMasterView>>(
+                     nameof(FixedDepositAccountMasterView), "id", FixedDepositAccountId);
+        if (rsped.IsSuccessStatusCode)
+        {
+            _FixedDepositAccountMasterView = new List<FixedDepositAccountMasterView>();
+            var jsonDocument = JsonDocument.Parse(rsped.Content.ToJson());
+            _FixedDepositAccountMasterView =
+                JsonConvert.DeserializeObject<List<FixedDepositAccountMasterView>>(
+                    rsped.Content.ToJson());
+        }
+        else
+        {
+            await notificationService.Open(new NotificationConfig()
+                {
+                    Message = MessageBox.ServerErrorHeader,
+                    Description = MessageBox.ServerErrorDescription,
+                    NotificationType = NotificationType.Error
+                });
+        }
+
+    }
+
+
+
+
+}

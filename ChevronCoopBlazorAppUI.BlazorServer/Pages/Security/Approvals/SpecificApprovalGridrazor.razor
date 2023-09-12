@@ -1,0 +1,236 @@
+﻿@page "/chevroncoop/approval"
+@using AP.ChevronCoop.Entities.Security.Auth;
+@using AP.ChevronCoop.Entities.Security.Approvals
+@using ChevronCoop.Web.AppUI.BlazorServer.Enum;
+@using Syncfusion.Blazor.Grids
+@inject NavigationManager MyNavigationManager
+@layout AppUIMainLayout
+@attribute [Authorize]
+
+<div class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5 pt-10">
+    <div class="mb-4">
+        <nav class="flex mb-5" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                <li class="inline-flex items-center">
+                    <a href="/approval/list"
+                       class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                        <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                        </svg>
+                        Approvals
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                        @Title
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>
+    <!-- Start coding here -->
+    <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+
+        <span class="error p-2">@ErrorDetails</span>
+
+
+        <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+            <div class="w-full md:w-1/2">
+
+                <div class="sm:col-span-2">
+                    <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                        <input type="search" id="default-search" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+                               class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search...">
+
+                        <button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="overflow-x-auto sb">
+
+            <SfGrid @ref="grid" ID="approvalmasterview" TValue="ApprovalMasterView" EnablePersistence="false"
+                    Query="@QueryGrid"
+                    AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                    AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="400"
+                    AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                    AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+                <SfDataManager Url="@GRID_API_RESOURCE" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+                <GridEvents TValue="ApprovalMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure" QueryCellInfo="CellInfoHandler"></GridEvents>
+
+                <GridEditSettings AllowAdding="false" AllowEditing="true" AllowDeleting="false"
+                                  ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+                </GridEditSettings>
+
+                <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+                </GridFilterSettings>
+
+
+                <GridColumns>
+
+                    <GridColumn Field=@nameof(ApprovalMasterView.RowNumber) HeaderText="ROW NO" AutoFit="true"></GridColumn>
+                    <GridColumn Field=@nameof(ApprovalMasterView.ApprovalType) HeaderText="APPROVAL TYPE" AutoFit="true"></GridColumn>
+                    <GridColumn Field=@nameof(ApprovalMasterView.Description) HeaderText="DESCRIPTION" AutoFit="false"></GridColumn>
+                    <GridColumn Field=@nameof(ApprovalMasterView.Status) HeaderText="STATUS" AutoFit="true">
+                        <Template>
+                            @{
+                                var status = (context as ApprovalMasterView);
+                                <div class="flex items-left">
+                                    @if (status.Status.Contains(nameof(ApprovalStatus.APPROVED)))
+                                    {
+                                        <div class="inline flex flex-row items-center bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md justify-center">
+                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                                            <div> @status.Status</div>
+                                        </div>
+                                    }
+                                    else if (status.Status.Contains(nameof(ApprovalStatus.REJECTED)))
+                                    {
+                                        <div class="inline flex flex-row items-center bg-red-100 dark:bg-red-200 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md justify-center">
+                                            <div class="h-2.5 w-2.5 rounded-full bg-red-600 mr-2"></div>
+                                            <div> @status.Status</div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="inline flex flex-row items-center bg-purple-100 dark:bg-purple-200 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md justify-center">
+                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                                            <div> @status.Status</div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </Template>
+                    </GridColumn>
+                    <GridColumn Field=@nameof(ApprovalMasterView.DateUpdated) HeaderText="DATE UPDATED" AutoFit="false" Format="dd/MM/yyyy h:mm tt" TextAlign=TextAlign.Center Width="300" Type="ColumnType.DateTime"></GridColumn>
+                    <GridColumn HeaderText="PROCESSING PAGE" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                        <Template>
+
+                            @{
+                                var row = (context as ApprovalMasterView);
+
+
+                                <a href="javascript: void(0)" @onclick=@(e => ApproveRow(row)) class="block py-2 px-4 hover:bg-green-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    Approve
+                                </a>
+
+                            }
+
+                        </Template>
+                    </GridColumn>
+                </GridColumns>
+            </SfGrid>
+        </div>
+    </div>
+</div>
+<Drawer @ref="@approveDrawer" Closable="true" Visible="showApproveDrawer" Title='("Request Approval")'
+        OnClose="onApproveDone">
+    <EditForm Model="@Model">
+        <FluentValidationValidator/>
+        <ValidationSummary/>
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+            <div class="sm:col-span-2">
+                <label for="Owner" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select status
+                </label>
+
+
+                @{
+                    var statusTypes = Enum.GetNames(typeof(ApprovalStatusDTO)).ToList();
+
+                }
+
+                <SfComboBox id="Status" DataSource=@statusTypes TValue="ApprovalStatus" TItem="string"
+                            @bind-Value=@status
+                            ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select status">
+                </SfComboBox>
+            </div>
+            <div class="sm:col-span-2">
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your reason</label>
+                <textarea id="message" rows="4" @bind="Model.Comment" required class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+            </div>
+
+        </div>
+        <br/>
+
+        <button type="button" @onclick="OnSave"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            @ApproveButtonText
+        </button>
+
+        <button type="button" @onclick="OnCancel"
+                class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            Cancel
+        </button>
+    </EditForm>
+</Drawer>
+<!----------------------------------Modal----------------------------------------------->
+
+<Modal Visible="@showPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+       class="overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+
+    <!-- Modal content -->
+    <!-- Modal header -->
+    <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+        <svg width="79" height="80" viewBox="0 0 79 80" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                  stroke="#0E9F6E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <p class="break-words text-center my-8">
+            You have successfully @Model.Status this request.
+            <span class="text-CEMCS-Blue-100">
+                Thank you!
+            </span>
+        </p>
+
+        <form class="w-full">
+            <button @onclick=Done type="button"
+                    class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                Done
+            </button>
+        </form>
+    </div>
+    <!-- Modal body -->
+
+
+</Modal>

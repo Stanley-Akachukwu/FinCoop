@@ -1,0 +1,15 @@
+﻿@using AP.ChevronCoop.Entities.Security.Auth;
+@using AP.ChevronCoop.Entities.Security;
+<EnrolmentGrid EnrolmentFIlter="@pendingEnrolmentFilter"/>
+
+@code {
+
+    public string pendingEnrolmentFilter { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+    // pendingEnrolmentFilter = "PENDING_APPROVAL";
+        pendingEnrolmentFilter = MemberProfileStatus.PENDING_APPROVAL.ToString();
+    }
+
+}

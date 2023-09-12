@@ -1,0 +1,1150 @@
+is_global = true
+build_property.RefitInternalNamespace = ChevronCoop.Web.AppUI.BlazorServer
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ChevronCoop.Web.AppUI.BlazorServer
+build_property.RootNamespace = ChevronCoop.Web.AppUI.BlazorServer
+build_property.ProjectDir = C:\Projects\Web\FinCoop\ChevronCoopBlazorAppUI.BlazorServer\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Projects\Web\FinCoop\ChevronCoopBlazorAppUI.BlazorServer
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/CompanyBankAccount/CompanyBankAccountCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xDb21wYW55QmFua0FjY291bnRcQ29tcGFueUJhbmtBY2NvdW50Q3JlYXRlRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/CompanyBankAccount/CompanyBankAccountEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xDb21wYW55QmFua0FjY291bnRcQ29tcGFueUJhbmtBY2NvdW50RWRpdEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/CompanyBankAccount/CompanyBankAccountGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xDb21wYW55QmFua0FjY291bnRcQ29tcGFueUJhbmtBY2NvdW50R3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/JournalEntry/JournalEntryCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xKb3VybmFsRW50cnlcSm91cm5hbEVudHJ5Q3JlYXRlRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/JournalEntry/JournalEntryEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xKb3VybmFsRW50cnlcSm91cm5hbEVudHJ5RWRpdEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/JournalEntry/JournalEntryGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xKb3VybmFsRW50cnlcSm91cm5hbEVudHJ5R3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/JournalEntry/JournalEntryQuickGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xKb3VybmFsRW50cnlcSm91cm5hbEVudHJ5UXVpY2tHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/JournalEntry/ViewEntriesGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xKb3VybmFsRW50cnlcVmlld0VudHJpZXNHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/LedgerAccount/LedgerAccountCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xMZWRnZXJBY2NvdW50XExlZGdlckFjY291bnRDcmVhdGVGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/LedgerAccount/LedgerAccountEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xMZWRnZXJBY2NvdW50XExlZGdlckFjY291bnRFZGl0Rm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/LedgerAccount/LedgerAccountGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xMZWRnZXJBY2NvdW50XExlZGdlckFjY291bnRHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/LedgerAccount/LedgerAccountGrid2.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xMZWRnZXJBY2NvdW50XExlZGdlckFjY291bnRHcmlkMi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/TransactionJournal/TransactionJournalCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xUcmFuc2FjdGlvbkpvdXJuYWxcVHJhbnNhY3Rpb25Kb3VybmFsQ3JlYXRlRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/TransactionJournal/TransactionJournalEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xUcmFuc2FjdGlvbkpvdXJuYWxcVHJhbnNhY3Rpb25Kb3VybmFsRWRpdEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounting/TransactionJournal/TransactionJournalGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudGluZ1xUcmFuc2FjdGlvbkpvdXJuYWxcVHJhbnNhY3Rpb25Kb3VybmFsR3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/AdminUserAccountManagement/DepositAccounts/AdminDepositDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcQWRtaW5Vc2VyQWNjb3VudE1hbmFnZW1lbnRcRGVwb3NpdEFjY291bnRzXEFkbWluRGVwb3NpdERhc2hib2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/AdminUserAccountManagement/DepositAccounts/AllDepositApplications.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcQWRtaW5Vc2VyQWNjb3VudE1hbmFnZW1lbnRcRGVwb3NpdEFjY291bnRzXEFsbERlcG9zaXRBcHBsaWNhdGlvbnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/AdminUserAccountManagement/LoanAccounts/AdminLoanAccountDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcQWRtaW5Vc2VyQWNjb3VudE1hbmFnZW1lbnRcTG9hbkFjY291bnRzXEFkbWluTG9hbkFjY291bnREYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/AdminUserAccountManagement/LoanAccounts/UserLoanAccountManagementGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcQWRtaW5Vc2VyQWNjb3VudE1hbmFnZW1lbnRcTG9hbkFjY291bnRzXFVzZXJMb2FuQWNjb3VudE1hbmFnZW1lbnRHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/AdminUserAccountManagement/LoanAccounts/UserLoanApplicationGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcQWRtaW5Vc2VyQWNjb3VudE1hbmFnZW1lbnRcTG9hbkFjY291bnRzXFVzZXJMb2FuQXBwbGljYXRpb25HcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/AccountDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcQWNjb3VudERldGFpbHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/ApplicationRequest.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcQXBwbGljYXRpb25SZXF1ZXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/DepositAccountGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRGVwb3NpdEFjY291bnRHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/FixedDepositApplication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xGaXhlZERlcG9zaXRBcHBsaWNhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/FixedDepositImmediateLiquidation.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xGaXhlZERlcG9zaXRJbW1lZGlhdGVMaXF1aWRhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/FixedDepositMaturityInstructionComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xGaXhlZERlcG9zaXRNYXR1cml0eUluc3RydWN0aW9uQ29tcC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/SavingsAccountRegistration.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xTYXZpbmdzQWNjb3VudFJlZ2lzdHJhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/SavingsCashAdditionComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xTYXZpbmdzQ2FzaEFkZGl0aW9uQ29tcC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/SavingsIncreaseDecreaseComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xTYXZpbmdzSW5jcmVhc2VEZWNyZWFzZUNvbXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/SpecialDepositAccount.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xTcGVjaWFsRGVwb3NpdEFjY291bnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/SpecialDepositCashAdditionComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xTcGVjaWFsRGVwb3NpdENhc2hBZGRpdGlvbkNvbXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/SpecialDepositFundTransferComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xTcGVjaWFsRGVwb3NpdEZ1bmRUcmFuc2ZlckNvbXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/SpecialDepositIncreaseDecreaseComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xTcGVjaWFsRGVwb3NpdEluY3JlYXNlRGVjcmVhc2VDb21wLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/Drawals/SpecialDepositWithdrawalComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRHJhd2Fsc1xTcGVjaWFsRGVwb3NpdFdpdGhkcmF3YWxDb21wLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/FixedDeposit/FixedDepositDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRml4ZWREZXBvc2l0XEZpeGVkRGVwb3NpdERhc2hib2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/FixedDeposit/FixedDepositInterestAddition.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRml4ZWREZXBvc2l0XEZpeGVkRGVwb3NpdEludGVyZXN0QWRkaXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/FixedDeposit/FixedDepositLiquidation.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRml4ZWREZXBvc2l0XEZpeGVkRGVwb3NpdExpcXVpZGF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/FixedDeposit/FixedDepositMaturityInstruction.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRml4ZWREZXBvc2l0XEZpeGVkRGVwb3NpdE1hdHVyaXR5SW5zdHJ1Y3Rpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/FixedDeposit/FixedDepositTransactions.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcRml4ZWREZXBvc2l0XEZpeGVkRGVwb3NpdFRyYW5zYWN0aW9ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/LedgerAccount.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcTGVkZ2VyQWNjb3VudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/NewApplication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcTmV3QXBwbGljYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/PayrollTransaction.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcUGF5cm9sbFRyYW5zYWN0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SavingsAccount/CashAddition.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU2F2aW5nc0FjY291bnRcQ2FzaEFkZGl0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SavingsAccount/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU2F2aW5nc0FjY291bnRcRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SavingsAccount/IncreaseDecrease.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU2F2aW5nc0FjY291bnRcSW5jcmVhc2VEZWNyZWFzZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SavingsAccount/Transaction.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU2F2aW5nc0FjY291bnRcVHJhbnNhY3Rpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SpecialDeposit/FundTransfer.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU3BlY2lhbERlcG9zaXRcRnVuZFRyYW5zZmVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SpecialDeposit/InterestAddition.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU3BlY2lhbERlcG9zaXRcSW50ZXJlc3RBZGRpdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SpecialDeposit/SpecialDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU3BlY2lhbERlcG9zaXRcU3BlY2lhbERhc2hib2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SpecialDeposit/SpecialDepositCashAddition.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU3BlY2lhbERlcG9zaXRcU3BlY2lhbERlcG9zaXRDYXNoQWRkaXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SpecialDeposit/SpecialDepositIncreaseDecrease.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU3BlY2lhbERlcG9zaXRcU3BlY2lhbERlcG9zaXRJbmNyZWFzZURlY3JlYXNlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SpecialDeposit/SpecialDepositTransactions.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU3BlY2lhbERlcG9zaXRcU3BlY2lhbERlcG9zaXRUcmFuc2FjdGlvbnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/DepositAccount/SpecialDeposit/Withdrawal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcRGVwb3NpdEFjY291bnRcU3BlY2lhbERlcG9zaXRcV2l0aGRyYXdhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/ApplianceLoanApplication/ApplianceLoanApplication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcQXBwbGlhbmNlTG9hbkFwcGxpY2F0aW9uXEFwcGxpYW5jZUxvYW5BcHBsaWNhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/CarLoanApplication/CarLoanApplication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcQ2FyTG9hbkFwcGxpY2F0aW9uXENhckxvYW5BcHBsaWNhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/Drawals/LoanOffset.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcRHJhd2Fsc1xMb2FuT2Zmc2V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/ExecutiveLoanApplication/ExecutiveLoanApplication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcRXhlY3V0aXZlTG9hbkFwcGxpY2F0aW9uXEV4ZWN1dGl2ZUxvYW5BcHBsaWNhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanAccountDashboard/LoanApplicationDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hbkFjY291bnREYXNoYm9hcmRcTG9hbkFwcGxpY2F0aW9uRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanAccountDashboard/LoanLedgerAccounts.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hbkFjY291bnREYXNoYm9hcmRcTG9hbkxlZGdlckFjY291bnRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanAccountDashboard/LoanOffsetAccountDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hbkFjY291bnREYXNoYm9hcmRcTG9hbk9mZnNldEFjY291bnREYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanAccountDashboard/LoanRepaymentSchedule.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hbkFjY291bnREYXNoYm9hcmRcTG9hblJlcGF5bWVudFNjaGVkdWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanAccountDashboard/LoanTopUpAccountDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hbkFjY291bnREYXNoYm9hcmRcTG9hblRvcFVwQWNjb3VudERhc2hib2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanAccountDashboard/LoanTransactionDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hbkFjY291bnREYXNoYm9hcmRcTG9hblRyYW5zYWN0aW9uRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanAccountDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hbkFjY291bnREZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanAccountGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hbkFjY291bnRHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanProductCategory.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hblByb2R1Y3RDYXRlZ29yeS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanRequestHistory.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hblJlcXVlc3RIaXN0b3J5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanTopUp/LoanTopUpApplication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hblRvcFVwXExvYW5Ub3BVcEFwcGxpY2F0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Accounts/LoanAccount/LoanTopUp/LoanTopUpGuarantor.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9hbkFjY291bnRcTG9hblRvcFVwXExvYW5Ub3BVcEd1YXJhbnRvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/ApprovalRejection.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXEFwcHJvdmFsUmVqZWN0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/Approvals.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXEFwcHJvdmFscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/ApprovalSuccess.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXEFwcHJvdmFsU3VjY2Vzcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/ApprovalTrail.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXEFwcHJvdmFsVHJhaWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/DepositApprovals/FixedDepositApplication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXERlcG9zaXRBcHByb3ZhbHNcRml4ZWREZXBvc2l0QXBwbGljYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/DepositApprovals/FixedDepositLiquidation.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXERlcG9zaXRBcHByb3ZhbHNcRml4ZWREZXBvc2l0TGlxdWlkYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/DepositApprovals/FixedDepositMaturity.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXERlcG9zaXRBcHByb3ZhbHNcRml4ZWREZXBvc2l0TWF0dXJpdHkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/DepositApprovals/SavingsAndActions.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXERlcG9zaXRBcHByb3ZhbHNcU2F2aW5nc0FuZEFjdGlvbnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/DepositApprovals/SavingsCashAdditionApproval.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXERlcG9zaXRBcHByb3ZhbHNcU2F2aW5nc0Nhc2hBZGRpdGlvbkFwcHJvdmFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/DepositApprovals/SavingsIncrease.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXERlcG9zaXRBcHByb3ZhbHNcU2F2aW5nc0luY3JlYXNlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/DepositApprovals/SpecialDepositApplication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXERlcG9zaXRBcHByb3ZhbHNcU3BlY2lhbERlcG9zaXRBcHBsaWNhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/DepositApprovals/SpecialDepositIncrease.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXERlcG9zaXRBcHByb3ZhbHNcU3BlY2lhbERlcG9zaXRJbmNyZWFzZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/LoanApprovals/LoanApprovalGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXExvYW5BcHByb3ZhbHNcTG9hbkFwcHJvdmFsR3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/PendingApproval.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXFBlbmRpbmdBcHByb3ZhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Approvals/ProcessApproval.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwcm92YWxzXFByb2Nlc3NBcHByb3ZhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/ChangePassword.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxDaGFuZ2VQYXNzd29yZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/CompleteSignup.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxDb21wbGV0ZVNpZ251cC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/EmailVerified.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxFbWFpbFZlcmlmaWVkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/Forgot-Password.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxGb3Jnb3QtUGFzc3dvcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/MakePayment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxNYWtlUGF5bWVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/MemberCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxNZW1iZXJDcmVhdGVGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/SelectCooperative.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxTZWxlY3RDb29wZXJhdGl2ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/SendEmailForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxTZW5kRW1haWxGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/SendNewPasswordForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxTZW5kTmV3UGFzc3dvcmRGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/SignupBankDetail.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxTaWdudXBCYW5rRGV0YWlsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/SignUpDemo.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxTaWduVXBEZW1vLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/UploadReceipt.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxVcGxvYWRSZWNlaXB0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/UploadReceipt2.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxVcGxvYWRSZWNlaXB0Mi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/ValidateOtpForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxWYWxpZGF0ZU90cEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Auth/VerifyEmailrazor.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxWZXJpZnlFbWFpbHJhem9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ChargeSetup/ProductChargesGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxDaGFyZ2VTZXR1cFxQcm9kdWN0Q2hhcmdlc0dyaWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/GlobalConfiguration/GlobalConfiguration.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxHbG9iYWxDb25maWd1cmF0aW9uXEdsb2JhbENvbmZpZ3VyYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/GlobalConfiguration/ProductCodeSetup/ProductCodeGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxHbG9iYWxDb25maWd1cmF0aW9uXFByb2R1Y3RDb2RlU2V0dXBcUHJvZHVjdENvZGVHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/ApprovalViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEFwcHJvdmFsVmlld0NvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/BasicInformationViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEJhc2ljSW5mb3JtYXRpb25WaWV3Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/CreateLoanProductSetupForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXENyZWF0ZUxvYW5Qcm9kdWN0U2V0dXBGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/CustomerLoanAccountComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEN1c3RvbWVyTG9hbkFjY291bnRDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/EditLoanProduct/EditApprovalViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEVkaXRMb2FuUHJvZHVjdFxFZGl0QXBwcm92YWxWaWV3Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/EditLoanProduct/EditBasicInformationViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEVkaXRMb2FuUHJvZHVjdFxFZGl0QmFzaWNJbmZvcm1hdGlvblZpZXdDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/EditLoanProduct/EditGLViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEVkaXRMb2FuUHJvZHVjdFxFZGl0R0xWaWV3Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/EditLoanProduct/EditGuarantorInfoViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEVkaXRMb2FuUHJvZHVjdFxFZGl0R3VhcmFudG9ySW5mb1ZpZXdDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/EditLoanProduct/EditLoanProductSetupForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEVkaXRMb2FuUHJvZHVjdFxFZGl0TG9hblByb2R1Y3RTZXR1cEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/EditLoanProduct/EditOffSetViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEVkaXRMb2FuUHJvZHVjdFxFZGl0T2ZmU2V0Vmlld0NvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/EditLoanProduct/EditTargetSetUpViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEVkaXRMb2FuUHJvZHVjdFxFZGl0VGFyZ2V0U2V0VXBWaWV3Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/EditLoanProduct/EditTopUpViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEVkaXRMb2FuUHJvZHVjdFxFZGl0VG9wVXBWaWV3Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/EditLoanProduct/EditWhenDueViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEVkaXRMb2FuUHJvZHVjdFxFZGl0V2hlbkR1ZVZpZXdDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/GLViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEdMVmlld0NvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/GuarantorInfoViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXEd1YXJhbnRvckluZm9WaWV3Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/LoanProductSetupGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXExvYW5Qcm9kdWN0U2V0dXBHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/OffSetViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXE9mZlNldFZpZXdDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/TargetSetUpViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXFRhcmdldFNldFVwVmlld0NvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/TopUpViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXFRvcFVwVmlld0NvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/ViewLoanProductSetup.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXFZpZXdMb2FuUHJvZHVjdFNldHVwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/LoanProductSetup/WhenDueViewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxMb2FuUHJvZHVjdFNldHVwXFdoZW5EdWVWaWV3Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/ApproveDepositProductSetupForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcQXBwcm92ZURlcG9zaXRQcm9kdWN0U2V0dXBGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/CreateProductSetupForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcQ3JlYXRlUHJvZHVjdFNldHVwRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/DetailsComp/Details.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcRGV0YWlsc0NvbXBcRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/DetailsComp/EditProduct.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcRGV0YWlsc0NvbXBcRWRpdFByb2R1Y3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/DetailsComp/GLAccount.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcRGV0YWlsc0NvbXBcR0xBY2NvdW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/DetailsComp/ProductApplications.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcRGV0YWlsc0NvbXBcUHJvZHVjdEFwcGxpY2F0aW9ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/DetailsComp/ProductCustomers.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcRGV0YWlsc0NvbXBcUHJvZHVjdEN1c3RvbWVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/EditDepositProduct/EditDepositProductApprovalComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcRWRpdERlcG9zaXRQcm9kdWN0XEVkaXREZXBvc2l0UHJvZHVjdEFwcHJvdmFsQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/EditDepositProduct/EditDepositProductBasicInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcRWRpdERlcG9zaXRQcm9kdWN0XEVkaXREZXBvc2l0UHJvZHVjdEJhc2ljSW5mb3JtYXRpb25Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/EditDepositProduct/EditDepositProductForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcRWRpdERlcG9zaXRQcm9kdWN0XEVkaXREZXBvc2l0UHJvZHVjdEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/EditDepositProduct/EditDepositProductGLAccountComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcRWRpdERlcG9zaXRQcm9kdWN0XEVkaXREZXBvc2l0UHJvZHVjdEdMQWNjb3VudENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/EditDepositProduct/EditDepositProductInterestRateComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcRWRpdERlcG9zaXRQcm9kdWN0XEVkaXREZXBvc2l0UHJvZHVjdEludGVyZXN0UmF0ZUNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/ProductSetupGetStarted.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcUHJvZHVjdFNldHVwR2V0U3RhcnRlZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/ProductSetupGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcUHJvZHVjdFNldHVwR3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Configuration/ProductSetup/ViewProductDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uZmlndXJhdGlvblxQcm9kdWN0U2V0dXBcVmlld1Byb2R1Y3REZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Dashboard/AdminDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkXEFkbWluRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Dashboard/DefaultDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkXERlZmF1bHREYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Dashboard/GetStarted.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkXEdldFN0YXJ0ZWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Dashboard/UserDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkXFVzZXJEYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Demo/DemoForm1.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVtb1xEZW1vRm9ybTEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Demo/DemoForm2.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVtb1xEZW1vRm9ybTIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Demo/DemoGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVtb1xEZW1vR3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Demo/DemoTables1.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVtb1xEZW1vVGFibGVzMS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/Beneficiary.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxCZW5lZmljaWFyeS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/BeneficiarySwitch.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxCZW5lZmljaWFyeVN3aXRjaC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/CompanyData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxDb21wYW55RGF0YS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/CorporateProfile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxDb3Jwb3JhdGVQcm9maWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/EmptyBeneficiary.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxFbXB0eUJlbmVmaWNpYXJ5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/EmptyNextOfKin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxFbXB0eU5leHRPZktpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/KYCDocument.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxLWUNEb2N1bWVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/KycInformation.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxLeWNJbmZvcm1hdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/MemberAccountData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxNZW1iZXJBY2NvdW50RGF0YS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/NewBeneficiary.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxOZXdCZW5lZmljaWFyeS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/NewNextOfKin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxOZXdOZXh0T2ZLaW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/NextOfKin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxOZXh0T2ZLaW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/NextOfKinSwitch.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxOZXh0T2ZLaW5Td2l0Y2gucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/KYC/CorporateMember/StaffEnrollment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS1lDXENvcnBvcmF0ZU1lbWJlclxTdGFmZkVucm9sbG1lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Loans/LoanProduct/LoanProductCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9hbnNcTG9hblByb2R1Y3RcTG9hblByb2R1Y3RDcmVhdGVGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Loans/LoanProduct/LoanProductEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9hbnNcTG9hblByb2R1Y3RcTG9hblByb2R1Y3RFZGl0Rm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Loans/LoanProduct/LoanProductGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9hbnNcTG9hblByb2R1Y3RcTG9hblByb2R1Y3RHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/Bank/BankCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxCYW5rXEJhbmtDcmVhdGVGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/Bank/BankEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxCYW5rXEJhbmtFZGl0Rm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/Bank/BankGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxCYW5rXEJhbmtHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/Currency/CurrencyCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxDdXJyZW5jeVxDdXJyZW5jeUNyZWF0ZUZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/Currency/CurrencyEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxDdXJyZW5jeVxDdXJyZW5jeUVkaXRGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/Currency/CurrencyGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxDdXJyZW5jeVxDdXJyZW5jeUdyaWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/Department/DepartmentCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxEZXBhcnRtZW50XERlcGFydG1lbnRDcmVhdGVGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/Department/DepartmentEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxEZXBhcnRtZW50XERlcGFydG1lbnRFZGl0Rm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/Department/DepartmentGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxEZXBhcnRtZW50XERlcGFydG1lbnRHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/GlobalCode/GlobalCodeCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxHbG9iYWxDb2RlXEdsb2JhbENvZGVDcmVhdGVGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/GlobalCode/GlobalCodeEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxHbG9iYWxDb2RlXEdsb2JhbENvZGVFZGl0Rm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/MasterData/GlobalCode/GlobalCodeGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyRGF0YVxHbG9iYWxDb2RlXEdsb2JhbENvZGVHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/NewKYC/CompleteKYC.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3S1lDXENvbXBsZXRlS1lDLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/NewKYC/KYCBeneficiary.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3S1lDXEtZQ0JlbmVmaWNpYXJ5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/NewKYC/KYCBioddata.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3S1lDXEtZQ0Jpb2RkYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/NewKYC/KYCCompanyData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3S1lDXEtZQ0NvbXBhbnlEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/NewKYC/KYCDocument.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3S1lDXEtZQ0RvY3VtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/NewKYC/KYCInformation.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3S1lDXEtZQ0luZm9ybWF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/NewKYC/KYCMemberAccount.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3S1lDXEtZQ01lbWJlckFjY291bnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/NewKYC/KYCNextOfKin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3S1lDXEtZQ05leHRPZktpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Payroll/ImportFromCNL.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5cm9sbFxJbXBvcnRGcm9tQ05MLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Payroll/MatchDeduction.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5cm9sbFxNYXRjaERlZHVjdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Payroll/PayrollDeductionScheduleItemGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5cm9sbFxQYXlyb2xsRGVkdWN0aW9uU2NoZWR1bGVJdGVtR3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Payroll/PayrollDeductionSchedule/PayrollDeductionScheduleCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5cm9sbFxQYXlyb2xsRGVkdWN0aW9uU2NoZWR1bGVcUGF5cm9sbERlZHVjdGlvblNjaGVkdWxlQ3JlYXRlRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Payroll/PayrollDeductionSchedule/PayrollDeductionScheduleEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5cm9sbFxQYXlyb2xsRGVkdWN0aW9uU2NoZWR1bGVcUGF5cm9sbERlZHVjdGlvblNjaGVkdWxlRWRpdEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Payroll/PayrollDeductionSchedule/PayrollDeductionScheduleGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5cm9sbFxQYXlyb2xsRGVkdWN0aW9uU2NoZWR1bGVcUGF5cm9sbERlZHVjdGlvblNjaGVkdWxlR3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Payroll/PayrollDeductionSchedule/UploadCNL.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5cm9sbFxQYXlyb2xsRGVkdWN0aW9uU2NoZWR1bGVcVXBsb2FkQ05MLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Schedule/Job_Processing/JobProcessingGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2NoZWR1bGVcSm9iX1Byb2Nlc3NpbmdcSm9iUHJvY2Vzc2luZ0dyaWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/ApprovalCategories.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsQ2F0ZWdvcmllcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/ApprovalGroups/AddApprovalGroup.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsR3JvdXBzXEFkZEFwcHJvdmFsR3JvdXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/ApprovalGroups/AddGroupMemberDrawerForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsR3JvdXBzXEFkZEdyb3VwTWVtYmVyRHJhd2VyRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/ApprovalGroups/ApprovalGroupList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsR3JvdXBzXEFwcHJvdmFsR3JvdXBMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/ApprovalGroups/EditApprovalGroup.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsR3JvdXBzXEVkaXRBcHByb3ZhbEdyb3VwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/ApprovalNotification.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsTm90aWZpY2F0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/ApprovalSetup.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsU2V0dXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/Approvalworkflows/AddGroupDrawerForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsd29ya2Zsb3dzXEFkZEdyb3VwRHJhd2VyRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/Approvalworkflows/ApprovalWorkflowList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsd29ya2Zsb3dzXEFwcHJvdmFsV29ya2Zsb3dMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/Approvalworkflows/CreateApprovalWorkflow.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsd29ya2Zsb3dzXENyZWF0ZUFwcHJvdmFsV29ya2Zsb3cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/Approvalworkflows/CreateApprovalWorkflowComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsd29ya2Zsb3dzXENyZWF0ZUFwcHJvdmFsV29ya2Zsb3dDb21wLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/Approvalworkflows/EditApprovalWorkflow.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsd29ya2Zsb3dzXEVkaXRBcHByb3ZhbFdvcmtmbG93LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/Approvalworkflows/EditGroupDrawerForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXEFwcHJvdmFsd29ya2Zsb3dzXEVkaXRHcm91cERyYXdlckZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/ChevronCoopApprovalForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXENoZXZyb25Db29wQXBwcm92YWxGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Approvals/SpecificApprovalGridrazor.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXBwcm92YWxzXFNwZWNpZmljQXBwcm92YWxHcmlkcmF6b3IucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Audit/AuditTrail2.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXVkaXRcQXVkaXRUcmFpbDIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Audit/AuditTrailGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXVkaXRcQXVkaXRUcmFpbEdyaWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Audit/AuditViewForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXVkaXRcQXVkaXRWaWV3Rm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Audit/AuditViewForm2.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcQXVkaXRcQXVkaXRWaWV3Rm9ybTIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/GuarantorApproval/GuarantorApprovalDetailForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcR3VhcmFudG9yQXBwcm92YWxcR3VhcmFudG9yQXBwcm92YWxEZXRhaWxGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/GuarantorApproval/GuarantorApprovalGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcR3VhcmFudG9yQXBwcm92YWxcR3VhcmFudG9yQXBwcm92YWxHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Permissions/PermissionCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcUGVybWlzc2lvbnNcUGVybWlzc2lvbkNyZWF0ZUZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Permissions/PermissionEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcUGVybWlzc2lvbnNcUGVybWlzc2lvbkVkaXRGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Permissions/PermissionGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcUGVybWlzc2lvbnNcUGVybWlzc2lvbkdyaWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Roles/RoleCreatorForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcUm9sZXNcUm9sZUNyZWF0b3JGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Roles/RoleEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcUm9sZXNcUm9sZUVkaXRGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/Roles/RoleGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcUm9sZXNcUm9sZUdyaWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/AlertComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXEFsZXJ0Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/DataMigrationApprovalForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXERhdGFNaWdyYXRpb25BcHByb3ZhbEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/DataMigrationForApprovalGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXERhdGFNaWdyYXRpb25Gb3JBcHByb3ZhbEdyaWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/DataMigrationGridForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXERhdGFNaWdyYXRpb25HcmlkRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/DataMigrationPreviewGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXERhdGFNaWdyYXRpb25QcmV2aWV3R3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/DataMigrationPreviewModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXERhdGFNaWdyYXRpb25QcmV2aWV3TW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/KycDetailForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXEt5Y0RldGFpbEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/PersonalDetail.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXFBlcnNvbmFsRGV0YWlsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/SuccessModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXFN1Y2Nlc3NNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/UploadDataModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXFVwbG9hZERhdGFNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/DataMigration/UserpersonalInfomationForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxEYXRhTWlncmF0aW9uXFVzZXJwZXJzb25hbEluZm9tYXRpb25Gb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/EditUserRoleForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFZGl0VXNlclJvbGVGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/ActiveEnrolment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcQWN0aXZlRW5yb2xtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/AllEnrolment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcQWxsRW5yb2xtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/ApprovedEnrolment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcQXBwcm92ZWRFbnJvbG1lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/ApproveEnrolmentForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcQXBwcm92ZUVucm9sbWVudEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/ApproveKYCCompletionForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcQXBwcm92ZUtZQ0NvbXBsZXRpb25Gb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/AwaitingEnrolment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcQXdhaXRpbmdFbnJvbG1lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/CompletedKyc.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcQ29tcGxldGVkS3ljLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/EditEnrolmentForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcRWRpdEVucm9sbWVudEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/Enrolment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcRW5yb2xtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/EnrolmentGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcRW5yb2xtZW50R3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/PendingApprovalEnrolment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcUGVuZGluZ0FwcHJvdmFsRW5yb2xtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/Enrolment/ViewCompletedKyc.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxFbnJvbG1lbnRcVmlld0NvbXBsZXRlZEt5Yy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/MyBankAccountGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxNeUJhbmtBY2NvdW50R3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/NewDataMigration/DataMigrationNotification.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxOZXdEYXRhTWlncmF0aW9uXERhdGFNaWdyYXRpb25Ob3RpZmljYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/NewDataMigration/DataMigrationProfile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxOZXdEYXRhTWlncmF0aW9uXERhdGFNaWdyYXRpb25Qcm9maWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/NewDataMigration/DataMigrationUploadPreviewGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxOZXdEYXRhTWlncmF0aW9uXERhdGFNaWdyYXRpb25VcGxvYWRQcmV2aWV3R3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/NewDataMigration/MigratedUserGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxOZXdEYXRhTWlncmF0aW9uXE1pZ3JhdGVkVXNlckdyaWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/RetireeSwitchRequestGridForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxSZXRpcmVlU3dpdGNoUmVxdWVzdEdyaWRGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/UserCreateForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxVc2VyQ3JlYXRlRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/UserEditForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxVc2VyRWRpdEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Security/User/UserGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VjdXJpdHlcVXNlclxVc2VyR3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/SharedComponents/AllMasterViews.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkQ29tcG9uZW50c1xBbGxNYXN0ZXJWaWV3cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/SharedComponents/AmountComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkQ29tcG9uZW50c1xBbW91bnRDb21wLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/SharedComponents/ApprovalStatusComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkQ29tcG9uZW50c1xBcHByb3ZhbFN0YXR1c0NvbXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/SharedComponents/ButtonComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkQ29tcG9uZW50c1xCdXR0b25Db21wLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/SharedComponents/CarouselComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkQ29tcG9uZW50c1xDYXJvdXNlbENvbXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/SharedComponents/CurrentUserComp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkQ29tcG9uZW50c1xDdXJyZW50VXNlckNvbXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/SharedComponents/LoadingComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkQ29tcG9uZW50c1xMb2FkaW5nQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/SharedComponents/SuccessMessageModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkQ29tcG9uZW50c1xTdWNjZXNzTWVzc2FnZU1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/SharedComponents/TabComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkQ29tcG9uZW50c1xUYWJDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/SharedComponents/TotalRows.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkQ29tcG9uZW50c1xUb3RhbFJvd3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/AdminFooter.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFkbWluRm9vdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/AdminHeader.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFkbWluSGVhZGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/AdminSidebar.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFkbWluU2lkZWJhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/AdminUIMainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFkbWluVUlNYWluTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/AppUIMainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFwcFVJTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/LandingPageLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExhbmRpbmdQYWdlTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/LoginLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/RedirectToLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFJlZGlyZWN0VG9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-jjcmpxek8u
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-zxztvcsziu
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Areas/Identity/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Areas/Identity/Pages/Account/LogOut.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dPdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Areas/Identity/Pages/Account/SwitchAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxTd2l0Y2hBY2NvdW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Web/FinCoop/ChevronCoopBlazorAppUI.BlazorServer/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

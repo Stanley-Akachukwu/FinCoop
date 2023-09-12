@@ -1,0 +1,550 @@
+﻿@page "/data-migration-profile/{id}"
+<main>
+<div class="px-4 pt-6">
+<div class="mb-4">
+    <nav class="flex mb-5" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2">
+            <li class="inline-flex items-center">
+                <a href="#"
+                   class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                    </svg>
+                    Profile
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                    KYC Details
+                </div>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                </div>
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<!-- Request Tabs -->
+
+<div class="mb-4 flex w-full items-center">
+    <div class="sm:hidden border border-red-200">
+        <label for="tabs" class="sr-only">Select Request</label>
+        <select id="tabs"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option>Personal Information</option>
+            <option>KYC Details</option>
+        </select>
+    </div>
+    <ul class="w-2/5 hidden text-xs font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+        <li class="w-full">
+            <a href="javascript: void(0)" @onclick=OnShowPersonalInfo
+               class="inline-block w-full py-4 bg-CEMCS-Blue-100 text-white hover:text-gray-600 rounded-lg focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-white"
+               aria-current="page">
+                Personal Information
+            </a>
+        </li>
+        <li class="w-full">
+            <a href="javascript: void(0)" @onclick=OnShowKYCDetail
+               class="inline-block w-full px-2 py-4 bg-white hover:bg-CEMCS-Blue-100 text-gray-600 hover:text-white rounded-lg focus:ring-4 focus:ring-CEMCS-Blue-100 active focus:outline-none"
+               aria-current="page">
+                KYC Details
+            </a>
+        </li>
+
+    </ul>
+</div>
+
+@if (showPersonalInfo)
+{
+    <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+        <div class="col-span-2">
+            <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                <div class="flex gap-4">
+                    <div>
+                        <img src="@MemberProfile.PassportUrl"/>
+                    </div>
+                    <div class="flex flex-col gap-2 items-start justify-center">
+                        <h2 class="text-2xl font-bold text-gray-900"></h2>
+                        <h3>@MemberProfile.FullName</h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+        <div class="col-span-2">
+
+            <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                <div class="col-span-6 sm:col-full mb-3">
+                    <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-white dark:hover:bg-white dark:focus:ring-primary-800"
+                            type="button" @onclick=GoBack>
+                        <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 7.99967H14H2Z" fill="#1F82BD"/>
+                            <path d="M6.66667 12.6663L2 7.99967M2 7.99967L6.66667 3.33301M2 7.99967H14" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Back
+                    </button>
+                </div>
+                <h3 class="mb-4 text-xl font-bold dark:text-white">
+                    Personal information
+                </h3>
+                <form >
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="first-name"
+                                   class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                First Name
+                            </label>
+
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.FirstName</h3>
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="last-name"
+                                   class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                Last Name
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.LastName</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="country"
+                                   class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                Country
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.Country</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="state"
+                                   class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                City
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.StateOfOrigin</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="address"
+                                   class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                Address
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.ResidentialAddress</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="email"
+                                   class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                Email
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.PrimaryEmail</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="work-address"
+                                   class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                Phone Number
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.PrimaryPhone</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="residential-address"
+                                   class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                Birthday
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">Chervon</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="phonenmber1"
+                                   class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                                Department
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.DepartmentId_Name</h3>
+
+                        </div>
+
+
+                        <div class="flex items-start mb-6 col-span-6 sm:col-span-3">
+
+                            <span class="mr-3 text-sm font-medium text-gray-900 dark:text-gray-300">Do you wish to retire a member?</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+
+                            </label>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+}
+@if (showKYCDetail)
+{
+    <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+        <div class="col-span-2">
+
+            <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                <div class="col-span-6 sm:col-full">
+                    <button class="text-CEMCS-Blue-100 border-CEMCS-Blue-100 border mb-4 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                            type="button" @onclick=GoBack>
+                        <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 7.99967H14H2Z" fill="#1F82BD"/>
+                            <path d="M6.66667 12.6663L2 7.99967M2 7.99967L6.66667 3.33301M2 7.99967H14" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Back
+                    </button>
+                </div>
+                <h3 class="mb-4 text-xl font-bold dark:text-white">
+                    Next of Kin
+                </h3>
+                <form >
+                    <div class="grid grid-cols-6 gap-6">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700">
+                            <tr>
+
+
+                                <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                    Name
+                                </th>
+                                <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                    Phone Number
+                                </th>
+                                <th scope="col" class="px-4 py-3 min-w-[14rem]">
+                                    Address
+                                </th>
+                                <th scope="col" class="px-4 py-3 min-w-[6rem]">
+                                    Relationship
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 min-w-[6rem]">
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody data-accordion="table-column">
+                            @foreach (var item in NextOfKinMasterViews)
+                            {
+                                <tr class="border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+                                    id="table-column-header-9"
+                                    data-accordion-target="#table-column-body-9"
+                                    aria-expanded="false"
+                                    aria-controls="table-column-body-9">
+
+
+                                    <th scope="row"
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white ">
+                                        @item.ProfileId_FirstName @item.LastName
+                                    </th>
+                                    <td class="px-4 py-3 text-gray-500">
+                                        @item.Phone
+                                    </td>
+                                    <td class="px-4 py-3 font-normal text-gray-500 whitespace-nowrap dark:text-white">
+                                        @item.Address
+                                    </td>
+                                    <td class="px-4 py-3 font-normal text-gray-500 whitespace-nowrap dark:text-white">
+                                        @item.Relationship
+                                    </td>
+
+
+                                </tr>
+                            }
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+        <div class="col-span-2">
+            <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                <h3 class="mb-4 text-xl font-bold dark:text-white">
+                    Beneficiary
+                </h3>
+                <form >
+                    <div class="grid grid-cols-6 gap-6">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700">
+                            <tr>
+
+
+                                <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                    Name
+                                </th>
+                                <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                    Phone Number
+                                </th>
+                                <th scope="col" class="px-4 py-3 min-w-[14rem]">
+                                    Address
+                                </th>
+                                <th scope="col" class="px-4 py-3 min-w-[6rem]">
+                                    Email
+                                </th>
+                                <th scope="col"
+                                    class="px-4 py-3 min-w-[6rem]">
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody data-accordion="table-column">
+                            @foreach (var item in MemberBeneficiaryMasterView)
+                            {
+                                <tr class="border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+                                    id="table-column-header-9"
+                                    data-accordion-target="#table-column-body-9"
+                                    aria-expanded="false"
+                                    aria-controls="table-column-body-9">
+
+
+                                    <th scope="row"
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white ">
+                                        @item.FirstName @item.LastName
+                                    </th>
+                                    <td class="px-4 py-3 text-gray-500">
+                                        @item.Phone
+                                    </td>
+                                    <td class="px-4 py-3 font-normal text-gray-500 whitespace-nowrap dark:text-white">
+                                        @item.Address
+                                    </td>
+                                    <td class="px-4 py-3 font-normal text-gray-500 whitespace-nowrap dark:text-white">
+                                        @item.Email
+                                    </td>
+
+
+                                </tr>
+                            }
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+        <div class="col-span-2">
+            <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                <h3 class="mb-4 text-xl font-bold dark:text-white">
+                    Member Account Data
+                </h3>
+                <form >
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="first-name"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Primary bank name
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@CustomerBankDetail.BankId_Name</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="last-name"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Primary bank account
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@CustomerBankDetail.AccountName</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="country"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Primary bank branch
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@CustomerBankDetail.Branch</h3>
+
+                        </div>
+                        @* <div class="col-span-6 sm:col-span-3">
+                                <label for="state"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Primary bank sort code</label>
+                                <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@CustomerBankDetail.SortCode</h3>
+
+                            </div>*@
+
+
+
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+        <div class="col-span-2">
+
+            <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                <h3 class="mb-4 text-xl font-bold dark:text-white">
+                    Company data
+                </h3>
+                <form >
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="first-name"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Membership number
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.MembershipId</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="last-name"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Job role
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.JobRole</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="country"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                CAI
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.CAI</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="state"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Rank
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.Rank</h3>
+
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="address"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Department
+                            </label>
+                            <h3 class="text-gray-900 sm:text-sm rounded-lg  block w-full    dark:text-white dark:focus:ring-primary-500">@MemberProfile.DepartmentId_Name</h3>
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+        <div class="col-span-2">
+            <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                <h3 class="mb-4 text-xl font-bold dark:text-white">
+                    KYC document
+                </h3>
+                <form >
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-full">
+                            <div class="flex items-center justify-between w-1/2">
+                                <div>
+                                    <h2>photo</h2>
+                                </div>
+                                <div>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3" d="M13 4H6V20H18V9H13V4Z" fill="#1F82BD"/>
+                                        <path d="M20 8L14 2H6C4.9 2 4.01 2.9 4.01 4L4 20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8ZM18 20H6V4H13V9H18V20Z" fill="#1F82BD"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h2>roy.png</h2>
+                                </div>
+                                <div>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M7 10L12 15L17 10" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M12 15V3" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-6 sm:col-full">
+                            <div class="flex items-center justify-between w-1/2">
+                                <div>
+                                    <h2>photo</h2>
+                                </div>
+                                <div>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3" d="M13 4H6V20H18V9H13V4Z" fill="#1F82BD"/>
+                                        <path d="M20 8L14 2H6C4.9 2 4.01 2.9 4.01 4L4 20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8ZM18 20H6V4H13V9H18V20Z" fill="#1F82BD"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h2>roy.png</h2>
+                                </div>
+                                <div>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M7 10L12 15L17 10" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M12 15V3" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-span-6 sm:col-full">
+                            <button class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                    type="button" @onclick=GoBack>
+                                Go to table
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+}
+
+</div>
+</main>
+
+@code {
+
+}

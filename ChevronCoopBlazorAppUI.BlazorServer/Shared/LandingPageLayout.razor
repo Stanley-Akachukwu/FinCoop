@@ -1,0 +1,130 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime jsRuntime
+@inject NavigationManager navigationManager
+@using Microsoft.AspNetCore.Components.Authorization  
+@inject AuthenticationStateProvider authStateProvider
+<div id="banner" tabindex="-1" class="flex  z-50 gap-8 justify-between items-start py-3 px-4 w-full bg-red-700  sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800">
+    <div class="flex flex-row gap-5">
+        <div class="flex items-center justify-center">
+            <img src="../images/chevron/landingpage/phone.svg" alt="" />
+            <p class="text-sm font-light text-white">+23470378990000</p>
+        </div>
+
+        <div class="flex items-center justify-center">
+            <img src="../images/chevron/landingpage/mail.svg" alt="" />
+            <p class="text-sm font-light text-white">contact@cemcs.com.ng</p>
+        </div>
+    </div>
+    <button data-collapse-toggle="banner" type="button" class="flex items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+
+</div>
+<header>
+    <nav class="bg-white border-gray-200 px-4 lg:px-6 py-3.5 dark:bg-gray-800">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg">
+            <div class="flex gap-2">
+                <a href="" class="flex items-center">
+                    <img src="../images/chevron/landingpage/logo.svg" class="mr-3 " alt="Chervon Logo" />
+                </a>
+                <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                    <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About CEMCS</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Products</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Blog</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">FAQs</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex items-center lg:order-2">
+                <AuthorizeView>
+                    <Authorized>
+                        <a href="/admin/dashboard" class="text-white bg-gradient-primary hover:bg-gradient-primary focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-6 lg:px-7 py-2 lg:py-2.5 mr-2 dark:bg-gradient-primary dark:hover:bg-gradient-primary focus:outline-none dark:focus:ring-primary-800">Dashboard</a>
+                    </Authorized>
+                    <NotAuthorized>
+                        <a href="/identity/account/login" class="text-white bg-gradient-primary hover:bg-gradient-primary focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-6 lg:px-7 py-2 lg:py-2.5 mr-2 dark:bg-gradient-primary dark:hover:bg-gradient-primary focus:outline-none dark:focus:ring-primary-800">Login</a>
+                    </NotAuthorized>
+                </AuthorizeView>
+                
+                <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                    <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+@Body
+
+
+
+<section class="bg-black ">
+    <div class="flex flex-col py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="flex justify-between items-center border-b border-slate-500 pb-8">
+            <div>   <img src="../images/chevron/landingpage/logo-white.svg" class="mr-3 " alt="Chervon Logo" /></div>
+            <div class="flex flex-row relative">
+                <div class="absolute -translate-y-1/2 top-2/4 left-1">   <img src="../images/chevron/landingpage/input-mail.svg" alt="input mail" /></div><input class="py-2 lg:py-2.5 placeholder:text-sm placeholder:text-greylighter rounded-tl-lg rounded-bl-lg px-5 bg-greylite" placeholder="Enter your email" />   <a href="#" class="text-white bg-gradient-primary hover:bg-gradient-primary focus:ring-4 focus:ring-primary-300 font-medium rounded-tr-lg rounded-br-lg text-sm px-4 lg:px-5 py-2 lg:py-4 mr-2 dark:bg-gradient-primary dark:hover:bg-gradient-primary focus:outline-none dark:focus:ring-primary-800">Subscribe</a>
+            </div>
+        </div>
+        <div class="flex justify-between items-center pt-4">
+            <p class="text-greylighter">© 2023 CEMCS. All rights reserved.</p>
+            <div class="flex justify-between items-center gap-2">
+                <img src="../images/chevron/landingpage/github.svg" alt="Github Logo" />
+                <img src="../images/chevron/landingpage/twitter.svg" alt="Twitter Logo" />
+                <img src="../images/chevron/landingpage/dribble.svg" alt="Dribble Logo" />
+                <img src="../images/chevron/landingpage/facebook.svg" alt="Facebook Logo" />
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+         var authState = await authStateProvider.GetAuthenticationStateAsync();  
+        var user = authState.User;  
+        if(user.Identity.IsAuthenticated)
+        {
+            navigationManager.NavigateTo("identity/account/login", true);
+        } 
+    }
+
+   
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            //var module = await jsRuntime.InvokeAsync<IJSObjectReference>("import",
+            //navigationManager.ToAbsoluteUri("js/app.bundle2.js"));
+            //await module.InvokeVoidAsync("initFlowbiteJS");
+            //await module.InvokeVoidAsync("initFlowbiteJS");
+
+            //await jsRuntime.InvokeAsync<IJSObjectReference>("import",
+            //navigationManager.ToAbsoluteUri("js/app.bundle2.js"));
+            //await jsRuntime.InvokeVoidAsync("initFlowbiteJS");
+            //await jsRuntime.InvokeVoidAsync("initAppScripts");
+
+        }
+        //await jsRuntime.InvokeVoidAsync("initFlowbiteJS");
+
+        base.OnAfterRender(firstRender);
+        //return base.OnAfterRenderAsync(firstRender);
+    }
+}

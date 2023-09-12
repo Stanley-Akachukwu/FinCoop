@@ -1,0 +1,222 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.Products.DepositProducts;
+@using AP.ChevronCoop.Entities.MasterData.Charges;
+<EditForm Model="@Model" OnValidSubmit="OnProceed">
+<FluentValidationValidator @ref="_fluentValidationValidator"/>
+<ValidationSummary/>
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Offset Information
+    </h3>
+
+    <div class="grid grid-cols-6 gap-6">
+        <div class="col-span-6 sm:col-full">
+            <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Offset Allowed</label>
+            <div class="flex flex-wrap">
+                <div class="flex items-center mr-4">
+
+                    <SfRadioButton @onclick=hideOffsetForm Name="AllowedOffsetType" Value="NONE" @bind-Checked="@Model.AllowedOffsetType" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                    <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">None</label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <SfRadioButton @onclick=ShowOffsetForm_Full Name="AllowedOffsetType" Value="FULL" @bind-Checked="@Model.AllowedOffsetType" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                    <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Full Offset</label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <SfRadioButton @onclick=ShowOffsetForm_Partial Name="AllowedOffsetType" Value="PARTIAL" @bind-Checked="@Model.AllowedOffsetType" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                    <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Partial Offset</label>
+                </div>
+
+            </div>
+            @if (showOffsetForm)
+            {
+                <div class="grid grid-cols-6 gap-6 mt-3" id="viewBox">
+
+
+                    <div class="col-span-6 sm:col-span-3 ">
+                        <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Min Offset Period Type (Period unit)<span class="text-red-500">*</span>
+                        </label>
+
+                        <SfComboBox id="tenureUnitOffset" DataSource=@tenureUnit TValue="string" TItem="string" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    @bind-Value=@Model.OffsetPeriodUnit
+                                    ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Offset Period">
+                        </SfComboBox>
+                        <ValidationMessage For="() => Model.OffsetPeriodUnit" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="countries"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Min Offset Period Value<span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative max-w-sm">
+                                <SfNumericTextBox TValue="decimal" ID="Value" Placeholder="Enter Value"  CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                              @bind-Value=@Model.OffsetPeriodValue OnBlur="OnBlur">
+                            </SfNumericTextBox>
+                            <ValidationMessage For="() => Model.OffsetPeriodValue" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            }
+        </div>
+
+
+    </div>
+
+</div>
+
+
+@if (showOffsetForm)
+{
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800" id="viewBox2">
+
+
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Enable
+                    Offset using Savings
+                </label>
+                <div class="flex flex-wrap">
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=EnableOffsetSaving Name="OffSetSaving" Value=true @bind-Checked="@Model.EnableSavingsOffset" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+
+
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=DisableOffsetSaving Name="OffSetSaving" Value=false @bind-Checked="@Model.EnableSavingsOffset" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-span-6 sm:col-full">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select savings option for loan offset
+                </label>
+                <SfMultiSelect TValue="string[]" @bind-Value=@preselectedSaving TItem="DepositProductMasterView" FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains" Query="@Query_Combo" ShowSelectAll=true FilterBarPlaceholder="Charges" EnableGroupCheckBox=false Mode="@VisualMode.CheckBox" ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Charge" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <MultiSelectEvents TItem="DepositProductMasterView" TValue="string[]" ValueChange="@SavingValueChangeHandler"></MultiSelectEvents>
+                    <SfDataManager Url="@DROPDOWN_API_RESOURCE_DEPOSIT_PRODUCT" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                    <MultiSelectFieldSettings Text="Name" Value="Id"></MultiSelectFieldSettings>
+                </SfMultiSelect>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800" id="viewBox3">
+
+
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enable offset waiver charge</label>
+                <div class="flex flex-wrap">
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=EnableOffsetWaiver Name="OffsetWaiver" Value=true @bind-Checked="@Model.EnableChargeWaiver" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=DisableOffsetWaiver Name="OffsetWaiver" Value=false @bind-Checked="@Model.EnableChargeWaiver" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-span-6 sm:col-full">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select charges for offset waiver
+                </label>
+                <SfMultiSelect TValue="string[]" @bind-Value=@preselectedWaiving TItem="ChargeMasterView" FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains" Query="@Query_Combo" ShowSelectAll=true FilterBarPlaceholder="Charges" EnableGroupCheckBox=false Mode="@VisualMode.CheckBox" ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Charge" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <MultiSelectEvents TItem="ChargeMasterView" TValue="string[]" ValueChange="@WaiverValueChangeHandler"></MultiSelectEvents>
+                    <SfDataManager Url="@DROPDOWN_API_RESOURCE_CHARGE" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                    <MultiSelectFieldSettings Text="Name" Value="Id"></MultiSelectFieldSettings>
+                </SfMultiSelect>
+            </div>
+
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800" id="viewBox2">
+
+
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Enable
+                    Offset Admin Charges
+                </label>
+                <div class="flex flex-wrap">
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=EnableOffsetAdminCharges Name="OffSetAdminCharge" Value=true @bind-Checked="@Model.EnableOffSetAdminCharges" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+
+
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=EnableOffsetAdminCharges Name="OffSetAdminCharge" Value=false @bind-Checked="@Model.EnableOffSetAdminCharges" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                    </div>
+                </div>
+            </div>
+
+            @if (showOffsetAdmin)
+            {
+                <div class="col-span-6 sm:col-full">
+                    <label for="countries"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Select offset Admin Charges
+                    </label>
+                    <SfMultiSelect TValue="string[]" TItem="ChargeMasterView" FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains" Query="@Query_Combo" ShowSelectAll=true FilterBarPlaceholder="Charges" EnableGroupCheckBox=false Mode="@VisualMode.CheckBox" ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Charge" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <MultiSelectEvents TItem="ChargeMasterView" TValue="string[]" ValueChange="@OffsetAdminValueChangeHandler"></MultiSelectEvents>
+                        <SfDataManager Url="@DROPDOWN_API_RESOURCE_CHARGE" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                        <MultiSelectFieldSettings Text="Name" Value="Id"></MultiSelectFieldSettings>
+                    </SfMultiSelect>
+                </div>
+            }
+
+
+
+        </div>
+
+    </div>
+}
+
+
+<div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+    <div class="col-span-3 sm:col-span-3">
+        <a href="javascript: void(0)" @onclick=OnPrevious>
+            <button type="button" class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Back
+            </button>
+        </a>
+
+    </div>
+    <div class="col-span-3 sm:col-span-3">
+        <a href="javascript: void(0)" @onclick=OnProceed>
+            <button class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Proceed
+            </button>
+        </a>
+
+    </div>
+</div>
+</EditForm>

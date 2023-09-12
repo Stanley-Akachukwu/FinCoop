@@ -1,0 +1,52 @@
+﻿<div class="grid grid-cols-6 gap-6">
+    <div class="col-span-6 sm:col-span-3">
+        <label for="first-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Module
+        </label>
+        <span>@Model.Module</span>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="first-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            IP Address
+        </label>
+        <span>@Model.IPAddress</span>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="first-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Action
+        </label>
+        <span>@Model.Action</span>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="first-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Description
+        </label>
+        <span>@Model.Description</span>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="last-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Date Created
+        </label>
+        <span>@Model.DateCreated</span>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="country"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Created By
+        </label>
+        <span>@Model.ApplicationUserId_Email</span>
+    </div>
+
+
+    <div class="col-span-6 sm:col-full">
+        <button class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                type="submit" @onclick="OnCancel">
+            Close
+        </button>
+    </div>
+</div>

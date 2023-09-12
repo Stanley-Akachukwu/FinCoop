@@ -1,0 +1,57 @@
+﻿@using AP.ChevronCoop.Entities.Security;
+@using AP.ChevronCoop.AppDomain.Security.MemberProfiles.MemberBulkUploads;
+
+
+<div class="relative overflow-x-auto overflow-y-auto  w-full">
+    <SfGrid ID="memberDataUpload" TValue="MemberDataUpload" EnablePersistence="false"
+            DataSource="@ModelList"
+            AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+            AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="400"
+            AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+            AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+
+        <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+        <GridEvents TValue="MemberDataUpload" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure"></GridEvents>
+
+        <GridEditSettings AllowAdding="false" AllowEditing="true" AllowDeleting="false"
+                          ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+        </GridEditSettings>
+
+        <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+        </GridFilterSettings>
+
+
+        <GridColumns>
+
+            <GridColumn Field=@nameof(MemberDataUpload.FirstName) HeaderText="FIRST NAME" AutoFit="true"></GridColumn>
+            <GridColumn Field=@nameof(MemberDataUpload.LastName) HeaderText="LAST NAME" AutoFit="true"></GridColumn>
+            <GridColumn Field=@nameof(MemberDataUpload.Gender) HeaderText="GENDER" AutoFit="true"></GridColumn>
+            <GridColumn Field=@nameof(MemberDataUpload.Email) HeaderText="EMAIL" AutoFit="false"></GridColumn>
+            <GridColumn Field=@nameof(MemberDataUpload.PhoneNumber) HeaderText="PHONE NO." AutoFit="false"></GridColumn>
+            <GridColumn Field=@nameof(MemberDataUpload.MembershipNumber) HeaderText="MEMBERSHIP NO." AutoFit="false"></GridColumn>
+           <GridColumn Field=@nameof(MemberDataUpload.MemberType) HeaderText="MEMBER TYPE" AutoFit="false"></GridColumn>
+            @*<GridColumn Field=@nameof(MemberDataUpload.Status) HeaderText="STATUS" AutoFit="false"></GridColumn>*@
+            <GridColumn HeaderText="ERRORS" AutoFit="true">
+                <Template>
+                    @{
+                        var record = (context as MemberDataUpload);
+                        @if (record.IsValid)
+                        {
+                            <span class="e-userimg sf-icon-Male" style="color:green"></span>
+                        }
+                        else
+                        {
+                            <a href="javascript: void(0)" @onclick=@(e => OnViewError(record)) class="e-userimg sf-icon-Male" style="color:red">
+                                Error
+                            </a>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+
+        </GridColumns>
+
+    </SfGrid>
+</div>

@@ -1,0 +1,85 @@
+﻿@page "/userDetail"
+@layout AppUIMainLayout
+@attribute [Authorize]
+@inject NavigationManager UriHelper
+<EditForm Model="@Model">
+    <FluentValidationValidator/>
+    <ValidationSummary/>
+    <div class="px-4 pt-6">
+        <div class="mb-4">
+            <nav class="flex mb-5" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="#"
+                           class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                            </svg>
+                            Profile
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd">
+                                </path>
+                            </svg>
+                            KYC Details
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd">
+                                </path>
+                            </svg>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="mb-4 flex w-full items-center">
+
+            <ul class="w-2/5 hidden text-xs font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+                <li class="w-full">
+                    <a href="javascript: void(0)" @onclick="@(e => OnShowPersonalInformation())"
+                       class="inline-block w-full py-4 bg-CEMCS-Blue-100 text-white hover:text-gray-600 rounded-lg focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-white"
+                       aria-current="page">
+                        Personal Information
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="javascript: void(0)" @onclick="@(e => OnShowKycDetail())"
+                       class="inline-block w-full px-2 py-4 bg-white hover:bg-CEMCS-Blue-100 text-gray-600 hover:text-white rounded-lg focus:ring-4 focus:ring-CEMCS-Blue-100 active focus:outline-none"
+                       aria-current="page">
+                        KYC Details
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        @if (showUserPersonalInformationForm)
+        {
+            <UserpersonalInfomationForm></UserpersonalInfomationForm>
+        }
+        @if (showKycDetailForm)
+        {
+            <KycDetailForm></KycDetailForm>
+        }
+
+    </div>
+</EditForm>

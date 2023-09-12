@@ -1,0 +1,35 @@
+﻿@if (showAmount == true)
+{
+
+    @symbol@amount.ToString("N2")
+
+}
+else
+{
+    <Spin Size="small"></Spin>
+}
+
+
+@code {
+
+    [Parameter] public decimal amount { get; set; } = 0;
+    [Parameter] public decimal totalAmount { get; set; } = 0;
+    [Parameter] public int seconds { get; set; } = 5;
+    public bool showAmount { get; set; } = false;
+
+    [Parameter] public string symbol { get; set; } = "₦";
+
+    protected override async Task OnInitializedAsync()
+    {
+       
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+
+        await Task.Delay(5000);
+        showAmount = true;
+
+    }
+
+}

@@ -1,0 +1,144 @@
+﻿@page "/security/guarantorapproval" 
+@using AP.ChevronCoop.Entities.Loans.LoanApplicationGuarantors;
+<main>
+    <div class="px-4 pt-6">
+
+        <!-- Request Tabs -->
+
+        <div class="mb-4 flex w-full items-center font-semibold justify-between">
+            <h1>Guarantor Approval Requests</h1>
+
+        </div>
+
+        <div class="relative overflow-x-auto shadow mb-3 sm:rounded-lg">
+
+            <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                <!-- Start coding here -->
+
+                <span class="error p-2">@ErrorDetails</span>
+                <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                    <div class="w-full md:w-1/2">
+
+                        <div class="sm:col-span-2">
+                            <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </div>
+                                <input type="search" id="default-search" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+                                       class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search...">
+
+                                <button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+         <div class="overflow-x-auto">
+        <!-- Table -->
+
+        <SfGrid @ref="grid" ID="gridGuarantorRequest" TValue="LoanApplicationGuarantorApprovalMasterView" EnablePersistence="false"
+                Query="@QueryGrid"
+                AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="500"
+                AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false" Toolbar="@(new List<string>() { "ExcelExport", "PdfExport" })">
+            <SfDataManager Url="@GRID_API_RESOURCE" Headers=@HeaderData CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+            <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+            <GridEvents TValue="LoanApplicationGuarantorApprovalMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure" QueryCellInfo="CellInfoHandler" OnToolbarClick="ToolbarClickHandler"></GridEvents>
+
+            <GridEditSettings AllowAdding="false" AllowEditing="true" AllowDeleting="false"
+                              ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+            </GridEditSettings>
+
+            <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+            </GridFilterSettings>
+
+
+            <GridColumns>
+                <GridColumn Field=@nameof(LoanApplicationGuarantorApprovalMasterView.CustomerId_MemberId) HeaderText="MEMBERSHIP NUMBER" AutoFit="true"></GridColumn>
+                <GridColumn  HeaderText="NAME" AutoFit="false">
+                    <Template>
+                        @{
+                            var row = (context as LoanApplicationGuarantorApprovalMasterView);
+                            <div>
+                                @row.CustomerId_FirstName @row.CustomerId_LastName @row.CustomerId_MiddleName
+                            </div>
+                        }
+                    </Template>
+                </GridColumn>
+                <GridColumn Field=@nameof(LoanApplicationGuarantorApprovalMasterView.LoanApplicationId_Principal) HeaderText="PRINCIPAL" Format="N2" AutoFit="true"></GridColumn>
+                            <GridColumn Field=@nameof(LoanApplicationGuarantorApprovalMasterView.DateCreated) HeaderText="DATE" AutoFit="false" Format="dd MMM yyyy hh:mm tt" Type="ColumnType.DateTime"></GridColumn>
+                <GridColumn Field=@nameof(LoanApplicationGuarantorApprovalMasterView.GuarantorType) HeaderText="TYPE" AutoFit="true"></GridColumn>
+
+                <GridColumn HeaderText="STATUS" AutoFit="false">
+                    <Template>
+                        @{
+                            var status = (context as LoanApplicationGuarantorApprovalMasterView);
+                            <div class="flex items-left">
+                                @if (status.Status == "Approved")
+                                {
+                                    <div class="inline flex flex-row items-center bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md justify-center">
+                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                                        <div> @status.Status</div>
+                                    </div>
+                                }
+                                else if (status.Status == "Rejected")
+                                {
+                                    <span
+                                        class="bg-red-100 dark:bg-red-200 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">
+                                        @status.Status
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span
+                                        class="bg-purple-100 dark:bg-purple-200 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">
+                                        @status.Status
+                                    </span>
+                                }
+                            </div>
+                        }
+
+                    </Template>
+
+                </GridColumn>
+
+                <GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                    <Template>
+
+
+                        @{
+                            var row = (context as LoanApplicationGuarantorApprovalMasterView);
+                            <button @onclick=@(e => onShowDetailRow(row))
+                                    class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                                    type="button">
+                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
+                                     viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                </svg>
+                            </button>
+
+                        }
+
+
+                    </Template>
+                </GridColumn>
+            </GridColumns>
+        </SfGrid>
+        </div>
+    </div>
+    </div>
+    </div>
+</main>
+
+
+@code {
+
+}

@@ -1,0 +1,462 @@
+
+Loan Disbursement full v1
+
+
+
+//bank reconciliation : SD
+DR Disbursement.DisbursementAccount.LedgerAccount 1,000,000
+CR Disbursement.SpecialDepositAccount.DepositAccount 1,000,000
+
+//bank reconciliation : Cust bank
+DR Disbursement.DisbursementAccount.LedgerAccount 1,000,000
+CR Disbursement.CustomerBankAccount.LedgerAccount 1,000,000
+
+
+//loan tracking:principal Product
+DR LOAN_PROD_PRINCIPAL_CONTROL 1,000,000
+CR LoanProduct.PrincipalAccount 1,000,000
+
+
+//loan tracking:principal Account
+DR LOAN_ACC_PRINCIPAL_CONTROL 1,000,000
+CR LoanAccount.PrincipalBalanceAccount 1,000,000
+
+
+//loan tracking:unearned interest Product
+DR LOAN_PROD_UNEARNED_INTEREST_CONTROL 100,000
+CR UnearnedInterest 100,000
+
+
+//loan tracking:unearned interest Account
+DR LOAN_ACC_UNEARNED_INTEREST_CONTROL 100,000
+CR UnearnedInterest 100,000
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL 1,000
+CR LoanProduct.ChargesAccrualAccount 1,000
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL 1,000
+CR LoanAccount.ChargesAccruedAccount 1,000
+
+
+
+
+Loan repayment : payroll v1
+
+//bank reconciliation : 
+DR LOAN_PAYROLL_CONTROL 1,000,000
+CR Product.BankDepositAccount.LedgerAccount 1,000,000
+
+
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount 1,000,000
+CR LOAN_PROD_PRINCIPAL_CONTROL 1,000,000
+
+
+//loan tracking:principal Account
+DR LoanAccount.PrincipalBalanceAccount 1,000,000
+CR LOAN_ACC_PRINCIPAL_CONTROL 1,000,000
+
+
+--unearned interest
+//loan tracking:unearned interest Product
+DR Product.UnearnedInterest 100,000
+CR LOAN_PROD_UNEARNED_INTEREST_CONTROL 100,000
+
+
+//loan tracking:unearned interest Account
+DR Account.UnearnedInterest 100,000
+CR LOAN_ACC_UNEARNED_INTEREST_CONTROL 100,000
+
+--earned interest
+//loan tracking:earned interest Product
+DR LOAN_PROD_EARNED_INTEREST_CONTROL 100,000
+CR Product.InterestIncomeAccount 100,000
+
+
+//loan tracking:earned interest Account
+DR LOAN_ACC_EARNED_INTEREST_CONTROL 100,000
+CR Account.EarnedInterestAccount 100,000
+
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL 1,000
+CR LoanProduct.ChargesAccrualAccount 1,000
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL 1,000
+CR LoanAccount.ChargesAccruedAccount 1,000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Charge Accrual v1
+:Aggregate charges
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL totalCharges
+CR Product charge accrual    totalCharges
+
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL totalCharges
+CR Account charge accrual        totalCharges
+
+:ForEach charge
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL chargeAmount
+CR Product charge accrual    chargeAmount
+
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL chargeAmount
+CR Acc charge accrual            chargeAmount
+
+
+
+Charge Collection v1
+:Aggregate charges
+DR LOAN_PROD_CHARGE_COLLECT_CONTROL totalCharges
+CR Product charge income    totalCharges
+
+DR LOAN_ACC_CHARGE_COLLECT_CONTROL totalCharges
+CR Account charge income    totalCharges
+
+
+:ForEach charge
+DR LOAN_PROD_CHARGE_COLLECT_CONTROL chargeAmount
+CR Product charge income    chargeAmount
+
+DR LOAN_ACC_CHARGE_COLLECT_CONTROL chargeAmount
+CR Account charge income    chargeAmount
+
+
+
+LOAN TOPUP
+
+
+:old loan
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount principalBalance
+CR LOAN_PROD_PRINCIPAL_CONTROL principalBalance
+
+
+//loan tracking:principal Account
+DR LoanAccount.PrincipalBalanceAccount principalBalance
+CR LOAN_ACC_PRINCIPAL_CONTROL principalBalance
+
+
+//loan tracking:unearned interest Product
+DR LOAN_PROD_UNEARNED_INTEREST_CONTROL unearnedInterestBalance
+CR Prod.UnearnedInterest unearnedInterestBalance
+
+
+//loan tracking:unearned interest Account
+DR LOAN_ACC_UNEARNED_INTEREST_CONTROL unEarnedInterestBalance
+CR Acc.UnearnedInterest unEarnedInterestBalance
+
+
+:new loan
+//loan tracking:principal Product
+DR LOAN_PROD_PRINCIPAL_CONTROL newPrincipal
+CR LoanProduct.PrincipalAccount newPrincipal
+
+
+//loan tracking:principal Account
+DR LOAN_ACC_PRINCIPAL_CONTROL newPrincipal
+CR LoanAccount.PrincipalBalanceAccount newPrincipal
+
+
+//loan tracking:unearned interest Product
+DR LOAN_PROD_UNEARNED_INTEREST_CONTROL newInterestBalance
+CR Prod.UnearnedInterest newInterestBalance
+
+
+//loan tracking:unearned interest Account
+DR LOAN_ACC_UNEARNED_INTEREST_CONTROL newInterestBalance
+CR Acc.UnearnedInterest newInterestBalance
+
+
+
+
+
+
+
+
+
+LOAN OFFSET SAVINGS->PARTIAL
+
+//bank reconciliation : 
+DR OldLoanAccount.Customer.SavingsAccount.DepositAccount.LedgerAccount offsetAmount
+CR Product.BankDepositAccount.LedgerAccount offsetAmount
+
+
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount offsetAmount
+CR LOAN_PROD_PRINCIPAL_CONTROL offsetAmount
+
+
+//loan tracking:principal Account
+DR OldLoanAccount.PrincipalBalanceAccount offsetAmount
+CR LOAN_ACC_PRINCIPAL_CONTROL offsetAmount
+
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanProduct.ChargesAccrualAccount offsetCharge
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR OldLoanAccount.ChargesAccruedAccount offsetCharge
+
+
+
+LOAN OFFSET SAVINGS->FULL
+
+//bank reconciliation : 
+DR LoanAccount.Customer.SavingsAccount.DepositAccount.LedgerAccount offsetAmount
+CR Product.BankDepositAccount.LedgerAccount offsetAmount
+
+
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount offsetAmount
+CR LOAN_PROD_PRINCIPAL_CONTROL offsetAmount
+
+
+//loan tracking:principal Account
+DR LoanAccount.PrincipalBalanceAccount offsetAmount
+CR LOAN_ACC_PRINCIPAL_CONTROL offsetAmount
+
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanProduct.ChargesAccrualAccount offsetCharge
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanAccount.ChargesAccruedAccount offsetCharge
+
+
+
+
+
+LOAN OFFSET SAVINGS->LIEU OF PAYROLL
+//bank reconciliation : 
+DR LoanAccount.Customer.SavingsAccount.DepositAccount.LedgerAccount offsetAmount
+CR Product.BankDepositAccount.LedgerAccount offsetAmount
+
+
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount offsetAmount
+CR LOAN_PROD_PRINCIPAL_CONTROL offsetAmount
+
+
+//loan tracking:principal Account
+DR LoanAccount.PrincipalBalanceAccount offsetAmount
+CR LOAN_ACC_PRINCIPAL_CONTROL offsetAmount
+
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanProduct.ChargesAccrualAccount offsetCharge
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanAccount.ChargesAccruedAccount offsetCharge
+
+
+
+//loan tracking:unearned interest Product
+DR Prod.UnearnedInterest periodInterest
+CR LOAN_PROD_UNEARNED_INTEREST_CONTROL periodInterest
+
+
+//loan tracking:unearned interest Account
+DR Acc.UnearnedInterest periodInterest
+CR LOAN_ACC_UNEARNED_INTEREST_CONTROL periodInterest
+
+
+//loan tracking:interest income Product
+DR LOAN_PROD_EARNED_INTEREST_CONTROL periodInterest
+CR Prod.EarnedInterest periodInterest
+
+
+//loan tracking:interest income Account
+DR LOAN_ACC_EARNED_INTEREST_CONTROL periodInterest
+CR Acc.EarnedInterest periodInterest
+
+
+
+LOAN OFFSET TRANSFER->PARTIAL
+DR LOAN_CUST_BANK_CONTROL offsetAmount
+CR Customer cash account offsetAmount
+
+DR Customer cash account offsetAmount
+CR LoanProduct.BankDepositAccount.LedgerAccount offsetAmount
+
+
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount offsetAmount
+CR LOAN_PROD_PRINCIPAL_CONTROL offsetAmount
+
+
+//loan tracking:principal Account
+DR OldLoanAccount.PrincipalBalanceAccount offsetAmount
+CR LOAN_ACC_PRINCIPAL_CONTROL offsetAmount
+
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanProduct.ChargesAccrualAccount offsetCharge
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR OldLoanAccount.ChargesAccruedAccount offsetCharge
+
+
+
+LOAN OFFSET TRANSFER->FULL
+DR LOAN_CUST_BANK_CONTROL offsetAmount
+CR Customer cash account offsetAmount
+
+DR Customer cash account offsetAmount
+CR LoanProduct.BankDepositAccount.LedgerAccount offsetAmount
+
+
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount offsetAmount
+CR LOAN_PROD_PRINCIPAL_CONTROL offsetAmount
+
+
+//loan tracking:principal Account
+DR LoanAccount.PrincipalBalanceAccount offsetAmount
+CR LOAN_ACC_PRINCIPAL_CONTROL offsetAmount
+
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanProduct.ChargesAccrualAccount offsetCharge
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanAccount.ChargesAccruedAccount offsetCharge
+
+
+LOAN OFFSET TRANSFER->LIEU OF PAYROLL
+DR LOAN_CUST_BANK_CONTROL offsetAmount
+CR Customer cash account offsetAmount
+
+DR Customer cash account offsetAmount
+CR LoanProduct.BankDepositAccount.LedgerAccount offsetAmount
+
+
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount offsetAmount
+CR LOAN_PROD_PRINCIPAL_CONTROL offsetAmount
+
+
+//loan tracking:principal Account
+DR LoanAccount.PrincipalBalanceAccount offsetAmount
+CR LOAN_ACC_PRINCIPAL_CONTROL offsetAmount
+
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanProduct.ChargesAccrualAccount offsetCharge
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanAccount.ChargesAccruedAccount offsetCharge
+
+
+
+
+LOAN OFFSET SD->PARTIAL
+DR OldLoanAccount.Customer.SDAccount.DepositAccount.LedgerAccount offsetAmount
+CR Product.BankDepositAccount.LedgerAccount offsetAmount
+
+
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount offsetAmount
+CR LOAN_PROD_PRINCIPAL_CONTROL offsetAmount
+
+
+//loan tracking:principal Account
+DR OldLoanAccount.PrincipalBalanceAccount offsetAmount
+CR LOAN_ACC_PRINCIPAL_CONTROL offsetAmount
+
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanProduct.ChargesAccrualAccount offsetCharge
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR OldLoanAccount.ChargesAccruedAccount offsetCharge
+
+
+
+LOAN OFFSET SD->FULL
+//bank reconciliation : 
+DR LoanAccount.Customer.SDAccount.DepositAccount.LedgerAccount offsetAmount
+CR Product.BankDepositAccount.LedgerAccount offsetAmount
+
+
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount offsetAmount
+CR LOAN_PROD_PRINCIPAL_CONTROL offsetAmount
+
+
+//loan tracking:principal Account
+DR LoanAccount.PrincipalBalanceAccount offsetAmount
+CR LOAN_ACC_PRINCIPAL_CONTROL offsetAmount
+
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanProduct.ChargesAccrualAccount offsetCharge
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanAccount.ChargesAccruedAccount offsetCharge
+
+
+
+LOAN OFFSET SD->LIEU OF PAYROLL
+//bank reconciliation : 
+DR LoanAccount.Customer.SDAccount.DepositAccount.LedgerAccount offsetAmount
+CR Product.BankDepositAccount.LedgerAccount offsetAmount
+
+
+//loan tracking:principal Product
+DR LoanProduct.PrincipalAccount offsetAmount
+CR LOAN_PROD_PRINCIPAL_CONTROL offsetAmount
+
+
+//loan tracking:principal Account
+DR LoanAccount.PrincipalBalanceAccount offsetAmount
+CR LOAN_ACC_PRINCIPAL_CONTROL offsetAmount
+
+
+//track charges Product
+DR LOAN_PROD_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanProduct.ChargesAccrualAccount offsetCharge
+
+
+//track charges Account
+DR LOAN_ACC_CHARGE_ACCRUAL_CONTROL offsetCharge
+CR LoanAccount.ChargesAccruedAccount offsetCharge

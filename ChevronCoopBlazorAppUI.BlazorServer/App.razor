@@ -1,0 +1,53 @@
+﻿@inject IJSRuntime jsRuntime
+@inject NavigationManager navigationManager
+
+<CascadingAuthenticationState>
+    <Router AppAssembly="typeof(Program).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(AppUIMainLayout)">
+                <NotAuthorized>
+                    @*<RedirectToLogin IsAuthenticated="@context.User.Identity.IsAuthenticated" />*@
+                      <RedirectToLogin />
+                </NotAuthorized>
+            </AuthorizeRouteView>
+        </Found>
+        <NotFound>
+            <LayoutView Layout="typeof(LandingPageLayout)">
+                <h1>Page not found</h1>
+                <p>Sorry, but there's nothing here!</p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
+
+<AntContainer />
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+
+            //var module = await jsRuntime.InvokeAsync<IJSObjectReference>("import",
+            //navigationManager.ToAbsoluteUri("js/libs/flowbite/app.bundle.js"));
+
+            //await module.InvokeVoidAsync("initFlowbiteJS");
+            //await module.InvokeVoidAsync("initFlowbiteJS");
+
+            //await jsRuntime.InvokeAsync<IJSObjectReference>("import",
+            //navigationManager.ToAbsoluteUri("js/app.bundle2.js"));
+            //await jsRuntime.InvokeVoidAsync("initFlowbiteJS");
+            //await jsRuntime.InvokeVoidAsync("initAppScripts");
+
+            //await jsRuntime.InvokeVoidAsync("initFlowbiteJS2");
+        }
+
+        //await jsRuntime.InvokeVoidAsync("initFlowbiteJS");
+
+        base.OnAfterRender(firstRender);
+        //return base.OnAfterRenderAsync(firstRender);
+    }
+
+
+}

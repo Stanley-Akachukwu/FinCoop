@@ -1,0 +1,29 @@
+﻿<div class="p-12 mt-10 justify-center items-center w-full bg-white rounded-lg shadow lg:flex   dark:bg-gray-800">
+    <div class="flex justify-center text-center flex-col items-center">
+        <svg width="101" height="100" viewBox="0 0 101 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M37.7274 50L46.0607 58.3333L62.7274 41.6667M32.8732 19.5708C35.862 19.3323 38.6994 18.1571 40.9816 16.2125C43.5604 14.0136 46.8384 12.8058 50.2274 12.8058C53.6164 12.8058 56.8944 14.0136 59.4732 16.2125C61.7554 18.1571 64.5928 19.3323 67.5816 19.5708C70.9597 19.8396 74.1315 21.3034 76.5277 23.6997C78.924 26.0959 80.3878 29.2677 80.6566 32.6458C80.8951 35.6346 82.0703 38.472 84.0149 40.7542C86.2138 43.333 87.4216 46.611 87.4216 50C87.4216 53.389 86.2138 56.667 84.0149 59.2458C82.0703 61.528 80.8951 64.3654 80.6566 67.3542C80.3878 70.7323 78.924 73.9041 76.5277 76.3003C74.1315 78.6966 70.9597 80.1604 67.5816 80.4292C64.5928 80.6677 61.7554 81.8429 59.4732 83.7875C56.8944 85.9864 53.6164 87.1942 50.2274 87.1942C46.8384 87.1942 43.5604 85.9864 40.9816 83.7875C38.6994 81.8429 35.862 80.6677 32.8732 80.4292C29.4951 80.1604 26.3233 78.6966 23.9271 76.3003C21.5308 73.9041 20.067 70.7323 19.7982 67.3542C19.5597 64.3654 18.3845 61.528 16.4399 59.2458C14.241 56.667 13.0332 53.389 13.0332 50C13.0332 46.611 14.241 43.333 16.4399 40.7542C18.3845 38.472 19.5597 35.6346 19.7982 32.6458C20.067 29.2677 21.5308 26.0959 23.9271 23.6997C26.3233 21.3034 29.4951 19.8396 32.8732 19.5708Z" stroke="#0E9F6E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="my-4">File committed for approval </p>
+
+        <form class="my-6 w-full">
+
+            <button type="button" @onclick=Close
+                    class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                Close
+            </button>
+        </form>
+
+    </div>
+</div>
+
+@code {
+
+    [Inject]
+    NavigationManager NavigationManager { get; set; }
+
+    private void Close()
+    {
+        NavigationManager.NavigateTo("/security/data-migration", true);
+    }
+
+}

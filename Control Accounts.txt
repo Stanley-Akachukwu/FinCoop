@@ -1,0 +1,145 @@
+/*
+ * 
+ * 
+
+
+
+General Bank Control Account            GENERAL_BANK_CONTROL
+General Charges Control Account         GENERAL_CHARGE_CONTROL
+Opening Balance Control Account         OPENING_BAL_CONTROL
+General Payroll Control Account         GENERAL_PAYROLL_CONTROL
+General Expense Control Account         GENERAL_EXPENSE_CONTROL
+General Payable Control Account         GENERAL_PAYABLE_CONTROL
+General Recv Control Account            GENERAL_RECEIVABLE_CONTROL
+General Income Control Account          GENERAL_INCOME_CONTROL
+General Suspense Account                GENERAL_SUSPENSE
+
+
+Loan Product Control Account          LOAN_PROD_CONTROL
+Loan Charges Control Account          LOAN_CHARGE_CONTROL
+Loan Coy Bank Control Account         LOAN_COY_BANK_CONTROL
+Loan Customer Bank Control Account    LOAN_CUST_BANK_CONTROL
+Loan Payroll Control Account          LOAN_PAYROLL_CONTROL
+Loan Opening Bal Control Account      LOAN_BAL_CONTROL
+Loan Expense Control Account          LOAN_EXPENSE_CONTROL
+Loan Payable Control Account          LOAN_PAYABLE_CONTROL
+Loan Recv Control Account             LOAN_RECEIVABLE_CONTROL
+Loan Income Control Account            LOAN_INCOME_CONTROL
+Loan Suspense Account                  LOAN_SUSPENSE
+
+
+Savings Product Control Account          SAVINGS_PROD_CONTROL
+Savings Charges Control Account          SAVINGS_CHARGE_CONTROL    
+Savings Coy Bank Control Account         SAVINGS_COY_BANK_CONTROL
+Savings Customer Bank Control Account    SAVINGS_CUST_BANK_CONTROL
+Savings Payroll Control Account          SAVINGS_PAYROLL_CONTROL
+Savings Opening Bal Control Account      SAVINGS_BAL_CONTROL  
+Savings Expense Control Account          SAVINGS_EXPENSE_CONTROL
+Savings Payable Control Account          SAVINGS_PAYABLE_CONTROL
+Savings Recv Control Account             SAVINGS_RECEIVABLE_CONTROL
+Savings Income Control Account           SAVINGS_INCOME_CONTROL
+Savings Suspense Account                 SAVINGS_SUSPENSE
+
+
+SD Product Control Account               SD_PROD_CONTROL
+SD Charges Control Account               SD_CHARGE_CONTROL
+SD Coy Bank Control Account              SD_COY_BANK_CONTROL
+SD Customer Bank Control Account         SD_CUST_BANK_CONTROL
+SD Payroll Control Account               SD_PAYROLL_CONTROL
+SD Opening Bal Control Account           SD_BAL_CONTROL  
+SD Expense Control Account               SD_EXPENSE_CONTROL
+SD Payable Control Account               SD_PAYABLE_CONTROL
+SD Recv Control Account                  SD_RECEIVABLE_CONTROL
+SD Income Control Account                SD_INCOME_CONTROL
+SD Suspense Account                      SD_SUSPENSE
+
+
+
+FD Product Control Account               FD_PROD_CONTROL
+FD Charges Control Account               FD_CHARGE_CONTROL
+FD Coy Bank Control Account              FD_COY_BANK_CONTROL
+FD Customer Bank Control Account         FD_CUST_BANK_CONTROL
+FD Payroll Control Account               FD_PAYROLL_CONTROL 
+FD Opening Bal Control Account           FD_BAL_CONTROL  
+FD Expense Control Account               FD_EXPENSE_CONTROL
+FD Payable Control Account               FD_PAYABLE_CONTROL
+FD Recv Control Account                  FD_RECEIVABLE_CONTROL
+FD Income Control Account                FD_INCOME_CONTROL
+FD Suspense Account                      FD_SUSPENSE
+
+
+
+ */
+
+
+public enum ControlAccounts
+{
+
+GENERAL_BANK_CONTROL,
+GENERAL_CHARGE_CONTROL,
+GENERAL_BAL_CONTROL,
+GENERAL_PAYROLL_CONTROL,
+GENERAL_EXPENSE_CONTROL,
+GENERAL_PAYABLE_CONTROL,
+GENERAL_RECEIVABLE_CONTROL,
+GENERAL_INCOME_CONTROL,
+GENERAL_SUSPENSE,
+
+
+
+LOAN_PROD_CONTROL,
+LOAN_CHARGE_CONTROL,
+LOAN_COY_BANK_CONTROL,
+LOAN_CUST_BANK_CONTROL,
+LOAN_PAYROLL_CONTROL,
+LOAN_BAL_CONTROL,
+LOAN_EXPENSE_CONTROL,
+LOAN_PAYABLE_CONTROL,
+LOAN_RECEIVABLE_CONTROL,
+LOAN_INCOME_CONTROL,
+LOAN_SUSPENSE,
+
+
+
+SAVINGS_PROD_CONTROL,
+SAVINGS_CHARGE_CONTROL,
+SAVINGS_COY_BANK_CONTROL,
+SAVINGS_CUST_BANK_CONTROL,
+SAVINGS_PAYROLL_CONTROL,
+SAVINGS_BAL_CONTROL,
+SAVINGS_EXPENSE_CONTROL,
+SAVINGS_PAYABLE_CONTROL,
+SAVINGS_RECEIVABLE_CONTROL,
+SAVINGS_INCOME_CONTROL,
+SAVINGS_SUSPENSE,
+
+
+SD_PROD_CONTROL,
+SD_CHARGE_CONTROL,
+SD_COY_BANK_CONTROL,
+SD_CUST_BANK_CONTROL,
+SD_PAYROLL_CONTROL,
+SD_BAL_CONTROL,
+SD_EXPENSE_CONTROL,
+SD_PAYABLE_CONTROL,
+SD_RECEIVABLE_CONTROL,
+SD_INCOME_CONTROL,
+SD_SUSPENSE,
+
+
+
+FD_PROD_CONTROL,
+FD_CHARGE_CONTROL,
+FD_COY_BANK_CONTROL,
+FD_CUST_BANK_CONTROL,
+FD_PAYROLL_CONTROL,
+FD_BAL_CONTROL,
+FD_EXPENSE_CONTROL,
+FD_PAYABLE_CONTROL,
+FD_RECEIVABLE_CONTROL,
+FD_INCOME_CONTROL,
+FD_SUSPENSE,
+
+
+
+}

@@ -1,0 +1,206 @@
+﻿@page "/account/loanproductApplication"
+<main>
+
+    <div class="px-4 pt-6">
+        <div class="col-span-3 sm:col-span-3 mb-2">
+            <a href="/account/loanproductsapplications">
+                <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="submit">
+                    <svg class="inline mr-1" width="14" height="12" viewBox="0 0 14 12" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 5.99967H13Z" fill="#1F82BD"/>
+                        <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13"
+                              stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg> Back
+                </button>
+            </a>
+
+        </div>
+        <section>
+            <div class="py-8 px-4 mx-auto max-w-screen-lg text-center sm:py-16 lg:px-6">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+                    Loan Product Application
+                </h2>
+                <p class="text-gray-500 text-base sm:text-xl dark:text-gray-400">
+                    Your account is currently
+                    in test mode, so there are a few more things to do before you can go live and start
+                    receiving
+                    payments.Follow the steps below to get activated.
+                </p>
+                <div class="mt-8 lg:mt-12 space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+                    <div class="flex flex-col  items-center justify-center max-w-sm p-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity="0.5" cx="24" cy="24" r="24" fill="#1F82BD"
+                                    fill-opacity="0.2"/>
+                            <path d="M21 17H19C18.4696 17 17.9609 17.2107 17.5858 17.5858C17.2107 17.9609 17 18.4696 17 19V31C17 31.5304 17.2107 32.0391 17.5858 32.4142C17.9609 32.7893 18.4696 33 19 33H29C29.5304 33 30.0391 32.7893 30.4142 32.4142C30.7893 32.0391 31 31.5304 31 31V19C31 18.4696 30.7893 17.9609 30.4142 17.5858C30.0391 17.2107 29.5304 17 29 17H27M21 17C21 17.5304 21.2107 18.0391 21.5858 18.4142C21.9609 18.7893 22.4696 19 23 19H25C25.5304 19 26.0391 18.7893 26.4142 18.4142C26.7893 18.0391 27 17.5304 27 17M21 17C21 16.4696 21.2107 15.9609 21.5858 15.5858C21.9609 15.2107 22.4696 15 23 15H25C25.5304 15 26.0391 15.2107 26.4142 15.5858C26.7893 15.9609 27 16.4696 27 17M24 24H27M24 28H27M21 24H21.01M21 28H21.01"
+                                  stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                        <a href="/account/LoanApplication/executive">
+                            <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">
+                                Executive Loan
+                            </h5>
+                        </a>
+                        <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">
+                            Your
+                            account is currently in test
+                            mode, so there are a few more
+                        </p>
+                        <form action="/account/LoanApplication/executive">
+                            <button type="submit"
+                                    class="mt-4  py-2 px-8 w-full text-xs font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                Apply
+                                Now
+                            </button>
+                        </form>
+
+                    </div>
+                    <div class="flex flex-col  items-center justify-center max-w-sm p-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity="0.5" cx="24" cy="24" r="24" fill="#1F82BD"
+                                    fill-opacity="0.2"/>
+                            <path d="M29 21V19C29 18.4696 28.7893 17.9609 28.4142 17.5858C28.0391 17.2107 27.5304 17 27 17H17C16.4696 17 15.9609 17.2107 15.5858 17.5858C15.2107 17.9609 15 18.4696 15 19V25C15 25.5304 15.2107 26.0391 15.5858 26.4142C15.9609 26.7893 16.4696 27 17 27H19M21 31H31C31.5304 31 32.0391 30.7893 32.4142 30.4142C32.7893 30.0391 33 29.5304 33 29V23C33 22.4696 32.7893 21.9609 32.4142 21.5858C32.0391 21.2107 31.5304 21 31 21H21C20.4696 21 19.9609 21.2107 19.5858 21.5858C19.2107 21.9609 19 22.4696 19 23V29C19 29.5304 19.2107 30.0391 19.5858 30.4142C19.9609 30.7893 20.4696 31 21 31ZM28 26C28 26.5304 27.7893 27.0391 27.4142 27.4142C27.0391 27.7893 26.5304 28 26 28C25.4696 28 24.9609 27.7893 24.5858 27.4142C24.2107 27.0391 24 26.5304 24 26C24 25.4696 24.2107 24.9609 24.5858 24.5858C24.9609 24.2107 25.4696 24 26 24C26.5304 24 27.0391 24.2107 27.4142 24.5858C27.7893 24.9609 28 25.4696 28 26Z"
+                                  stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+
+                        <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">
+                            Target Loan
+                        </h5>
+
+                        <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">
+                            Your
+                            account is currently in test
+                            mode, so there are a few more
+                        </p>
+                        <a href="/account/LoanApplication/target">
+                            <button type="submit"
+                                    class="mt-4  py-2 px-8 w-full text-xs font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                Apply
+                                Now
+                            </button>
+                        </a>
+                    </div>
+                    <div class="flex flex-col  items-center justify-center max-w-sm p-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity="0.5" cx="24" cy="24" r="24" fill="#1F82BD"
+                                    fill-opacity="0.2"/>
+                            <path d="M21 17H19C18.4696 17 17.9609 17.2107 17.5858 17.5858C17.2107 17.9609 17 18.4696 17 19V31C17 31.5304 17.2107 32.0391 17.5858 32.4142C17.9609 32.7893 18.4696 33 19 33H29C29.5304 33 30.0391 32.7893 30.4142 32.4142C30.7893 32.0391 31 31.5304 31 31V19C31 18.4696 30.7893 17.9609 30.4142 17.5858C30.0391 17.2107 29.5304 17 29 17H27M21 17C21 17.5304 21.2107 18.0391 21.5858 18.4142C21.9609 18.7893 22.4696 19 23 19H25C25.5304 19 26.0391 18.7893 26.4142 18.4142C26.7893 18.0391 27 17.5304 27 17M21 17C21 16.4696 21.2107 15.9609 21.5858 15.5858C21.9609 15.2107 22.4696 15 23 15H25C25.5304 15 26.0391 15.2107 26.4142 15.5858C26.7893 15.9609 27 16.4696 27 17M24 24H27M24 28H27M21 24H21.01M21 28H21.01"
+                                  stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                        <a href="/account/LoanApplication/long">
+                            <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">
+                                Long-term Loan
+                            </h5>
+                        </a>
+                        <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">
+                            Your
+                            account is currently in test
+                            mode, so there are a few more
+                        </p>
+                        <form action="/account/LoanApplication/long">
+                            <button type="submit"
+                                    class="mt-4  py-2 px-8 w-full text-xs font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                Apply
+                                Now
+                            </button>
+                        </form>
+
+                    </div>
+                    <div class="flex flex-col  items-center justify-center max-w-sm p-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity="0.5" cx="24" cy="24" r="24" fill="#1F82BD"
+                                    fill-opacity="0.2"/>
+                            <path d="M29 21V19C29 18.4696 28.7893 17.9609 28.4142 17.5858C28.0391 17.2107 27.5304 17 27 17H17C16.4696 17 15.9609 17.2107 15.5858 17.5858C15.2107 17.9609 15 18.4696 15 19V25C15 25.5304 15.2107 26.0391 15.5858 26.4142C15.9609 26.7893 16.4696 27 17 27H19M21 31H31C31.5304 31 32.0391 30.7893 32.4142 30.4142C32.7893 30.0391 33 29.5304 33 29V23C33 22.4696 32.7893 21.9609 32.4142 21.5858C32.0391 21.2107 31.5304 21 31 21H21C20.4696 21 19.9609 21.2107 19.5858 21.5858C19.2107 21.9609 19 22.4696 19 23V29C19 29.5304 19.2107 30.0391 19.5858 30.4142C19.9609 30.7893 20.4696 31 21 31ZM28 26C28 26.5304 27.7893 27.0391 27.4142 27.4142C27.0391 27.7893 26.5304 28 26 28C25.4696 28 24.9609 27.7893 24.5858 27.4142C24.2107 27.0391 24 26.5304 24 26C24 25.4696 24.2107 24.9609 24.5858 24.5858C24.9609 24.2107 25.4696 24 26 24C26.5304 24 27.0391 24.2107 27.4142 24.5858C27.7893 24.9609 28 25.4696 28 26Z"
+                                  stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+
+                        <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">
+                            Short-term Loan
+                        </h5>
+
+                        <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">
+                            Your
+                            account is currently in test
+                            mode, so there are a few more
+                        </p>
+                        <a href="/account/LoanApplication/short">
+                            <button type="submit"
+                                    class="mt-4  py-2 px-8 w-full text-xs font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                Apply
+                                Now
+                            </button>
+                        </a>
+                    </div>
+                    <div class="flex flex-col  items-center justify-center max-w-sm p-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity="0.5" cx="24" cy="24" r="24" fill="#1F82BD"
+                                    fill-opacity="0.2"/>
+                            <path d="M21 17H19C18.4696 17 17.9609 17.2107 17.5858 17.5858C17.2107 17.9609 17 18.4696 17 19V31C17 31.5304 17.2107 32.0391 17.5858 32.4142C17.9609 32.7893 18.4696 33 19 33H29C29.5304 33 30.0391 32.7893 30.4142 32.4142C30.7893 32.0391 31 31.5304 31 31V19C31 18.4696 30.7893 17.9609 30.4142 17.5858C30.0391 17.2107 29.5304 17 29 17H27M21 17C21 17.5304 21.2107 18.0391 21.5858 18.4142C21.9609 18.7893 22.4696 19 23 19H25C25.5304 19 26.0391 18.7893 26.4142 18.4142C26.7893 18.0391 27 17.5304 27 17M21 17C21 16.4696 21.2107 15.9609 21.5858 15.5858C21.9609 15.2107 22.4696 15 23 15H25C25.5304 15 26.0391 15.2107 26.4142 15.5858C26.7893 15.9609 27 16.4696 27 17M24 24H27M24 28H27M21 24H21.01M21 28H21.01"
+                                  stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                        <a href="/account/carloanapplication">
+                            <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">
+                                Car Loan
+                            </h5>
+                        </a>
+                        <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">
+                            Your
+                            account is currently in test
+                            mode, so there are a few more
+                        </p>
+                        <form action="/account/carloanapplication">
+                            <button type="submit"
+                                    class="mt-4  py-2 px-8 w-full text-xs font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                Apply
+                                Now
+                            </button>
+                        </form>
+
+                    </div>
+                    <div class="flex flex-col  items-center justify-center max-w-sm p-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity="0.5" cx="24" cy="24" r="24" fill="#1F82BD"
+                                    fill-opacity="0.2"/>
+                            <path d="M29 21V19C29 18.4696 28.7893 17.9609 28.4142 17.5858C28.0391 17.2107 27.5304 17 27 17H17C16.4696 17 15.9609 17.2107 15.5858 17.5858C15.2107 17.9609 15 18.4696 15 19V25C15 25.5304 15.2107 26.0391 15.5858 26.4142C15.9609 26.7893 16.4696 27 17 27H19M21 31H31C31.5304 31 32.0391 30.7893 32.4142 30.4142C32.7893 30.0391 33 29.5304 33 29V23C33 22.4696 32.7893 21.9609 32.4142 21.5858C32.0391 21.2107 31.5304 21 31 21H21C20.4696 21 19.9609 21.2107 19.5858 21.5858C19.2107 21.9609 19 22.4696 19 23V29C19 29.5304 19.2107 30.0391 19.5858 30.4142C19.9609 30.7893 20.4696 31 21 31ZM28 26C28 26.5304 27.7893 27.0391 27.4142 27.4142C27.0391 27.7893 26.5304 28 26 28C25.4696 28 24.9609 27.7893 24.5858 27.4142C24.2107 27.0391 24 26.5304 24 26C24 25.4696 24.2107 24.9609 24.5858 24.5858C24.9609 24.2107 25.4696 24 26 24C26.5304 24 27.0391 24.2107 27.4142 24.5858C27.7893 24.9609 28 25.4696 28 26Z"
+                                  stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+
+                        <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">
+                            Home Appliance Loan
+                        </h5>
+
+                        <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">
+                            Your
+                            account is currently in test
+                            mode, so there are a few more
+                        </p>
+                        <a href="/account/homeapplianceloanapplication">
+                            <button type="submit"
+                                    class="mt-4  py-2 px-8 w-full text-xs font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                Apply
+                                Now
+                            </button>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+@code {
+
+}

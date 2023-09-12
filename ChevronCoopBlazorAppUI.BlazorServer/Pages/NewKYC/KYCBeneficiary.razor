@@ -1,0 +1,653 @@
+﻿@using ChevronCoop.Web.AppUI.BlazorServer.Data
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.KYC.CorporateMember;
+
+
+<section class="bg-gray-50 dark:bg-gray-900">
+    <div class="mx-auto max-w-screen-2xl">
+        <!-- Start coding here -->
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            <div class="flex flex-col py-8 md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 px-4 border-b dark:border-gray-700">
+                <div class="w-full flex flex-col">
+                    <h5 class="dark:text-white font-bold text-xl">
+                        Beneficiary
+                    </h5>
+                    <div class="text-gray-500 font-normal text-sm">
+                        Register a maximum of 5 Beneficiary
+                    </div>
+                </div>
+                @if (!DisableAddButton)
+                {
+                    <div class="w-full flex flex-row items-center justify-end space-x-3">
+                        <button class="w-full md:w-auto flex items-center justify-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                                type="button" @onclick="OnAddBeneficiary">
+                            <svg class="h-3.5 w-3.5 mr-2"
+                                 fill="currentColor"
+                                 viewbox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 aria-hidden="true">
+                                <path clip-rule="evenodd"
+                                      fill-rule="evenodd"
+                                      d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                            </svg>
+                            Add Beneficiary
+                        </button>
+                    </div>
+                }
+            </div>
+            @if (HasRecords)
+            {
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700">
+                        <tr>
+
+
+                            <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                Name
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                Phone Number
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[14rem]">
+                                Address
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[6rem]">
+                                Email
+                            </th>
+                            <th scope="col"
+                                class="px-4 py-3 min-w-[6rem]">
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody data-accordion="table-column">
+                        @foreach (var item in BeneficiariesList)
+                        {
+                            <tr class="border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+                                id="table-column-header-9"
+                                data-accordion-target="#table-column-body-9"
+                                aria-expanded="false"
+                                aria-controls="table-column-body-9">
+
+
+                                <th scope="row"
+                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white ">
+                                    @item.FullName
+                                </th>
+                                <td class="px-4 py-3 text-gray-500">
+                                    @item.PhoneNumber
+                                </td>
+                                <td class="px-4 py-3 font-normal text-gray-500 whitespace-nowrap dark:text-white">
+                                    @item.Address
+                                </td>
+                                <td class="px-4 py-3 font-normal text-gray-500 whitespace-nowrap dark:text-white">
+                                    @item.Email
+                                </td>
+
+
+                                <td class="p-4 space-x-2 whitespace-nowrap">
+
+                                    <button @onclick=@(e => EditBeneficiary(item))>
+                                        <svg class="inline-flex items-center mr-2 w-5 h-5" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 4.00016H3C2.46957 4.00016 1.96086 4.21088 1.58579 4.58595C1.21071 4.96102 1 5.46973 1 6.00016V17.0002C1 17.5306 1.21071 18.0393 1.58579 18.4144C1.96086 18.7894 2.46957 19.0002 3 19.0002H14C14.5304 19.0002 15.0391 18.7894 15.4142 18.4144C15.7893 18.0393 16 17.5306 16 17.0002V12.0002M14.586 2.58616C14.7705 2.39514 14.9912 2.24278 15.2352 2.13796C15.4792 2.03314 15.7416 1.97797 16.0072 1.97566C16.2728 1.97335 16.5361 2.02396 16.7819 2.12452C17.0277 2.22508 17.251 2.37359 17.4388 2.56137C17.6266 2.74916 17.7751 2.97246 17.8756 3.21825C17.9762 3.46405 18.0268 3.72741 18.0245 3.99296C18.0222 4.25852 17.967 4.52096 17.8622 4.76497C17.7574 5.00898 17.605 5.22967 17.414 5.41416L8.828 14.0002H6V11.1722L14.586 2.58616Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+
+                                    <button @onclick=@(e => DeleteBeneficiary(item))>
+                                        <svg class="inline-flex items-center mr-2 w-5 h-5" width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 9V15M11 9V15M1 5H17M16 5L15.133 17.142C15.0971 17.6466 14.8713 18.1188 14.5011 18.4636C14.1309 18.8083 13.6439 19 13.138 19H4.862C4.35614 19 3.86907 18.8083 3.49889 18.4636C3.1287 18.1188 2.90292 17.6466 2.867 17.142L2 5H16ZM12 5V2C12 1.73478 11.8946 1.48043 11.7071 1.29289C11.5196 1.10536 11.2652 1 11 1H7C6.73478 1 6.48043 1.10536 6.29289 1.29289C6.10536 1.48043 6 1.73478 6 2V5H12Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+
+
+                                </td>
+                            </tr>
+                        }
+
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700">
+                        <tr>
+
+
+                            <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                Name
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[10rem]">
+                                Phone Number
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[14rem]">
+                                Address
+                            </th>
+                            <th scope="col" class="px-4 py-3 min-w-[6rem]">
+                                Email
+                            </th>
+                            <th scope="col"
+                                class="px-4 py-3 min-w-[6rem]">
+                            </th>
+                        </tr>
+                        </thead>
+
+
+                    </table>
+                    <div class="flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                        <svg width="59" height="56" viewBox="0 0 59 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.3479 11.6667H17.5798C16.3152 11.6667 15.1024 12.1583 14.2082 13.0335C13.314 13.9087 12.8116 15.0957 12.8116 16.3333V44.3333C12.8116 45.571 13.314 46.758 14.2082 47.6332C15.1024 48.5083 16.3152 49 17.5798 49H41.4203C42.6849 49 43.8977 48.5083 44.7919 47.6332C45.6861 46.758 46.1885 45.571 46.1885 44.3333V16.3333C46.1885 15.0957 45.6861 13.9087 44.7919 13.0335C43.8977 12.1583 42.6849 11.6667 41.4203 11.6667H36.6522M22.3479 11.6667C22.3479 12.9043 22.8502 14.0913 23.7444 14.9665C24.6386 15.8417 25.8514 16.3333 27.116 16.3333H31.8841C33.1487 16.3333 34.3615 15.8417 35.2557 14.9665C36.1499 14.0913 36.6522 12.9043 36.6522 11.6667M22.3479 11.6667C22.3479 10.429 22.8502 9.242 23.7444 8.36683C24.6386 7.49167 25.8514 7 27.116 7H31.8841C33.1487 7 34.3615 7.49167 35.2557 8.36683C36.1499 9.242 36.6522 10.429 36.6522 11.6667" stroke="#0E9F6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M25.2391 26.7822L33.7609 34.0866M25.2391 34.0866L33.7609 26.7822L25.2391 34.0866Z" stroke="#0E9F6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+
+                        <h5 class="text-base font-medium text-gray-900 my-4">
+                            No data yet
+                        </h5>
+
+                        <p class=" font-medium text-sm text-gray-500 mb-6 text-center">
+                            To add a Beneficiary, simply click the "Add <br/> Beneficiary" button below.
+                        </p>
+
+                        <button class="w-full md:w-auto flex items-center justify-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                                type="button" aria-controls="drawer-right-example" @onclick="OnAddBeneficiary">
+                            <svg class="h-3.5 w-3.5 mr-2"
+                                 fill="currentColor"
+                                 viewbox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 aria-hidden="true">
+                                <path clip-rule="evenodd"
+                                      fill-rule="evenodd"
+                                      d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                            </svg>
+                            Add Beneficiary
+                        </button>
+
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+    <form>
+        <div class="col-span-6 sm:col-full my-4">
+            <button @onclick=SaveandContinue class="@Tailwind.Button_Blue"
+                    type="button">
+                Save & Continue
+            </button>
+        </div>
+    </form>
+
+
+</section>
+<Modal Visible="@showPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+       class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+
+    <!-- Modal content -->
+
+    <!-- Modal header -->
+    <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+        <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.5003 29.3337C23.8337 29.3337 29.8337 23.3337 29.8337 16.0003C29.8337 8.66699 23.8337 2.66699 16.5003 2.66699C9.16699 2.66699 3.16699 8.66699 3.16699 16.0003C3.16699 23.3337 9.16699 29.3337 16.5003 29.3337Z" stroke="#E24D4D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16.5 10.667V17.3337" stroke="#E24D4D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16.4922 21.333H16.5042" stroke="#E24D4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <p class="break-words text-center my-4 text-gray-900 text-xl font-medium">Are you sure you want to delete <br/> this Beneficiary?</p>
+        <p class="">
+            This Beneficiary input would be deleted
+        </p>
+
+
+        <div class="flex items-center space-x-4 mt-6 ">
+            <button @onclick=OnclodeModal type="button" class="bg-cancelGray inline-flex items-center hover:text-black border   focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-10 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                Cancel
+            </button>
+            <button type="button" @onclick=ConfirmDeleteBeneficiary class="text-white bg-CEMCS-Blue-100 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Yes, Proceed
+            </button>
+
+        </div>
+
+        <!-- Modal body -->
+
+    </div>
+
+
+</Modal>
+
+
+<!-- drawer component -->
+<Drawer @ref="@addDrawer" Closable="true" Visible="showAddDrawer" Title='("Add Beneficiary")'
+        OnClose="onAddDone">
+<EditForm Model="@Model" OnValidSubmit="SubmitValidForm">
+<FluentValidationValidator @ref="_fluentValidationValidatorAdd"/>
+<ValidationSummary/>
+<div class="pb-20 flex flex-col justify-between h-full">
+<div class="grid grid-cols-6 gap-6 ">
+    <div class="col-span-6 sm:col-span-3">
+        <label for="first-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            First Name<span class="text-red-500">*</span>
+        </label>
+        <SfTextBox ID="FirstName" @bind-Value=@Model.firstName Placeholder="Ex. Bonnie" CssClass="@Tailwind.TextBoxWithShadow"></SfTextBox>
+        <ValidationMessage For="() => Model.firstName" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="last-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Last Name<span class="text-red-500">*</span>
+        </label>
+        <SfTextBox ID="LastName" @bind-Value=@Model.lastName Placeholder="Ex. Green" CssClass="@Tailwind.TextBoxWithShadow"></SfTextBox>
+        <ValidationMessage For="() => Model.lastName" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="email"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Email Address<span class="text-red-500">*</span>
+        </label>
+        <SfTextBox ID="LastName" @bind-Value=@Model.email Placeholder="Ex. info@example.com" CssClass="@Tailwind.TextBoxWithShadow"></SfTextBox>
+        <ValidationMessage For="() => Model.email" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="phonenmber1"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Phone number<span class="text-red-500">*</span>
+        </label>
+
+        <div class="flex">
+            <button id="dropdown-button-2"
+                    data-dropdown-toggle="dropdown-search-city"
+                    class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                    type="button">
+                <svg class="mr-2" width="14" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 2C0 0.89543 0.89543 0 2 0H6.66667V14H2C0.895429 14 0 13.1046 0 12V2Z" fill="#009D6E"/>
+                    <rect x="6.6665" width="6.66667" height="14" fill="white"/>
+                    <path d="M13.3335 0H18.0002C19.1047 0 20.0002 0.895431 20.0002 2V12C20.0002 13.1046 19.1047 14 18.0002 14H13.3335V0Z" fill="#009D6E"/>
+                </svg>
+                NG +234
+                <svg aria-hidden="true"
+                     class="w-4 h-4 ml-1"
+                     fill="currentColor"
+                     viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clip-rule="evenodd">
+                    </path>
+                </svg>
+            </button>
+            <div id="dropdown-search-city"
+                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdown-button-2">
+                    <li>
+                        <button type="button"
+                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">
+                            <div class="inline-flex items-center">
+                                <svg aria-hidden="true"
+                                     class="h-3.5 w-3.5 rounded-full mr-2"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     id="flag-icon-css-us"
+                                     viewBox="0 0 512 512">
+                                    <g fill-rule="evenodd">
+                                        <g stroke-width="1pt">
+                                            <path fill="#bd3d44"
+                                                  d="M0 0h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z"
+                                                  transform="scale(3.9385)"/>
+                                            <path fill="#fff"
+                                                  d="M0 10h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z"
+                                                  transform="scale(3.9385)"/>
+                                        </g>
+                                        <path fill="#192f5d"
+                                              d="M0 0h98.8v70H0z"
+                                              transform="scale(3.9385)"/>
+                                        <path fill="#fff"
+                                              d="M8.2 3l1 2.8H12L9.7 7.5l.9 2.7-2.4-1.7L6 10.2l.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7L74 8.5l-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 7.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 24.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 21.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 38.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 35.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 52.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 49.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 66.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 63.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9z"
+                                              transform="scale(3.9385)"/>
+                                    </g>
+                                </svg>
+                                United States
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button"
+                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">
+                            <div class="inline-flex items-center">
+                                <svg aria-hidden="true"
+                                     class="h-3.5 w-3.5 rounded-full mr-2"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     id="flag-icon-css-de"
+                                     viewBox="0 0 512 512">
+                                    <path fill="#ffce00"
+                                          d="M0 341.3h512V512H0z"/>
+                                    <path d="M0 0h512v170.7H0z"/>
+                                    <path fill="#d00"
+                                          d="M0 170.7h512v170.6H0z"/>
+                                </svg>
+                                Germany
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button"
+                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">
+                            <div class="inline-flex items-center">
+                                <svg aria-hidden="true"
+                                     class="h-3.5 w-3.5 rounded-full mr-2"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     id="flag-icon-css-it"
+                                     viewBox="0 0 512 512">
+                                    <g fill-rule="evenodd" stroke-width="1pt">
+                                        <path fill="#fff" d="M0 0h512v512H0z"/>
+                                        <path fill="#009246"
+                                              d="M0 0h170.7v512H0z"/>
+                                        <path fill="#ce2b37"
+                                              d="M341.3 0H512v512H341.3z"/>
+                                    </g>
+                                </svg>
+                                Italy
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button"
+                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">
+                            <div class="inline-flex items-center">
+                                <svg aria-hidden="true"
+                                     class="h-3.5 w-3.5 rounded-full mr-2"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     id="flag-icon-css-cn"
+                                     viewBox="0 0 512 512">
+                                    <defs>
+                                        <path id="a"
+                                              fill="#ffde00"
+                                              d="M1-.3L-.7.8 0-1 .6.8-1-.3z"/>
+                                    </defs>
+                                    <path fill="#de2910"
+                                          d="M0 0h512v512H0z"/>
+                                    <use width="30"
+                                         height="20"
+                                         transform="matrix(76.8 0 0 76.8 128 128)"
+                                         xlink:href="#a"/>
+                                    <use width="30"
+                                         height="20"
+                                         transform="rotate(-121 142.6 -47) scale(25.5827)"
+                                         xlink:href="#a"/>
+                                    <use width="30"
+                                         height="20"
+                                         transform="rotate(-98.1 198 -82) scale(25.6)"
+                                         xlink:href="#a"/>
+                                    <use width="30"
+                                         height="20"
+                                         transform="rotate(-74 272.4 -114) scale(25.6137)"
+                                         xlink:href="#a"/>
+                                    <use width="30"
+                                         height="20"
+                                         transform="matrix(16 -19.968 19.968 16 256 230.4)"
+                                         xlink:href="#a"/>
+                                </svg>
+                                China
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="relative w-full">
+                            <SfTextBox ID="PhoneNo" @bind-Value=@Model.phone Placeholder="Ex. 800-XXX-XXXX" CssClass="@Tailwind.TextBox_General"></SfTextBox>
+                <ValidationMessage For="() => Model.phone" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="address"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Address<span class="text-red-500">*</span>
+        </label>
+        <SfTextBox ID="Address" @bind-Value=@Model.address Placeholder="Ex. No. 2 Oniru" CssClass="@Tailwind.TextBoxWithShadow"></SfTextBox>
+        <ValidationMessage For="() => Model.address" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+    </div>
+
+
+</div>
+<div class="flex col-span-6 sm:col-full space-x-4 justify-end">
+    <button data-drawer-hide="drawer-right-example-2"
+            aria-controls="drawer-right-example-2"
+            class="@Tailwind.Button_Cancel"
+            type="button" @onclick="onAddDone">
+        Cancel
+    </button>
+    <button class="@Tailwind.Button_Green"
+            type="submit">
+        Add Beneficiary
+    </button>
+</div>
+</div>
+</EditForm>
+
+</Drawer>
+<!-----------Edit Drawer Component--------------------->
+<Drawer @ref="@editDrawer" Closable="true" Visible="showEditDrawer" Title='("Edit Beneficiary")'
+        OnClose="onEditDone">
+<EditForm Model="@UpdateModel" OnValidSubmit="SaveEditForm">
+<FluentValidationValidator @ref="_fluentValidationValidatorEdit"/>
+<ValidationSummary/>
+<div class="pb-20 flex flex-col justify-between h-full">
+<div class="grid grid-cols-6 gap-6 ">
+    <div class="col-span-6 sm:col-span-3">
+        <label for="first-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            First Name<span class="text-red-500">*</span>
+        </label>
+        <SfTextBox ID="FirstName" @bind-Value=@UpdateModel.FirstName Placeholder="Ex. Bonnie" CssClass="@Tailwind.TextBox_General"></SfTextBox>
+        <ValidationMessage For="() => UpdateModel.FirstName" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="last-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Last Name<span class="text-red-500">*</span>
+        </label>
+        <SfTextBox ID="LastName" @bind-Value=@UpdateModel.LastName Placeholder="Ex. Bonnie" CssClass="@Tailwind.TextBox_General"></SfTextBox>
+        <ValidationMessage For="() => UpdateModel.LastName" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="email"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Email Address<span class="text-red-500">*</span>
+        </label>
+        <SfTextBox ID="LastName" @bind-Value=@Model.email Placeholder="Ex. info@example.com" CssClass="@Tailwind.TextBox_General"></SfTextBox>
+        <ValidationMessage For="() => Model.email" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="phonenmber1"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Phone number<span class="text-red-500">*</span>
+        </label>
+
+        <div class="flex">
+            <button id="dropdown-button-2"
+                    data-dropdown-toggle="dropdown-search-city"
+                    class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                    type="button">
+                <svg class="mr-2" width="14" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 2C0 0.89543 0.89543 0 2 0H6.66667V14H2C0.895429 14 0 13.1046 0 12V2Z" fill="#009D6E"/>
+                    <rect x="6.6665" width="6.66667" height="14" fill="white"/>
+                    <path d="M13.3335 0H18.0002C19.1047 0 20.0002 0.895431 20.0002 2V12C20.0002 13.1046 19.1047 14 18.0002 14H13.3335V0Z" fill="#009D6E"/>
+                </svg>
+                NG +234
+                <svg aria-hidden="true"
+                     class="w-4 h-4 ml-1"
+                     fill="currentColor"
+                     viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clip-rule="evenodd">
+                    </path>
+                </svg>
+            </button>
+            <div id="dropdown-search-city"
+                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdown-button-2">
+                    <li>
+                        <button type="button"
+                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">
+                            <div class="inline-flex items-center">
+                                <svg aria-hidden="true"
+                                     class="h-3.5 w-3.5 rounded-full mr-2"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     id="flag-icon-css-us"
+                                     viewBox="0 0 512 512">
+                                    <g fill-rule="evenodd">
+                                        <g stroke-width="1pt">
+                                            <path fill="#bd3d44"
+                                                  d="M0 0h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z"
+                                                  transform="scale(3.9385)"/>
+                                            <path fill="#fff"
+                                                  d="M0 10h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z"
+                                                  transform="scale(3.9385)"/>
+                                        </g>
+                                        <path fill="#192f5d"
+                                              d="M0 0h98.8v70H0z"
+                                              transform="scale(3.9385)"/>
+                                        <path fill="#fff"
+                                              d="M8.2 3l1 2.8H12L9.7 7.5l.9 2.7-2.4-1.7L6 10.2l.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7L74 8.5l-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 7.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 24.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 21.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 38.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 35.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 52.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 49.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 66.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 63.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9z"
+                                              transform="scale(3.9385)"/>
+                                    </g>
+                                </svg>
+                                United States
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button"
+                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">
+                            <div class="inline-flex items-center">
+                                <svg aria-hidden="true"
+                                     class="h-3.5 w-3.5 rounded-full mr-2"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     id="flag-icon-css-de"
+                                     viewBox="0 0 512 512">
+                                    <path fill="#ffce00"
+                                          d="M0 341.3h512V512H0z"/>
+                                    <path d="M0 0h512v170.7H0z"/>
+                                    <path fill="#d00"
+                                          d="M0 170.7h512v170.6H0z"/>
+                                </svg>
+                                Germany
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button"
+                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">
+                            <div class="inline-flex items-center">
+                                <svg aria-hidden="true"
+                                     class="h-3.5 w-3.5 rounded-full mr-2"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     id="flag-icon-css-it"
+                                     viewBox="0 0 512 512">
+                                    <g fill-rule="evenodd" stroke-width="1pt">
+                                        <path fill="#fff" d="M0 0h512v512H0z"/>
+                                        <path fill="#009246"
+                                              d="M0 0h170.7v512H0z"/>
+                                        <path fill="#ce2b37"
+                                              d="M341.3 0H512v512H341.3z"/>
+                                    </g>
+                                </svg>
+                                Italy
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button"
+                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">
+                            <div class="inline-flex items-center">
+                                <svg aria-hidden="true"
+                                     class="h-3.5 w-3.5 rounded-full mr-2"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     id="flag-icon-css-cn"
+                                     viewBox="0 0 512 512">
+                                    <defs>
+                                        <path id="a"
+                                              fill="#ffde00"
+                                              d="M1-.3L-.7.8 0-1 .6.8-1-.3z"/>
+                                    </defs>
+                                    <path fill="#de2910"
+                                          d="M0 0h512v512H0z"/>
+                                    <use width="30"
+                                         height="20"
+                                         transform="matrix(76.8 0 0 76.8 128 128)"
+                                         xlink:href="#a"/>
+                                    <use width="30"
+                                         height="20"
+                                         transform="rotate(-121 142.6 -47) scale(25.5827)"
+                                         xlink:href="#a"/>
+                                    <use width="30"
+                                         height="20"
+                                         transform="rotate(-98.1 198 -82) scale(25.6)"
+                                         xlink:href="#a"/>
+                                    <use width="30"
+                                         height="20"
+                                         transform="rotate(-74 272.4 -114) scale(25.6137)"
+                                         xlink:href="#a"/>
+                                    <use width="30"
+                                         height="20"
+                                         transform="matrix(16 -19.968 19.968 16 256 230.4)"
+                                         xlink:href="#a"/>
+                                </svg>
+                                China
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="relative w-full">
+                            <SfTextBox ID="PhoneNo" maxlength="11" minlength="11" @bind-Value=@UpdateModel.PhoneNumber Placeholder="Ex. 800-XXX-XXXX" CssClass="@Tailwind.TextBox_General"></SfTextBox>
+                <ValidationMessage For="() => UpdateModel.PhoneNumber" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="address"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Address<span class="text-red-500">*</span>
+        </label>
+        <SfTextBox ID="Address" @bind-Value=@UpdateModel.Address Placeholder="Ex. No. 2 Oniru" CssClass="@Tailwind.TextBox_General"></SfTextBox>
+        <ValidationMessage For="() => UpdateModel.Address" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+    </div>
+
+
+</div>
+<div class="flex col-span-6 sm:col-full space-x-4 justify-end">
+    <button data-drawer-hide="drawer-right-editpage"
+            aria-controls="drawer-right-editpage"
+            class="@Tailwind.Button_Cancel"
+            type="button" @onclick="onEditDone">
+        Cancel
+    </button>
+    <button class="@Tailwind.Button_Green"
+            type="submit">
+        Edit Beneficiary
+    </button>
+</div>
+</div>
+</EditForm>
+
+</Drawer>

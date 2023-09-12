@@ -1,0 +1,78 @@
+﻿@using AP.ChevronCoop.Entities.Security.MemberProfiles.MemberProfiles;
+<EditForm Model="@Model">
+    <FluentValidationValidator/>
+    <ValidationSummary/>
+
+    <div class="fixed top-0 right-0 z-40 h-screen p-4  transition-transform  bg-white w-2/5 dark:bg-gray-800">
+
+        <div action="" class="pb-20 flex flex-col justify-between h-full">
+            @if (!hasSelectedMember)
+            {
+                <div class="grid grid-cols-6 gap-6 ">
+
+                  
+                    <div class="col-span-6 sm:col-full">
+                        @if (hasSelectedDepartment)
+                        {
+                            <SfComboBox CssClass="w-full md:w-auto flex items-center justify-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                                        TValue="string" TItem="MemberProfileMasterView" DataSource="MembersByDepartment"
+                                        Query="@Query_Dept_Combo"
+                                        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Search by primary email">
+                                <ComboBoxEvents TItem="MemberProfileMasterView" TValue="string" OnValueSelect="@OnMemberValueSelectedhandler"></ComboBoxEvents>
+                                <ComboBoxFieldSettings Text="PrimaryEmail" Value="Id"></ComboBoxFieldSettings>
+                            </SfComboBox>
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="grid grid-cols-6 gap-6 ">
+                @if (hasSelectedMember)
+                {
+                <div class="col-span-6 sm:col-full">
+                    <label for="first-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Member email address</label>
+                        <SfTextBox ID="member-name" Readonly=true Placeholder="Enter group name" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        @bind-Value=@Model.Email OnBlur="OnBlur"></SfTextBox>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Member name</label>
+                        <SfTextBox ID="member-name" Placeholder="Enter group name" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      @bind-Value=@Model.MemberName OnBlur="OnBlur"></SfTextBox>
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Membership number</label>
+                        <SfTextBox ID="member-name" Placeholder="Enter group name" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        @bind-Value=@Model.MembershipId OnBlur="OnBlur"></SfTextBox>
+                </div>
+                }
+            </div>
+
+
+            <div class="flex col-span-6 sm:col-full space-x-4  justify-end">
+
+                <button type="button" @onclick="OnCancel"
+                        class="text-CEMCS-Blue-100 border border-gray-300 focus:outline-none hover:bg-gray-100  focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    Cancel
+                </button>
+                <button @onclick="OnClickAddMember"
+                        class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="button">
+                    Add Member
+                </button>
+            </div>
+
+        </div>
+    </div>
+</EditForm>
+
+
+<Modal Title="@("Notification")" Visible="@showPopup" DestroyOnClose="true"
+       OnOk="OnCancel" OkText="@("Ok")"
+       OnCancel="OnCancel" CancelText="@("Cancel")">
+    <p>@notificationText</p>
+</Modal>

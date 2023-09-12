@@ -1,0 +1,51 @@
+﻿@page "/emailVerified"
+@*@page "/verify-email-result"*@
+@layout LoginLayout
+
+<div class="flex flex-col justify-center items-center px-6 pt-8 mx-auto  pt:mt-0 dark:bg-gray-900">
+
+    <!-- Card -->
+    <!-- <section class="py-8 bg-white dark:bg-gray-900 lg:py-0"> -->
+    <div class="p-12 justify-center items-center w-full bg-white rounded-lg shadow lg:flex  lg:max-w-xl dark:bg-gray-800">
+        <div class="flex items-center mx-auto md:w-[42rem] px-4 md:px-8 xl:px-0">
+            <div class="w-full">
+
+                <ol class="flex items-center mb-6 text-sm font-medium text-center  dark:text-gray-400 lg:mb-12 sm:text-base">
+                    <li class="flex  items-center after:content-[''] after:w-12 after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+                        <div class="flex items-center text-blue-400  sm:block after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 dark:after:text-gray-500">
+                            <div class="text-xs sm:mb-2 sm:mx-auto">1</div>
+                            Employee Info
+                        </div>
+                    </li>
+                    <li class="flex items-center after:content-[''] after:w-12 after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+                        <div class="flex items-center text-gray-500 sm:block after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 dark:after:text-gray-500">
+                            <div class="mr-2 sm:mb-2 sm:mx-auto">2</div>
+                            Account <span class="hidden sm:inline-flex">Info</span>
+                        </div>
+                    </li>
+                    <li class="flex items-center sm:block text-gray-500">
+                        <div class="mr-2  sm:mb-2 sm:mx-auto">3</div>
+                        Membership fee
+                    </li>
+                </ol>
+
+                <div class="flex flex-col items-center">
+                    <h1 class="text-center mb-4 text-2xl font-extrabold leading-tight tracking-tight text-gray-900 sm:mb-6 dark:text-white">
+                        Email Verification
+                    </h1>
+                    <img src="../images/chevron/auth/Vector (1).svg" class="my-4"/>
+
+                    <p class="text-center my-6 max-w-xs">Your email has been verified<br/> successfully</p>
+                    <form action="./addBankDetails" class="w-full">
+                        <button type="button" onclick="@OnClickReturnToApplication"
+                                class="py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                            Continue
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </section> -->
+</div>

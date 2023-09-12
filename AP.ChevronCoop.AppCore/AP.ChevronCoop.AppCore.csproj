@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="EntityFrameworkCore.Exceptions.SqlServer" Version="6.0.3.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
+    <PackageReference Include="Hangfire" Version="1.8.2" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.2" />
+    <PackageReference Include="Hangfire.Dashboard.BasicAuthorization" Version="1.0.2" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.8.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NHiLo" Version="2.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AP.ChevronCoop.AppDomain\AP.ChevronCoop.AppDomain.csproj" />
+    <ProjectReference Include="..\AP.ChevronCoop.Entities\AP.ChevronCoop.Entities.csproj" />
+    <ProjectReference Include="..\AP.ChevronCoop.Infrastructure\AP.ChevronCoop.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Services\BackgroundServices\Interfaces\" />
+    <None Remove="NetPay\" />
+    <None Remove="Payroll\PayrollDeductionMatch\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NetPay\" />
+    <Folder Include="Payroll\PayrollDeductionMatch\" />
+  </ItemGroup>
+</Project>

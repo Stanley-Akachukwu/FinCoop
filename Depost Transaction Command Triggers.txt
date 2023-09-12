@@ -1,0 +1,22 @@
+
+Deposit Transaction Triggers:
+
+- SpecialDepositAccountCommandHandler > CreateSpecialDepositAccountCommand-------------------------(Transaction triggered on creating an SD account)
+- SpecialDepositCashAdditionCommandHandler > UpdateSpecialDepositCashAdditionCommand---------------(Transaction triggered on approval of SD Cash Addition)
+- SpecialDepositFundTransferCommandHandler > UpdateSpecialDepositFundTransferCommand---------------(Transaction triggered on approval of SD Fund Transfer)
+- SpecialDepositInterestAdditionCommandHandler > CreateSpecialDepositInterestAdditionCommand-------(Transaction triggered on logging SD Interest Computation Addition)
+- SpecialDepositWithdrawalCommandHandler > UpdateSpecialDepositWithdrawalCommand-------------------(Transaction triggered on approval of SD Fund Withdrawal)
+- FixedDepositAccountCommandHandler > CreateFixedDepositAccountCommand-----------------------------(Transaction triggered on creating an FD account)
+- FixedDepositInterestAdditionCommandHandler > CreateFixedDepositInterestAdditionCommand-----------(Transaction triggered on logging FD Interest Computation Addition)
+- UpdateSavingsCashAdditionCommand > UpdateSavingsCashAdditionCommand------------------------------(Transaction triggered on approval of SA Cash Addition)
+
+
+
+
+Deposit Transaction
+
+SavingsCashAddtion
+ - via bank transfer 50k
+ - upon approval
+ - upon ledge
+ 

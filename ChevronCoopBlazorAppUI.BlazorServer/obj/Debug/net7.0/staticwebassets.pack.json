@@ -1,0 +1,433 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\ChevronCoop.Web.AppUI.BlazorServer.bundle.scp.css",
+      "PackagePath": "staticwebassets\\ChevronCoop.Web.AppUI.BlazorServer.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\css\\flowbite-bundle.css",
+      "PackagePath": "staticwebassets\\css\\flowbite-bundle.css"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\css\\tailwind-styles.css",
+      "PackagePath": "staticwebassets\\css\\tailwind-styles.css"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\files\\ImportCNLFormat.xlsx",
+      "PackagePath": "staticwebassets\\files\\ImportCNLFormat.xlsx"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\.DS_Store",
+      "PackagePath": "staticwebassets\\images\\.DS_Store"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\auth\\Group 1000005034.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\auth\\Group 1000005034.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\auth\\Vector (1).svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\auth\\Vector (1).svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\auth\\Vector.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\auth\\Vector.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\auth\\bank.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\auth\\bank.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\auth\\calculator.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\auth\\calculator.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\auth\\card.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\auth\\card.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\auth\\done.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\auth\\done.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\auth\\infoIcon.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\auth\\infoIcon.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\auth\\successCheck.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\auth\\successCheck.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\Heros.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\Heros.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\Mask group.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\Mask group.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\[GetPaidStock 2.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\[GetPaidStock 2.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\appliances.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\appliances.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\arrowDeskIcon.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\arrowDeskIcon.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\bag-plus-icon.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\bag-plus-icon.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\bank-card-icon.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\bank-card-icon.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\car.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\car.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\cardDeskIcon.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\cardDeskIcon.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\chatDeskIcon.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\chatDeskIcon.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\credit-card-icon.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\credit-card-icon.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\more-circle.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\more-circle.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\pattern-icons.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\pattern-icons.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\people.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\people.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\profile.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\profile.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\dashboard\\userDeskIcons.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\dashboard\\userDeskIcons.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\empty-state\\empty.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\empty-state\\empty.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\Pattern.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\Pattern.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\Pattern.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\Pattern.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\about-image.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\about-image.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\badge-check.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\badge-check.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\badge-check.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\badge-check.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\bg-patterns.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\bg-patterns.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\bg-patterns.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\bg-patterns.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\card-header.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\card-header.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\chat-icon.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\chat-icon.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\chat-icon.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\chat-icon.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\clipboard-list.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\clipboard-list.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\clipboard-list.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\clipboard-list.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\dribble.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\dribble.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\dribble.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\dribble.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\facebook.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\facebook.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\facebook.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\facebook.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\finger-print.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\finger-print.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\finger-print.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\finger-print.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\github.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\github.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\github.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\github.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\hero-image.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\hero-image.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\image-withlaptop.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\image-withlaptop.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\image-withlaptop.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\image-withlaptop.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\input-mail.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\input-mail.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\input-mail.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\input-mail.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\logo-white.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\logo-white.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\logo-white.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\logo-white.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\logo.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\logo.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\logo.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\logo.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\mail.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\mail.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\mail.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\mail.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\phone.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\phone.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\phone.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\phone.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\top-landingpage-image.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\top-landingpage-image.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\top-landingpage-image.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\top-landingpage-image.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\twitter.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\twitter.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\landingpage\\twitter.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\landingpage\\twitter.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\modal-icon\\verify.svg",
+      "PackagePath": "staticwebassets\\images\\chevron\\modal-icon\\verify.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\chevron\\signup\\signup-image.png",
+      "PackagePath": "staticwebassets\\images\\chevron\\signup\\signup-image.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\logo.svg",
+      "PackagePath": "staticwebassets\\images\\logo.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\og-image.jpg",
+      "PackagePath": "staticwebassets\\images\\og-image.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\og-image.png",
+      "PackagePath": "staticwebassets\\images\\og-image.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\pdf_icon.svg",
+      "PackagePath": "staticwebassets\\images\\pdf_icon.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\themesberg.svg",
+      "PackagePath": "staticwebassets\\images\\themesberg.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\.DS_Store",
+      "PackagePath": "staticwebassets\\images\\users\\.DS_Store"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\avater.png",
+      "PackagePath": "staticwebassets\\images\\users\\avater.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\bonnie-green-2x.png",
+      "PackagePath": "staticwebassets\\images\\users\\bonnie-green-2x.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\bonnie-green.png",
+      "PackagePath": "staticwebassets\\images\\users\\bonnie-green.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\helene-engels.png",
+      "PackagePath": "staticwebassets\\images\\users\\helene-engels.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\jese-leos-2x.png",
+      "PackagePath": "staticwebassets\\images\\users\\jese-leos-2x.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\jese-leos.png",
+      "PackagePath": "staticwebassets\\images\\users\\jese-leos.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\joseph-mcfall.png",
+      "PackagePath": "staticwebassets\\images\\users\\joseph-mcfall.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\lana-byrd.png",
+      "PackagePath": "staticwebassets\\images\\users\\lana-byrd.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\leslie-livingston.png",
+      "PackagePath": "staticwebassets\\images\\users\\leslie-livingston.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\michael-gough.png",
+      "PackagePath": "staticwebassets\\images\\users\\michael-gough.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\neil-sims.png",
+      "PackagePath": "staticwebassets\\images\\users\\neil-sims.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\pdf_icon.svg",
+      "PackagePath": "staticwebassets\\images\\users\\pdf_icon.svg"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\robert-brown.png",
+      "PackagePath": "staticwebassets\\images\\users\\robert-brown.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\roberta-casas-2x.png",
+      "PackagePath": "staticwebassets\\images\\users\\roberta-casas-2x.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\roberta-casas.png",
+      "PackagePath": "staticwebassets\\images\\users\\roberta-casas.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\images\\users\\thomas-lean.png",
+      "PackagePath": "staticwebassets\\images\\users\\thomas-lean.png"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\js\\BlazorDownloadFile.js",
+      "PackagePath": "staticwebassets\\js\\BlazorDownloadFile.js"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\js\\Utility.js",
+      "PackagePath": "staticwebassets\\js\\Utility.js"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\js\\libs\\flowbite\\app.bundle.js",
+      "PackagePath": "staticwebassets\\js\\libs\\flowbite\\app.bundle.js"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\js\\libs\\flowbite\\app.bundle.js.map",
+      "PackagePath": "staticwebassets\\js\\libs\\flowbite\\app.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\js\\libs\\flowbite\\app.css",
+      "PackagePath": "staticwebassets\\js\\libs\\flowbite\\app.css"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\js\\libs\\flowbite\\app.css.map",
+      "PackagePath": "staticwebassets\\js\\libs\\flowbite\\app.css.map"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\js\\libs\\sidebarmenu.js",
+      "PackagePath": "staticwebassets\\js\\libs\\sidebarmenu.js"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\js\\sidebar.js",
+      "PackagePath": "staticwebassets\\js\\sidebar.js"
+    },
+    {
+      "Id": "C:\\Projects\\AP\\Repos\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI\\ChevronCoopBlazorAppUI.BlazorServer\\wwwroot\\js\\sidebareval.js",
+      "PackagePath": "staticwebassets\\js\\sidebareval.js"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.ChevronCoop.Web.AppUI.BlazorServer.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.ChevronCoop.Web.AppUI.BlazorServer.props",
+      "PackagePath": "build\\ChevronCoop.Web.AppUI.BlazorServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.ChevronCoop.Web.AppUI.BlazorServer.props",
+      "PackagePath": "buildMultiTargeting\\ChevronCoop.Web.AppUI.BlazorServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.ChevronCoop.Web.AppUI.BlazorServer.props",
+      "PackagePath": "buildTransitive\\ChevronCoop.Web.AppUI.BlazorServer.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

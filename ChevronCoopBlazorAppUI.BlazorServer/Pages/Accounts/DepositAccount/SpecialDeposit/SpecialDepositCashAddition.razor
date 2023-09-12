@@ -1,0 +1,129 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.CommonViews;
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.Drawals;
+@using AP.ChevronCoop.Entities.Deposits.SpecialDeposits.SpecialDepositCashAdditions;
+
+<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+
+    <!-- Card Title -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+                Cash Addition
+            </h3>
+            <span class="text-base font-normal text-gray-500 dark:text-gray-400">List of latest request.</span>
+        </div>
+
+        <div class="flex-shrink-0">
+        </div>
+    </div>
+
+    <div class="mb-4 flex w-full items-center font-semibold justify-between flex-wrap ">
+        <div class="flex gap-2 py-4">
+
+            <div class="">
+                <label for="mobile-search" class="sr-only">Search</label>
+                <div class="relative">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        @((MarkupString)SvgHelpers.SearchIcon)
+
+                    </div>
+                    <input type="text" @bind="@searchText" @oninput="SearchGrid"
+                           class="@Tailwind.SearchText"
+                           placeholder="Search">
+                    <button type="submit" class="@Tailwind.Search_Button_Blue">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        @if (!IsAdmin)
+        {
+
+            <button type="button"
+                @onclick="OnShowDrawal"
+                    class="@Tailwind.GreenButton_Inline">
+                @((MarkupString)SvgHelpers.PlusSignIcon)
+                New Request
+            </button>
+        }
+
+    </div>
+
+    <div class="mb-4 flex w-full items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+
+        <div class="w-full">
+            <div class="hidden  space-x-1 md:flex ">
+
+                @{
+                    string tabtoShow = "othertab1";
+                }
+
+                <TabComponent OnUpdateChanged="@onFiltering" MenuToShow="@tabtoShow"></TabComponent>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Table -->
+    <div class="flex flex-col mt-8">
+        <div class="overflow-x-auto rounded-lg">
+            <div class="inline-block min-w-full align-middle">
+
+                <div class="overflow-x-auto">
+                    <SfGrid ID="gridCashAddition" TValue="SpecialDepositActionsMasterView" EnablePersistence="false"
+                            DataSource="_SpecialDepositActionsMasterView"
+                            AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                            AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="500"
+                            AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                            AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+                        <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true"></GridFilterSettings>
+                        <GridPageSettings PageCount="10" PageSize="20" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+                        <GridEvents TValue="SpecialDepositActionsMasterView"></GridEvents>
+
+                        <GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false"
+                                          ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+                        </GridEditSettings>
+
+                        <GridColumns>
+                            <GridColumn Field=@nameof(SpecialDepositActionsMasterView.TransactionDate) HeaderText="DATE" Type="ColumnType.DateTime" Format="dd MMM yyyy hh:mm tt" AutoFit="true"></GridColumn>
+                            <GridColumn Field=@nameof(SpecialDepositActionsMasterView.Description) HeaderText="DESCRIPTION" AutoFit="true"></GridColumn>
+                            <GridColumn Field=@nameof(SpecialDepositActionsMasterView.Amount) HeaderText="AMOUNT" TextAlign="TextAlign.Right" Format="N2" Type="ColumnType.Number" AutoFit="true"></GridColumn>
+
+                            <GridColumn HeaderText="STATUS" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center>
+                                <Template>
+
+                                    @{
+                                        var row = (context as SpecialDepositActionsMasterView);
+                                        <ApprovalStatusComp approvalName="@row.ApprovalId_Status"></ApprovalStatusComp>
+                                    }
+
+                                </Template>
+                            </GridColumn>
+                        </GridColumns>
+                    </SfGrid>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@if (showDrawal)
+{
+    <SpecialDepositCashAdditionComp showAddDrawer="@showCashAddition"
+                                    CustomerID="@CustomerID"
+                                    SpecialDepositAccountID="@SpecialDepositAccountId"
+                                    SpecialDepositAccountNumber="@SavingsAccountNumber"
+                                    MembersName="@MembersName"
+                                    MembersNumber="@MembersNumber"
+                                    BankName="@BankName"
+                                    AccountNumber="@AccountNumber"
+                                    AccountName="@AccountName"
+                                    AvailableBalance="@AvailableBalance"
+                                    OnUpdateChanged="@OnUpdateChangedHandler"/>
+}

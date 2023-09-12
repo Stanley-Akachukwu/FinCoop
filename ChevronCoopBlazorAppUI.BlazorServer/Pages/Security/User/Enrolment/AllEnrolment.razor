@@ -1,0 +1,13 @@
+﻿@using AP.ChevronCoop.Entities.Security.Auth;
+@using AP.ChevronCoop.Entities.Security;
+<EnrolmentGrid EnrolmentFIlter="@allEnrolmentFilter"/>
+
+@code {
+    public string allEnrolmentFilter { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        allEnrolmentFilter = MemberProfileStatus.ACTIVE.ToString();
+    }
+
+}

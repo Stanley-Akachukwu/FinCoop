@@ -1,0 +1,132 @@
+﻿@using AP.ChevronCoop.Entities.MasterData.Charges;
+<EditForm Model="@Model" OnValidSubmit="OnProceed">
+    <FluentValidationValidator @ref="_fluentValidationValidator"/>
+    <ValidationSummary/>
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+        <h3 class="mb-4 text-xl font-bold dark:text-white">
+            When due for new loan
+        </h3>
+
+        <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Enable
+                    waiting period
+                </label>
+                <div class="flex flex-wrap">
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=ShowWaitingForm Name="EnableWaitingPeriod" Value=true @bind-Checked="@Model.EnableWaitingPeriod" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=HideWaitingForm Name="EnableWaitingPeriod" Value=false @bind-Checked="@Model.EnableWaitingPeriod" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                    </div>
+
+
+                </div>
+                @if (showEnableWaitingForm)
+                {
+                    <div class="grid grid-cols-6 gap-6 mt-3 " id="viewBox">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="countries"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Min waiting period unit<span class="text-red-500">*</span>
+                            </label>
+                            <SfComboBox id="tenureUnitOffset" DataSource=@tenureUnit TValue="string" TItem="string" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        @bind-Value=@Model.WaitingPeriodUnit
+                                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Waiting Period">
+                            </SfComboBox>
+                            <ValidationMessage For="() => Model.WaitingPeriodUnit" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3 ">
+                            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Min waiting period value</label>
+                            <div class="relative max-w-sm">
+                                <SfNumericTextBox TValue="decimal" ID="WaitingPeriodValue"  Placeholder="2" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                  @bind-Value=@Model.WaitingPeriodValue OnBlur="OnBlur">
+                                </SfNumericTextBox>
+                                <ValidationMessage For="() => Model.WaitingPeriodValue" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                }
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+
+
+        <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Enable
+                    Charges for waiting interest
+                </label>
+                <div class="flex flex-wrap">
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=ShowWaitingChargeForm Name="EnableWaitingPeriodCharge" Value=true @bind-Checked="@Model.EnableWaitingPeriodCharge" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <SfRadioButton @onclick=HideWaitingChargeForm Name="EnableWaitingPeriodCharge" Value=false @bind-Checked="@Model.EnableWaitingPeriodCharge" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                        <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                    </div>
+
+
+                </div>
+                @if (showEnableChargeWaitingForm)
+                {
+                    <div class="grid grid-cols-6 gap-6 mt-3" id="viewBox3">
+
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="countries"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Select charges for waiting period
+                            </label>
+                            <SfMultiSelect TValue="string[]" TItem="ChargeMasterView" FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains" Query="@Query_Combo" ShowSelectAll=true FilterBarPlaceholder="Charges" EnableGroupCheckBox=false Mode="@VisualMode.CheckBox" ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Charge" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <MultiSelectEvents TItem="ChargeMasterView" TValue="string[]" ValueChange="@WaitingPeriodValueChangeHandler"></MultiSelectEvents>
+                                <SfDataManager Url="@DROPDOWN_API_RESOURCE_CHARGE" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                                <MultiSelectFieldSettings Text="Name" Value="Id"></MultiSelectFieldSettings>
+                            </SfMultiSelect>
+                        </div>
+
+
+                    </div>
+                }
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+        <div class="col-span-3 sm:col-span-3">
+            <a href="javascript: void(0)" @onclick=OnPrevious>
+                <button type="button" class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    Back
+                </button>
+            </a>
+
+        </div>
+        <div class="col-span-3 sm:col-span-3">
+            <a href="javascript: void(0)" @onclick=OnProceed>
+                <button class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    Proceed
+                </button>
+            </a>
+
+        </div>
+    </div>
+</EditForm>

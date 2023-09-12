@@ -1,0 +1,108 @@
+﻿@page "/selectcoop"
+@layout LoginLayout
+@inject NavigationManager UriHelper
+<div class="justify-center items-center w-full bg-white rounded-lg shadow lg:flex md:mt-0 lg:max-w-screen-md 2xl:max:max-w-screen-md xl:p-0 dark:bg-gray-800">
+    <div class="p-6 space-y-6 w-full sm:p-8 lg:p-16 py-6 lg:py-8">
+        <h2 class="text-lg font-bold text-center text-gray-900 lg:text-lg dark:text-white">
+            Create an account
+        </h2>
+        <p class="text-base text-center text-gray-500 dark:text-white">
+            Select cooperative member type
+        </p>
+
+        <form class="space-y-6">
+
+
+            <ul class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                    <div class="flex items-center pl-3">
+                        <input id="list-radio-license" type="radio" value="" @onchange="@(async (e) => await SetRegularMemberType(true))" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label for="list-radio-license" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Regular
+                        </label>
+                    </div>
+
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                    <div class="flex items-center pl-3">
+                        <input id="list-radio-id" type="radio" value="" @onchange="@(async (e) => await SetRetireeMemberType(true))" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label for="list-radio-id" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Retiree
+                        </label>
+                    </div>
+                </li>
+
+                <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                    <div class="flex items-center pl-3">
+                        <input id="list-radio-millitary" type="radio" value="" @onchange="@(async (e) => await SetExpatriateMemberType(true))" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label for="list-radio-millitary" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Expatriate
+                        </label>
+                    </div>
+                </li>
+                @*<li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                        <div class="flex items-center pl-3">
+                            <input id="list-radio-passport" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                            <label for="list-radio-passport" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                Chevron MFB customer
+                            </label>
+                        </div>
+                    </li>*@
+            </ul>
+
+            <button type="button" onclick="@GotoNext"
+                    class="py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                Next
+            </button>
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+@code {
+    public bool isRegularMemberType { get; set; }
+    public bool isRetireeMemberType { get; set; }
+    public bool isExpatriateMemberType { get; set; }
+    public string SelectedMemberType { get; set; }
+
+    void GotoNext()
+    {
+        if (isRegularMemberType)
+        {
+            SelectedMemberType = "Regular".ToLower();
+            UriHelper.NavigateTo($"/signup/{SelectedMemberType}", forceLoad: true);
+        }
+        if (isRetireeMemberType)
+        {
+            SelectedMemberType = "Retiree".ToLower();
+
+            UriHelper.NavigateTo($"/signup/{SelectedMemberType}", forceLoad: true);
+        }
+        if (isExpatriateMemberType)
+        {
+            SelectedMemberType = "Expatriate".ToLower();
+
+            UriHelper.NavigateTo($"/signup/{SelectedMemberType}", forceLoad: true);
+        }
+    }
+
+    async Task SetRegularMemberType(bool approved)
+    {
+        isRegularMemberType = approved;
+    }
+
+    async Task SetRetireeMemberType(bool approved)
+    {
+        isRetireeMemberType = approved;
+    }
+
+    async Task SetExpatriateMemberType(bool approved)
+    {
+        isExpatriateMemberType = approved;
+    }
+
+}

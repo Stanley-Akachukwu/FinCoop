@@ -1,0 +1,133 @@
+﻿@page "/approval/list"
+@using AP.ChevronCoop.Entities.Security.Auth;
+@using AP.ChevronCoop.Entities.Security.Approvals
+@using Syncfusion.Blazor.Grids
+@inject NavigationManager MyNavigationManager
+@layout AppUIMainLayout
+@attribute [Authorize]
+
+<div class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5 pt-10">
+    <div class="mb-4">
+        <nav class="flex mb-5" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                <li class="inline-flex items-center">
+                    <a href="/approval/list"
+                       class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                        <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                        </svg>
+                        Approvals
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                        List
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>
+    <!-- Start coding here -->
+    <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+
+        <span class="error p-2">@ErrorDetails</span>
+
+
+        <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+            <div class="w-full md:w-1/2">
+
+                <div class="sm:col-span-2">
+                    <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                        <input type="search" id="default-search" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+                               class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search...">
+
+                        <button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="overflow-x-auto sb">
+
+            <SfGrid @ref="grid" ID="gridMemberProfile" TValue="ApprovalStatsMasterView" EnablePersistence="false"
+                    Query="@QueryGrid"
+                    AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                    AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="400"
+                    AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                    AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+                <SfDataManager Url="@GRID_API_RESOURCE" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+                <GridEvents TValue="ApprovalStatsMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure" QueryCellInfo="CellInfoHandler"></GridEvents>
+
+                <GridEditSettings AllowAdding="false" AllowEditing="true" AllowDeleting="false"
+                                  ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+                </GridEditSettings>
+
+                <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+                </GridFilterSettings>
+
+
+                <GridColumns>
+
+                    <GridColumn Field=@nameof(ApprovalStatsMasterView.RowNumber) HeaderText="ROW NO" AutoFit="true"></GridColumn>
+                    <GridColumn Field=@nameof(ApprovalStatsMasterView.ApprovalType) HeaderText="APPROVAL TYPE" AutoFit="true"></GridColumn>
+                    <GridColumn Field=@nameof(ApprovalStatsMasterView.Description) HeaderText="DESCRIPTION" AutoFit="false"></GridColumn>
+                    <GridColumn Field=@nameof(ApprovalStatsMasterView.Size) HeaderText="SIZE" AutoFit="true"></GridColumn>
+                    <GridColumn HeaderText="PROCESSING PAGE" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                        <Template>
+
+                            @{
+                                var row = (context as ApprovalStatsMasterView);
+
+                                //<a href="@MyNavigationManager.ToAbsoluteUri(@row.AprrovalProcessingPage.Substring(1))" class="block py-2 px-4 hover:bg-green-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                //	View Approvals
+                                //</a>
+                                <a href="javascript: void(0)" @onclick=@(e => OnViewRow(row)) class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    View Approvals
+                                </a>
+                            }
+
+                        </Template>
+                    </GridColumn>
+                </GridColumns>
+            </SfGrid>
+        </div>
+    </div>
+</div>

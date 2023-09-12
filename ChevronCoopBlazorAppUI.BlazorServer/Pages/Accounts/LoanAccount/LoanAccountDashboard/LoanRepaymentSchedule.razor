@@ -1,0 +1,192 @@
+﻿@using AP.ChevronCoop.AppDomain.Loans.LoanApplications;
+@using System.Globalization;
+@using AP.ChevronCoop.Entities.Loans.LoanRepaymentSchedules;
+<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <!-- Card Title -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+                All Offset Transactions
+            </h3>
+        </div>
+        <div class="flex-shrink-0">
+        </div>
+    </div>
+    <div class="mb-4 flex w-full items-center font-semibold justify-between flex-wrap ">
+        <div class="flex gap-2 py-4">
+
+            <div class="">
+                <label for="mobile-search" class="sr-only">Search</label>
+                <div class="relative">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        @((MarkupString)SvgHelpers.SearchIcon)
+
+                    </div>
+                    <input type="text" @bind="@searchText" @oninput="SearchGrid"
+                           class="@Tailwind.SearchText"
+                           placeholder="Search">
+                    <button type="submit" class="@Tailwind.Search_Button_Blue">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table -->
+    <div class="flex flex-col mt-8">
+        <div class="overflow-x-auto rounded-lg">
+            <div class="inline-block min-w-full align-middle">
+                <div class="overflow-hidden shadow sm:rounded-lg">
+
+                    <div class="overflow-x-auto">
+                        <SfGrid DataSource="@LoanRepaymentScheduleMasterViews" ID="repayment" AllowPaging="true" AllowExcelExport="true" Toolbar="@(new List<string>() { "ExcelExport"})">
+                            <GridEvents TValue="LoanRepaymentScheduleMasterView" OnToolbarClick="ToolbarClickHandler"></GridEvents>
+                            <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+                            <GridColumns>
+                                <GridColumn Field="@nameof(LoanRepaymentScheduleMasterView.RepaymentNo)" HeaderText="NO" AutoFit="true"> </GridColumn>
+                                <GridColumn HeaderText="STATUS" HeaderTextAlign="TextAlign.Left" TextAlign=TextAlign.Left AutoFit="true">
+                                    <Template>
+
+                                        @{
+                                            var row = (context as LoanRepaymentScheduleMasterView);
+                                            if (row.IsPaid)
+                                            {
+                                                <span class="bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">
+                                                    Paid
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="bg-red-100 dark:bg-red-200 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">
+                                                   Pending Payment
+                                                </span>
+                                            }
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+                                <GridColumn Field="@nameof(LoanRepaymentScheduleMasterView.DueDate)" HeaderText="Due Date" AutoFit="true">
+                                    <Template>
+                                        @{
+                                            var status = (context as LoanRepaymentScheduleMasterView);
+                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                @status.DueDate.ToString("dd-MMMM-yyyy")
+                                            </td>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+                                <GridColumn Field="@nameof(LoanRepaymentScheduleMasterView.PeriodPayment)" HeaderText="Monthly Payment" AutoFit="true">
+                                    <Template>
+                                        @{
+                                            var status = (context as LoanRepaymentScheduleMasterView);
+                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                @status.PeriodPayment.ToString("N2", new CultureInfo("en-US"))
+                                            </td>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+                                <GridColumn Field="@nameof(LoanRepaymentScheduleMasterView.CumulativeTotal)" HeaderText="Commulative Total">
+                                    <Template>
+                                        @{
+                                            var status = (context as LoanRepaymentScheduleMasterView);
+                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                @status.CumulativeTotal.ToString("N2", new CultureInfo("en-US"))
+                                            </td>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+
+                                <GridColumn Field=@nameof(LoanRepaymentScheduleMasterView.TotalBalance) HeaderText="Total Balance" AutoFit="true">
+                                    <Template>
+                                        @{
+                                            var status = (context as LoanRepaymentScheduleMasterView);
+                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                @status.TotalBalance.ToString("N2", new CultureInfo("en-US"))
+                                            </td>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+
+                                <GridColumn Field="@nameof(LoanRepaymentScheduleMasterView.PeriodPrincipal)" HeaderText="PRD. Principal" AutoFit="true">
+                                    <Template>
+                                        @{
+                                            var status = (context as LoanRepaymentScheduleMasterView);
+                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white" AutoFit="true">
+                                                @status.PeriodPrincipal.ToString("N2", new CultureInfo("en-US"))
+                                            </td>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+                                <GridColumn Field="@nameof(LoanRepaymentScheduleMasterView.CumulativePrincipal)" HeaderText="CUM. Principal" AutoFit="true">
+                                    <Template>
+                                        @{
+                                            var status = (context as LoanRepaymentScheduleMasterView);
+                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                @status.CumulativePrincipal.ToString("N2", new CultureInfo("en-US"))
+                                            </td>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+                                <GridColumn Field="@nameof(LoanRepaymentScheduleMasterView.PrincipalBalance)" HeaderText="PRI. Balance" AutoFit="true">
+                                    <Template>
+                                        @{
+                                            var status = (context as LoanRepaymentScheduleMasterView);
+                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                @status.PrincipalBalance.ToString("N2", new CultureInfo("en-US"))
+                                            </td>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+
+                                <GridColumn Field="@nameof(LoanRepaymentScheduleMasterView.PeriodInterest)" HeaderText="PRD. Interest" AutoFit="true">
+                                    <Template>
+                                        @{
+                                            var status = (context as LoanRepaymentScheduleMasterView);
+                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                @status.PeriodInterest.ToString("N2", new CultureInfo("en-US"))
+                                            </td>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+                                <GridColumn Field="@nameof(LoanRepaymentScheduleMasterView.CumulativeInterest)" HeaderText="CUM. Interest" AutoFit="true">
+                                    <Template>
+                                        @{
+                                            var status = (context as LoanRepaymentScheduleMasterView);
+                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                @status.CumulativeInterest.ToString("N2", new CultureInfo("en-US"))
+                                            </td>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+                                <GridColumn Field="@nameof(LoanRepaymentScheduleMasterView.InterestBalance)" HeaderText="INT. Balance" AutoFit="true">
+                                    <Template>
+                                        @{
+                                            var status = (context as LoanRepaymentScheduleMasterView);
+                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                @status.InterestBalance.ToString("N2", new CultureInfo("en-US"))
+                                            </td>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+
+                            </GridColumns>
+                        </SfGrid>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

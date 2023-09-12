@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AP.ChevronCoop.Commons\AP.ChevronCoop.Commons.csproj" />
+    <ProjectReference Include="..\AP.ChevronCoop.Entities\AP.ChevronCoop.Entities.csproj" />
+    <ProjectReference Include="..\AP.ChevronCoop.Infrastructure\AP.ChevronCoop.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="NetPay\" />
+    <None Remove="NetPay\MemberExposure\" />
+    <None Remove="Payroll\PayrollDeductionMatch\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NetPay\" />
+    <Folder Include="NetPay\MemberExposure\" />
+  </ItemGroup>
+</Project>

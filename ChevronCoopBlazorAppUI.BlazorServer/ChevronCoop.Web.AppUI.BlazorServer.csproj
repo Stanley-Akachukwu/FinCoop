@@ -1,0 +1,517 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Helper\Tailwindcss\MemberEnrollment\**" />
+	  <Compile Remove="Pages\Configuration\ProductSetup\Job_Processing\**" />
+	  <Compile Remove="Pages\Securities\**" />
+	  <Content Remove="Helper\Tailwindcss\MemberEnrollment\**" />
+	  <Content Remove="Pages\Configuration\ProductSetup\Job_Processing\**" />
+	  <Content Remove="Pages\Securities\**" />
+	  <EmbeddedResource Remove="Helper\Tailwindcss\MemberEnrollment\**" />
+	  <EmbeddedResource Remove="Pages\Configuration\ProductSetup\Job_Processing\**" />
+	  <EmbeddedResource Remove="Pages\Securities\**" />
+	  <None Remove="Helper\Tailwindcss\MemberEnrollment\**" />
+	  <None Remove="Pages\Configuration\ProductSetup\Job_Processing\**" />
+	  <None Remove="Pages\Securities\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Pages\Accounts\DepositAccount\Drawals\FixedDepositAccount.razor.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Remove="Areas\Identity\Pages\Account\RefreshDashBoard.cshtml" />
+	  <Content Remove="Areas\Identity\Pages\_ViewImport.cshtml" />
+	  <Content Remove="assets\js\calendar.js" />
+	  <Content Remove="assets\js\charts.js" />
+	  <Content Remove="assets\js\constants.js" />
+	  <Content Remove="assets\js\dark-mode.js" />
+	  <Content Remove="assets\js\flowbite-scripts.js" />
+	  <Content Remove="assets\js\kanban.js" />
+	  <Content Remove="assets\js\map.js" />
+	  <Content Remove="assets\js\sidebar.js" />
+	  <Content Remove="Pages\Accounts\DepositAccount\Drawals\FixedDepositAccount.razor" />
+	  <Content Remove="Pages\Accounts\DepositAccount\OpenDepositAccount.razor" />
+	  <Content Remove="wwwroot\js\assets\calendar.js" />
+	  <Content Remove="wwwroot\js\assets\charts.js" />
+	  <Content Remove="wwwroot\js\assets\constants.js" />
+	  <Content Remove="wwwroot\js\assets\dark-mode.js" />
+	  <Content Remove="wwwroot\js\assets\flowbite-scripts.js" />
+	  <Content Remove="wwwroot\js\assets\kanban.js" />
+	  <Content Remove="wwwroot\js\assets\map.js" />
+	  <Content Remove="wwwroot\js\assets\sidebar.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\RefreshDashBoard.cshtml" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\.DS_Store" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\arrowDeskIcon.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\bag-plus-icon.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\bank-card-icon.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\cardDeskIcon.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\chatDeskIcon.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\credit-card-icon.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\Heros.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\Mask group.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\more-circle.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\pattern-icons.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\profile.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\userDeskIcons.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\dashboard\[GetPaidStock 2.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\about-image.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\badge-check.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\badge-check.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\bg-patterns.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\bg-patterns.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\card-header.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\chat-icon.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\chat-icon.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\clipboard-list.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\clipboard-list.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\dribble.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\dribble.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\facebook.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\facebook.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\finger-print.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\finger-print.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\github.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\github.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\hero-image.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\image-withlaptop.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\image-withlaptop.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\input-mail.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\input-mail.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\logo-white.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\logo-white.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\logo.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\logo.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\mail.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\mail.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\Pattern.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\Pattern.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\phone.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\phone.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\top-landingpage-image.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\top-landingpage-image.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\twitter.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\landingpage\twitter.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\chevron\signup\signup-image.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\logo.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\og-image.jpg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\og-image.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\themesberg.svg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\.DS_Store" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\bonnie-green-2x.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\bonnie-green.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\helene-engels.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\jese-leos-2x.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\jese-leos.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\joseph-mcfall.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\lana-byrd.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\leslie-livingston.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\michael-gough.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\neil-sims.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\robert-brown.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\roberta-casas-2x.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\roberta-casas.png" />
+	  <_ContentIncludedByDefault Remove="wwwroot\images\users\thomas-lean.png" />
+
+		<_ContentIncludedByDefault Include="wwwroot\images\pdf_icon.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="assets\css\tailwind-styles.css" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AntDesign" Version="0.15.3" />
+		<PackageReference Include="AP.ChevronCoop.AppCore" Version="0.1.0.5053" />
+		<PackageReference Include="AP.ChevronCoop.Infrastructure" Version="0.1.0.5053" />
+		<PackageReference Include="Blazored.FluentValidation" Version="2.1.0" />
+		<PackageReference Include="Blazored.SessionStorage" Version="2.3.0" />
+		<PackageReference Include="BlazorPro.Spinkit" Version="1.2.0" />
+		<PackageReference Include="CountryData" Version="4.1.0" />
+		<PackageReference Include="CsvHelper" Version="30.0.1" />
+		<PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.5.0" />
+		<PackageReference Include="EPPlus" Version="6.2.0" />
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
+    <PackageReference Include="IntlTelInputBlazor" Version="1.0.2" />
+    <PackageReference Include="Meziantou.Framework.ByteSize" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Forms" Version="7.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="1.26.0" />
+		<PackageReference Include="Microsoft.Identity.Web.UI" Version="1.26.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+		<PackageReference Include="Refit.HttpClientFactory" Version="6.3.2" />
+		<PackageReference Include="Simple.OData.Client" Version="6.0.1" />
+		<PackageReference Include="Microsoft.OData.Core" Version="[7.10.0]" />
+		<PackageReference Include="Syncfusion.Blazor" Version="20.4.0.54" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.1" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.16.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="wwwroot\favicon.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\icon-192.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\.DS_Store">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\arrowDeskIcon.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\bag-plus-icon.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\bank-card-icon.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\cardDeskIcon.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\chatDeskIcon.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\credit-card-icon.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\Heros.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\Mask group.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\more-circle.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\pattern-icons.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\profile.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\userDeskIcons.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\dashboard\[GetPaidStock 2.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\about-image.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\badge-check.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\badge-check.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\bg-patterns.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\bg-patterns.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\card-header.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\chat-icon.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\chat-icon.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\clipboard-list.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\clipboard-list.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\dribble.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\dribble.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\facebook.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\facebook.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\finger-print.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\finger-print.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\github.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\github.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\hero-image.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\image-withlaptop.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\image-withlaptop.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\input-mail.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\input-mail.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\logo-white.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\logo-white.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\logo.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\logo.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\mail.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\mail.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\Pattern.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\Pattern.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\phone.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\phone.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\top-landingpage-image.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\top-landingpage-image.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\twitter.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\landingpage\twitter.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\chevron\signup\signup-image.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\logo.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\og-image.jpg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\og-image.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\themesberg.svg">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\.DS_Store">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\bonnie-green-2x.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\bonnie-green.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\helene-engels.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\jese-leos-2x.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\jese-leos.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\joseph-mcfall.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\lana-byrd.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\leslie-livingston.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\michael-gough.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\neil-sims.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\robert-brown.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\roberta-casas-2x.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\roberta-casas.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\images\users\thomas-lean.png">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Areas\Identity\Pages\Shared\" />
+	  <Folder Include="Pages\MasterData\Location\" />
+	  <Folder Include="wwwroot\js\libs\flowbite\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Areas\Identity\Pages\Account\RefreshDashBoard.cshtml" />
+	  <None Include="Areas\Identity\Pages\_ViewImport.cshtml" />
+	  <None Include="Pages\Accounting\CompanyBankAccount\CompanyBankAccountCreateForm.razor" />
+	  <None Include="Pages\Accounting\CompanyBankAccount\CompanyBankAccountEditForm.razor" />
+	  <None Include="Pages\Accounting\JournalEntry\JournalEntryCreateForm.razor" />
+	  <None Include="Pages\Accounting\JournalEntry\JournalEntryEditForm.razor" />
+	  <None Include="Pages\Accounting\LedgerAccount\LedgerAccountCreateForm.razor" />
+	  <None Include="Pages\Accounting\LedgerAccount\LedgerAccountEditForm.razor" />
+	  <None Include="Pages\Accounting\TransactionJournal\TransactionJournalCreateForm.razor" />
+	  <None Include="Pages\Accounting\TransactionJournal\TransactionJournalEditForm.razor" />
+	  <None Include="Pages\KYC\CorporateMember\Beneficiary.razor" />
+	  <None Include="Pages\KYC\CorporateMember\CompanyData.razor" />
+	  <None Include="Pages\KYC\CorporateMember\CorporateProfile.razor" />
+	  <None Include="Pages\KYC\CorporateMember\KYCDocument.razor" />
+	  <None Include="Pages\KYC\CorporateMember\KycInformation.razor" />
+	  <None Include="Pages\KYC\CorporateMember\MemberAccountData.razor" />
+	  <None Include="Pages\KYC\CorporateMember\NextOfKin.razor" />
+	  <None Include="Pages\KYC\CorporateMember\StaffEnrollment.razor" />
+	  <None Include="Pages\Loans\LoanProduct\LoanProductCreateForm.razor" />
+	  <None Include="Pages\Loans\LoanProduct\LoanProductEditForm.razor" />
+	  <None Include="Pages\Loans\LoanProduct\LoanProductGrid.razor" />
+	  <None Include="Pages\MasterData\Bank\BankCreateForm.razor" />
+	  <None Include="Pages\MasterData\Bank\BankEditForm.razor" />
+	  <None Include="Pages\MasterData\GlobalCode\GlobalCodeCreateForm.razor" />
+	  <None Include="Pages\MasterData\GlobalCode\GlobalCodeEditForm.razor" />
+	  <None Include="Pages\MasterData\GlobalCode\GlobalCodeGrid.razor" />
+	  <None Include="Pages\Schedule\Job_Processing\JobProcessingGrid.razor" />
+	  <None Include="wwwroot\images\chevron\auth\bank.svg" />
+	  <None Include="wwwroot\images\chevron\auth\calculator.svg" />
+	  <None Include="wwwroot\images\chevron\auth\card.svg" />
+	  <None Include="wwwroot\images\chevron\auth\done.svg" />
+	  <None Include="wwwroot\images\chevron\auth\Group 1000005034.svg" />
+	  <None Include="wwwroot\images\chevron\auth\infoIcon.svg" />
+	  <None Include="wwwroot\images\chevron\auth\successCheck.svg" />
+	  <None Include="wwwroot\images\chevron\auth\Vector %281%29.svg" />
+	  <None Include="wwwroot\images\chevron\auth\Vector.svg" />
+	  <None Include="wwwroot\images\chevron\modal-icon\verify.svg" />
+	  <None Include="wwwroot\js\assets\calendar.js" />
+	  <None Include="wwwroot\js\assets\charts.js" />
+	  <None Include="wwwroot\js\assets\constants.js" />
+	  <None Include="wwwroot\js\assets\dark-mode.js" />
+	  <None Include="wwwroot\js\assets\flowbite-scripts.js" />
+	  <None Include="wwwroot\js\assets\kanban.js" />
+	  <None Include="wwwroot\js\assets\map.js" />
+	  <None Include="wwwroot\js\assets\sidebar.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\RefreshDashBoard.cshtml" />
+	</ItemGroup>
+
+</Project>

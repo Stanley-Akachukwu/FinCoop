@@ -1,0 +1,595 @@
+﻿@page "/product-charges/list"
+@using AP.ChevronCoop.Entities.Security.Auth;
+@using AP.ChevronCoop.Entities.Accounting;
+@using AP.ChevronCoop.Entities.MasterData.Charges
+@using Syncfusion.Blazor.Grids
+@using ChevronCoop.Web.AppUI.BlazorServer.Helper;
+@layout AppUIMainLayout
+@attribute [Authorize]
+
+@{
+    var targetTypes = Enum.GetNames(typeof(ChargeTarget)).ToList();
+    var calculationTypes = Enum.GetNames(typeof(ChargeCalculationMethod)).ToList();
+
+    var chargemethod = Enum.GetNames(typeof(ChargeMethod)).ToList();
+
+}
+<div class="px-4 pt-6">
+
+<div class="mb-4">
+    <div class="my-4 px-2">
+        <a @onclick="GoBack"
+           class="mb-6 inline-flex items-center px-4 py-2 mr-3 text-sm font-medium ring-2 ring-primary-300 text-CEMCS-Blue-100 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <svg aria-hidden="true"
+                 class="w-5 h-5 mr-2"
+                 fill="currentColor"
+                 viewBox="0 0 20 20"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                      d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                      clip-rule="evenodd">
+                </path>
+            </svg>
+            Back
+        </a>
+    </div>
+
+</div>
+
+
+<!-- Request Tabs -->
+
+
+<section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5">
+    <div class="mx-auto max-w-screen-2xl px-4 lg:px-12">
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            <div class="border-b dark:border-gray-700 mx-4">
+                <div class="flex items-center justify-between space-x-4 pt-3">
+                    <div class="flex-1 flex items-center space-x-3">
+                        <h5 class="dark:text-white font-semibold">Charge History</h5>
+                    </div>
+                </div>
+                <div class="flex flex-col-reverse  md:flex-row items-center justify-between space-x-4 py-3">
+                    <div class="w-1/2   flex flex-col space-y-3 md:space-y-0 md:flex-row md:items-center">
+                        <form class="w-full md:max-w-sm flex-1 md:mr-4">
+                            <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                    </svg>
+                                </div>
+                                <input type="search" id="default-search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search..." required="" @bind-value="@searchText">
+                                <button type="button" @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                            </div>
+                        </form>
+                        <div class="flex items-center space-x-4">
+                            <div>
+                                <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" type="button" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"/>
+                                    </svg>
+                                    Filter
+                                    <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                                    </svg>
+                                </button>
+                                <div id="filterDropdown" class="z-10 hidden p-3 bg-white rounded-lg shadow w-56 dark:bg-gray-700">
+                                    <h6 class="mb-2 text-sm font-medium text-gray-900 dark:text-white">By status</h6>
+                                    <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
+                                        <li>
+                                            <label class="flex items-center text-sm font-medium text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md px-1.5 py-1 w-full">
+                                                <input type="checkbox" value="" class="w-4 h-4 mr-2 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                Charge Name
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="flex items-center text-sm font-medium text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md px-1.5 py-1 w-full">
+                                                <input type="checkbox" value="" checked="" class="w-4 h-4 mr-2 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                Charge Currency
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="flex items-center text-sm font-medium text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md px-1.5 py-1 w-full">
+                                                <input type="checkbox" value="" class="w-4 h-4 mr-2 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                Charge Code
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="flex items-center text-sm font-medium text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md px-1.5 py-1 w-full">
+                                                <input type="checkbox" value="" class="w-4 h-4 mr-2 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                Charge target
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <h6 class="mt-4 mb-2 text-sm font-medium text-gray-900 dark:text-white">By number of users</h6>
+                                    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                                        <li>
+                                            <label class="flex items-center text-sm font-medium text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md px-1.5 py-1 w-full">
+                                                <input type="checkbox" value="" checked="" class="w-4 h-4 mr-2 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                5-10 peoples
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="flex items-center text-sm font-medium text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md px-1.5 py-1 w-full">
+                                                <input type="checkbox" value="" class="w-4 h-4 mr-2 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                10+ peoples
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="flex items-center text-sm font-medium text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md px-1.5 py-1 w-full">
+                                                <input type="checkbox" value="" class="w-4 h-4 mr-2 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                More than 10 peoples
+                                            </label>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="w-full md:w-auto flex flex-col md:flex-row mb-3 md:mb-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                        @{
+                            if (enableCreatePermission)
+                            {
+                                <button type="button" @onclick="@(e => OnAddCharges())"
+                                        class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                    <svg class="mr-2 -ml-1 w-6 h-6"
+                                         fill="currentColor"
+                                         viewBox="0 0 20 20"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                              clip-rule="evenodd">
+                                        </path>
+                                    </svg>
+                                    Add New Charges
+                                </button>
+                            }
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="relative overflow-x-auto shadow sb sm:rounded-lg">
+                <!-- Table -->
+                <SfGrid @ref="grid" ID="gridMemberProfile" TValue="ChargeMasterView" EnablePersistence="false"
+                        Query="@QueryGrid"
+                        AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                        AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="400"
+                        AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                        AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+                    <SfDataManager Url="@GRID_API_RESOURCE" Headers=@HeaderData CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                    <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+                    <GridEvents TValue="ChargeMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure"></GridEvents>
+
+                    <GridEditSettings AllowAdding="false" AllowEditing="true" AllowDeleting="false"
+                                      ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+                    </GridEditSettings>
+
+                    <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+                    </GridFilterSettings>
+                    <GridColumns>
+                          <GridColumn HeaderText="S/N" AutoFit="true">
+                <Template Context="context">
+
+                                <span>@SortSerialNumber.GetSerialNumber(context)</span>
+                </Template>    
+                </GridColumn>
+                        <GridColumn Field=@nameof(ChargeMasterView.Name) HeaderText="CHARGE NAME" AutoFit="true"></GridColumn>
+                        <GridColumn Field=@nameof(ChargeMasterView.Code) HeaderText="CHARGE CODE" AutoFit="true"></GridColumn>
+                        <GridColumn Field=@nameof(ChargeMasterView.CurrencyId_Name) HeaderText="CHARGE CURRENCY" AutoFit="false"></GridColumn>
+                        <GridColumn Field=@nameof(ChargeMasterView.Method) HeaderText="CHARGE METHOD" AutoFit="false"></GridColumn>
+                        <GridColumn Field=@nameof(ChargeMasterView.Target) HeaderText="CHARGE TARGET" AutoFit="false"></GridColumn>
+                        <GridColumn Field=@nameof(ChargeMasterView.CalculationMethod) HeaderText="COMPUTATION METHOD" AutoFit="false"></GridColumn>
+                            <GridColumn Field=@nameof(ChargeMasterView.DateCreated) HeaderText="DATE CREATED" Format="dd MMM yyyy" Type="ColumnType.DateTime" AutoFit="false"></GridColumn>
+                        <GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                            <Template>
+                                @{
+                                    if (enableCreatePermission)
+                                    {
+                                        var row = (context as ChargeMasterView);
+
+                                        <a href="javascript: void(0)" @onclick="@(e => OnEditCharges(row))"
+                                           class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                            <svg class="inline mr-1"
+                                                 width="18"
+                                                 height="19"
+                                                 viewBox="0 0 18 19"
+                                                 fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.6726 2.8278C15.3351 2.49035 14.8773 2.30078 14.4 2.30078C13.9228 2.30078 13.465 2.49035 13.1274 2.8278L6.30005 9.6552V12.2004H8.84525L15.6726 5.373C16.0101 5.03545 16.1997 4.57769 16.1997 4.1004C16.1997 3.6231 16.0101 3.16535 15.6726 2.8278Z"
+                                                      fill="#6B7280"/>
+                                                <path fill-rule="evenodd"
+                                                      clip-rule="evenodd"
+                                                      d="M1.80005 5.89961C1.80005 5.42222 1.98969 4.96438 2.32726 4.62682C2.66482 4.28925 3.12266 4.09961 3.60005 4.09961H7.20005C7.43874 4.09961 7.66766 4.19443 7.83644 4.36321C8.00523 4.532 8.10005 4.76091 8.10005 4.99961C8.10005 5.2383 8.00523 5.46722 7.83644 5.63601C7.66766 5.80479 7.43874 5.89961 7.20005 5.89961H3.60005V14.8996H12.6V11.2996C12.6 11.0609 12.6949 10.832 12.8637 10.6632C13.0324 10.4944 13.2614 10.3996 13.5 10.3996C13.7387 10.3996 13.9677 10.4944 14.1364 10.6632C14.3052 10.832 14.4 11.0609 14.4 11.2996V14.8996C14.4 15.377 14.2104 15.8348 13.8728 16.1724C13.5353 16.51 13.0774 16.6996 12.6 16.6996H3.60005C3.12266 16.6996 2.66482 16.51 2.32726 16.1724C1.98969 15.8348 1.80005 15.377 1.80005 14.8996V5.89961Z"
+                                                      fill="#6B7280"/>
+                                            </svg>
+
+                                            Edit
+                                        </a>
+                                    }
+                                }
+
+                            </Template>
+                        </GridColumn>
+                    </GridColumns>
+                </SfGrid>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@{
+    <Drawer @ref="@addDrawer" Closable="true" Visible="showAddChargesDrawer" Title='("  Add Charge Configuration")'
+            OnClose="OnAddChargesDone">
+        <EditForm Model="@CreateModel" OnValidSubmit="OnSaveClose">
+
+            <FluentValidationValidator/>
+            <ValidationSummary/>
+            <!-- drawer component -->
+            <div class="pb-20 flex flex-col justify-between h-full">
+                <div class="flex justify-center items-center">
+                    <div class="max-w-3xl">
+                        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                            <form action="">
+                                <div class="grid grid-cols-6 gap-6">
+                                    <div class="col-span-6 sm:col-span-6">
+                                        <label for="charge-name"
+                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Charge name<span class="text-red-500">*</span>
+                                        </label>
+                                        <SfTextBox ID="charge-name" required Placeholder=" Enter Charge Name" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                   @bind-Value=@CreateModel.Name OnBlur="OnBlur">
+                                        </SfTextBox>
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="charge-code"
+                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Charge code<span class="text-red-500">*</span>
+                                        </label>
+                                        <SfTextBox ID="charge-code" required Placeholder=" Enter Charge Code" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                   @bind-Value=@CreateModel.Code OnBlur="OnBlur">
+                                        </SfTextBox>
+                                    </div>
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="countries"
+                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Charge currency<span class="text-red-500">*</span>
+                                        </label>
+
+                                        <SfComboBox CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" TValue="string" TItem="Currency" OnBlur="OnBlur"
+                                                    @bind-Value=@CreateModel.CurrencyId Query="@Query_Combo"
+                                                    FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                                                    ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select">
+                                            <SfDataManager Url="@combobox_Department_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                                            <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+                                        </SfComboBox>
+
+
+                                    </div>
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="countries"
+                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Charge method<span class="text-red-500">*</span>
+                                        </label>
+                                        <SfComboBox id="charge-method-add" DataSource=@chargemethod TValue="string" TItem="string" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    @bind-Value=@CreateModel.Method
+                                                    ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select method">
+                                        </SfComboBox>
+
+
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="charge-code"
+                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Charge Value<span class="text-red-500">*</span>
+                                        </label>
+                                        <input type="number"
+                                               name="add-charge-value"
+                                               @bind=@CreateModel.ChargeValue
+                                               id="add-charge-value"
+                                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                               placeholder="0.00"
+                                               required/>
+                                    </div>
+
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="charge-target"
+                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Charge target<span class="text-red-500">*</span>
+                                        </label>
+
+
+                                        <SfComboBox id="target" DataSource=@targetTypes TValue="string" TItem="string" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    @bind-Value=@CreateModel.Target
+                                                    ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select target">
+                                        </SfComboBox>
+                                    </div>
+
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="Computation-method*"
+                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Computation method<span class="text-red-500">*</span>
+                                        </label>
+                                        <SfComboBox id="Computation" DataSource=@calculationTypes TValue="string" TItem="string" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    @bind-Value=@CreateModel.CalculationMethod
+                                                    ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select">
+                                        </SfComboBox>
+                                    </div>
+
+                                    <div class="col-span-6 sm:col-span-6">
+                                        <label for="max-charge"
+                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Maximum charge
+                                        </label>
+                                        <input type="number"
+                                               name="max-charge"
+                                               @bind=@CreateModel.MaximumCharge
+                                               id="max-charge"
+                                               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                               placeholder="NGN 0.00"
+                                               required/>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="flex flex-row p-4 mb-4 space-x-4">
+                            <div class="col-span-6 sm:col-full">
+                                <button class="text-CEMCS-Blue-100 bg-white hover:bg-CEMCS-Blue-100 focus:ring-4 border border-CEMCS-Blue-100 focus:ring-CEMCS-Blue-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                        type="button" @onclick="closeAddDrawer">
+                                    Back
+                                </button>
+                            </div>
+                            <div class="col-span-6 sm:col-full">
+                                <button @onclick="OnSaveClose" class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                        type="button">
+                                    Proceed
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </EditForm>
+
+    </Drawer>
+}
+
+
+<!-- Drawer Edit page -->
+<!-- Drawer Edit page -->
+<Drawer @ref="@editDrawer" Closable="true" Visible="showEditChargesDrawer" Title='("  Edit Charge Configuration")'
+        OnClose="OnEditChargesDone">
+    <EditForm Model="@UpdateModel" OnValidSubmit="OnEditClose">
+
+        <div class="pb-20 flex flex-col justify-between h-full">
+            <div class="flex justify-center items-center">
+                <div class="max-w-3xl">
+                    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                        <form action="">
+                            <div class="grid grid-cols-6 gap-6">
+                                <div class="col-span-6 sm:col-span-6">
+                                    <label for="charge-name"
+                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Charge name<span class="text-red-500">*</span>
+                                    </label>
+                                    <SfTextBox ID="charge-name" required Placeholder=" Enter Charge Name" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                               @bind-Value=@UpdateModel.Name OnBlur="OnBlur">
+                                    </SfTextBox>
+                                </div>
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="charge-code"
+                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Charge code<span class="text-red-500">*</span>
+                                    </label>
+                                    <SfTextBox ID="charge-code" required Placeholder=" Enter Charge Code" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                               @bind-Value=@UpdateModel.Code OnBlur="OnBlur">
+                                    </SfTextBox>
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="countries"
+                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Charge currency<span class="text-red-500">*</span>
+                                    </label>
+
+                                    <SfComboBox CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" TValue="string" TItem="Currency" OnBlur="OnBlur"
+                                                @bind-Value=@UpdateModel.CurrencyId Query="@Query_Combo"
+                                                FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                                                ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select">
+                                        <SfDataManager Url="@combobox_Department_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                                        <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+                                    </SfComboBox>
+
+
+                                </div>
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="countries"
+                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Charge method<span class="text-red-500">*</span>
+                                    </label>
+
+                                    <SfComboBox CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="chargemethod" DataSource=@chargemethod TValue="string" TItem="string" OnBlur="OnBlur"
+                                                @bind-Value=@UpdateModel.Method
+                                                ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select">
+                                    </SfComboBox>
+
+
+                                </div>
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="charge-code"
+                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Charge Value<span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="number"
+                                           name="charge-value"
+                                           @bind=@UpdateModel.ChargeValue
+                                           id="charge-value"
+                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                           placeholder="0.00"
+                                           required/>
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="charge-target"
+                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Charge target<span class="text-red-500">*</span>
+                                    </label>
+
+
+                                    <SfComboBox CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="targetTypes" DataSource=@targetTypes TValue="string" TItem="string" OnBlur="OnBlur"
+                                                @bind-Value=@UpdateModel.Target
+                                                ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select target">
+                                    </SfComboBox>
+                                </div>
+
+
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="Computation-method*"
+                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Computation method<span class="text-red-500">*</span>
+                                    </label>
+                                    <SfComboBox CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="computation" DataSource=@calculationTypes TValue="string" TItem="string" OnBlur="OnBlur"
+                                                @bind-Value=@UpdateModel.CalculationMethod
+                                                ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select">
+                                    </SfComboBox>
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-6">
+                                    <label for="max-charge"
+                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Maximum charge
+                                    </label>
+                                    <input type="number"
+                                           name="max-charge"
+                                           @bind=@UpdateModel.MaximumCharge
+                                           id="max-charge"
+                                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                           placeholder="NGN 0.00"
+                                           required/>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="flex flex-row p-4 mb-4 space-x-4">
+                        <div class="col-span-6 sm:col-full">
+                            <button @onclick="onBack" class="text-CEMCS-Blue-100 bg-white hover:bg-CEMCS-Blue-100 focus:ring-4 border border-CEMCS-Blue-100 focus:ring-CEMCS-Blue-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                    type="button"
+                                    data-drawer-hide="drawer-right-example-2"
+                                    aria-controls="drawer-right-example-2">
+                                Back
+                            </button>
+                        </div>
+                        <div class="col-span-6 sm:col-full">
+                            <button @onclick="OnEditClose" class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                    type="button">
+                                Proceed
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </EditForm>
+</Drawer>
+
+<Modal Visible="@showPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+       class="overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+
+    <!-- Modal content -->
+    <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <!-- Modal header -->
+            <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+                <svg width="79"
+                     height="80"
+                     viewBox="0 0 79 80"
+                     fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                          stroke="#0E9F6E"
+                          stroke-width="4"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+
+                <p class="break-words text-center my-8">
+                    Charge setup was successful.
+                    <span class="text-CEMCS-Blue-100">
+                        Thank you.
+                    </span>
+                </p>
+                <form>
+                    <button @onclick=Done type="button"
+                            class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                        Done
+                    </button>
+                </form>
+            </div>
+            <!-- Modal body -->
+        </div>
+    </div>
+</Modal>
+<!-- Success Modal -->
+<div id="updateProductModal"
+     tabindex="-1"
+     aria-hidden="true"
+     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <!-- Modal header -->
+            <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+                <svg width="79"
+                     height="80"
+                     viewBox="0 0 79 80"
+                     fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                          stroke="#0E9F6E"
+                          stroke-width="4"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+
+                <p class="break-words text-center my-8">
+                    Charge setup has been created succesfully.
+                </p>
+
+                <form action="../dashboard.html" class="w-full">
+                    <button type="submit"
+                            class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                        Done
+                    </button>
+                </form>
+            </div>
+            <!-- Modal body -->
+        </div>
+    </div>
+</div>
+
+
+</div>
+<Modal Title="@("Notification")" Visible="@showError" DestroyOnClose="true"
+       OnOk="OnCancel" OkText="@("Ok")"
+       OnCancel="OnCancel" CancelText="@("Cancel")">
+    <p>@notificationText</p>
+</Modal>

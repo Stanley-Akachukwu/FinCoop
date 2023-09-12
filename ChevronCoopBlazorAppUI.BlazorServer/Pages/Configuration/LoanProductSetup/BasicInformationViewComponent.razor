@@ -1,0 +1,288 @@
+﻿<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Basic Information
+    </h3>
+    <form action="">
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Loan Code</h2>
+                    <p>@Model.Code</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Loan Name</h2>
+                    <p>@Model.Name</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Loan Description</h2>
+                    <p>@Model.Description</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Member Type</h2>
+                    @foreach (var item in Model.MemberTypes)
+                    {
+                        <p>@item</p>
+                    }
+
+                </div>
+
+            </div>
+
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Currency</h2>
+                    <p>@Model.CurrencyName</p>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Loan Principal Settings
+    </h3>
+    <form action="">
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Multiples of Principal</h2>
+                    <p>@Model.PrincipalMultiple</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                  @*  <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Principal Limit Type</h2>
+                    <p>@Model.PrincipalLimitType</p>*@
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Principal Min Limit</h2>
+                    <p>@Model.PrincipalMinLimit.ToString("N2")</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Principal Max Limit</h2>
+                   
+                    <p>@Model.PrincipalMaxLimit.ToString("N2")</p>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Loan Tenor Settings
+    </h3>
+    <form action="">
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Tenor Unit</h2>
+                    <p>@Model.TenureUnit</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Min Tenor Unit</h2>
+                    <p>@Model.MinTenureValue</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                     <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Min Tenor Unit</h2>
+                    <p>@Model.MaxTenureValue</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Repayment Period</h2>
+                    <p>@Model.RepaymentPeriod</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Days in Year</h2>
+                    <p>@Model.DaysInYear</p>
+                </div>
+
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Loan Interest Settings
+    </h3>
+    <form action="">
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Interest calculation method</h2>
+                    <p>@Model.InterestCalculationMethod</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Default interest rate</h2>
+                    <p>@Model.InterestRate</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Interest Method</h2>
+                    <p>@Model.InterestMethod</p>
+                </div>
+
+            </div>
+
+
+        </div>
+    </form>
+</div>
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+       Company Account Detail
+    </h3>
+    <form action="">
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Company Disbursement Account</h2>
+                    <p>@Model.DisbursementAccountId_AccountName @Model.DisbursementAccountId_AccountNumber</p>
+                </div>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Company Deposit Account</h2>
+                    <p>@Model.BankDepositAccountId_AccountName @Model.BankDepositAccountId_AccountNumber</p>
+                </div>
+
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Disbursement Charge
+    </h3>
+    <form action="">
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-span-3">
+                <div class="flex items-center  gap-8">
+                    <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Enable Disbursement Charge</h2>
+                    @if (Model.HasAdminCharges)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
+
+                </div>
+
+            </div>
+            @if (Model.DisbursementCharges.Count > 0 && Model.HasAdminCharges)
+            {
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Disbursement Charge</h2>
+                        <div class="overflow-hidden">
+                            <table class="min-w-full text-left text-sm font-light">
+                                <thead class="border-b font-medium dark:border-neutral-500">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-4">Name</th>
+                                        <th scope="col" class="px-6 py-4">Code</th>
+                                        <th scope="col" class="px-6 py-4">Charge</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.DisbursementCharges)
+                                    {
+                                        <tr class="border-b dark:border-neutral-500">
+                                            <td class="whitespace-nowrap px-6 py-4">@item.Name</td>
+                                            <td class="whitespace-nowrap px-6 py-4">@item.Code</td>
+                                            <td class="whitespace-nowrap px-6 py-4">@item.Amount.ToString("N")</td>
+                                        </tr>
+
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+         
+
+
+        </div>
+    </form>
+</div>
+
+
+<div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+    <div class="col-span-3 sm:col-span-3">
+        <a href="javascript: void(0)" @onclick=OnPrevious>
+            <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Back
+            </button>
+        </a>
+
+    </div>
+    <div class="col-span-3 sm:col-span-3">
+        <a href="javascript: void(0)" @onclick=OnProceed>
+            <button class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Next
+            </button>
+        </a>
+    </div>
+</div>

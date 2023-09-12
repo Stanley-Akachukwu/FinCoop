@@ -1,0 +1,222 @@
+﻿@page "/payroll/PayrollDeductionScheduleItem/{jobid}/{schedulename}"
+@using AP.ChevronCoop.AppDomain.Payroll.PayrollDeductionScheduleItems;
+@using AP.ChevronCoop.Entities.Payroll.PayrollDeductionScheduleItems;
+@layout AppUIMainLayout
+@using System.Globalization;
+@using ChevronCoop.Web.AppUI.BlazorServer.Helper;
+<main>
+ <br/>
+ 
+
+        <div class="col-span-3 sm:col-span-3 mb-2">
+            <a href="javascript: void(0)" @onclick="@(e => GoBack())">
+
+                <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="submit">
+                    <svg class="inline mr-1" width="14" height="12" viewBox="0 0 14 12" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 5.99967H13Z" fill="#1F82BD" />
+                        <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13"
+                              stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                    </svg> Back
+                </button>
+            </a>
+        </div>
+        <span class="error p-2">@ErrorDetails</span>
+        
+
+        <div class="grid grid-cols-1 gap-2 mt-4 w-full md:grid-cols-2 xl:grid-cols-4">
+
+          <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4 ">
+                <div class="flex flex-row items-center gap-x-3 py-4">
+
+                    <svg class="" width="45" height="45" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30.0674" cy="30" r="30" fill="#1F82BD" />
+                        <path d="M32.7816 34.1262H26.7816" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M29.7816 31.1978V37.1978" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M30.8595 18.6218L30.8235 18.7058L27.3435 26.7818H23.9235C23.1075 26.7818 22.3275 26.9498 21.6195 27.2498L23.7195 22.2338L23.7675 22.1138L23.8515 21.9218C23.8755 21.8498 23.8995 21.7778 23.9355 21.7178C25.5075 18.0818 27.2835 17.2538 30.8595 18.6218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M37.3275 27.0218C36.7875 26.8538 36.2115 26.7818 35.6355 26.7818H27.3435L30.8235 18.7058L30.8595 18.6218C31.0395 18.6818 31.2075 18.7658 31.3875 18.8378L34.0395 19.9538C35.5155 20.5658 36.5475 21.2018 37.1715 21.9698C37.2915 22.1138 37.3875 22.2458 37.4715 22.4018C37.5795 22.5698 37.6635 22.7378 37.7115 22.9178C37.7595 23.0258 37.7955 23.1338 37.8195 23.2298C38.1435 24.2378 37.9515 25.4738 37.3275 27.0218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M41.4936 32.6382V34.9782C41.4936 35.2182 41.4816 35.4582 41.4696 35.6982C41.2416 39.8862 38.9016 41.9982 34.4616 41.9982H25.1016C24.8136 41.9982 24.5256 41.9742 24.2496 41.9382C20.4336 41.6862 18.3936 39.6462 18.1416 35.8302C18.1056 35.5542 18.0816 35.2662 18.0816 34.9782V32.6382C18.0816 30.2262 19.5456 28.1502 21.6336 27.2502C22.3536 26.9502 23.1216 26.7822 23.9376 26.7822H35.6496C36.2376 26.7822 36.8136 26.8662 37.3416 27.0222C39.7296 27.7542 41.4936 29.9862 41.4936 32.6382Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M23.7195 22.2339L21.6195 27.2499C19.5315 28.1499 18.0675 30.2259 18.0675 32.6379V29.1219C18.0675 25.7139 20.4915 22.8699 23.7195 22.2339Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M41.4899 29.1212V32.6372C41.4899 29.9972 39.7379 27.7532 37.3379 27.0332C37.9619 25.4732 38.1419 24.2492 37.8419 23.2292C37.8179 23.1212 37.7819 23.0132 37.7339 22.9172C39.9659 24.0692 41.4899 26.4332 41.4899 29.1212Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <div class="flex flex-col justify-start ">
+                        <div class="text-gray-500 text-sm">Schedule Name</div>
+                        <div class="text-base font-bold">@schedulename</div>
+                    </div>
+                </div>
+                 
+            </div>
+
+            <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4 ">
+                <div class="flex flex-row items-center gap-x-3 py-4">
+
+                    <svg class="" width="45" height="45" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30.0674" cy="30" r="30" fill="#1F82BD" />
+                        <path d="M32.7816 34.1262H26.7816" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M29.7816 31.1978V37.1978" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M30.8595 18.6218L30.8235 18.7058L27.3435 26.7818H23.9235C23.1075 26.7818 22.3275 26.9498 21.6195 27.2498L23.7195 22.2338L23.7675 22.1138L23.8515 21.9218C23.8755 21.8498 23.8995 21.7778 23.9355 21.7178C25.5075 18.0818 27.2835 17.2538 30.8595 18.6218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M37.3275 27.0218C36.7875 26.8538 36.2115 26.7818 35.6355 26.7818H27.3435L30.8235 18.7058L30.8595 18.6218C31.0395 18.6818 31.2075 18.7658 31.3875 18.8378L34.0395 19.9538C35.5155 20.5658 36.5475 21.2018 37.1715 21.9698C37.2915 22.1138 37.3875 22.2458 37.4715 22.4018C37.5795 22.5698 37.6635 22.7378 37.7115 22.9178C37.7595 23.0258 37.7955 23.1338 37.8195 23.2298C38.1435 24.2378 37.9515 25.4738 37.3275 27.0218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M41.4936 32.6382V34.9782C41.4936 35.2182 41.4816 35.4582 41.4696 35.6982C41.2416 39.8862 38.9016 41.9982 34.4616 41.9982H25.1016C24.8136 41.9982 24.5256 41.9742 24.2496 41.9382C20.4336 41.6862 18.3936 39.6462 18.1416 35.8302C18.1056 35.5542 18.0816 35.2662 18.0816 34.9782V32.6382C18.0816 30.2262 19.5456 28.1502 21.6336 27.2502C22.3536 26.9502 23.1216 26.7822 23.9376 26.7822H35.6496C36.2376 26.7822 36.8136 26.8662 37.3416 27.0222C39.7296 27.7542 41.4936 29.9862 41.4936 32.6382Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M23.7195 22.2339L21.6195 27.2499C19.5315 28.1499 18.0675 30.2259 18.0675 32.6379V29.1219C18.0675 25.7139 20.4915 22.8699 23.7195 22.2339Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M41.4899 29.1212V32.6372C41.4899 29.9972 39.7379 27.7532 37.3379 27.0332C37.9619 25.4732 38.1419 24.2492 37.8419 23.2292C37.8179 23.1212 37.7819 23.0132 37.7339 22.9172C39.9659 24.0692 41.4899 26.4332 41.4899 29.1212Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <div class="flex flex-col justify-start ">
+                        <div class="text-gray-500 text-sm">Payroll Date</div>
+                        <div class="text-base font-bold">@DateCompleted</div>
+                    </div>
+                </div>
+ 
+            </div>
+
+            <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4 ">
+                <div class="flex flex-row items-center gap-x-3 py-4">
+
+                    <svg class="" width="45" height="45" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30.0674" cy="30" r="30" fill="#1F82BD" />
+                        <path d="M32.7816 34.1262H26.7816" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M29.7816 31.1978V37.1978" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M30.8595 18.6218L30.8235 18.7058L27.3435 26.7818H23.9235C23.1075 26.7818 22.3275 26.9498 21.6195 27.2498L23.7195 22.2338L23.7675 22.1138L23.8515 21.9218C23.8755 21.8498 23.8995 21.7778 23.9355 21.7178C25.5075 18.0818 27.2835 17.2538 30.8595 18.6218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M37.3275 27.0218C36.7875 26.8538 36.2115 26.7818 35.6355 26.7818H27.3435L30.8235 18.7058L30.8595 18.6218C31.0395 18.6818 31.2075 18.7658 31.3875 18.8378L34.0395 19.9538C35.5155 20.5658 36.5475 21.2018 37.1715 21.9698C37.2915 22.1138 37.3875 22.2458 37.4715 22.4018C37.5795 22.5698 37.6635 22.7378 37.7115 22.9178C37.7595 23.0258 37.7955 23.1338 37.8195 23.2298C38.1435 24.2378 37.9515 25.4738 37.3275 27.0218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M41.4936 32.6382V34.9782C41.4936 35.2182 41.4816 35.4582 41.4696 35.6982C41.2416 39.8862 38.9016 41.9982 34.4616 41.9982H25.1016C24.8136 41.9982 24.5256 41.9742 24.2496 41.9382C20.4336 41.6862 18.3936 39.6462 18.1416 35.8302C18.1056 35.5542 18.0816 35.2662 18.0816 34.9782V32.6382C18.0816 30.2262 19.5456 28.1502 21.6336 27.2502C22.3536 26.9502 23.1216 26.7822 23.9376 26.7822H35.6496C36.2376 26.7822 36.8136 26.8662 37.3416 27.0222C39.7296 27.7542 41.4936 29.9862 41.4936 32.6382Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M23.7195 22.2339L21.6195 27.2499C19.5315 28.1499 18.0675 30.2259 18.0675 32.6379V29.1219C18.0675 25.7139 20.4915 22.8699 23.7195 22.2339Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M41.4899 29.1212V32.6372C41.4899 29.9972 39.7379 27.7532 37.3379 27.0332C37.9619 25.4732 38.1419 24.2492 37.8419 23.2292C37.8179 23.1212 37.7819 23.0132 37.7339 22.9172C39.9659 24.0692 41.4899 26.4332 41.4899 29.1212Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <div class="flex flex-col justify-start ">
+                        <div class="text-gray-500 text-sm">Total Items</div>
+                        <div class="text-base font-bold">@TotalCount</div>
+                    </div>
+                </div>
+ 
+            </div>
+
+            <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4 ">
+                <div class="flex flex-row items-center gap-x-3 py-4">
+
+                    <svg class="" width="45" height="45" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30.0674" cy="30" r="30" fill="#1F82BD" />
+                        <path d="M32.7816 34.1262H26.7816" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M29.7816 31.1978V37.1978" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M30.8595 18.6218L30.8235 18.7058L27.3435 26.7818H23.9235C23.1075 26.7818 22.3275 26.9498 21.6195 27.2498L23.7195 22.2338L23.7675 22.1138L23.8515 21.9218C23.8755 21.8498 23.8995 21.7778 23.9355 21.7178C25.5075 18.0818 27.2835 17.2538 30.8595 18.6218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M37.3275 27.0218C36.7875 26.8538 36.2115 26.7818 35.6355 26.7818H27.3435L30.8235 18.7058L30.8595 18.6218C31.0395 18.6818 31.2075 18.7658 31.3875 18.8378L34.0395 19.9538C35.5155 20.5658 36.5475 21.2018 37.1715 21.9698C37.2915 22.1138 37.3875 22.2458 37.4715 22.4018C37.5795 22.5698 37.6635 22.7378 37.7115 22.9178C37.7595 23.0258 37.7955 23.1338 37.8195 23.2298C38.1435 24.2378 37.9515 25.4738 37.3275 27.0218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M41.4936 32.6382V34.9782C41.4936 35.2182 41.4816 35.4582 41.4696 35.6982C41.2416 39.8862 38.9016 41.9982 34.4616 41.9982H25.1016C24.8136 41.9982 24.5256 41.9742 24.2496 41.9382C20.4336 41.6862 18.3936 39.6462 18.1416 35.8302C18.1056 35.5542 18.0816 35.2662 18.0816 34.9782V32.6382C18.0816 30.2262 19.5456 28.1502 21.6336 27.2502C22.3536 26.9502 23.1216 26.7822 23.9376 26.7822H35.6496C36.2376 26.7822 36.8136 26.8662 37.3416 27.0222C39.7296 27.7542 41.4936 29.9862 41.4936 32.6382Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M23.7195 22.2339L21.6195 27.2499C19.5315 28.1499 18.0675 30.2259 18.0675 32.6379V29.1219C18.0675 25.7139 20.4915 22.8699 23.7195 22.2339Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M41.4899 29.1212V32.6372C41.4899 29.9972 39.7379 27.7532 37.3379 27.0332C37.9619 25.4732 38.1419 24.2492 37.8419 23.2292C37.8179 23.1212 37.7819 23.0132 37.7339 22.9172C39.9659 24.0692 41.4899 26.4332 41.4899 29.1212Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <div class="flex flex-col justify-start ">
+                        <div class="text-gray-500 text-sm">Total Amount </div>
+                    <div class="text-base font-bold">₦@TotalDeduction</div>
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+
+
+        <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+            <!-- Card Title -->
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+                        Deduction List
+                    </h3>
+                    <span class="text-base font-normal text-gray-500 dark:text-gray-400">
+                    Showing  Payroll Deduction Schedule Items for @desc
+                    </span>
+                </div>
+                <div class="flex-shrink-0">
+               
+                    <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <input type="search" id="default-search" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+                               class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search...">
+
+                        <button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                    </div>
+              
+                  @*  <a href="#"
+                       class="p-2 text-sm font-medium rounded-lg text-primary-700 hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
+                        View
+                        all
+                    </a>*@
+                </div>
+            </div>
+            <!-- Table -->
+            <div class="flex flex-col mt-8">
+                <div class="overflow-x-auto rounded-lg">
+                    <div class="inline-block min-w-full align-middle">
+                        <div class="overflow-hidden shadow sm:rounded-lg">
+
+                       
+
+                                <SfGrid @ref="grid" ID="gridPayrollDeductionScheduleItem" TValue="PayrollDeductionScheduleItemMasterView" EnablePersistence="false"
+                                    Query="@QueryGrid" DataSource=@_PayrollDeductionScheduleItemMasterViewSrc
+                                        AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                                        AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="500"
+                                        AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                                        AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false" Toolbar="@(new List<string>() { "ExcelExport", "PdfExport" })">
+@*                                    <SfDataManager Url="@GRID_API_RESOURCE" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>*@
+                                    <GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+                                    <GridEvents TValue="PayrollDeductionScheduleItemMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure" OnToolbarClick="ToolbarClickHandler"></GridEvents>
+
+                                    <GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false"
+                                                      ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog"></GridEditSettings>
+
+
+                                    <GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+                                    </GridFilterSettings>
+
+
+                                    <GridColumns>
+                                <GridColumn HeaderText="S/N" AutoFit="true">
+                                    <Template Context="context">
+                                        <span>@SortSerialNumber.GetSerialNumber(context)</span>
+                                    </Template>
+                                </GridColumn>
+
+                                        <GridColumn Field=@nameof(PayrollDeductionScheduleItemMasterView.MemberId) HeaderText="Member No" AutoFit="true"></GridColumn>
+                                        <GridColumn Field=@nameof(PayrollDeductionScheduleItemMasterView.MemberName) HeaderText="Member Name" AutoFit="true"></GridColumn>
+
+                                        <GridColumn Field=@nameof(PayrollDeductionScheduleItemMasterView.AccountNo) HeaderText="Account No" AutoFit="true"></GridColumn>
+                                        <GridColumn Field=@nameof(PayrollDeductionScheduleItemMasterView.DeductionType) HeaderText="Deduction Type" AutoFit="true"></GridColumn>
+
+                                        <GridColumn Field=@nameof(PayrollDeductionScheduleItemMasterView.Narration) HeaderText="Narration" AutoFit="true"></GridColumn>
+
+                                        <GridColumn Field=@nameof(PayrollDeductionScheduleItemMasterView.PayrollCode) HeaderText="Payroll Code" AutoFit="true"></GridColumn>
+                                <GridColumn Field=@nameof(PayrollDeductionScheduleItemMasterView.Amount) HeaderText="Amount" AutoFit="true" Format="N2">
+                                </GridColumn>
+                       
+
+                                        <GridColumn Field=@nameof(PayrollDeductionScheduleItemMasterView.PayrollDate) HeaderText="Payroll Date" AutoFit="true"></GridColumn>
+
+                                        <GridColumn Field=@nameof(PayrollDeductionScheduleItemMasterView.BatchRefNo) HeaderText="Batch RefNo" AutoFit="true"></GridColumn>
+
+                                    </GridColumns>
+                                </SfGrid>
+                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+   
+</main>
+
+ 
+
+
+

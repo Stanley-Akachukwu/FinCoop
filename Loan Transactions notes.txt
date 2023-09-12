@@ -1,0 +1,207 @@
+///LOAN TXN TYPES
+//loan disbursement
+//loan repayment ,
+//Loan offset,
+//Loan topup
+
+
+
+
+
+Principal 1,000,000 interest 100k, period repayment 110,000 princ payment 100k, int payment 10k
+
+
+Loan disbursement Journal process
+1. Generate journal entries (principal, interest, charges) from company bank account and customer loan account
+	CompanyBankAccount->LedgerAccount
+	CustomerBankAccount->Customer->LoanAccount
+
+	1.1 Principal who gave and who received, who is paying and who got paid??,
+		Coop is the one paying or the one giving
+		Customer is the one receiving or the one who got paid
+		DR,CR
+
+		//bank reconciliation
+		DR CompanyBankAccount.LedgerAccount 1,000,000
+		CR CustomerBankAccount.LedgerAccount 1,000,000
+
+		//loan tracking:principal
+		DR LoanProduct.PrincipalAccount 1,000,000
+		CR LoanAccount.PrincipalBalanceAccount 1,000,000
+
+		//loan tracking:interest
+		DR LoanProduct.InterestReceivableAccount 100,000
+		CR LoanAccount.InterestBalanceAccount 100,000
+
+		//track charges
+		DR LoanProduct.ChargesReceivableAccount 1,000
+		CR LoanAccount.ChargesPayableAccount 1,000
+
+
+2.Post journal entries
+
+if debit entry, subtract debit amount from ledger balance
+if credit entry, add credit amount to ledger balance
+
+
+types of payroll deductions (CSVs to and from payroll)
+1.Loan repayments (DeductionType=LOAN)
+2.Savings deposits (DeductionType=SAVINGS)
+3.Fixed deposit contributions (DeductionType=FIXED)
+4. Special deposit contributions (DeductionType=SPECIAL)
+
+
+1. Coop sends advise to payroll ->CSV
+CSV to payroll
+345,Loan123,110k ->p 100k, i 10k
+346,Loan123,55k-> p 50k, i 5k
+347,Loan125,25k-> p 20k, i 5k
+
+total deductions=256,000,000
+gtb acc
+
+DR PayrollDeductions 256,000,000
+CR PayrollSuspense 256,000,000
+
+
+2. when payroll notifies of deductions->CSV
+total deductions=256,000,000
+gtb acc 256,000,000
+
+DR PayrollSuspense 256,000,000
+CR GTB Coy Acc 256,000,000
+
+CSV from payroll
+345,Loan123,110k ->p 100k, i 10k
+346,Loan123,55k-> p 50k, i 5k
+347,Loan125,25k-> p 20k, i 5k
+
+LOAN REPAYMENT FROM PAYROLL
+	Principal repayment
+	DR PayrollSuspenseAccount 100k
+	CR CompanyBankAccount.LedgerAccount 100k  //GTB
+	DR LoanAccount.PrincipalBalanceAccount 100k
+	CR LoanProduct.PrincipalAccount 100k
+
+	Interest repayment
+	DR PayrollSuspenseAccount 10k
+	CR CompanyBankAccount.LedgerAccount 10k //GTB
+	DR LoanAccount.InterestBalanceAccount 10k
+	CR LoanProduct.InterestReceivableAccount 10k
+
+
+
+
+LOAN REPAYMENT FROM BANK TRANSFER
+	Principal repayment
+	DR LoanAccount.PrincipalBalanceAccount 100k
+	CR CompanyBankAccount.LedgerAccount 100k
+
+	Interest repayment
+	DR LoanAccount.InterestBalanceAccount 10k
+	CR CompanyBankAccount.LedgerAccount 10k
+
+
+
+RepaymentPeriods->Weekly,BiWeekly,Monthly, Quarterly etc
+
+Calendar(Name,Month,Year)
+
+LoanAccounts(Principal,Interest, CommencementDate)
+RepaymentSchedule(LoanAccountId, No, PrincipalPaid,InterestPaid,DueDate, IsPaid,PaidDate,PaidChannel{PAYROLL,BANK_TRANSFER, ETC})
+PayrollSchedule(LoanAccountId, No, Amount***,PayrollDate)
+LoanRepayment(LoanAccountId,ScheduleId,PayrollScheduleId, Amount)
+
+04-2023, 100k --BatchRefNo 122
+05-2023, 100k --BatchRefNo 123
+06-2023, 100k --BatchRefNo 124
+
+Payroll schedule for 05-23
+05-2023, 7891, 100k --BatchRefNo 123
+
+Payroll deductions schedule for 05-23
+05-2023, 7891, 50k --BatchRefNo 123
+
+
+Payroll schedule for 06-23
+06-2023, 7891, 50k --BatchRefNo 123 // Index1: Date,AccountNo,BatchRefNo Index2: Date,BatchRefNo
+06-2023, 7891, 100k --BatchRefNo 124
+
+
+
+================================
+
+04-2023, 125.50k --BatchRefNo 122
+05-2023, 125.50k --BatchRefNo 123
+06-2023, 125.50k --BatchRefNo 124
+
+Payroll schedule for 05-23
+05-2023, 7891, 125.50k --BatchRefNo 123
+
+Payroll deductions schedule for 05-23
+05-2023, 7891, 125.52k --BatchRefNo 123
+
+
+Payroll schedule for 06-23
+06-2023, 7891, 50k --BatchRefNo 123 // Index1: Date,AccountNo,BatchRefNo Index2: Date,BatchRefNo
+06-2023, 7891, 100k --BatchRefNo 124
+
+================
+Loan Offset 
+1. Partial Offset 2. Full Offset 
+1. Partial Offset
+ - Interest balance will be repaid completely or partial 
+ - Principal balance will be re-created as a new loan account 
+  Principal bal  -100k , interest bal - 20k ,partial offset amount - 50k
+  interest balance will be reduced to zero ,partial offset amount =50-20= 30k
+  principal balance  = 100k - 30k  = 70k
+ 
+ A user took a loan of 1 billion 
+ User is offsetting - 250 million 
+ offset admin charge - 0.5  - 1 million  
+ Two use case 
+ user case 1 -> admin charge: 250m + 1m (ChargeType - Add) - for executive loan 
+ uase case 2 -> admin charge: 250m - 1m (ChargeType - Subtract) - for executive loan  
+ 
+ 10month repayment
+
+ m1 - principa: 100m , interest : 10m //payroll, bank transfer/cash, offset
+ m2 - principa: 100m , interest : 10m
+ m3 - principa: 100m , interest : 10m
+ Customer paid : 250million
+ m4 - principa: 100m , interest : 0m -> 100m
+ m5 - principa: 100m , interest : 0m  -> 100m
+ New S.I is computed on outstanding on total outstanding principal - flat interest
+ -------------------------------
+ m6 - principa: 100m , interest : flat interest recalculation  -> 50m
+ m7 - principa: 100m , interest : 10m
+ m8 - principa: 100m , interest : 10m
+ m9 - principa: 100m , interest : 10m
+ m10 - principa: 100m , interest : 10m 
+ 
+ Loan topup
+ -----------
+ A user took a loan of 1 billion 
+ User is topup - 200 million  
+ Admin fee - 0.5 % of topup amount = 2million  -> Temitope to confirm.
+ 
+m1 - principa: 100m , interest : 10m
+ m2 - principa: 100m , interest : 10m
+ m3 - principa: 100m , interest : 10m
+ The customer has paid 300m with interest
+ Customer request topup : 200million
+ Original balance is  = 700m 
+ New Balance after topup  = 900million 
+ Interest will be recalculated based on the new principal
+ We keep track of the last repayment payment point before close out the other loan account 
+ New tenure  - 7month total outstanding principal -900m .. interest is calc on 900m flat 
+ m4 - principa: 128m , interest : xm 
+ m5 - principa: 128m , interest : xm 
+ m6 - principa: 128m , interest : xm
+ m7 - principa: 128m , interest : xm
+ m8 - principa: 128m , interest : xm
+ m9 - principa: 128m , interest : xm
+ m10 - principa: 128m , interest : xm  
+ 
+ 
+ 

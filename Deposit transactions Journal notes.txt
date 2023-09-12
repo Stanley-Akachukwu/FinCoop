@@ -1,0 +1,227 @@
+v1
+DR SD_COY_BANK_CONTROL
+CR Company bank account fundingAmount COMPANY_BANK_CREDIT
+
+DR SD_PROD_CONTROL 
+CR Product deposit account fundingAmount
+
+DR SD_CUST_BANK_CONTROL 
+CR Account deposit account fundingAmount
+
+
+v2
+
+DR SD_CUST_BANK_CONTROL fundingAmount
+CR Customer cash account fundingAmount
+
+DR Customer cash account fundingAmount
+CR Company bank account fundingAmount 
+
+DR SD_COY_BANK_CONTROL 
+CR Product deposit account fundingAmount
+
+DR Product deposit account fundingAmount
+CR Account deposit account fundingAmount
+
+
+v3
+
+DR SD_COY_BANK_CONTROL
+CR Customer cash account fundingAmount
+
+DR Customer cash account fundingAmount
+CR Company bank account fundingAmount 
+
+DR SD_PROD_CONTROL 
+CR Product deposit account fundingAmount
+
+DR SD_CUST_BANK_CONTROL  
+CR Account deposit account fundingAmount
+
+
+v1 FD APPLICATION ->BANK TRANSFER
+
+FD_DR FD_COY_BANK_CONTROL
+FD_CR Customer cash account fundingAmount
+
+FD_DR Customer cash account fundingAmount
+FD_CR Company bank account fundingAmount 
+
+FD_DR FD_PROD_CONTROL 
+FD_CR Product deposit account fundingAmount
+
+FD_DR FD_CUST_BANK_CONTROL  
+FD_CR Account deposit account fundingAmount
+
+
+
+v1 FD APPLICATION ->SPECIAL DEPOSIT
+
+ DR SD Product Deposit Account
+ CR FD Product deposit account fundingAmount
+
+ DR SD Deposit Account
+ CR FD Account deposit account fundingAmount
+
+
+ v1 SD FUNDING ->PAYROLL
+
+DR SD_PAYROLL_CONTROL
+CR Customer cash account fundingAmount
+
+DR Customer cash account fundingAmount
+CR Company bank account fundingAmount 
+
+DR SD_PROD_CONTROL 
+CR Product deposit account fundingAmount
+
+DR SD_CUST_BANK_CONTROL  
+CR Account deposit account fundingAmount
+
+
+
+v1 SAVINGS FUNDING->PAYROLL
+DR SAVINGS_PAYROLL_CONTROL
+CR Customer cash account fundingAmount
+
+DR Customer cash account fundingAmount
+CR Company bank account fundingAmount 
+
+DR SAVINGS_PROD_CONTROL 
+CR Product deposit account fundingAmount
+
+DR SAVINGS_CUST_BANK_CONTROL  
+CR Account deposit account fundingAmount
+
+
+
+ SD Withdrawals v1 ->existing bank account
+ DR Company bank account fundingAmount 
+ CR Customer bank account fundingAmount
+
+ DR Product deposit account fundingAmount
+ CR SD_PROD_CONTROL 
+
+ DR Account deposit account fundingAmount
+ CR SD_CUST_BANK_CONTROL 
+
+
+
+ SD Transfer v1->SV/SD/FD
+ DR Product deposit account fundingAmount
+ CR SV/SD/FD Product Deposit Account
+
+ DR Account deposit account fundingAmount
+ CR SV/SD/FD Deposit Account
+
+
+ SD Interest addition
+ DR SD/FD_PROD_INTEREST_ACCRUAL_CONTROL
+ CR Product interest payable account fundingAmount
+
+ DR SD/FD_ACC_INTEREST_ACCRUAL_CONTROL  
+ CR Account interest earned account fundingAmount
+
+
+ DR SD/FD_PROD_INTEREST_ADD_CONTROL
+ CR PROD deposit account fundingAmount
+
+ DR SD/FD_ACC_INTEREST_ADD_CONTROL
+ CR Account deposit account fundingAmount
+
+
+
+
+FD Liquidation
+
+:old account
+DR Prod.InterestEarnedAccount earnedInterest
+CR Prod.InterestPayoutAccount earnedInterest
+
+DR Acc.InterestEarnedAccount earnedInterest
+CR Acc.InterestPayoutAccount earnedInterest
+
+DR Product deposit account deposit
+CR FD_PROD_CONTROL deposit
+
+DR Account deposit account deposit
+CR FD_CUST_BANK_CONTROL deposit
+
+
+:new account
+
+ROLLOVER_PRINCIPAL_AND_INTEREST = 1,
+
+DR FD_PROD_CONTROL 
+CR FD Product deposit account deposit+interest
+
+DR FD_CUST_BANK_CONTROL  
+CR FD Account deposit account deposit+interest
+
+
+SD Liquidation
+
+ROLLOVER_PRINCIPAL_AND_LIQUIDATE_INTEREST = 2,
+
+DR FD_PROD_CONTROL 
+CR FD Product deposit account deposit
+
+DR FD_CUST_BANK_CONTROL  
+CR FD Account deposit account deposit
+
+DR SD_PROD_CONTROL interest
+CR SD Product deposit account interest
+
+DR SD_CUST_BANK_CONTROL  interest
+CR SD Account deposit account interest
+
+
+LIQUIDATE_PRINCIPAL_AND_INTEREST = 3
+DR SD_PROD_CONTROL deposit+interest
+CR SD Product deposit account deposit+interest
+
+DR SD_CUST_BANK_CONTROL  deposit+interest
+CR SD Account deposit account deposit+interest
+
+
+SV Liquidation
+
+ROLLOVER_PRINCIPAL_AND_LIQUIDATE_INTEREST = 2,
+DR FD_PROD_CONTROL 
+CR FD Product deposit account deposit
+
+DR FD_CUST_BANK_CONTROL  
+CR FD Account deposit account deposit
+
+DR SV_PROD_CONTROL interest
+CR SV Product deposit account interest
+
+DR SV_CUST_BANK_CONTROL  interest
+CR SV Account deposit account interest
+
+LIQUIDATE_PRINCIPAL_AND_INTEREST = 3
+DR SV_PROD_CONTROL deposit+interest
+CR SV Product deposit account deposit+interest
+
+DR SV_CUST_BANK_CONTROL  deposit+interest
+CR SV Account deposit account deposit+interest
+
+
+TRANSFER Liquidation
+
+ROLLOVER_PRINCIPAL_AND_LIQUIDATE_INTEREST = 2,
+DR FD_PROD_CONTROL 
+CR FD Product deposit account deposit
+
+DR FD_CUST_BANK_CONTROL  
+CR FD Account deposit account deposit
+
+DR Product.BankDepositAccount interest
+CR Customer bank account interest
+
+LIQUIDATE_PRINCIPAL_AND_INTEREST = 3
+DR Product.BankDepositAccount deposit+interest
+CR Customer bank account deposit+interest
+
+
+  

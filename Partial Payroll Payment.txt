@@ -1,0 +1,70 @@
+﻿
+In the case of incomplete funds deduction from CNL Payroll deduction upload:
+
+System should deduct outstanding from the members SD.
+
+if the member has insufficient balance on SD: System sends an exception mail notification to internal control and sets member SD balance to appropriate negative value
+
+Implementation Logic
+--------------------
+
+Alter Entities loan Repaymemt schedule 
+---------------------------------------
+   Period_Principal_Balance  = Contains original balance 
+1. decimal Holding_Principal_Balance  = Contains 
+   bool IsHolding_Principal_Balance
+2. decimal Holding_Interest_balance
+   deciaml IsHolding_Interest_balance
+
+Logic to prepare payroll schedule for savings , special deposit , loan repayment
+------------------------
+
+Pull from
+1. Savings 2. Special deposit 3. Loan repayment.
+
+For savings & special deposit postings => We pull into payroll repayment table
+
+To pull loan balance we need to check existings balance to be sure its fully or partially paid.
+
+When repayment comes in for a loan product (A) => 50k.
+
+HP: Happy path  | UHP: Un Happy path
+--------------------------------------
+
+
+Month 1 (HP): CNL Pay:  50k  , Schedule Pay : 50K  => its balance and status changes to match - posting changes to complete
+
+Month 1 (UHP): CNL Pay:  40k  , Schedule Pay : 50K , Intrest component paid : 0  | Principal balance : 0 - Holding_principal_balance : 10k
+
+Month 1 
+On upload from CNL
+
+Holding_Principal_Balance = 10k
+
+ Action 1 
+ posted to debit special deposit may throw balance to -ve
+
+ Action 2
+ Send email an exceptional mail to internal control
+ 
+
+Month 2 (HP):  CNL Pay:  50k  , Schedule Pay  : 50K  = 50k
+
+
+Month 2 (UHP):  CNL Pay: 50k  , Schedule Pay  : 50K = 50k
+
+
+Action 1 
+ posted to debit special deposit may throw balance to -ve
+
+ Action 2
+ Send email an exceptional mail to internal control
+
+
+
+
+
+
+
+
+

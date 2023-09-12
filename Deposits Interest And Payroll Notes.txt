@@ -1,0 +1,264 @@
+Fixed Deposit Interest Computation: 
+
+Note the following:
+- Maturity date: Tenor(dateof maturity) 
+- CommencmentDate: Date of application approval 
+- How do we get maturity date? If the tenor is 90 days then Maturity day is 3moouth
+- Minimum balance is not required on any of the accounts before interest computation can be done
+ 
+
+Use Cases for Fixed Deposit Interest Computation are as follows:
+
+(A.) Investment that runs to maturity date :
+               Fixed-deposit-interest-paid = FXDRate/100 * FXDInvAmount/365 * FXDTenor 
+
+
+
+     Andrew(Appoved jan 1)
+    
+    
+
+   - Assume interest runs every 15th (Pick this from 15th)
+    
+   - Get All deposit Account (FX)
+
+   - Check the last time lastTime interest computed
+
+   - if last interest computed present then calculate has follows
+        
+        (lastTimeComput + 1)  - 15 Current month
+
+     else
+          commercement  - 15 5 Current month
+         
+
+
+    - 
+    commercement  - 15
+    (lastRan + 1)  - 15 next month
+
+
+
+    -------------------------------------------------
+
+       
+
+
+      Jan 1  -- ( interest 15th -- )   1-15
+     
+      (16th) lastRan = 15
+     
+      Jan 15   --( interest  15th --)  16 - 30
+      
+      --( interest  15th --)  
+
+
+
+       Day 1        curentTime - CommencmentDate  Andrew  91  >= 90
+                    curentTime - CommencmentDate           29  >= 90
+          
+
+
+
+
+               approved-15  -time    t-10 
+
+(B.) Investment that is liquidated before maturity date:
+
+         Use the following parameters to compute Fixed-deposit-interest-paid:
+
+          Fixed-deposit-interest-paid = Interest-to-date – earlyLiquidationCharge 
+
+          where;Fixed
+                  
+                   15
+
+                   91  >= 90
+
+                 Interest-to-date = FXDRate/100 * FXDInvAmount/365 * No-of-days-for-interest 
+                 (No-of-days-for-interest = DateLiquidated – commencementDate)
+
+
+                earlyLiquidationCharge is computed as follows.  
+
+                If FXDTenor = 30 then 
+
+                                earlyLiquidationCharge = 0.15 * Interest-to-date ,
+
+                elseif No-of-days-for-interest < 0.50 * FXDTenor then 
+
+                                earlyLiquidationCharge = 0.20 * Interest-to-date 
+
+                elseif (No-of-days-for-interest >= 0.50 * FXDTenor) And (No-of-days-for-interest <= 0.60 * FXDTenor) then 
+
+                                earlyLiquidationCharge = 0.17 * Interest-to-date 
+
+                elseif (No-of-days-for-interest >= 0.61 * FXDTenor) And (No-of-days-for-interest <= 0.70 * FXDTenor) then 
+
+                                earlyLiquidationCharge = 0.15 * Interest-to-date 
+
+                elseif (No-of-days-for-interest >= 0.71 * FXDTenor) And (No-of-days-for-interest <= 0.80 * FXDTenor) then 
+
+                                earlyLiquidationCharge = 0.13 * Interest-to-date 
+
+                elseif (No-of-days-for-interest >= 0.81 * FXDTenor) And (No-of-days-for-interest <= 0.99 * FXDTenor) then 
+
+                                earlyLiquidationCharge = 0.1 * Interest-to-date 
+
+                end if 
+
+  
+
+(C.) Toped up Investment. 
+
+            No-of-days-for-interest = DateLiquidated – commencementDate 
+
+            Interest-to-date = FXDRate/100 * FXDInvAmount/365 * No-of-days-for-interest 
+
+            New_FXDInvAmount = TopUpAmount + Interest-to-date + FXDInvAmount 
+
+            Then use the New_FXDInvAmount, the new rate and new tenor(supplied) to calculate the new interest to be tentatively paid. 
+
+            The formular to calculate the FXD interest here( depends on the maturity date) 
+
+            Please note that the minimum top up amount should also be setup. 
+
+
+(D.)  Rolled Over Investment. 
+
+            As you know, this implies that the investment runs to maturity. 
+
+            FXD-Inv-at-Maturity = Interest-at-maturity + FXDInvAmount 
+
+            Then use the rolled over rate and tenor automatically as follows. 
+
+            Fixed-deposit-interest-paid (tentatively)= FXDRate/100 * FXD-Inv-at-Maturity /365 * FXDTenor 
+
+            Please note if it’s a leap year.  
+
+  
+
+ 
+
+----------------------------------------------------------------------------------------------------------------------------------------- 
+
+ 
+
+Special Deposit Interest Computation: 
+Note: Cash addition, Fund transfer and withdrawal impact interest computation because one of the parameters for Special deposit interest computation is the SD balance.
+ SD Interest computation is saved monthly and done at the end of the month. It is as follows.
+
+
+   (A.) Use case 1 (As as long as there is existing bal.):
+   
+       Conditions: No monthly contribution action(Bank transfer or cash addition) and no payroll contribution.
+        
+        Using flat interest rate converted into monthly.
+        
+        Interest-for-the-month = (SDIntRate/100)/12 * SDBalance-as-at-month-end-being-considered 
+  
+
+     (B.) Use case 2 
+
+     Conditions: Monthly contribution(Payroll) and no contribution action 
+
+     Using flat interest converted into monthly  and first week interest(rate% * new monthly balance/365) * 7 
+
+     Interest-for-the-month = ((SDIntRate/100 * SDBalance-as-at-month-end-being-considered) /12) + (SDIntRate/100 * (MonthlyContribAmount/365) * 7) 
+  
+
+     (C.)Use case 3 
+
+     Conditions:  No monthly contribution(Payroll) but has cash addition, SD withdrawal, Deposit transfer and/or loan offset for the month being considered.
+
+      Using flat interest converted into monthly  + daily interest rate(nth computation) (rate%* existing balance/365) - for daily 
+
+    Computation is as follows: 
+
+    (i) Calculate the SD balance as at the previous month end as SDBalPreviousMonthend 
+
+    (ii)Calculate daily interest on the month being considered as follows: 
+
+    - Interest-for-the-first-day-of-month = (SDIntRate /100) * cum-balance-as-at-first-day-of-the-month-being-considered / 365 
+    - Interest-for-the-second-day-of-month = (SDIntRate /100) * cum-balance-as-at-second-day-of-the-month-being-considered / 365 
+    - . . .
+     - Interest-for-the-nth-day-of-month = (SDIntRate /100) * cum-balance-as-at-nth-day-of-the-month-being-considered / 365 
+
+    (iii)Therefore, Interest-for-the-month = (SDIntRate / 100 * SDBalPreviousMonthend / 12) + (Interest -for-the-first-day-of-month + Interest-for-the-second-day-of-month + … + Interest-for-the-last-day-of-month) 
+  
+
+     (D.) Use case 4 
+     Conditions: Monthly contribution(Payroll) & action(cash addition, withdrawal , transfer, loan offset) 
+
+     using flat interest converted into monthly + daily interest rate(nth computation) (rate%* existing balance/365) - for daily + first week interest(rate% * new monthly balance/365) * 7 
+
+  
+    Computation is as follows:
+    (i) Calculate the SD balance as at the previous month end – SDBalPreviousMonthend 
+               
+   (ii)   Calculate daily interest on the month being considered. 
+
+                             Interest-for-the-first-day-of-month = SDIntRate / 100 * cum-balance-as-at-first-day-of-the-month-being-considered / 365 
+                             Interest-for-the-second-day-of-month = SDIntRate / 100 * cum-balance-as-at-second-day-of-the-month-being-considered / 365 
+
+  (iii) Therefore, Interest-for-the-month = (SDIntRate / 100 * SDBalPreviousMonthend / 12) + (Interest -for-the-first-day-of-month + Interest-for-the-second-day-of-month + … + Interest-for-the-last-day-of-month) + (SDIntRate/100 * MonthlyContribAmount/365 * 7) 
+   
+
+
+
+
+
+------------------------------------Handling Cron Jobs-----------------------------------------
+  
+  (A.)Payroll schedule: Cron job  runs every 15th of the month spool all account that the Funding source is Payroll then post them into Payroll schedule table
+
+
+ (B.) DepositCronJobConfiguration Data Update:
+         Cron job  runs everyday to
+         Check for the last day of the current month &
+         update Computation Date and minimum computation date of DepositCronJobConfiguration table
+
+ (C.) Interest computation For Special Deposit(Cron runs everyday)
+
+ If(today is computation date)
+
+ 1. a Cron start from deposit account table
+  Check if funding source == Payroll & account balance > 0 & computation_date - application_date > MinimumComputationDays & DepositAccountActionType == none then
+ Apply(use case 2)
+ Post into SpecialDepositInterestSchedule
+
+
+ 1. b Check if funding source == BankTransfer Or Cash addition && account balance > 0
+ & computation_date - application_date > MinimumComputationDays & DepositAccountActionType == none
+ Apply(use case 1)
+ Post into SpecialDepositInterestSchedule
+
+ 1.c
+ Check if funding source == BankTransfer Or Cash addition && account balance > 0
+ & computation_date - application_date > MinimumComputationDays & DepositAccountActionType == cash deposit | Withdrawal
+ Apply(use case 3)
+ Post into SpecialDepositInterestSchedule
+
+ 1.d
+ Cron start from deposit account table
+  Check if funding source == Payroll & account balance > 0 & computation_date - application_date > MinimumComputationDays
+ DepositAccountActionType == Payroll
+ Apply(use case 4)
+ Post into SpecialDepositInterestSchedule
+
+
+
+
+ public class DepositCronJobConfiguration  : BaseEntity<string>  // This optional
+{
+    public string ConfigurationName { get; set; } // Payroll Deduction | Interest computation
+    public DateTime StartDate { get; set; }
+    public DateTime ComputationDate { get; set; }
+    public int ComputationFrequency { get; set; } // 20 days  | interest computation  - 30 | days
+    public int MinimumComputationDays { get; set; }
+    public Tenure Unit { get; set; } // day 
+    public bool IsFrequencyComputation { get; set; } // true if we are using frequency | false
+    public override string DisplayCaption { get; }
+    public override string DropdownCaption { get; }
+    public override string ShortCaption { get; }
+}

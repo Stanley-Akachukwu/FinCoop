@@ -1,0 +1,17 @@
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\bin\Debug\net7.0\AP.ChevronCoop.Entities.deps.json
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\bin\Debug\net7.0\AP.ChevronCoop.Entities.runtimeconfig.json
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\bin\Debug\net7.0\AP.ChevronCoop.Entities.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\bin\Debug\net7.0\AP.ChevronCoop.Entities.pdb
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\bin\Debug\net7.0\AP.ChevronCoop.Commons.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\bin\Debug\net7.0\AP.ChevronCoop.Commons.pdb
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\AP.ChevronCoop.Entities.csproj.AssemblyReference.cache
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\AP.ChevronCoop.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\AP.ChevronCoop.Entities.AssemblyInfoInputs.cache
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\AP.ChevronCoop.Entities.AssemblyInfo.cs
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\AP.ChevronCoop.Entities.csproj.CoreCompileInputs.cache
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\AP.ChevronCoop.Entities.csproj.CopyComplete
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\AP.ChevronCoop.Entities.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\refint\AP.ChevronCoop.Entities.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\AP.ChevronCoop.Entities.pdb
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\AP.ChevronCoop.Entities.genruntimeconfig.cache
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Entities\obj\Debug\net7.0\ref\AP.ChevronCoop.Entities.dll

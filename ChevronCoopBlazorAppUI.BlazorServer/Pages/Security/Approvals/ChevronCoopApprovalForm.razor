@@ -1,0 +1,69 @@
+﻿@*@page "/chevroncoop/approval/{entityId}"*@
+
+@*https://localhost:7218/chevroncoop/approval/f91e8801-49ed-802c-26df-e2859b83f71d*@
+
+<section class="bg-gray-50 dark:bg-gray-900 py-10 px-8">
+    @if (string.IsNullOrEmpty(ApprovalViewModel.Description))
+    {
+        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+            Approval Processing
+        </h2>
+    }
+    @if (!string.IsNullOrEmpty(ApprovalViewModel.Description))
+    {
+        <h3 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+            @ApprovalViewModel.Description Approval Processing
+        </h3>
+    }
+    <div class="mx-auto max-w-screen-2xl px-4 lg:px-4 ">
+        <div class="relative overflow-x-auto shadow sm:rounded-lg my-4">
+            <div class="grid grid-cols-4 gap-6 px-8 py-4">
+                @foreach (var item in keyValuePairs)
+                {
+                    <div class="">
+                        <label for="detailAtr" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@item.Key</label>
+                        <span>@item.Value</span>
+                    </div>
+                }
+
+            </div>
+        </div>
+        @*    <div class="overflow-x-auto my-6 shadow sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                        <th scope="col" class="px-4 py-3 min-w-[10rem]"> Member name </th>
+                        <th scope="col" class="px-4 py-3 min-w-[10rem]"> Member email </th>
+                        <th scope="col" class="px-4 py-3 min-w-[6rem]">MembershipId</th>
+                    </tr>
+                </thead>
+                <tbody data-accordion="table-column">
+                    @foreach (var grpMember in approvalGroupMembers)
+                    {
+                        <tr class="border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition" id="table-column-header-9" data-accordion-target="#table-column-body-9" aria-expanded="false" aria-controls="table-column-body-9">
+                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"> @grpMember.MemberName </th>
+                            <td class="px-4 py-3 text-gray-500"> @grpMember.Email  </td>
+                            <td class="px-4 py-3 font-normal text-gray-500 whitespace-nowrap dark:text-white"> @grpMember.MembershipId  </td>
+                            <td class="p-4 space-x-2 whitespace-nowrap">
+                                <a href="javascript: void(0)" @onclick=@(e=>OnClickProcessApproval(grpMember)) class="isDisabled block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    <svg class="inline-flex items-center mr-2 w-5 h-5" width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 9V15M11 9V15M1 5H17M16 5L15.133 17.142C15.0971 17.6466 14.8713 18.1188 14.5011 18.4636C14.1309 18.8083 13.6439 19 13.138 19H4.862C4.35614 19 3.86907 18.8083 3.49889 18.4636C3.1287 18.1188 2.90292 17.6466 2.867 17.142L2 5H16ZM12 5V2C12 1.73478 11.8946 1.48043 11.7071 1.29289C11.5196 1.10536 11.2652 1 11 1H7C6.73478 1 6.48043 1.10536 6.29289 1.29289C6.10536 1.48043 6 1.73478 6 2V5H12Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+
+                    }
+                 </tbody>
+            </table>
+        </div> *@
+        <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-full mt-4">
+                <button
+                    class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit" @onclick="OnClickReturn">
+                    Return to Approval List
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

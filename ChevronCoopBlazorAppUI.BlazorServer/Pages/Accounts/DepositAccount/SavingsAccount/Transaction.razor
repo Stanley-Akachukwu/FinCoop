@@ -1,0 +1,101 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.CommonViews;
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.Drawals
+
+<!-- Card Title -->
+<div class="flex justify-between items-center mb-4">
+    <div>
+        <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+            Transactions
+        </h3>
+        <span class="text-base font-normal text-gray-500 dark:text-gray-400">
+            This is a list of latest transactions
+        </span>
+    </div>
+
+    <div class="flex gap-2 py-4">
+
+            <label for="mobile-search" class="sr-only">Search</label>
+            <div class="relative w-full">
+                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                </div>
+                <input type="text" @oninput="SearchGrid"
+                       class="@Tailwind.SearchText"
+                       placeholder="Search">
+                <button type="submit"
+                        class="@Tailwind.Search_Button_Blue">
+                    Search
+                </button>
+            </div>
+        
+    </div>
+</div>
+
+<div class="mb-4 flex w-full items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+
+    <div class="w-full">
+        <div class="hidden  space-x-1 md:flex ">
+
+            @{
+                string tabtoShow = "othertab2";
+            }
+
+            <TabComponent OnUpdateChanged="@onFiltering" MenuToShow="@tabtoShow"></TabComponent>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- Table -->
+<div class="flex flex-col mt-8">
+    <div class="overflow-x-auto rounded-lg">
+        <div class="inline-block min-w-full align-middle">
+            <div class="overflow-hidden shadow sm:rounded-lg">
+
+                <div class="overflow-x-auto">
+                    <SfGrid ID="gridCashAddition" TValue="SavingsActionsMasterView" EnablePersistence="false"
+                            DataSource="_SavingsCashAdditionMasterViewSrc"
+                            AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                            AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%"
+                            AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="true" AllowSorting="true"
+                            AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+                        <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true"></GridFilterSettings>
+                        <GridPageSettings PageCount="20" PageSize="20" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+                        <GridEvents TValue="SavingsActionsMasterView"></GridEvents>
+
+                        <GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false"
+                                          ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog">
+                        </GridEditSettings>
+
+                        <GridColumns>
+                            <GridColumn Field=@nameof(SavingsActionsMasterView.TransactionDate) HeaderText="DATE" Type="ColumnType.DateTime" Format="dd MMM yyyy hh:mm tt" AutoFit="true"></GridColumn>
+                            <GridColumn Field=@nameof(SavingsActionsMasterView.Description) HeaderText="DESCRIPTION" AutoFit="true" ></GridColumn>
+                            <GridColumn Field=@nameof(SavingsActionsMasterView.TransactionType) HeaderText="TRANSACTION TYPE" AutoFit="true"></GridColumn>
+                            <GridColumn Field=@nameof(SavingsActionsMasterView.Amount) HeaderText="AMOUNT" TextAlign="TextAlign.Right" Format="N2" Type="ColumnType.Number" AutoFit="true"></GridColumn>
+
+                            <GridColumn HeaderText="STATUS" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center>
+                                <Template>
+
+                                    @{
+                                        var row = (context as SavingsActionsMasterView);
+
+                                        <ApprovalStatusComp approvalName="@row.ApprovalId_Status"></ApprovalStatusComp>
+                                    }
+
+                                </Template>
+                            </GridColumn>
+                        </GridColumns>
+                    </SfGrid>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

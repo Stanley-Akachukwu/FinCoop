@@ -1,0 +1,1052 @@
+﻿@page "/approval-rejection"
+@using System.Globalization;
+
+<main>
+
+<div class="px-4 pt-6">
+
+<div class="col-span-3 sm:col-span-3">
+    <button @onclick="GoToApprovals" class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            type="submit">
+        <svg class="inline mr-1" width="14" height="12" viewBox="0 0 14 12" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 5.99967H13Z" fill="#1F82BD"/>
+            <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13"
+                  stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+        </svg> Back
+    </button>
+</div>
+<!-- Request Tabs -->
+<!-- Request Tabs -->
+@if (ViewModel != null && ViewModel.Module != null)
+{
+    <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-9 xl:gap-2 space-x-24 dark:bg-gray-900">
+
+    <div class="col-span-6">
+    <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+         role="alert">
+        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.9998 15.2C9.90936 15.2 11.7407 14.4415 13.091 13.0912C14.4412 11.741 15.1998 9.90961 15.1998 8.00005C15.1998 6.09049 14.4412 4.25914 13.091 2.90888C11.7407 1.55862 9.90936 0.800049 7.9998 0.800049C6.09025 0.800049 4.2589 1.55862 2.90864 2.90888C1.55837 4.25914 0.799805 6.09049 0.799805 8.00005C0.799805 9.90961 1.55837 11.741 2.90864 13.0912C4.2589 14.4415 6.09025 15.2 7.9998 15.2ZM11.3361 6.83635C11.5 6.66661 11.5908 6.43927 11.5887 6.20329C11.5867 5.96731 11.492 5.74158 11.3251 5.57471C11.1583 5.40785 10.9325 5.31319 10.6966 5.31114C10.4606 5.30909 10.2332 5.39981 10.0635 5.56375L7.0998 8.52745L5.9361 7.36375C5.76636 7.19981 5.53902 7.10909 5.30304 7.11114C5.06707 7.11319 4.84134 7.20785 4.67447 7.37471C4.5076 7.54158 4.41295 7.76731 4.4109 8.00329C4.40885 8.23927 4.49956 8.46661 4.66351 8.63635L6.46351 10.4363C6.63228 10.6051 6.86116 10.6999 7.0998 10.6999C7.33845 10.6999 7.56733 10.6051 7.7361 10.4363L11.3361 6.83635Z" fill="#046C4E"/>
+        </svg>
+
+        <span class="sr-only">Danger</span>
+        <div>
+            <span class="font-medium">Approved</span>
+            <ul class="mt-1.5 ml-4  list-inside">
+                <li>You approved this request</li>
+            </ul>
+        </div>
+    </div>
+    @if (ViewModel.ApprovalType.Equals(ApprovalType.LOAN_PRODUCT.ToString()))
+    {
+        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+            <h3 class="mb-4 text-xl font-bold dark:text-white">
+                @ViewModel.ApprovalType.Replace("_", " ")
+            </h3>
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Product Name
+                            </h2>
+                            <p>@CreateLoanProductCommand.Name</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Description
+                            </h2>
+                            <p>@CreateLoanProductCommand.Description</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Preferred
+                                executive loan product
+                            </h2>
+                            <p>@CreateLoanProductCommand.LoanProductType.ToString().Replace("_", " ")</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Loan
+                                amount
+                            </h2>
+                           <p>N @CreateLoanProductCommand.PrincipalMinLimit.ToString("N2", new CultureInfo("en-US"))</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Interest
+                                rate
+                            </h2>
+                            <p>@CreateLoanProductCommand.InterestRate</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Tenor
+                                Unit
+                            </h2>
+                            <p>@CreateLoanProductCommand.TenureUnit</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Maximum
+                                tenor
+                            </h2>
+                            <p>@CreateLoanProductCommand.MaxTenureValue</p>
+                        </div>
+
+                    </div>
+                  @*  <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Admin Charge
+                            </h2>
+                            <p>N @CreateLoanProductCommand.AdminCharges</p>
+                        </div>
+
+                    </div>*@
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Employee Count
+                            </h2>
+                            <p>@CreateLoanProductCommand.EmployeeGuarantorCount</p>
+                        </div>
+
+                    </div>
+                    @* <div class="col-span-6 sm:col-span-3">
+                            <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Disbursement account
+                            </h2>
+                            <p>@CreateLoanProductCommand.BankDepositAccountId</p>
+                            </div>
+
+                            </div>*@
+                </div>
+            </form>
+        </div>
+    }
+    else if (ViewModel.ApprovalType.Equals(ApprovalType.FIXED_DEPOSIT_APPLICATION.ToString()))
+    {
+        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+            <h3 class="mb-4 text-xl font-bold dark:text-white">
+                @ViewModel.ApprovalType.Replace("_", " ")
+            </h3>
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Product Name
+                            </h2>
+                            <p>@CreateFixedDepositAccountApplicationCommand.Caption</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Description
+                            </h2>
+                            <p>@CreateFixedDepositAccountApplicationCommand.Description</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Deposit Amount
+                            </h2>
+                                            <p>N @CreateFixedDepositAccountApplicationCommand.Amount.ToString("N2", new CultureInfo("en-US"))</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Comments
+                            </h2>
+                            <p>@CreateFixedDepositAccountApplicationCommand.Comments</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Interest
+                                rate
+                            </h2>
+                            <p>@CreateFixedDepositAccountApplicationCommand.InterestRate</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Date Created
+                            </h2>
+                            <p>@CreateFixedDepositAccountApplicationCommand.DateCreated.GetValueOrDefault().ToString("M/d/yyyy")</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Payment Mode
+                            </h2>
+                            <p>@CreateFixedDepositAccountApplicationCommand.ModeOfPayment.ToString().Replace("_", " ")</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Maturity Instruction
+                            </h2>
+                            <p>@CreateFixedDepositAccountApplicationCommand.MaturityInstructionType.ToString().Replace("_", " ")</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Liquidation Type
+                            </h2>
+                            <p>@CreateFixedDepositAccountApplicationCommand.LiquidationAccountType.ToString().Replace("_", " ")</p>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    else if (ViewModel.ApprovalType.Equals(ApprovalType.SAVING_DEPOSIT_APPLICATION.ToString()))
+    {
+        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+            <h3 class="mb-4 text-xl font-bold dark:text-white">
+                @ViewModel.ApprovalType.Replace("_", " ")
+            </h3>
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Product Name
+                            </h2>
+                            <p>@CreateSavingsAccountApplicationCommand.Caption</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Description
+                            </h2>
+                            <p>@CreateSavingsAccountApplicationCommand.Description</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Deposit Amount
+                            </h2>
+                         <p>@CreateSavingsAccountApplicationCommand.Amount.ToString("N2", new CultureInfo("en-US"))</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Comments
+                            </h2>
+                            <p>@CreateSavingsAccountApplicationCommand.Comments</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Date Created
+                            </h2>
+                            <p>@CreateSavingsAccountApplicationCommand.DateCreated.GetValueOrDefault().ToString("M/d/yyyy")</p>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    else if (ViewModel.ApprovalType.Equals(ApprovalType.SPECIAL_DEPOSIT_APPLICATION.ToString()))
+    {
+        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+            <h3 class="mb-4 text-xl font-bold dark:text-white">
+                @ViewModel.ApprovalType.Replace("_", " ")
+            </h3>
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Special Deposit Amount
+                            </h2>
+                            <p>N @CreateSpecialDepositAccountApplicationCommand.Amount</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Interest
+                            </h2>
+                            <p>@CreateSpecialDepositAccountApplicationCommand.InterestRate</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Payment Bank Name
+                            </h2>
+                            <p>@CreateSpecialDepositAccountApplicationCommand.PaymentBankName</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Payment Account Number
+                            </h2>
+                            <p>@CreateSpecialDepositAccountApplicationCommand.PaymentAccountNumber</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Mode of Payment
+                            </h2>
+                            <p>@CreateSpecialDepositAccountApplicationCommand.ModeOfPayment.ToString().Replace("_", " ")</p>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    else if (ViewModel.ApprovalType.Equals(ApprovalType.KYC_COMPLETION.ToString()))
+    {
+        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+            <h3 class="mb-4 text-xl font-bold dark:text-white">
+                @ViewModel.ApprovalType.Replace("_", " ")
+            </h3>
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                First Name
+                            </h2>
+                            <p>@UpdateMemberProfileCommand.FirstName</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Last Name
+                            </h2>
+                            <p>@UpdateMemberProfileCommand.LastName</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                DOB
+                            </h2>
+                            <p>@UpdateMemberProfileCommand.DOB</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Country
+                            </h2>
+                            <p>@UpdateMemberProfileCommand.Country</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Date Created
+                            </h2>
+                            <p>@UpdateMemberProfileCommand.DateCreated.GetValueOrDefault().ToString("M/d/yyyy")</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Gender
+                            </h2>
+                            <p>@UpdateMemberProfileCommand.Gender</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Identification Number
+                            </h2>
+                            <p>@UpdateMemberProfileCommand.IdentificationNumber</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Membership Id
+                            </h2>
+                            <p>@UpdateMemberProfileCommand.MembershipId</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Comments
+                            </h2>
+                            <p>@UpdateMemberProfileCommand.Comments</p>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    else if (ViewModel.ApprovalType.Equals(ApprovalType.DEPOSIT_PRODUCT.ToString()))
+    {
+        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+            <h3 class="mb-4 text-xl font-bold dark:text-white">
+                @ViewModel.ApprovalType.Replace("_", " ")
+            </h3>
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                First Name
+                            </h2>
+                            <p>@RegisterMemberCommand.FirstName</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Last Name
+                            </h2>
+                            <p>@RegisterMemberCommand.LastName</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Location
+                            </h2>
+                            <p>@RegisterMemberCommand.Location</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Email Address
+                            </h2>
+                            <p>@RegisterMemberCommand.Email</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                KYC Started
+                            </h2>
+                            <p>@RegisterMemberCommand.IsKycStarted</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    }
+                    else if (ViewModel.ApprovalType.Equals(ApprovalType.LOAN_OFFSET_APPLICATION.ToString()))
+                    {
+                        foreach (var item in _LoanOffsetMasterView)
+                        {
+                            <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                                <h3 class="mb-4 text-xl font-bold dark:text-white">
+                                    @ViewModel.ApprovalType.Replace("_", " ")
+                                </h3>
+                                <form action="">
+                                    <div class="grid grid-cols-6 gap-6">
+
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Loan Account Number
+                                                </h2>
+                                                <p>@item.LoanAccountId_AccountNo</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Offset Amount
+                                                </h2>
+                                                <p>@item.OffsetAmount.ToString("N2", new CultureInfo("en-US"))</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Allowed Offset Type
+                                                </h2>
+                                                <p>@item.AllowedOffsetType</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Loan Repayment Mode
+                                                </h2>
+                                                <p>@item.LoanRepaymentMode</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Loan Account Principal
+                                                </h2>
+                                                <p>@item.LoanAccountId_Principal.GetValueOrDefault(0).ToString("N0")</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Tenure Unit
+                                                </h2>
+                                                <p>@item.LoanAccountId_TenureUnit</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-6">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Tenure Unit
+                                                </h2>
+                                                <p>
+                                                    @item.LoanAccountId_TenureValue
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+                                      @*  <div class="col-span-6 sm:col-span-6">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Special Deposit Funding Amount
+                                                </h2>
+                                                <p>
+                                                    @item.SpecialDepositAccountId_FundingAmount
+                                                </p>
+                                            </div>
+
+                                        </div>*@
+
+                                       @* <div class="col-span-6 sm:col-span-6">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Interest Rate
+                                                </h2>
+                                                <p>
+                                                    @item.SpecialDepositAccountId_InterestRate
+                                                </p>
+                                            </div>
+                                        </div>*@
+
+                                        <div class="col-span-6 sm:col-span-6">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Approval Status
+                                                </h2>
+                                                <p>
+                                                    @item.ApprovalId_Status
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </form>
+                            </div>
+                        }
+                    }
+                    else if (ViewModel.ApprovalType.Equals(ApprovalType.LOAN_TOPUP_APPLICATION.ToString()))
+                    {
+                        foreach (var item in _LoanTopupMasterView)
+                        {
+                            <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                                <h3 class="mb-4 text-xl font-bold dark:text-white">
+                                    @ViewModel.ApprovalType.Replace("_", " ")
+                                </h3>
+                                <form action="">
+                                    <div class="grid grid-cols-6 gap-6">
+
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Destination Type
+                                                </h2>
+                                                <p>@item.DestinationType</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Topup Amount
+                                                </h2>
+                                                <p>@item.TopupAmount.ToString("N2", new CultureInfo("en-US"))</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Old Principal Balance
+                                                </h2>
+                                                <p>@item.OldPrincipalBalance</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Old Interest Rate
+                                                </h2>
+                                                <p>@item.OldInterestBalance</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Date Created
+                                                </h2>
+                                                <p>@item.DateCreated.GetValueOrDefault().ToString("M/d/yyyy")</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Loan Account Number
+                                                </h2>
+                                                <p>@item.LoanAccountId_AccountNo</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-6">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Tenure Unit
+                                                </h2>
+                                                <p>
+                                                    <img src="@item.LoanAccountId_TenureUnit" />
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-6">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Tenure Value
+                                                </h2>
+                                                <p>
+                                                    <img src="@item.LoanAccountId_TenureValue" />
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-span-6 sm:col-span-6">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Customer Bank Account name
+                                                </h2>
+                                                <p>
+                                                    @item.CustomerBankAccountId_AccountName
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-span-6 sm:col-span-6">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Customer Bank Account Number
+                                                </h2>
+                                                <p>
+                                                    @item.CustomerBankAccountId_AccountNumber
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-span-6 sm:col-span-6">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Comment
+                                                </h2>
+                                                <p>
+                                                    @item.ApprovalId_Comment
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-span-6 sm:col-span-6">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Approval Status
+                                                </h2>
+                                                <p>
+                                                    @item.ApprovalId_Status
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </form>
+                            </div>
+                        }
+                    }
+    else if (ViewModel.ApprovalType.Equals(ApprovalType.LOAN_PRODUCT_APPLICATION.ToString()))
+    {
+                        foreach (var item in CreateLoanApplicationCommand)
+                        {
+                            <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                                <h3 class="mb-4 text-xl font-bold dark:text-white">
+                                    @ViewModel.ApprovalType.Replace("_", " ")
+                                </h3>
+                                <form action="">
+                                    <div class="grid grid-cols-6 gap-6">
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Merbership Number
+                                                </h2>
+                                                <p>@item.CustomerId_MemberId</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Customer Name
+                                                </h2>
+                                                <p>@item.CustomerId_FirstName @item.CustomerId_LastName</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Loan Amount
+                                                </h2>
+                                                <p>@item.Principal.ToString("N2", new CultureInfo("en-US"))</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Tenure Unit
+                                                </h2>
+                                                <p>@item.TenureUnit</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Tenure Value
+                                                </h2>
+                                                <p>@item.TenureValue</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <div class="flex items-center  gap-8">
+                                                <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                                    Repayment Date
+                                                </h2>
+                                                <p>@item.RepaymentCommencementDate.ToString("M/d/yyyy")</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        }
+    }
+    else if (ViewModel.ApprovalType.Equals(ApprovalType.DEPOSIT_PRODUCT.ToString()))
+    {
+        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+            <h3 class="mb-4 text-xl font-bold dark:text-white">
+                @ViewModel.ApprovalType.Replace("_", " ")
+            </h3>
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Product Name
+                            </h2>
+                            <p>@_DepositProductViewModel.Name</p>
+                        </div>
+
+                    </div>
+                  @*  <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Description
+                            </h2>
+                            <p>@_DepositProductViewModel.Description</p>
+                        </div>
+
+                    </div>*@
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Tenure
+                            </h2>
+                            <p>@_DepositProductViewModel.Tenure</p>
+                        </div>
+
+                    </div>
+                   @* <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Comments
+                            </h2>
+                            <p>@_DepositProductViewModel.Comments</p>
+                        </div>
+
+                    </div>*@
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Product Charge
+                            </h2>
+                            <p>N @_DepositProductViewModel.ProductCharges</p>
+                        </div>
+
+                    </div>
+                  @*  <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Date Created
+                            </h2>
+                            <p>@_DepositProductViewModel.DateCreated.GetValueOrDefault().ToString("M/d/yyyy")</p>
+                        </div>
+
+                    </div>*@
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Minimum Contribution Retiree
+                            </h2>
+                            <p>@_DepositProductViewModel.MinimumContributionRetiree</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Minimum Age
+                            </h2>
+                            <p>@_DepositProductViewModel.MinimumAge</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Maximum Age
+                            </h2>
+                            <p>@_DepositProductViewModel.MaximumAge</p>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+            <h3 class="mb-4 text-xl font-bold dark:text-white">
+                @ViewModel.ApprovalType
+            </h3>
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Membership name
+                            </h2>
+                            <p>@ViewModel.Module</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Member
+                                Name
+                            </h2>
+                            <p>@ViewModel.Module</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Preferred
+                                executive loan product
+                            </h2>
+                            <p>@ViewModel.Description</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Loan
+                                amount
+                            </h2>
+                            <p>@ViewModel.Module</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Interest
+                                rate
+                            </h2>
+                            <p>5</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Tenor
+                                Unit
+                            </h2>
+                            <p>@ViewModel.Module</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Repayment
+                                tenor
+                            </h2>
+                            <p>1111</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Commencement of repayment
+                            </h2>
+                            <p>@ViewModel.Module</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Years of
+                                service
+                            </h2>
+                            <p>1111</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                                Disbursement account
+                            </h2>
+                            <p>@ViewModel.Module</p>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    </div>
+
+    </div>
+}
+</div>
+
+</main>
+
+@code {
+
+}

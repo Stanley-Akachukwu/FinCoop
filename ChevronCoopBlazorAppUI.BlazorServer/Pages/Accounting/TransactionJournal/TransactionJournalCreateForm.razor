@@ -1,0 +1,187 @@
+@using ChevronCoop.Web.AppUI.BlazorServer.Data.Accounting
+
+<EditForm Model="@Model">
+    <FluentValidationValidator />
+
+
+    <ValidationSummary />
+
+    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+
+
+
+       @* <div class="w-full">
+            <label for="TransactionNo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Transaction No
+            </label>
+            <SfTextBox Readonly="true" Multiline="false" ID="TransactionNo" Placeholder="TransactionNo" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            @bind-Value=@Model.TransactionNo OnBlur="OnBlur">
+            </SfTextBox>
+        </div>*@
+
+        <div class="sm:col-span-2">
+            <label for="Title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Title
+            </label>
+            <SfTextBox Multiline="false" ID="Title" Placeholder="Title" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            @bind-Value=@Model.Title OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+        <div class="w-full">
+            <label for="TransactionType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Transaction Type
+            </label>
+          
+
+            @{
+                var txnTypes = Enum.GetNames(typeof(TransactionType)).ToList();
+
+            }
+
+            <SfComboBox DataSource=@txnTypes TValue="string" TItem="string" OnBlur="OnBlur"
+            @bind-Value=@Model.TransactionType
+                        ShowClearButton="false" AllowFiltering=true IgnoreAccent=true Placeholder="Select type">
+            </SfComboBox>
+        </div>
+
+
+
+        <div class="w-full">
+            <label for="TransactionDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Transaction Date
+            </label>
+
+            <SfDatePicker Readonly="true" ID="TransactionDate" TValue="DateTime" @bind-Value="@Model.TransactionDate"></SfDatePicker>
+        </div>
+
+
+        @* <div class="w-full">
+        <label for="IsPosted" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Is Posted?
+        </label>
+
+        <SfSwitch Disabled="true" ID="IsPosted" @bind-Checked="@Model.IsPosted" @onblur="@OnBlur" />
+        </div>
+
+
+        @* <div class="sm:col-span-2">
+        <label for="Memo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Memo
+        </label>
+        <SfTextBox Multiline="true" ID="Memo" Placeholder="Memo" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+        @bind-Value=@Model.Memo OnBlur="OnBlur">
+        </SfTextBox>
+        </div>*@
+
+
+        <div class="sm:col-span-2">
+            <label for="Description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Description
+            </label>
+            <SfTextBox Multiline="true" ID="Description" Placeholder="Description" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            @bind-Value=@Model.Description OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+
+        @* <div class="w-full">
+        <label for="IsActive" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Is Active
+        </label>
+
+        <SfSwitch ID="IsActive" @bind-Checked="@Model.IsActive" @onblur="@OnBlur" />
+        </div>*@
+
+
+
+        <div class="sm:col-span-2 overflow-x-auto">
+
+            <label for="Description" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
+                Add journal entries
+            </label>
+
+            <SfGrid @ref="gridEntries" ID="gridEntries" TValue="JournalEntryDTO" DataSource="@Items"
+                    Toolbar="@(new List<string>() { "Add", "Edit" ,"Delete","Update","Cancel" })"
+                    AllowPaging="true" AllowFiltering="false" AllowSelection="true" EnableAltRow="true"
+                    AllowResizing="true" ShowColumnChooser="false" ShowColumnMenu="false" Width="100%" Height="400"
+                    AllowExcelExport="false" AllowPdfExport="false" AllowTextWrap="false" AllowSorting="true"
+                    AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false">
+
+                <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true" Mode="EditMode.Dialog" Dialog="DialogParams">
+                </GridEditSettings>
+                <GridEvents TValue="JournalEntryDTO" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure"></GridEvents>
+
+
+                <GridColumns>
+
+                    <GridColumn Field=@nameof(JournalEntryDTO.TransactionEntryNo) HeaderText="Entry No"
+                                IsPrimaryKey="true" AllowAdding=true AllowEditing=true ValidationRules="@(new ValidationRules{Required=true, Number=true})"
+                                TextAlign=TextAlign.Center AutoFit="true" Width="60"></GridColumn>
+
+                    <GridColumn HeaderText="GL Code" Field=@nameof(JournalEntryDTO.AccountCode) TextAlign=TextAlign.Center AutoFit="false" Width="250"
+                                ValidationRules="@(new ValidationRules{ Required=true})">
+                        <EditTemplate Context="editContext">
+
+
+                            <SfComboBox TValue="string" TItem="LedgerAccountMasterView" OnBlur="OnBlur"
+                            @bind-Value=@((editContext as JournalEntryDTO).AccountCode)
+                                        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Width="300" Placeholder="Select ledger account">
+                                <SfDataManager Url="@combobox_Ledger_API" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                                <ComboBoxFieldSettings Text="Name" Value="Code"></ComboBoxFieldSettings>
+                            </SfComboBox>
+                        </EditTemplate>
+
+                    </GridColumn>
+                    <GridColumn HeaderText="Entry type" Field=@nameof(JournalEntryDTO.EntryType) TextAlign=TextAlign.Center AutoFit="false" Width="200"
+                                ValidationRules="@(new ValidationRules{ Required=true})">
+                        <EditTemplate Context="editContext">
+
+
+                            <SfComboBox DataSource=@entryTypes TValue="string" TItem="string" OnBlur="OnBlur"
+                            @bind-Value=@((editContext as JournalEntryDTO).EntryType)
+                                        ShowClearButton="false" AllowFiltering=true IgnoreAccent=true Placeholder="Select entry type">
+                            </SfComboBox>
+                        </EditTemplate>
+
+                    </GridColumn>
+                    <GridColumn HeaderText="Debit" Field=@nameof(JournalEntryDTO.Debit) TextAlign=TextAlign.Center AutoFit="false"
+                                EditType="EditType.NumericEdit" Format="n2" AllowEditing=true Width="200"
+                                DefaultValue="0" ValidationRules="@(new ValidationRules{ Required=true, Number=true})">
+
+                    </GridColumn>
+                    <GridColumn HeaderText="Credit" Field=@nameof(JournalEntryDTO.Credit) TextAlign=TextAlign.Center AutoFit="false"
+                                EditType="EditType.NumericEdit" Format="n2" AllowEditing=true Width="200"
+                                DefaultValue="0" ValidationRules="@(new ValidationRules{ Required=true, Number=true})">
+
+                    </GridColumn>
+
+
+                </GridColumns>
+            </SfGrid>
+        </div>
+
+        <br />
+
+
+
+    </div>
+    <br />
+
+    <button type="button" @onclick="OnSaveClose"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Save new journal
+    </button>
+
+    <button type="button" @onclick="OnSaveAndPost"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Save &amp; post journal
+    </button>
+
+    <button type="button" @onclick="OnCancel"
+            class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+        Cancel
+    </button>
+
+</EditForm>

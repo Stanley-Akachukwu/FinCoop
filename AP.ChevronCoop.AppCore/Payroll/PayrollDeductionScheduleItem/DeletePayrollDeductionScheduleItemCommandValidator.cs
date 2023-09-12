@@ -1,0 +1,44 @@
+using AP.ChevronCoop.AppDomain.Payroll.PayrollDeductionScheduleItems;
+using AP.ChevronCoop.Entities;
+using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.Extensions.Logging;
+
+namespace AP.ChevronCoop.AppCore.Payroll.PayrollDeductionScheduleItem;
+
+public class
+  DeletePayrollDeductionScheduleItemCommandValidator : AbstractValidator<DeletePayrollDeductionScheduleItemCommand>
+{
+  private readonly ChevronCoopDbContext dbContext;
+  private readonly ILogger<DeletePayrollDeductionScheduleItemCommandValidator> logger;
+
+  public DeletePayrollDeductionScheduleItemCommandValidator(ChevronCoopDbContext appDbContext,
+    ILogger<DeletePayrollDeductionScheduleItemCommandValidator> _logger)
+  {
+    dbContext = appDbContext;
+    logger = _logger;
+
+
+    RuleFor(p => p.Id).NotEmpty(); //.GreaterThan(0);
+
+    RuleFor(p => p).Custom((data, context) =>
+    {
+      var checkId = dbContext.PayrollDeductionScheduleItems.Where(r => r.Id == data.Id).Any();
+      if (!checkId)
+        context.AddFailure(
+          new ValidationFailure(nameof(data.Id),
+            "Selected Id does not exist", data.Id));
+
+      /*
+var checkChild = dbContext.ChildTable.Where(r => r.ChildTableId == data.Id).Any();
+    if (checkChild)
+    {
+        context.AddFailure(
+        new ValidationFailure(nameof(data.Id),
+        "Selected record has dependent records and cannot be deleted", data.Id));
+
+    }
+*/
+    });
+  }
+}

@@ -1,0 +1,187 @@
+﻿@using AP.ChevronCoop.Entities.MasterData.Charges;
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Basic Information
+    </h3>
+    <EditForm Model="@Model" OnValidSubmit="OnProceed">
+        <FluentValidationValidator @ref="_fluentValidationValidator"/>
+        <ValidationSummary/>
+
+        <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Product Name
+                </label>
+
+                <SfTextBox ID="code" Placeholder="Enter Product Name" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                           @bind-Value=@Model.Name OnBlur="OnBlur">
+                </SfTextBox>
+                <ValidationMessage For="() => Model.Name" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+
+            <div class="col-span-6 sm:col-span-3">
+                <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Product
+                    code
+                </label>
+                <SfTextBox ID="code" Placeholder="Enter Code" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                           @bind-Value=@Model.Code OnBlur="OnBlur">
+                </SfTextBox>
+                <ValidationMessage For="() => Model.Code" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Product
+                    Short Name
+                </label>
+
+                <SfTextBox ID="code" Placeholder="Enter Shot Name" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                           @bind-Value=@Model.ShortName OnBlur="OnBlur">
+                </SfTextBox>
+                <ValidationMessage For="() => Model.ShortName" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+
+            </div>
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Product Description
+                </label>
+
+
+                <SfTextBox ID="description" Multiline="true" Placeholder="Enter Description" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                           @bind-Value=@Model.Description OnBlur="OnBlur">
+                </SfTextBox>
+                <ValidationMessage For="() => Model.Description" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Charges
+                </label>
+                <SfMultiSelect TValue="string[]" TItem="ChargeMasterView" @bind-Value=@preselectedCharges FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains" Query="@Query_Combo" ShowSelectAll=true FilterBarPlaceholder="Charges" EnableGroupCheckBox=false Mode="@VisualMode.CheckBox" ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Charge" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <MultiSelectEvents TItem="ChargeMasterView" TValue="string[]" ValueChange="@ValueChangeHandler"></MultiSelectEvents>
+                    <SfDataManager Url="@DROPDOWN_API_RESOURCE_CHARGE" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                    <MultiSelectFieldSettings Text="Name" Value="Id"></MultiSelectFieldSettings>
+                </SfMultiSelect>
+
+            </div>
+
+            <div class="col-span-6 sm:col-span-3">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Currency
+                </label>
+
+                @*@{
+
+                var combobox_Currency_res = $"{Config.ODATA_VIEWS_HOST}/{nameof(CurrencyMasterView)}";
+                }*@
+
+                <SfComboBox TValue="string" TItem="CurrencyMasterView" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            @bind-Value=@Model.DefaultCurrencyId Query="@Query_Combo"
+                            FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                            ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Currency">
+                    <SfDataManager Url="@combobox_Currency_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                    <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+                </SfComboBox>
+                <ValidationMessage For="() => Model.DefaultCurrencyId" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+            <div class="col-span-6 sm:col-full">
+                <label for="first-name"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Associated Bank
+                    account
+                </label>
+
+                <SfComboBox TValue="string" TItem="CompanyBankAccountMasterView" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            @bind-Value=@Model.BankDepositAccountId Query="@Query_Combo"
+                            FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                            ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Account">
+                    <SfDataManager Url="@combobox_Account_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                    <ComboBoxFieldSettings Text="AccountName" Value="Id"></ComboBoxFieldSettings>
+                </SfComboBox>
+                <ValidationMessage For="() => Model.BankDepositAccountId" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="tenor unit"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Tenor unit
+                </label>
+
+
+                <SfComboBox id="tenureUnit" DataSource=@tenureUnit TValue="Tenure" TItem="string" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            @bind-Value=@Model.Tenure
+                            ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Tenure Unit">
+                </SfComboBox>
+                <ValidationMessage For="() => Model.Tenure" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="TenureValue"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Tenor Value
+                </label>
+
+
+                <SfNumericTextBox ID="te" Type="Syncfusion.Blazor.Inputs.InputType.Number"  Placeholder="Enter TenureValue" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                  @bind-Value=@Model.TenureValue OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.TenureValue" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+          @*  <div class="col-span-6 sm:col-span-3">
+                <label for="tenor value"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Minimum Age
+                </label>
+
+
+                <SfNumericTextBox ID="MinimumAge" Type="Syncfusion.Blazor.Inputs.InputType.Number" Placeholder="Enter MinimumAge" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                  @bind-Value=@Model.MinimumAge OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.MinimumAge" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="MaximumAge"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Maximum Age
+                </label>
+
+
+                <SfNumericTextBox ID="MaximumAge" Type="Syncfusion.Blazor.Inputs.InputType.Number" Placeholder="Enter Maximum Age" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                  @bind-Value=@Model.MaximumAge OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.MaximumAge" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>*@
+            <div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+                <div class="col-span-3 sm:col-span-3">
+                    <a href="javascript: void(0)" @onclick=OnPrevious>
+                        <button
+                            class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            Back
+                        </button>
+                    </a>
+
+                </div>
+                <div class="col-span-3 sm:col-span-3">
+                    <a href="javascript: void(0)" @onclick=OnProceed>
+                        <button
+                            class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            Proceed
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </EditForm>
+</div>
+
+
+@code {
+
+}

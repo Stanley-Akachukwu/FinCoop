@@ -1,0 +1,7 @@
+{
+  "AP.ChevronCoop.AppCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\AP\\Repos\\ChevronCoopDotnetCore\\ChevronCoopDotnetCore\\AP.ChevronCoop.AppCore",
+  "AP.ChevronCoop.AppDomain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\AP\\Repos\\ChevronCoopDotnetCore\\ChevronCoopDotnetCore\\AP.ChevronCoop.AppDomain",
+  "AP.ChevronCoop.Commons, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\AP\\Repos\\ChevronCoopDotnetCore\\ChevronCoopDotnetCore\\AP.ChevronCoop.Commons",
+  "AP.ChevronCoop.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\AP\\Repos\\ChevronCoopDotnetCore\\ChevronCoopDotnetCore\\AP.ChevronCoop.Entities",
+  "AP.ChevronCoop.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\AP\\Repos\\ChevronCoopDotnetCore\\ChevronCoopDotnetCore\\AP.ChevronCoop.Infrastructure"
+}

@@ -1,0 +1,13 @@
+﻿@using AP.ChevronCoop.Entities.Security.Auth;
+@using AP.ChevronCoop.Entities.Security;
+<EnrolmentGrid EnrolmentFIlter="@awaitingEnrolmentFilter"/>
+
+@code {
+    public string awaitingEnrolmentFilter { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        awaitingEnrolmentFilter = MemberProfileStatus.AWAITING_KYC_COMPLETION.ToString();
+    }
+
+}

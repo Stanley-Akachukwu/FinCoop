@@ -1,0 +1,67 @@
+﻿@using AP.ChevronCoop.Entities.Security;
+@using ChevronCoop.Web.AppUI.BlazorServer.Enums;
+<EditForm Model="@Model">
+    <FluentValidationValidator/>
+    <ValidationSummary/>
+    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="sm:col-span-2">
+            <label for="Owner" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Select status
+            </label>
+
+
+            @{
+                //if (ShowStatus){
+                statusTypes = Enum.GetNames(typeof(EnrolmentkycStatus)).ToList();
+                //}
+                //else
+                //{
+                //	statusTypes = Enum.GetNames(typeof(EnrolmentApprovalStatus)).ToList();
+                //}
+
+
+            }
+
+
+            <SfComboBox id="Status" DataSource=@statusTypes TValue="string" TItem="string" OnBlur="OnBlur"
+                        @bind-Value=@Model.Status
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select status">
+            </SfComboBox>
+        </div>
+        <div class="sm:col-span-2">
+            <label for="paymentreceipt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Payment Receipt
+            </label>
+
+            <p className="ant-upload-drag-icon">
+                <Icon type="inbox" style="width:50px"/>
+                <a id="downloadreceipt" class="btn" @onclick="OnDownloadPaymentReciept"
+                   role="button" target="=_top">
+                    download payment receipt
+                </a>
+            </p>
+        </div>
+        <div style="display:none">
+            <label for="UserId" autocomplete="off" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">UserId</label>
+            <SfTextBox ID="UserID" Placeholder="UserId" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.UserId>
+            </SfTextBox>
+        </div>
+    </div>
+    <br/>
+
+    <button type="button" @onclick="OnSave"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Save
+    </button>
+
+    <button type="button" @onclick="OnCancel"
+            class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+        Cancel
+    </button>
+</EditForm>
+<Modal Title="@("Notification")" Visible="@showPopup" DestroyOnClose="true"
+       OnOk="OnCancel" OkText="@("Ok")"
+       OnCancel="OnCancel" CancelText="@("Cancel")">
+    <p>@notificationText</p>
+</Modal>

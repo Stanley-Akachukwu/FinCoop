@@ -1,0 +1,191 @@
+﻿@page "/signup/{memberType}"
+
+@using AP.ChevronCoop.AppDomain.MasterData.Country;
+@using AP.ChevronCoop.AppDomain.Security.MemberProfiles.MemberProfiles;
+@layout LoginLayout
+@inject NavigationManager UriHelper
+@using Syncfusion.Blazor;
+@using System.ComponentModel.DataAnnotations;
+@using AP.ChevronCoop.Entities.MasterData.Locations;
+
+<div class="p-12 justify-center items-center w-full bg-white rounded-lg shadow lg:flex  lg:max-w-xl dark:bg-gray-800">
+    <div class="flex items-center mx-auto md:w-[42rem] px-4 md:px-8 xl:px-0">
+        <div class="w-full">
+
+            <ol class="flex items-center mb-6 text-sm font-medium text-center  dark:text-gray-400 lg:mb-12 sm:text-base">
+                <li class="flex  items-center after:content-[''] after:w-12 after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+                    <div class="flex items-center text-blue-400  sm:block after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 dark:after:text-gray-500">
+                        <div class="text-xs sm:mb-2 sm:mx-auto">1</div>
+                        Employee Info
+                    </div>
+                </li>
+                <li class="flex items-center after:content-[''] after:w-12 after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+                    <div class="flex items-center text-gray-500 sm:block after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 dark:after:text-gray-500">
+                        <div class="mr-2 sm:mb-2 sm:mx-auto">2</div>
+                        Account <span class="hidden sm:inline-flex">Info</span>
+                    </div>
+                </li>
+                <li class="flex items-center sm:block text-gray-500">
+                    <div class="mr-2  sm:mb-2 sm:mx-auto">3</div>
+                    Membership fee
+                </li>
+            </ol>
+            <h1 class="text-center mb-4 text-2xl font-extrabold leading-tight tracking-tight text-gray-900 sm:mb-6 dark:text-white">
+                Create an Account
+            </h1>
+
+            <EditForm Model="@Model" OnValidSubmit="HandleNextClick">
+
+                @* <Card size="small" class="error">*@
+                    <p style="color:red">
+                        <DataAnnotationsValidator/>
+                        <ValidationSummary/>
+               </p>
+                @*       </Card>*@
+                <div size="small" class="error" hidden="@isFormValid">
+                    <p style="color:red">
+                        @focusedNotificationText 
+                    </p>
+                </div>
+                <div>
+                    <label for="lastName"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Last Name
+                    </label>
+                    <SfTextBox ID="LastName" Placeholder="last name."
+                               class="@Tailwind.Textbox_With_smallText"
+                               @bind-Value=@Model.LastName OnBlur="OnBlur" Autocomplete="AutoComplete.Off" style="height:40px">
+                    </SfTextBox>
+
+                </div>
+                <div>
+                    <label for="firstName"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        First Name
+                    </label>
+
+                    <SfTextBox ID="LastName" Placeholder="first name."
+                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                               @bind-Value=@Model.FirstName OnBlur="OnBlur" Autocomplete="AutoComplete.Off" style="height:40px">
+                    </SfTextBox>
+                </div>
+
+
+                <div>
+                    @if (IsRetireeMemberType)
+                    {
+                        <label for="Cai"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Membership No.
+                        </label>
+                    }
+                    else
+                    {
+                        <label for="Cai"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Membership No.
+                        </label>
+                    }
+
+                    <SfTextBox ID="MembershipId" Placeholder="membership ID."
+                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                               @bind-Value=@Model.MembershipId OnBlur="OnBlur" Autocomplete="AutoComplete.Off" style="height:40px">
+                    </SfTextBox>
+                     <ValidationMessage For="() => Model.MembershipId" class="mt-2 text-sm text-red-600 dark:text-red-500" />
+                </div>
+                <div>
+                    <label for="email"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Email
+                    </label>
+
+                    <SfTextBox ID="Email" Placeholder="Email."
+                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                               @bind-Value=@Model.Email OnBlur="OnBlur" Autocomplete="AutoComplete.Off" style="height:40px">
+                    </SfTextBox>
+                    <ValidationMessage For="() => Model.Email" class="mt-2 text-sm text-red-600 dark:text-red-500" />
+                </div>
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select a location
+                </label>
+
+               @* @{
+                    var locations = $"{Config.ODATA_VIEWS_HOST}/{nameof(LocationMasterView)}?$filter=locationType eq 'COUNTRY'&$orderby=Name asc";
+                }*@
+
+                <SfDropDownList TValue="string" ID="dropdown" Placeholder="e.g. Nigeria" @bind-Value=@Model.Location TItem="LocationMasterView" ShowClearButton="true" AllowFiltering=true
+                                DataSource="@locations" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="height:40px">
+                   @* <SfDataManager Url="@locations" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>*@
+                    <DropDownListFieldSettings Text="Name" Value="Name"></DropDownListFieldSettings>
+                    <DropDownListEvents TValue="string" TItem="LocationMasterView" ValueChange="ChangeLocation"></DropDownListEvents>
+                </SfDropDownList>
+                <div>
+                    <label for="password"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Password
+                    </label>
+
+                    <SfTextBox Type="InputType.Password" ID="Password" Placeholder="Password."
+                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                               @bind-Value=@Model.Password OnBlur="OnBlur" Autocomplete="AutoComplete.Off" style="height:40px">
+                    </SfTextBox>
+                    <ValidationMessage For="() => Model.Password" class="mt-2 text-sm text-red-600 dark:text-red-500" />
+                </div>
+                <div>
+                    <label for="password"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Confirm Password
+                    </label>
+                    <SfTextBox Type="InputType.Password" ID="Password" Placeholder="Password."
+                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                               @bind-Value=@Model.ConfirmPassword OnBlur="OnBlur" Autocomplete="AutoComplete.Off" style="height:40px">
+                    </SfTextBox>
+                    <ValidationMessage For="() => Model.ConfirmPassword" class="mt-2 text-sm text-red-600 dark:text-red-500" />
+                </div><br/>
+
+
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        <input id="TermsAndCondition" aria-describedby="TermsAndCondition" name="TermsAndCondition" @bind-value="@Model.TermsAndCondition" type="checkbox" class="w-4 h-4 bg-gray-50 rounded border-gray-300 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" required>
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="remember" class="font-medium text-gray-900 dark:text-white">I accept the <a href="#" class="text-CEMCS-Blue-100 hover:underline dark:text-CEMCS-Blue-100">Terms and Conditions</a></label>
+                    </div>
+                </div>
+                <br/>
+
+
+                @*<SfButton style="height:40px" class="py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+					Next
+				</SfButton>*@
+                <button
+                    class="py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                    Next
+                </button>
+                <br/>
+
+                <div class="text-sm font-medium text-black dark:text-black">
+                    Already have an account?
+                    <a href="/identity/account/login"
+                       class="text-CEMCS-Blue-100 hover:underline dark:text-CEMCS-Blue-100">
+                        Login here
+                    </a>
+                </div>
+                <br/>
+            </EditForm>
+            <Modal Title="@("Notification")" Visible="@showPopup" DestroyOnClose="true"
+                   OnOk="OnCancel" OkText="@("Ok")"
+                   OnCancel="OnCancel" CancelText="@("Cancel")">
+                <p>@notificationText</p>
+            </Modal>
+        </div>
+    </div>
+</div>
+
+
+<Modal Title="@("Notification")" Visible="@showPopup" DestroyOnClose="true"
+       OnOk="OnCancel" OkText="@("Ok")"
+       OnCancel="OnCancel" CancelText="@("Cancel")">
+    <p>@notificationText</p>
+</Modal>

@@ -1,0 +1,82 @@
+﻿<Modal Visible="@showPopup" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+       class="overflow-y-auto  fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+
+    <!-- Modal content -->
+    <!-- Modal header -->
+    <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+        @((MarkupString)SvgHelpers.SuccessMessageIcon)
+
+        <p class="break-words text-center my-8">
+            @Header
+            <span class="text-CEMCS-Blue-100">
+                @Message
+            </span>
+        </p>
+
+        <form class="w-full">
+            <button type="button" @onclick=Done
+                    class="@Tailwind.Done_Button_SuccessMessage">
+                Done
+            </button>
+        </form>
+    </div>
+    <!-- Modal body -->
+
+</Modal>
+
+
+@code {
+
+    [Parameter]
+    public bool showPopup { get; set; } = true;
+
+    bool hideAlert = false;
+
+    [Parameter]
+    public string icon { get; set; } = "";
+
+    [Parameter]
+    public string Header { get; set; } = "";
+
+    [Parameter]
+    public string Message { get; set; } = "";
+
+    [Parameter]
+    public EventCallback<bool> OnUpdateChanged { get; set; }
+
+    [Parameter]
+    public bool NavigateToPage { get; set; } = false;
+
+    [Parameter]
+    public bool ReloadPage { get; set; } = false;
+
+    [Parameter]
+    public string PageURL { get; set; } = string.Empty;
+
+    [Inject]
+    public NavigationManager _navigationManager { get; set; }
+
+    protected override void OnInitialized()
+    {
+    }
+
+    private async Task Done()
+    {
+        if (NavigateToPage)
+        {
+            showPopup = false;
+            _navigationManager.NavigateTo(PageURL, forceLoad: false);
+        }
+        else if (ReloadPage)
+        {
+            showPopup = false;
+            _navigationManager.NavigateTo(PageURL, forceLoad: true);
+        }
+        else
+        {
+            showPopup = false;
+            await OnUpdateChanged.InvokeAsync(true);
+        }
+    }
+
+}

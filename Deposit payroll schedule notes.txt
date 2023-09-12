@@ -1,0 +1,33 @@
+
+
+PAYROLL DEDUCTION COMPUTATION
+Apr 2023, comp date->25th, time, t
+May 2023, comp date->25th
+June 2023, comp date->25th
+
+
+
+INTEREST COMPUTATION
+Apr 2023, comp date->last day
+May 2023, comp date->last day
+June 2023, comp date->last day
+
+1. at what does time does this job run? morning, noon, midnight
+2. how many times does this job run per day?
+3. what period? if monthly, which month then resolve last day of month
+
+var now = DateTime.Now;
+var startOfMonth = new DateTime(now.Year, now.Month, 1);
+
+var DaysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
+
+var lastDay = new DateTime(now.Year, now.Month, DaysInMonth);
+
+April --13, April 31
+May --13, May 30
+
+ProcessingDay
+Frequency{DAILY,LAST_DAY}
+
+
+Title->Interest computation for May 2023 sucessfully run

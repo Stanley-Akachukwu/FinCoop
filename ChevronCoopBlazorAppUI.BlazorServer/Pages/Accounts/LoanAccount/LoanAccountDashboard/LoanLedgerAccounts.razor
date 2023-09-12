@@ -1,0 +1,230 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.CommonViews;
+@using AP.ChevronCoop.Entities.Loans.LoanAccounts;
+@using AP.ChevronCoop.Entities.Loans.LoanTopupTransactions;
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.Drawals
+
+@*<div class="grid grid-cols-1 gap-2  mb-4 w-full md:grid-cols-2 ">
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+
+            @((MarkupString)@SvgHelpers.AvailableBalance)
+
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Loan Balance</div>
+                <div class="text-base font-bold">₦@LoanBalance.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Loan Amount </div>
+                <div class="text-base font-bold">₦@LoanAmount.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Total Amount Repaid </div>
+                <div class="text-base font-bold">₦@TotalAmountRepaid.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Next Repayment Amount </div>
+                <div class="text-base font-bold">₦@NextRepaymentAmount.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+</div>*@
+    <!-- Table -->
+    <div class="flex flex-col mt-8">
+        <div class="overflow-x-auto rounded-lg">
+            <div class="inline-block min-w-full align-middle">
+                <div class="overflow-hidden shadow sm:rounded-lg">
+
+                    <div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+                        <h3 class="mb-4 text-xl font-bold dark:text-white">
+                            Ledger Accounts
+                        </h3>
+
+                    </div>
+
+                    <div class="relative overflow-x-auto shadow mb-6  sm:rounded-lg">
+                        @* <div class="p-2 mb-4 bg-white rounded-lg shadow sm:p-4 xl:p-6 dark:bg-gray-800">
+                        <h3 class="mb-4 text-xl font-bold dark:text-white">
+                        GL Account - Charge
+                        </h3>
+
+                        </div>*@
+                        <!-- Table -->
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+
+                                    <th scope="col" class="px-6 py-3">
+                                        GL CODE
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        GL NAME
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        GL TYPE
+                                    </th>
+                                   @* <th scope="col" class="px-6 py-3">
+                                        GL DESCRIPTION
+                                    </th>*@
+                                    <th scope="col" class="px-6 py-3">
+                                        LEDGER BALANCE
+                                    </th>
+                                   @* <th scope="col" class="px-6 py-3">
+                                        AVAILABLE
+                                    </th>*@
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in LedgerAccounts)
+                                {
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+
+                                        <th scope="row"
+                                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                            <div class="pl-3">
+                                                <div class="text-base font-semibold">@item.Code</div>
+                                            </div>
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center">
+                                                @item.Name
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center">
+                                                @item.AccountType
+                                            </div>
+                                        </td>
+                                        @*<td class="px-6 py-4">
+                                            <a href="#" class="font-medium   hover:underline">
+                                                @item.Description
+                                            </a>
+                                        </td>*@
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center">
+                                            ₦@item.LedgerBalance.ToString("N2")
+                                            </div>
+                                        </td>
+                                       @* <td class="px-6 py-4">
+                                            <div class="flex items-center">
+                                                @item.AvailableBalance
+                                            </div>
+                                        </td>*@
+
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+                    @*<div class="relative overflow-x-auto shadow mb-3  sm:rounded-lg">
+                    <div class="p-2 mb-4 bg-white rounded-lg shadow sm:p-4 xl:p-6 dark:bg-gray-800">
+                    <h3 class="mb-4 text-xl font-bold dark:text-white">
+                    GL Account - Interest
+                    </h3>
+
+                    </div>
+                    <!-- Table -->
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+
+                    <th scope="col" class="px-6 py-3">
+                    GL CODE
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    GL NAME
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    GL TYPE
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    GL DESCRIPTION
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    LEDGER BALANCE
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    AVAILABLE
+                    </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.ExpenseLedgerAccounts)
+                    {
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+
+                    <th scope="row"
+                    class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                    <div class="pl-3">
+                    <div class="text-base font-semibold">@item.Code</div>
+                    </div>
+                    </th>
+                    <td class="px-6 py-4">
+                    <div class="flex items-center">
+                    @item.Name
+                    </div>
+                    </td>
+                    <td class="px-6 py-4">
+                    <div class="flex items-center">
+                    @item.AccountType
+                    </div>
+                    </td>
+                    <td class="px-6 py-4">
+                    <a href="#" class="font-medium   hover:underline">
+                    @item.Description
+                    </a>
+                    </td>
+                    <td class="px-6 py-4">
+                    <div class="flex items-center">
+                    @item.LedgerBalance
+                    </div>
+                    </td>
+                    <td class="px-6 py-4">
+                    <div class="flex items-center">
+                    @item.AvailableBalance
+                    </div>
+                    </td>
+
+
+                    </tr>
+                    }
+                    </tbody>
+                    </table>
+
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+

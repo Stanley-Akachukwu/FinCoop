@@ -1,0 +1,560 @@
+﻿@using Microsoft.Identity.Web
+@using Microsoft.Extensions.Options
+@inject IOptionsMonitor<MicrosoftIdentityOptions> microsoftIdentityOptions
+@using System.Security.Claims;
+@inject NavigationManager navigationManager
+
+@inject IJSRuntime JSRuntime
+
+
+
+<!-- SideBar -->
+<aside id="sidebar" class="flex hidden fixed top-0 left-0 z-20 flex-col flex-shrink-0 pt-16 w-64 h-full duration-75 lg:flex transition-width lg:w-16" aria-label="Sidebar">
+	<div class="flex relative flex-col flex-1 pt-0 min-h-0 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+		
+		<div class="flex overflow-y-auto flex-col flex-1 pt-5 pb-4">
+			<div class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+				
+				<ul id="sidebarall" class="pb-2 space-y-2">
+					
+					<!-- Search on mobile -->
+					<li>
+						<form action="#" method="GET" class="lg:hidden">
+							<label for="mobile-search" class="sr-only">Search</label>
+							<div class="relative">
+								<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+									@((MarkupString)SvgHelpers.SearchIcon)
+								</div>
+								<input type="text" name="email" id="mobile-search" class="@Tailwind.SearchText" placeholder="Search">
+							</div>
+						</form>
+					</li>
+					<li>
+						<a @onclick="GoToDashBoard" class='@SidebarMenu[0].CssClass'>
+							@((MarkupString)SvgHelpers.DashboardIcon)
+							<span class="ml-3" sidebar-toggle-item>My Dashboard</span>
+						</a>
+					</li>
+					@if (!isCustomer && isAdmin)
+					{
+						<li>
+							<button disabled="@disableMenu" type="button" class="@Tailwind.SideMenuButton"
+									aria-controls="dropdown-setup" data-collapse-toggle="dropdown-setup">
+
+								@((MarkupString)SvgHelpers.SideMenuSetupIcon)
+
+								<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Setup</span>
+								@((MarkupString)SvgHelpers.SideMenuDropDownIcon)
+
+
+							</button>
+							<ul id="dropdown-setup" class="hidden py-2 space-y-2 ">
+
+								<li>
+									<a @onclick='() => SetActiveMenuItem("globalcodes")' href="/setup/globalcodes"
+									   class="@SidebarMenu[1].CssClass">
+										Global codes
+									</a>
+								</li>
+
+								<li>
+									<a @onclick='() => SetActiveMenuItem("departments")' href="/setup/departments"
+									   class="@SidebarMenu[2].CssClass">
+										Departments
+									</a>
+								</li>
+
+								<li>
+									<a @onclick='() => SetActiveMenuItem("currencies")' href="/setup/currency" disabled="@disableMenu"
+									   class="@SidebarMenu[3].CssClass">
+										Currencies
+									</a>
+								</li>
+								<li>
+									<a @onclick='() => SetActiveMenuItem("banks")' href="/setup/banks"
+									   class="@SidebarMenu[4].CssClass">
+										Banks
+									</a>
+								</li>
+
+								<li>
+									<a @onclick='() => SetActiveMenuItem("companybank")' href="/financials/company/bank"
+									   class="@SidebarMenu[5].CssClass">
+										Company Bank Accounts
+									</a>
+								</li>
+								<li>
+									<a @onclick='() => SetActiveMenuItem("ApprovalsSetup")' href="/approval/setup" class="@SidebarMenu[6].CssClass">Approvals Setup</a>
+								</li>
+
+
+								@* <li> *@
+								@*     <a href="/docs/types" *@
+								@*        class="@Tailwind.SideMenuLink"> *@
+								@*         Document Types *@
+								@*     </a> *@
+								@* </li> *@
+
+
+							</ul>
+						</li>
+					}
+
+
+
+					@if (isAdmin)
+					{
+						<li>
+							<button disabled="@disableMenu" type="button" class="@Tailwind.SideMenuButton"
+									aria-controls="dropdown-deposit-account" data-collapse-toggle="dropdown-deposit-account">
+
+								@((MarkupString)SvgHelpers.SideMenuDepositAccountIcon)
+
+								<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>General Ledger</span>
+								@((MarkupString)SvgHelpers.SideMenuDropDownIcon)
+
+
+							</button>
+							<ul id="dropdown-deposit-account" class="hidden py-2 space-y-2 ">
+								<li>
+									<a @onclick='() => SetActiveMenuItem("Chartofaccounts")' href="/financials/ledger" class="@SidebarMenu[7].CssClass">
+										Chart of accounts
+									</a>
+
+								</li>
+
+								<li>
+									<NavLink @onclick='() => SetActiveMenuItem("transactionsjournal")' href="/financials/journal" class="@SidebarMenu[8].CssClass">
+										Transactions Journal
+									</NavLink>
+
+								</li>
+
+
+							</ul>
+						</li>
+					}
+					@if (!isCustomer && isAdmin)
+					{
+						<AuthorizeView Roles=@PermissionConfig.SetupConfigurationView>
+							<li>
+								<button type="button"
+										class="@Tailwind.SideMenuButton"
+										aria-controls="dropdown-ecommerce"
+										data-collapse-toggle="dropdown-ecommerce">
+
+									@(
+										(MarkupString)SvgHelpers.SideMenuConfigurationIcon
+										)
+
+									<span class="flex-1 ml-3 text-left whitespace-nowrap"
+										  sidebar-toggle-item>
+										Products
+									</span>
+
+									@(
+										(MarkupString)SvgHelpers.SideMenuDropDownIcon
+										)
+
+
+								</button>
+								<ul id="dropdown-ecommerce" class="hidden py-2 space-y-2">
+
+								
+									<li>
+										<a @onclick='() => SetActiveMenuItem("productssetup")' href="productSetup/get-started" class="@SidebarMenu[9].CssClass">Products Setup </a>
+									</li>
+									@*<li>
+										<a @onclick='() => SetActiveMenuItem("globalconfiguration")' href="configuration/global" class="@SidebarMenu[10].CssClass">Global Configuration</a>
+									</li>*@
+									<li>
+										<a @onclick='() => SetActiveMenuItem("chargessetup")' href="product-charges/list" class="@SidebarMenu[11].CssClass">Charges Setup</a>
+									</li>
+
+								</ul>
+							</li>
+						</AuthorizeView>
+						<li>
+							<button type="button"
+									class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700  "
+									aria-controls="dropdown-ecommerce-3" data-collapse-toggle="dropdown-ecommerce-3">
+								<svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M9.8 4.2C9.8 5.15478 9.42072 6.07045 8.74559 6.74559C8.07045 7.42072 7.15478 7.8 6.2 7.8C5.24522 7.8 4.32955 7.42072 3.65442 6.74559C2.97928 6.07045 2.6 5.15478 2.6 4.2C2.6 3.24522 2.97928 2.32955 3.65442 1.65442C4.32955 0.979286 5.24522 0.600001 6.2 0.600001C7.15478 0.600001 8.07045 0.979286 8.74559 1.65442C9.42072 2.32955 9.8 3.24522 9.8 4.2ZM19.4 4.2C19.4 4.67276 19.3069 5.14089 19.126 5.57766C18.9451 6.01443 18.6799 6.41129 18.3456 6.74559C18.0113 7.07988 17.6144 7.34505 17.1777 7.52597C16.7409 7.70688 16.2728 7.8 15.8 7.8C15.3272 7.8 14.8591 7.70688 14.4223 7.52597C13.9856 7.34505 13.5887 7.07988 13.2544 6.74559C12.9201 6.41129 12.655 6.01443 12.474 5.57766C12.2931 5.14089 12.2 4.67276 12.2 4.2C12.2 3.24522 12.5793 2.32955 13.2544 1.65442C13.9295 0.979286 14.8452 0.600001 15.8 0.600001C16.7548 0.600001 17.6705 0.979286 18.3456 1.65442C19.0207 2.32955 19.4 3.24522 19.4 4.2ZM14.516 17.4C14.5712 17.0076 14.6 16.608 14.6 16.2C14.6028 14.3146 13.9685 12.4836 12.8 11.004C13.7121 10.4774 14.7468 10.2002 15.8 10.2002C16.8532 10.2001 17.8878 10.4774 18.7999 11.004C19.712 11.5306 20.4695 12.288 20.9961 13.2001C21.5227 14.1121 21.8 15.1468 21.8 16.2V17.4H14.516ZM6.2 10.2C7.7913 10.2 9.31742 10.8321 10.4426 11.9574C11.5679 13.0826 12.2 14.6087 12.2 16.2V17.4H0.2V16.2C0.2 14.6087 0.832141 13.0826 1.95736 11.9574C3.08258 10.8321 4.6087 10.2 6.2 10.2Z" fill="#1F82BD" />
+								</svg>
+
+								<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Accounts</span>
+								<svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+									 xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd"
+										  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+										  clip-rule="evenodd"></path>
+								</svg>
+							</button>
+							<ul id="dropdown-ecommerce-3" class="hidden py-2 space-y-2 ">
+								<li>
+									<a @onclick='() => SetActiveMenuItem("loanaccounts")' href="/account/userloanaccounts"
+									   class="@SidebarMenu[12].CssClass">Loan Accounts</a>
+								</li>
+								<li>
+									<a @onclick='() => SetActiveMenuItem("loanapplications")' href="/account/userloanapplications/all"
+									   class="@SidebarMenu[13].CssClass">Loan Applications</a>
+								</li>
+
+								<li>
+									<a @onclick='() => SetActiveMenuItem("depositaccounts")' href="/account/depositadmindashboard"
+									   class="@SidebarMenu[14].CssClass">Deposit Accounts</a>
+								</li>
+								<li>
+									<NavLink @onclick='() => SetActiveMenuItem("depositapplications")' href="/account/alldepositapplications/all" class="@SidebarMenu[15].CssClass">Deposit Applications</NavLink>
+								</li>
+							</ul>
+						</li>
+						<AuthorizeView>
+							<li>
+								<button disabled="@disableMenu" type="button" class="@Tailwind.SideMenuButton"
+										aria-controls="dropdown-schedule" data-collapse-toggle="dropdown-schedule">
+
+									@((MarkupString)SvgHelpers.SideMenuScheduleIcon)
+
+									<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Schedule</span>
+									@((MarkupString)SvgHelpers.SideMenuDropDownIcon)
+
+
+								</button>
+								<ul id="dropdown-schedule" class="hidden py-2 space-y-2 ">
+									
+									<li>
+										<NavLink @onclick='() => SetActiveMenuItem("payroll")' href="/schedule/payrollScheduleList/" class="@SidebarMenu[16].CssClass">
+											Payroll
+										</NavLink>
+
+									</li>
+
+								</ul>
+							</li>
+						</AuthorizeView>
+						<li>
+							<AuthorizeView>
+								<a>
+									<button type="submit" class="@SidebarMenu[17].CssClass" @onclick="GoToApprovals">
+										@(
+											(MarkupString)SvgHelpers.SideMenuApproivalIconIcon
+											)
+										<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Approvals</span>
+
+									</button>
+								</a>
+							</AuthorizeView>
+						</li>
+
+						<li>
+
+							<button type="button" class="@Tailwind.SideMenuButton"
+									aria-controls="dropdown-security" data-collapse-toggle="dropdown-security">
+								@(
+									(MarkupString)SvgHelpers.SideMenuSecurityIcon
+									)
+								<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>User Management</span>
+								@(
+									(MarkupString)SvgHelpers.SideMenuDropDownIcon
+									)
+							</button>
+
+							<ul id="dropdown-security" class="hidden py-2 space-y-2 ">
+								
+								<AuthorizeView Roles=@PermissionConfig.SecurityRoleAddnew>
+									<li>
+										<a @onclick='() => SetActiveMenuItem("managestaff")' href="/security/users"
+										   class="@SidebarMenu[18].CssClass">
+											Manage staff
+										</a>
+									</li>
+								</AuthorizeView>
+								<AuthorizeView Roles=@PermissionConfig.SecurityRoleAddnew>
+									<li>
+										<a @onclick='() => SetActiveMenuItem("manageroles")' href="/security/roles"
+										   class="@SidebarMenu[19].CssClass">
+											Manage roles
+										</a>
+									</li>
+								</AuthorizeView>
+								<AuthorizeView Roles="@PermissionConfig.SecurityMemberView">
+									<li>
+										<a @onclick='() => SetActiveMenuItem("managemembers")' href="/security/enrollments"
+										   class="@SidebarMenu[20].CssClass">
+											Manage members
+										</a>
+									</li>
+								</AuthorizeView>
+
+
+								<AuthorizeView Roles=@PermissionConfig.SecurityDataMigration>
+									<li>
+										<a @onclick='() => SetActiveMenuItem("datamigration")' href="/security/data-migration"
+										   class="@SidebarMenu[21].CssClass">
+											Data Migration
+										</a>
+									</li>
+								</AuthorizeView>
+
+
+							</ul>
+						</li>
+					}
+
+					@if (isCustomer)
+					{
+						<AuthorizeView Roles=@PermissionConfig.AccountLoanApplication>
+							<li>
+
+								<button disabled="@disableMenu" type="button" class="@Tailwind.SideMenuButton"
+										aria-controls="dropdown-loan-account"
+										data-collapse-toggle="dropdown-loan-account">
+
+									@((MarkupString)SvgHelpers.SideMenuLoanAccountIcon)
+
+									<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>My Loan Accounts</span>
+									@((MarkupString)SvgHelpers.SideMenuDropDownIcon)
+
+
+								</button>
+								<ul id="dropdown-loan-account" class="hidden py-2 space-y-2 ">
+									<li>
+										<NavLink @onclick='() => SetActiveMenuItem("Accounts")' href="/account/loanproductsapplications" class="@SidebarMenu[22].CssClass">
+											Accounts
+										</NavLink>
+
+									</li>
+									<li>
+										<NavLink @onclick='() => SetActiveMenuItem("requestshistory")' href="/account/loanapplicationshistory" class="@SidebarMenu[23].CssClass">
+											Requests History
+										</NavLink>
+
+									</li>
+									<li>
+										<NavLink @onclick='() => SetActiveMenuItem("newapplication")' href="/account/loanproductApplication"
+											class="@SidebarMenu[24].CssClass">
+											New Application
+										</NavLink>
+									</li>
+									<li>
+										<NavLink @onclick='() => SetActiveMenuItem("report")' href="/account/loanproductsapplications"
+											class="@SidebarMenu[25].CssClass">
+											Report
+										</NavLink>
+									</li>
+								</ul>
+
+							</li>
+						</AuthorizeView>
+						<AuthorizeView Roles=@PermissionConfig.AccountDepositApplication>
+							<li>
+								<button disabled="@disableMenu" type="button" class="@Tailwind.SideMenuButton"
+										aria-controls="dropdown-deposit-account" data-collapse-toggle="dropdown-deposit-account">
+
+									@((MarkupString)SvgHelpers.SideMenuDepositAccountIcon)
+
+									<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>My Deposit Accounts</span>
+									@((MarkupString)SvgHelpers.SideMenuDropDownIcon)
+
+
+								</button>
+								<ul id="dropdown-deposit-account" class="hidden py-2 space-y-2 ">
+									<li>
+										<NavLink @onclick='() => SetActiveMenuItem("depositaccounts")' href="/account/DepositAccount" class="@SidebarMenu[26].CssClass">
+											Accounts
+										</NavLink>
+
+									</li>
+
+									<li>
+										<NavLink @onclick='() => SetActiveMenuItem("depositrequesthistory")' href="/account/DepositProduct/Applications" class="@SidebarMenu[27].CssClass">
+											Request History
+										</NavLink>
+
+									</li>
+									  <li>
+										<NavLink @onclick='() => SetActiveMenuItem("depositnewapplication")' href="/Account/NewDepositApplication" class="@SidebarMenu[28].CssClass">
+								New Application
+								</NavLink>
+
+								</li>
+
+								</ul>
+							</li>
+						</AuthorizeView>
+					}
+
+					@if (isCustomer)
+					{
+						<li>
+							<AuthorizeView>
+								
+									<button type="submit" class="@SidebarMenu[29].CssClass" @onclick="GoToGuarantoryApproval">
+										@(
+											(MarkupString)SvgHelpers.SideMenuApproivalIconIcon
+											)
+										<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Guarantor Requests</span>
+
+									</button>
+								
+							</AuthorizeView>
+						</li>
+					}
+					<li>
+						<AuthorizeView Roles=@PermissionConfig.SecurityViewAudit>
+
+
+							<a @onclick='() => SetActiveMenuItem("audittrails")' href="/audittrail/list" class="@SidebarMenu[30].CssClass">
+								@((MarkupString)SvgHelpers.ProfileSideMenuIcon)
+								<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item> Audit Trails</span>
+
+
+							</a>
+
+
+						</AuthorizeView>
+					</li>
+
+					<li>
+						<AuthorizeView>
+
+
+							
+								<button type="submit" class="@SidebarMenu[31].CssClass" @onclick="GoToProfile">
+									@((MarkupString)SvgHelpers.ProfileSideMenuIcon)
+									<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>My Profile</span>
+
+								</button>
+							
+
+
+						</AuthorizeView>
+					</li>
+					@if (isCustomer)
+					{
+						<li>
+							<AuthorizeView>
+								
+									<button type="button" class="@SidebarMenu[31].CssClass" @onclick="GoToMyBankAccounts">
+										@(
+											(MarkupString)SvgHelpers.SideMenuApproivalIconIcon
+											)
+										<span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>My Bank Accounts</span>
+
+									</button>
+								
+							</AuthorizeView>
+						</li>
+					}
+
+				</ul>
+
+			</div>
+		</div>
+
+		<!-- Bottom Setting -->
+		<div class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex" sidebar-bottom-menu>
+			<a href="#" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+				<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+					<path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path>
+				</svg>
+			</a>
+			<a href="../../users/settings/" data-tooltip-target="tooltip-settings" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+				<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+				</svg>
+			</a>
+			<div id="tooltip-settings" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+				Settings page
+				<div class="tooltip-arrow" data-popper-arrow></div>
+			</div>
+			<button type="button" data-dropdown-toggle="language-dropdown" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+				<svg class="h-5 w-5 rounded-full mt-0.5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3900 3900">
+					<path fill="#b22234" d="M0 0h7410v3900H0z" />
+					<path d="M0 450h7410m0 600H0m0 600h7410m0 600H0m0 600h7410m0 600H0" stroke="#fff" stroke-width="300" />
+					<path fill="#3c3b6e" d="M0 0h2964v2100H0z" />
+					<g fill="#fff">
+						<g id="d">
+							<g id="c">
+								<g id="e">
+									<g id="b">
+										<path id="a" d="M247 90l70.534 217.082-184.66-134.164h228.253L176.466 307.082z" /><use xlink:href="#a" y="420" /><use xlink:href="#a" y="840" /><use xlink:href="#a" y="1260" />
+									</g><use xlink:href="#a" y="1680" />
+								</g><use xlink:href="#b" x="247" y="210" />
+							</g><use xlink:href="#c" x="494" />
+						</g><use xlink:href="#d" x="988" /><use xlink:href="#c" x="1976" /><use xlink:href="#e" x="2470" />
+					</g>
+				</svg>
+			</button>
+
+			<div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700" id="language-dropdown">
+				<ul class="py-1" role="none">
+					<li>
+						<a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+							<div class="inline-flex items-center">
+								<svg class="h-3.5 w-3.5 rounded-full mr-2" xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-us" viewBox="0 0 512 512">
+									<g fill-rule="evenodd">
+										<g stroke-width="1pt">
+											<path fill="#bd3d44" d="M0 0h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z" transform="scale(3.9385)" />
+											<path fill="#fff" d="M0 10h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z" transform="scale(3.9385)" />
+										</g>
+										<path fill="#192f5d" d="M0 0h98.8v70H0z" transform="scale(3.9385)" />
+										<path fill="#fff" d="M8.2 3l1 2.8H12L9.7 7.5l.9 2.7-2.4-1.7L6 10.2l.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7L74 8.5l-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 7.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 24.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 21.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 38.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 35.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 52.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 49.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 66.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 63.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9z" transform="scale(3.9385)" />
+									</g>
+								</svg>
+								English (US)
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+							<div class="inline-flex items-center">
+								<svg class="h-3.5 w-3.5 rounded-full mr-2" xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-de" viewBox="0 0 512 512">
+									<path fill="#ffce00" d="M0 341.3h512V512H0z" />
+									<path d="M0 0h512v170.7H0z" />
+									<path fill="#d00" d="M0 170.7h512v170.6H0z" />
+								</svg>
+								Deutsch
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+							<div class="inline-flex items-center">
+								<svg class="h-3.5 w-3.5 rounded-full mr-2" xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-it" viewBox="0 0 512 512">
+									<g fill-rule="evenodd" stroke-width="1pt">
+										<path fill="#fff" d="M0 0h512v512H0z" />
+										<path fill="#009246" d="M0 0h170.7v512H0z" />
+										<path fill="#ce2b37" d="M341.3 0H512v512H341.3z" />
+									</g>
+								</svg>
+								Italiano
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+							<div class="inline-flex items-center">
+								<svg class="h-3.5 w-3.5 rounded-full mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="flag-icon-css-cn" viewBox="0 0 512 512">
+									<defs>
+										<path id="a" fill="#ffde00" d="M1-.3L-.7.8 0-1 .6.8-1-.3z" />
+									</defs>
+									<path fill="#de2910" d="M0 0h512v512H0z" />
+									<use width="30" height="20" transform="matrix(76.8 0 0 76.8 128 128)" xlink:href="#a" />
+									<use width="30" height="20" transform="rotate(-121 142.6 -47) scale(25.5827)" xlink:href="#a" />
+									<use width="30" height="20" transform="rotate(-98.1 198 -82) scale(25.6)" xlink:href="#a" />
+									<use width="30" height="20" transform="rotate(-74 272.4 -114) scale(25.6137)" xlink:href="#a" />
+									<use width="30" height="20" transform="matrix(16 -19.968 19.968 16 256 230.4)" xlink:href="#a" />
+								</svg>
+								中文 (繁體)
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</aside>
+

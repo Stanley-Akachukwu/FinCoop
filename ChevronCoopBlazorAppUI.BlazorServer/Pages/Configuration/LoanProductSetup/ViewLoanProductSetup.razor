@@ -1,0 +1,108 @@
+﻿@page "/LoanProductSetup/view/{id}"
+
+
+<div class="text-sm font-medium text-center bg-white text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+    <ul class="flex  -mb-px ">
+        <li class="mr-2">
+            <a href="javascript: void(0)" @onclick=@(e => ActivateTabs(1)) class="inline-block p-4 @GLAccountTab rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">GL Accounts</a>
+        </li>
+        <li class="mr-2">
+            <a href="javascript: void(0)" @onclick=@(e => ActivateTabs(2)) class="inline-block p-4 @BasicInformationTab rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Basic Information</a>
+        </li>
+        <li class="mr-2">
+            <a href="javascript: void(0)" @onclick=@(e => ActivateTabs(3)) class="inline-block p-4 @TargetSetupTab rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Target Setup</a>
+        </li>
+        <li class="mr-2">
+            <a href="javascript: void(0)" @onclick=@(e => ActivateTabs(4)) class="inline-block p-4 @OffsetTab rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Offset Information</a>
+        </li>
+        <li class="mr-2">
+            <a href="javascript: void(0)" @onclick=@(e => ActivateTabs(5)) class="inline-block p-4 @TopupTab rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Topup Information</a>
+        </li>
+        <li class="mr-2">
+            <a href="javascript: void(0)" @onclick=@(e => ActivateTabs(6)) class="inline-block p-4 @DueLoanTab rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">When due for new loan</a>
+        </li>
+        <li class="mr-2">
+            <a href="javascript: void(0)" @onclick=@(e => ActivateTabs(7)) class="inline-block p-4 @GuarantorTab rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Guarantor Information</a>
+        </li>
+        <li class="mr-2">
+            <a href="javascript: void(0)" @onclick=@(e => ActivateTabs(8)) class="inline-block p-4 @ApprovalTab rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Approval Routing</a>
+        </li>
+        <li class="mr-2">
+            <a href="javascript: void(0)" @onclick=@(e => ActivateTabs(9)) class="inline-block p-4 @ApprovalTab rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Customer Account</a>
+        </li>
+    </ul>
+</div>
+
+<main>
+
+    <div class="px-4 pt-6">
+
+        <div class="col-span-3 sm:col-span-3">
+            <a href="/LoanProductSetup/Manage/all">
+                <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="submit">
+                    <svg class="inline mr-1" width="14" height="12" viewBox="0 0 14 12" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 5.99967H13Z" fill="#1F82BD"/>
+                        <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13" stroke="#1F82BD"
+                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg> Back
+                </button>
+            </a>
+
+        </div>
+        <!-- Request Tabs -->
+
+        <div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-12 xl:gap-2 space-x-24 dark:bg-gray-900">
+
+            <div class="col-span-6">
+                @if (showGLAccounts)
+                {
+                    <GLViewComponent @bind-Model="Model" OnGLAccountChanged="OnProceedChangedHandler"></GLViewComponent>
+                }
+                @if (showBasicInformation)
+                {
+                    <BasicInformationViewComponent @bind-Model="Model" OnBasicChanged="OnProceedChangedHandler"></BasicInformationViewComponent>
+                }
+                @if (showTargetSetup)
+                {
+                    <TargetSetUpViewComponent @bind-Model="Model" OnTargetChanged="OnProceedChangedHandler"></TargetSetUpViewComponent>
+                }
+                @if (showOffset)
+                {
+                    <OffSetViewComponent @bind-Model="Model" OnOffSetChanged="OnProceedChangedHandler"></OffSetViewComponent>
+                }
+                @if (showTopUpInfo)
+                {
+                    <TopUpViewComponent @bind-Model="Model" OnTopUpSetChanged="OnProceedChangedHandler"></TopUpViewComponent>
+                }
+                @if (showDueForLoan)
+                {
+                    <WhenDueViewComponent @bind-Model="Model" OnWhenDueChanged="OnProceedChangedHandler"></WhenDueViewComponent>
+                }
+                @if (showGuarantorInfo)
+                {
+                    <GuarantorInfoViewComponent @bind-Model="Model" OnGuarantorChanged="OnProceedChangedHandler"></GuarantorInfoViewComponent>
+                }
+                @if (showApproval)
+                {
+                    <ApprovalViewComponent @bind-Model="Model" OnApprovalChanged="OnProceedChangedHandler"></ApprovalViewComponent>
+                }
+                 @if (showCustomerAccounts)
+                {
+                    <CustomerLoanAccountComponent @bind-LoanProductId="id" OnCustomerAccountsChanged="OnProceedChangedHandler"></CustomerLoanAccountComponent>
+                }
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+</main>
+
+
+@code {
+
+}

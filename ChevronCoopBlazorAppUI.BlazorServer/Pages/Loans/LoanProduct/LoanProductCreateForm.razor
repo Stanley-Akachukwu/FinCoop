@@ -1,0 +1,146 @@
+<EditForm Model="@Model">
+    <FluentValidationValidator/>
+
+
+    <ValidationSummary/>
+
+    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+
+
+        <div class="w-full">
+            <label for="Code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Code
+            </label>
+            <SfTextBox Multiline="false" ID="Code" Placeholder="Code" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.Code OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+
+        <div class="sm:col-span-2">
+            <label for="Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Name
+            </label>
+            <SfTextBox Multiline="true" ID="Name" Placeholder="Name" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.Name OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+
+        <div class="sm:col-span-2">
+            <label for="ShortName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Short Name
+            </label>
+            <SfTextBox Multiline="true" ID="ShortName" Placeholder="ShortName" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.ShortName OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+        <div class="w-full">
+            <label for="CurrencyId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Select default currency
+            </label>
+
+            @{
+                var combobox_Currency_res = $"{Config.ODATA_VIEWS_HOST}/{nameof(CurrencyMasterView)}";
+            }
+
+            <SfComboBox TValue="string" TItem="CurrencyMasterView" OnBlur="OnBlur"
+                        @bind-Value=@Model.DefaultCurrencyId Query="@Query_Combo"
+                        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select currency">
+                <SfDataManager Url="@combobox_Currency_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+            </SfComboBox>
+
+
+        </div>
+
+        <div class="sm:col-span-2">
+            <label for="CurrencyId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Select deposit bank account
+            </label>
+
+            @{
+                var combobox_Deposit_res = $"{Config.ODATA_VIEWS_HOST}/{nameof(CompanyBankAccountMasterView)}";
+            }
+
+            @* <SfComboBox TValue="string" TItem="CompanyBankAccountMasterView" OnBlur="OnBlur"
+                        @bind-Value=@Model.BankDepositAccountId Query="@Query_Combo"
+                        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select deposit acc">
+                <SfDataManager Url="@combobox_Deposit_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                <ComboBoxFieldSettings Text="AccountName" Value="Id"></ComboBoxFieldSettings>
+            </SfComboBox>*@
+
+
+        </div>
+
+        <div class="sm:col-span-2">
+            <label for="CurrencyId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Select disbursement bank account
+            </label>
+            @*
+            <SfComboBox TValue="string" TItem="CompanyBankAccountMasterView" OnBlur="OnBlur"
+                        @bind-Value=@Model.DisbursementAccountId Query="@Query_Combo"
+                        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select disbursement acc">
+                <SfDataManager Url="@combobox_Deposit_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                <ComboBoxFieldSettings Text="AccountName" Value="Id"></ComboBoxFieldSettings>
+            </SfComboBox>*@
+
+
+        </div>
+
+
+        <div class="w-full">
+            <label for="MinimumAge" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                MinimumAge
+            </label>
+
+            @*<SfNumericTextBox ID="MinimumAge" TValue="int" @bind-Value="@Model.MinimumAge"></SfNumericTextBox>*@
+        </div>
+
+
+        <div class="w-full">
+            <label for="MaximumAge" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                MaximumAge
+            </label>
+
+            @*<SfNumericTextBox ID="MaximumAge" TValue="int" @bind-Value="@Model.MaximumAge"></SfNumericTextBox>*@
+        </div>
+
+
+        <div class="sm:col-span-2">
+            <label for="Description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Description
+            </label>
+            <SfTextBox Multiline="true" ID="Description" Placeholder="Description" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                       @bind-Value=@Model.Description OnBlur="OnBlur">
+            </SfTextBox>
+        </div>
+
+
+        <div class="w-full">
+            <label for="IsActive" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Is Active?
+            </label>
+
+            <SfSwitch ID="IsActive" @bind-Checked="@Model.IsActive" @onblur="@OnBlur"/>
+        </div>
+
+
+    </div>
+    <br/>
+
+    <button type="button" @onclick="OnSaveClose"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Save &amp; Close
+    </button>
+
+    <button type="button" @onclick="OnCancel"
+            class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+        Cancel
+    </button>
+
+</EditForm>

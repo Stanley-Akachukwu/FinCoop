@@ -1,0 +1,206 @@
+﻿@page "/payroll/ImportFromCNL/{schedulename}/{scheduleId}"
+@using AP.ChevronCoop.AppDomain.Payroll.PayrollDeductionScheduleItems;
+@using AP.ChevronCoop.Entities.Payroll.PayrollDeductionScheduleItems;
+@using AP.ChevronCoop.Entities.Payroll;
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Payroll.PayrollDeductionSchedule;
+@using System.Globalization;
+@using ChevronCoop.Web.AppUI.BlazorServer.Helper;
+@layout AppUIMainLayout
+
+
+<main>
+
+    <div class="px-4 pt-6">
+
+        <div class="mb-4">
+            <nav class="flex mb-5" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="#"
+                           class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group"
+                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                            </svg>
+                            @schedulename - Import from CNL
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd">
+                                </path>
+                            </svg>
+
+                        </div>
+                    </li>
+
+                </ol>
+            </nav>
+        </div>
+        <div class="col-span-3 sm:col-span-3 mb-2">
+             <a href="/schedule/payrollScheduleList/">
+
+                <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="submit">
+                    <svg class="inline mr-1" width="14" height="12" viewBox="0 0 14 12" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 5.99967H13Z" fill="#1F82BD" />
+                        <path d="M5.66667 10.6663L1 5.99967M1 5.99967L5.66667 1.33301M1 5.99967H13"
+                              stroke="#1F82BD" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                    </svg> Back
+                </button>
+            </a>
+        </div>
+			<div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+				<div class="w-full md:w-1/2">
+
+					<div class="flex items-center">
+						<label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+						<div class="relative">
+							<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+								<svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+								</svg>
+							</div>
+							<input type="search" id="default-search" @bind-value="@searchText" @bind-value:event="oninput" @onkeyup="OnSearchEnter"
+		   class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search...">
+
+							<button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+						</div>
+					</div>
+
+				</div>
+
+			<button @onclick=@onUpload data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="button" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+				<svg class="mr-2 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+				</svg>
+				Upload Data
+			</button>
+				<a  href="/files/ImportCNLFormat.xlsx"  type="button" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+					<svg class="mr-2 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+					</svg>
+				Download import template	
+				</a>
+			</div>
+
+		  
+            @if (showUploadDataModal)
+            {
+			<UploadCNL scheduleId=@scheduleId schedulename="@schedulename" OnUploadDataChanged="OnUploadDataChangedHandler"></UploadCNL>
+            }
+            @if (showSuccessModal)
+            {
+                <SuccessModal/>
+            }
+            @if (showAlertComponent)
+            {
+                <AlertComponent/>
+            }
+
+			<div class="overflow-x-auto">
+
+				<SfGrid @ref="grid" ID="gridPayrollDeductionScheduleItem" TValue="PayrollDeductionItemMasterView" EnablePersistence="false"
+						Query="@QueryGrid" DataSource=@PayrollDeductionScheduleItemMasterViewSrc
+						AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+						AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="500"
+						AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+						AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false" Toolbar="@(new List<string>() { "ExcelExport", "PdfExport" })">
+					@*<SfDataManager Url="@GRID_API_RESOURCE" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>*@
+					<GridPageSettings EnableQueryString="true" PageCount="10" PageSize="10" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+					<GridEvents TValue="PayrollDeductionItemMasterView" OnActionComplete="ActionCompletedHandler" OnActionFailure="@ActionFailure" OnToolbarClick="ToolbarClickHandler"></GridEvents>
+
+					<GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false"
+									  ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog"></GridEditSettings>
+
+
+					<GridFilterSettings Columns="@filterColumns" Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+					</GridFilterSettings>
+
+
+					<GridColumns>
+					<GridColumn HeaderText="S/N" AutoFit="true">
+						<Template Context="context">
+							<span>@SortSerialNumber.GetSerialNumber(context)</span>
+						</Template>
+					</GridColumn>
+					<GridColumn Field=@nameof(PayrollDeductionItemMasterView.MemberId) HeaderText="Member ID" AutoFit="true"></GridColumn>
+
+						<GridColumn Field=@nameof(PayrollDeductionItemMasterView.MemberName) HeaderText="MemberName" AutoFit="true"></GridColumn>
+					<GridColumn Field=@nameof(PayrollDeductionItemMasterView.PayrollCode) HeaderText="PayrollCode" AutoFit="true"></GridColumn>
+
+				
+
+					<GridColumn Field=@nameof(PayrollDeductionItemMasterView.Amount) HeaderText="Amount" AutoFit="true" Format="N2">
+					@*	<Template>
+							@{
+								var status = (context as PayrollDeductionItemMasterView);
+								<td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+									@status.Amount.ToString("N2", new CultureInfo("en-US"))
+								</td>
+							}
+
+						</Template>*@
+					</GridColumn>
+
+@*
+					<GridColumn Field=@nameof(PayrollDeductionItemMasterView.AccountNo) HeaderText="AccountNo" AutoFit="true"></GridColumn>
+						<GridColumn Field=@nameof(PayrollDeductionItemMasterView.Narration) HeaderText="Narration" AutoFit="true"></GridColumn>*@
+
+					<GridColumn Field=@nameof(PayrollDeductionItemMasterView.PayrollDate) HeaderText="PayrollDate" AutoFit="true" Format="dd/MM/yyyy" Type="ColumnType.Date"></GridColumn>
+
+					@*	<GridColumn Field=@nameof(PayrollDeductionItemMasterView.AccountDueDate) HeaderText="AccountDueDate" AutoFit="true"></GridColumn>
+
+						<GridColumn Field=@nameof(PayrollDeductionItemMasterView.CurrentStatus) HeaderText="CurrentStatus" AutoFit="true"></GridColumn>
+
+						<GridColumn Field=@nameof(PayrollDeductionItemMasterView.DeductionType) HeaderText="DeductionType" AutoFit="true"></GridColumn>
+
+
+						<GridColumn Field=@nameof(PayrollDeductionItemMasterView.Description) HeaderText="Description" AutoFit="true"></GridColumn>*@
+
+					<GridColumn Field=@nameof(PayrollDeductionItemMasterView.DateCreated) HeaderText="DateCreated" AutoFit="true" Format="dd/MM/yyyy" Type="ColumnType.Date"></GridColumn>
+
+		@*				<GridColumn Field=@nameof(PayrollDeductionItemMasterView.Caption) HeaderText="Caption" AutoFit="true"></GridColumn>*@
+
+
+						<GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+							<Template>
+								@{
+									var row = (context as PayrollDeductionItemMasterView);
+
+									<span class="px-4 py-0 flex items-center justify-end">
+										<button id="apple-ipad-air-dropdown-button-@row.Id" data-dropdown-toggle="apple-ipad-air-dropdown-@row.Id"
+												class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus::outline-none dark::text-gray-400 dark::hover:text-gray-100"
+												type="button">
+											<svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+												<path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+											</svg>
+										</button>
+
+									</span>
+
+								}
+
+
+							</Template>
+						</GridColumn>
+					</GridColumns>
+				</SfGrid>
+			</div>
+
+
+		</div>
+
+ 
+ 
+</main>
+ 

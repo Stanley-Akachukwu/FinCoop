@@ -1,0 +1,429 @@
+﻿@using AP.ChevronCoop.Entities.MasterData.Charges;
+<EditForm Model="@Model" OnValidSubmit="OnProceed">
+<FluentValidationValidator @ref="_fluentValidationValidator"/>
+<ValidationSummary/>
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Basic Information
+    </h3>
+
+    <div class="grid grid-cols-6 gap-6">
+        <div class="col-span-6 sm:col-full">
+            <label for="first-name"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Product Code
+            </label>
+            <SfTextBox ID="Name" Placeholder="Enter Name" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       @bind-Value=@Model.Code OnBlur="OnBlur" Readonly="true">
+            </SfTextBox>
+            <ValidationMessage For="() => Model.Code" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+        </div>
+        <div class="col-span-6 sm:col-full">
+            <label for="first-name"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Payroll Code
+            </label>
+
+            <SfTextBox ID="Name" Placeholder="Enter Payroll Code" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       @bind-Value=@Model.PayrollCode OnBlur="OnBlur">
+            </SfTextBox>
+            <ValidationMessage For="() => Model.PayrollCode" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+
+        </div>
+        <div class="col-span-6 sm:col-full">
+            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Loan Product Type</label>
+
+            <SfComboBox id="loanProductType" DataSource=@loanProductType TValue="string" TItem="string" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        @bind-Value=@Model.LoanProductType
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Loan Product Type">
+            </SfComboBox>
+            <ValidationMessage For="() => Model.LoanProductType" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+        </div>
+
+        <div class="col-span-6 sm:col-full">
+            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Loan Name</label>
+            <div class="">
+                <SfTextBox ID="Name" Placeholder="Enter Name" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           @bind-Value=@Model.Name OnBlur="OnBlur">
+                </SfTextBox>
+                <ValidationMessage For="() => Model.Name" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+            </div>
+        </div>
+        <div class="col-span-6 sm:col-full">
+            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Loan Short Name</label>
+            <div class="">
+                <SfTextBox ID="ShortName" Placeholder="Enter ShortName" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           @bind-Value=@Model.ShortName OnBlur="OnBlur">
+                </SfTextBox>
+                <ValidationMessage For="() => Model.ShortName" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+            </div>
+        </div>
+        <div class="col-span-6 sm:col-full">
+            <label for="first-name"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Loan Description
+            </label>
+            <SfTextBox ID="Name" Multiline="true" Placeholder="Write text here..." CssClass="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       @bind-Value=@Model.Description OnBlur="OnBlur">
+            </SfTextBox>
+            <ValidationMessage For="() => Model.Description" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+
+        </div>
+
+        <div class="col-span-6 sm:col-full">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Member type<span class="text-red-500">*</span>
+            </label>
+            <SfMultiSelect TValue="string[]" TItem="string" @bind-Value=@preselectedMemberType FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains" DataSource="@memberType" ShowSelectAll=true FilterBarPlaceholder="Mmeber Type" EnableGroupCheckBox=false Mode="@VisualMode.CheckBox" ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Member Type" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <MultiSelectEvents TItem="string" TValue="string[]" ValueChange="@ValueChangeHandler"></MultiSelectEvents>
+
+            </SfMultiSelect>
+
+
+        </div>
+
+        <div class="col-span-6 sm:col-full">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Currency
+            </label>
+            <SfComboBox TValue="string" TItem="CurrencyMasterView" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        @bind-Value=@Model.DefaultCurrencyId Query="@Query_Combo"
+                        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Currency">
+                <SfDataManager Url="@combobox_Currency_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+                <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+            </SfComboBox>
+            <ValidationMessage For="() => Model.DefaultCurrencyId" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Company Account Detail
+    </h3>
+    <form action="">
+        <div class="grid grid-cols-6 gap-6">
+
+
+            <div class="col-span-6 sm:col-span-3">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Company Disbursement Account
+                </label>
+
+                <SfDropDownList @bind-Value=Model.CompanyDisbursementAccountId TItem="CompanyBankAccountMasterView" Placeholder="Select Company Disbursement Account" TValue="string" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <SfDataManager Url="@DROPDOWN_API_RESOURCE_COMPANY_ACCOUNT" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                    <DropDownListFieldSettings Text="Details" Value="Id"></DropDownListFieldSettings>
+                </SfDropDownList>
+
+                <ValidationMessage For="() => Model.CompanyDisbursementAccountId" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Company Deposit Account
+                </label>
+
+                <SfDropDownList @bind-Value=Model.CompanyDepositAccountId TItem="CompanyBankAccountMasterView" Placeholder="Select Company Deposit Account" TValue="string" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <SfDataManager Url="@DROPDOWN_API_RESOURCE_COMPANY_ACCOUNT" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                    <DropDownListFieldSettings Text="Details" Value="Id"></DropDownListFieldSettings>
+                </SfDropDownList>
+
+                <ValidationMessage For="() => Model.CompanyDepositAccountId" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Deposit Product Pre-Qualification Settings
+    </h3>
+
+    <div class="grid grid-cols-6 gap-6">
+
+        <div class="col-span-6 sm:col-span-3">
+            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Min Savings balance percentage</label>
+            <div class="relative max-w-sm">
+                    <SfNumericTextBox TValue="decimal" ID="QualificationLimit"  Placeholder="10%" CssClass="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                  @bind-Value=@Model.QualificationMinBalancePercentage OnBlur="OnBlur">
+                </SfNumericTextBox>
+
+            </div>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Target deposit product
+            </label>
+            <SfComboBox id="depositProduct" DataSource=@depositProductType TValue="string" TItem="string" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        @bind-Value=@Model.QualificationTargetProduct
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Deposit Product Type">
+            </SfComboBox>
+            <ValidationMessage For="() => Model.QualificationTargetProduct" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Loan Principal Settings
+    </h3>
+    <div class="grid grid-cols-6 gap-6">
+
+
+        <div class="col-span-6 sm:col-span-3">
+            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Multiples of Principal</label>
+            <div class="relative max-w-sm">
+                    <SfNumericTextBox TValue="decimal" ID="QualificationLimit"  Placeholder="10%" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                  @bind-Value=@Model.PrincipalMultiple OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.PrincipalMultiple" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+        </div>
+
+        <div class="col-span-6 sm:col-span-3">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Principal Min Limit
+            </label>
+            <div class="relative max-w-sm">
+
+                    <SfNumericTextBox TValue="decimal" ID="PrincipalMinLimit"  Placeholder="0.00" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                  @bind-Value=@Model.PrincipalMinLimit OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.PrincipalMinLimit" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+        </div>
+
+        <div class="col-span-6 sm:col-span-3">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Principal Max Limit
+            </label>
+            <div class="relative max-w-sm">
+
+                    <SfNumericTextBox TValue="decimal" ID="PrincipalMaxLimit"  Placeholder="0.00" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                  @bind-Value=@Model.PrincipalMaxLimit OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.PrincipalMaxLimit" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Loan Tenor Settings
+    </h3>
+
+    <div class="grid grid-cols-6 gap-6">
+
+        <div class="col-span-6 sm:col-span-3">
+            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tenor Unit</label>
+
+            <SfComboBox id="tenureUnit" DataSource=@tenureUnit TValue="string" TItem="string" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        @bind-Value=@Model.TenureUnit
+                        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Tenure Unit">
+            </SfComboBox>
+            <ValidationMessage For="() => Model.TenureUnit" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Min Tenor Limit
+            </label>
+            <div class="relative max-w-sm">
+                    <SfNumericTextBox TValue="decimal" ID="MinTenureValue" Placeholder="2"  CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                  @bind-Value=@Model.MinTenureValue OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.MinTenureValue" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+
+            </div>
+        </div>
+
+        <div class="col-span-6 sm:col-span-3">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Max Tenor Limit
+            </label>
+            <div class="relative max-w-sm">
+
+                    <SfNumericTextBox TValue="decimal" ID="MaxTenureValue" Placeholder="2"  CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                  @bind-Value=@Model.MaxTenureValue OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.MaxTenureValue" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        Loan Interest Settings
+    </h3>
+    <div class="grid grid-cols-6 gap-6">
+
+
+
+
+        @*   <div class="col-span-6 sm:col-span-3">
+                <label for="countries"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Interest Calculation method</label>
+
+                <SfComboBox id="InterestMethod" DataSource=@interestMethod TValue="string" TItem="string" OnBlur="OnBlur" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            @bind-Value=@Model.InterestMethod
+                            ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Charge method">
+                </SfComboBox>
+                <ValidationMessage For="() => Model.InterestMethod" class="mt-2 text-sm text-red-600 dark:text-red-500" />
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+                <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Default Interest Rate</label>
+                <div class="relative max-w-sm">
+
+                    <SfNumericTextBox TValue="decimal" ID="InterestRate" Placeholder="2" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                      @bind-Value=@Model.InterestRate OnBlur="OnBlur"></SfNumericTextBox>
+                    <ValidationMessage For="() => Model.InterestRate" class="mt-2 text-sm text-red-600 dark:text-red-500" />
+                </div>
+            </div>*@
+        <div class="col-span-6 sm:col-span-3">
+            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Default Interest Rate</label>
+            <div class="relative max-w-sm">
+
+                    <SfNumericTextBox TValue="decimal" ID="InterestRate" Placeholder="2"  CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                  @bind-Value=@Model.InterestRate OnBlur="OnBlur">
+                </SfNumericTextBox>
+                <ValidationMessage For="() => Model.InterestRate" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+            </div>
+        </div>
+
+
+        <div class="col-span-6 sm:col-span-3">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Interest Calculation Method
+            </label>
+
+
+            <SfDropDownList @bind-Value=Model.InterestCalculationMethod TItem="string" Placeholder="Select  Interest Calculation method" DataSource=@interestCalculationMethod TValue="string" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+            </SfDropDownList>
+            <ValidationMessage For="() => Model.InterestCalculationMethod" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+        </div>
+
+        <div class="col-span-6 sm:col-span-3">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Repayment Period
+            </label>
+
+
+            <SfDropDownList @bind-Value=Model.RepaymentPeriod TItem="string" Placeholder="Select  Repayment Period" DataSource=@tenureUnit TValue="string" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+            </SfDropDownList>
+            <ValidationMessage For="() => Model.RepaymentPeriod" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Days in Year
+            </label>
+
+
+            <SfDropDownList @bind-Value=Model.DaysInYear TItem="string" Placeholder="Select Days in a Year" DataSource=@daysInYear TValue="DaysInYear" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+            </SfDropDownList>
+            <ValidationMessage For="() => Model.DaysInYear" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+            Disbursement Charge
+    </h3>
+
+    <div class="grid grid-cols-6 gap-6">
+
+
+        <div class="col-span-6 sm:col-full">
+            <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Enable
+                Disbursement Charges
+            </label>
+            <div class="flex flex-wrap">
+                <div class="flex items-center mr-4">
+                    <SfRadioButton Name="options" Value="true" @bind-Checked="@Model.HasAdminCharges" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+
+                    <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <SfRadioButton Name="options" Value="false" @bind-Checked="@Model.HasAdminCharges" CssClass="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></SfRadioButton>
+                    <label for="radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-span-6 sm:col-full">
+            <label for="countries"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Select Disbursement Charges
+            </label>
+
+            <SfMultiSelect TValue="string[]" @bind-Value=preselectedAdminCharges TItem="ChargeMasterView" FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains" Query="@Query_Combo" ShowSelectAll=true FilterBarPlaceholder="Charges" EnableGroupCheckBox=false Mode="@VisualMode.CheckBox" ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select Charge" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <MultiSelectEvents TItem="ChargeMasterView" TValue="string[]" ValueChange="@AdminChargeValueChangeHandler"></MultiSelectEvents>
+                <SfDataManager Url="@DROPDOWN_API_RESOURCE_CHARGE" Adaptor="Adaptors.ODataV4Adaptor" CrossDomain=true></SfDataManager>
+                <MultiSelectFieldSettings Text="Name" Value="Id"></MultiSelectFieldSettings>
+            </SfMultiSelect>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+    <div class="col-span-3 sm:col-span-3">
+        <a href="javascript: void(0)" @onclick=OnPrevious>
+            <button type="button" class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Back
+            </button>
+        </a>
+
+    </div>
+    <div class="col-span-3 sm:col-span-3">
+        <a href="javascript: void(0)" @onclick=OnProceed>
+            <button class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Proceed
+            </button>
+        </a>
+    </div>
+</div>
+</EditForm>

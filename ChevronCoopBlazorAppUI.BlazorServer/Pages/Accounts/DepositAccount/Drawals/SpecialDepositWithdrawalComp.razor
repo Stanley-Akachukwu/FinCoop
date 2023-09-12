@@ -1,0 +1,165 @@
+﻿@using AP.ChevronCoop.AppDomain.Deposits.SpecialDeposits.SpecialDepositAccountApplications;
+@using AP.ChevronCoop.Entities.Deposits.DepositApplications;
+@using AP.ChevronCoop.Entities.Deposits.Products.DepositProducts;
+@using AP.ChevronCoop.Entities.CoopCustomers.CustomerBankAccounts;
+
+@if (ShowAlertPage)
+{
+    <SuccessMessageModal Message="We'll notify you once this setup has been approved."
+                         showPopup="true"
+                         NavigateToPage="false"
+                         PageURL="/account/DepositProduct/Applications"
+                         Header="Your special deposit account application has been sent to Internal control for approval."/>
+}
+
+
+<Drawer @ref="@addDrawer" Closable="true" Visible="showAddDrawer" Title='("Special Deposit Withdrawal")'
+        OnClose="onAddDone">
+
+
+    <EditForm Model="@Command" OnValidSubmit="OnSave">
+        @*<FluentValidationValidator @ref="_fluentValidationValidator" />*@
+
+        <div class="pb-20 flex flex-col justify-between h-full">
+
+            <div class="grid grid-cols-6 gap-6">
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Membership number
+                    </label>
+                    <input type="input"
+                           value="@MembersNumber"
+                           name="member-number"
+                           id="member-number"
+                           class="@Tailwind.TextBox_General"
+                           placeholder=""
+                           readonly
+                           required/>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Member name
+                    </label>
+                    <input type="input"
+                           name="member-name"
+                           id="member-name"
+                           value="@MembersName"
+                           class="@Tailwind.TextBox_General"
+                           placeholder=""
+                           readonly
+                           required/>
+                </div>
+
+                <div class="col-span-6 sm:col-span-full">
+                    <label for="preferred-fixed-deposit"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Source Account
+                    </label>
+
+                    <input type="input"
+                           name="member-name"
+                           id="member-name"
+                           value="@SavingsAccountNumber (₦@AvailableBalance.ToString("N0"))"
+                           class="@Tailwind.TextBox_General"
+                           placeholder=""
+                           readonly
+                           required/>
+
+                </div>
+
+                <div class="col-span-6">
+                    <label for="input-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Amount <br/>
+
+                    </label>
+                    <SfNumericTextBox TValue="decimal" CssClass="@Tailwind.TextBox_General"  @bind-Value="Command.Amount" Format="N2" Decimals=2></SfNumericTextBox>
+
+                </div>
+            </div>
+            <div>
+                <div class="w-full px-8 my-8">
+                    <p class="text-gray-900 font-medium text-sm my-4">
+                        Select destination account
+                    </p>
+
+
+                    <div class="flex flex-row w-2/3 justify-between">
+                        <div class="flex items-center mb-4">
+                            <SfRadioButton Label=" Use existing bank account" @onclick='(() => ShowLiquidation("existing"))'
+                                           CssClass="@Tailwind.RadioButton" Name="options1"
+                                           Value="Savings account" @bind-Checked="FundingSourceChecked">
+
+                            </SfRadioButton>
+
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <SfRadioButton Label="Project account" @onclick='(() => ShowLiquidation("project"))' CssClass="@Tailwind.RadioButton" Name="options1"
+                                           Value="Special deposit account" @bind-Checked="FundingSourceChecked">
+
+                            </SfRadioButton>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                @if (accountType == "existing")
+                {
+                    <div class="col-span-6" id="viewBox-existingAccount">
+                        <label for="preferred-fixed-deposit"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Select preferred bank account account
+                        </label>
+
+                        <SfDropDownList TItem="CustomerBankAccountMasterView" TValue="string" PopupHeight="auto" AllowFiltering=true CssClass="@Tailwind.ComboBox_General" DataSource="@GetCustomerBankAccounts">
+                            <DropDownListEvents TItem="CustomerBankAccountMasterView" ValueChange="GetCoopAccount" TValue="string"></DropDownListEvents>
+                            <DropDownListFieldSettings Text="Details" Value="Id"></DropDownListFieldSettings>
+                        </SfDropDownList>
+                    </div>
+                }
+                @if (accountType == "project")
+                {
+                    <div class="col-span-6" id="viewBox-projectAccount">
+                        <label for="preferred-fixed-deposit"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Select preferred project account
+                        </label>
+                        <SfDropDownList TItem="DepositAccountsMasterView" TValue="string" PopupHeight="auto" AllowFiltering=true CssClass="@Tailwind.ComboBox_General" DataSource="@GetDepositAccountsMasterView">
+                            <DropDownListEvents TItem="DepositAccountsMasterView" ValueChange="GetProjectAccount" TValue="string"></DropDownListEvents>
+                            <DropDownListFieldSettings Text="AccountNo" Value="Id"></DropDownListFieldSettings>
+                        </SfDropDownList>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+
+        <ValidationSummary/>
+
+        <div class="flex col-span-6 sm:col-full space-x-4 justify-end">
+            <button class="@Tailwind.Button_Cancel"
+                    @onclick="onAddDone"
+                    type="button">
+                Back
+            </button>
+
+
+            <button id="updateProductButton"
+                    disabled="@IsButtonDisabled"
+                    class="@Tailwind.Button_Blue"
+                    type="submit">
+                Submit
+            </button>
+        </div>
+
+    </EditForm>
+
+</Drawer>

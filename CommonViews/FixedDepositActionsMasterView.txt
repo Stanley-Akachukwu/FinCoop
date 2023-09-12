@@ -1,0 +1,27 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER   VIEW [Deposits].[FixedDepositActionsMasterView]
+as select
+     ROW_NUMBER() OVER (ORDER BY Liquidation.[Id]) AS RowNumber,Liquidation.[Id],
+ 'Fixed Deposit Account ('+FixedDepositAccountId.AccountNo+') Liquidation' as [Description],
+ FixedDepositAccountId.[Amount],ApprovalId.DateUpdated as TransactionDate,FixedDepositAccountId.CustomerId as CustomerId,
+  ApprovalId.[Status] as ApprovalId_Status,Liquidation.FixedDepositAccountId as FixedDepositAccountId,'Liquidation' as TransactionType,
+ FixedDepositAccountId.AccountNo as FixedDepositAccountId_AccountNo
+
+   from Deposits.FixedDepositLiquidation Liquidation
+    left join [Deposits].FixedDepositAccount FixedDepositAccountId on FixedDepositAccountId.Id=Liquidation.FixedDepositAccountId
+  left join [Security].Approval ApprovalId on ApprovalId.Id=Liquidation.ApprovalId
+   UNION select
+
+ ROW_NUMBER() OVER (ORDER BY Maturity.[Id]) AS RowNumber,Maturity.[Id],
+ 'Fixed Deposit Account ('+FixedDepositAccountId.AccountNo+') Change In Maturity Instruction' as [Description],
+ FixedDepositAccountId.[Amount],ApprovalId.DateUpdated as TransactionDate,FixedDepositAccountId.CustomerId as CustomerId,
+  ApprovalId.[Status] as ApprovalId_Status,Maturity.FixedDepositAccountId as FixedDepositAccountId,'Change Maturity Instruction' as TransactionType,
+ FixedDepositAccountId.AccountNo as FixedDepositAccountId_AccountNo
+
+   from Deposits.FixedDepositChangeInMaturity Maturity
+    left join [Deposits].FixedDepositAccount FixedDepositAccountId on FixedDepositAccountId.Id=Maturity.FixedDepositAccountId
+  left join [Security].Approval ApprovalId on ApprovalId.Id=Maturity.ApprovalId
+GO

@@ -1,0 +1,208 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.Products.DepositProducts;
+
+
+<div class="grid grid-cols-1 gap-2  mb-4 w-full md:grid-cols-2 ">
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4 ">
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Tenure</div>
+                <div class="text-base font-bold">@Model.Tenure</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Interest Enabled</div>
+
+                @if (Model.IsInterestEnabled)
+                {
+                    <div class="text-base font-bold">Yes</div>
+                }
+                else
+                {
+                    <div class="text-base font-bold">No</div>
+                }
+
+            </div>
+        </div>
+
+    </div>
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Product Type</div>
+                <div class="text-base font-bold">@Model.ProductType</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Approval Workflow </div>
+                <div class="text-base font-bold">@Model.ApprovalWorkflowId_WorkflowName</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Table -->
+<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <!-- Card Title -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+                Details
+            </h3>
+
+        </div>
+    </div>
+    <!-- Table -->
+    <div class="flex flex-col mt-8">
+        <div class="overflow-x-auto rounded-lg">
+            <div class="inline-block min-w-full align-middle">
+                <div class="overflow-hidden shadow sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+
+                        <tbody class="bg-white dark:bg-gray-800">
+                            <tr>
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold">Product code </span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.Code
+                                </td>
+
+                            </tr>
+                            <tr class="bg-gray-50 dark:bg-gray-700">
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold">
+                                        Product Short Name
+                                    </span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.ShortName
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold"> Product Description</span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.Description
+                                </td>
+
+                            </tr>
+                            <tr class="bg-gray-50 dark:bg-gray-700">
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold">Charges</span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.ChargesAccrualAccountId_Name
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold">Currency</span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.DefaultCurrencyId_Name
+                                </td>
+
+                            </tr>
+                            <tr class="bg-gray-50 dark:bg-gray-700">
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold">
+                                        Associated Bank account
+                                    </span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.ProductDepositAccountId_Name
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold"> Tenor unit</span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.Tenure
+                                </td>
+
+                            </tr>
+                            <tr class="bg-gray-50 dark:bg-gray-700">
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold"> Tenor Value</span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.TenureValue
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold">Minimum Age</span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.MinimumAge
+                                </td>
+
+                            </tr>
+                            <tr class="bg-gray-50 dark:bg-gray-700">
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold">Maximum Age</span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.MaximumAge
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+
+                                    <span class="font-semibold">Interest Rate</span>
+                                </td>
+                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    @Model.IsInterestEnabled
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter] public DepositProductMasterView Model { get; set; }
+
+}

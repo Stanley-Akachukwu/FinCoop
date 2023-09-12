@@ -1,0 +1,140 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.CommonViews;
+@using AP.ChevronCoop.Entities.Loans.LoanTopupTransactions;
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.Drawals
+
+@*<div class="grid grid-cols-1 gap-2  mb-4 w-full md:grid-cols-2 ">
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+
+            @((MarkupString)@SvgHelpers.AvailableBalance)
+
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Loan Balance</div>
+                <div class="text-base font-bold">₦@LoanBalance.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Loan Amount </div>
+                <div class="text-base font-bold">₦@LoanAmount.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Total Amount Repaid </div>
+                <div class="text-base font-bold">₦@TotalAmountRepaid.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Next Repayment Amount </div>
+                <div class="text-base font-bold">₦@NextRepaymentAmount.ToString("N2")</div>
+            </div>
+        </div>
+
+    </div>
+</div>*@
+<div class="mb-4 flex w-full items-center font-semibold justify-between flex-wrap ">
+    <div class="flex gap-2 py-4">
+
+        <div class="">
+            <label for="mobile-search" class="sr-only">Search</label>
+            <div class="relative">
+                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    @((MarkupString)SvgHelpers.SearchIcon)
+
+                </div>
+                <input type="text" @bind="@searchText" @oninput="SearchGrid"
+                       class="@Tailwind.SearchText"
+                       placeholder="Search">
+                <button type="submit" class="@Tailwind.Search_Button_Blue">
+                    Search
+                </button>
+            </div>
+        </div>
+    </div>
+
+    @if (!isAdmin && LoanBalance > 0 && IsActiveLoanAccount)
+    {
+        <button type="button"
+        @onclick="OnProceedToTopUp"
+                class="@Tailwind.GreenButton_Inline">
+            @((MarkupString)SvgHelpers.PlusSignIcon)
+            New Request
+        </button>
+    }
+   
+
+</div>
+
+<!-- Table -->
+<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <!-- Card Title -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+                All Top Up Transactions
+            </h3>
+        </div>
+        <div class="flex-shrink-0">
+        </div>
+    </div>
+    <!-- Table -->
+    <div class="flex flex-col mt-8">
+        <div class="overflow-x-auto rounded-lg">
+            <div class="inline-block min-w-full align-middle">
+                <div class="overflow-hidden shadow sm:rounded-lg">
+
+                    <div class="overflow-x-auto">
+                        <SfGrid ID="gridCashAddition" TValue="LoanTopupMasterView" EnablePersistence="false"
+                                DataSource="LoanTopupMasterViews_Src"
+                                AllowPaging="true" AllowFiltering="false" AllowSelection="false" EnableAltRow="false"
+                                AllowResizing="false" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" Height="100%"
+                                AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="true" AllowSorting="false"
+                                AllowMultiSorting="false" AllowGrouping="false" AllowReordering="true" AllowRowDragAndDrop="false" Toolbar="@(new List<string>() { "ExcelExport","PdfExport" })">
+
+                            <GridPageSettings PageCount="5" PageSize="20" PageSizes="new int[]{5,10,15,20,30,50}"></GridPageSettings>
+
+                            <GridEvents TValue="LoanTopupMasterView"></GridEvents>
+
+                            <GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false"
+                                              ShowDeleteConfirmDialog="false" Mode="EditMode.Dialog"></GridEditSettings>
+
+                            <GridColumns>
+                                <GridColumn Field=@nameof(LoanTopupMasterView.DateCreated) HeaderText="DATE" Type="ColumnType.DateTime" Format="dd/MMM/yyyy" AutoFit="true" Width="100"></GridColumn>
+                                <GridColumn Field=@nameof(LoanTopupMasterView.CommencementDate) HeaderText="COMMENCEMENT DATE" Type="ColumnType.DateTime" Format="dd/MMM/yyyy" AutoFit="true" Width="100"></GridColumn>
+                                <GridColumn Field=@nameof(LoanTopupMasterView.DestinationType) HeaderText="DETINATION ACCOUNT TYPE" AutoFit="true" Width="100"></GridColumn>
+                                <GridColumn Field=@nameof(LoanTopupMasterView.TopupAmount) HeaderText="AMOUNT" Format="N2" Type="ColumnType.Number" AutoFit="true"></GridColumn>
+                                <GridColumn Field=@nameof(LoanTopupMasterView.OldPrincipalBalance) HeaderText="OLD PRINCIPAL BALANCE" Format="N2" Type="ColumnType.Number" AutoFit="true"></GridColumn>
+                                <GridColumn Field=@nameof(LoanTopupMasterView.NewPrincipalBalance) HeaderText="NEW PRINCIPAL BALANCE" Format="N2" Type="ColumnType.Number" AutoFit="true"></GridColumn>
+
+                            </GridColumns>
+                        </SfGrid>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

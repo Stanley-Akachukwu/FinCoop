@@ -1,0 +1,38 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER   VIEW [Deposits].[DepositApplicationsMasterView]
+as select
+
+     ROW_NUMBER() OVER (ORDER BY Special.[Id]) AS RowNumber,
+      Special.[Id],Special.[Description],Special.[CustomerId],Special.[ApplicationNo],Special.[DepositProductId],'Special Deposit' as [AccountType],Special.[IsActive],Special.[CreatedByUserId],Special.[DateCreated],Special.[UpdatedByUserId],
+      Special.[DateUpdated],Special.[DeletedByUserId],Special.[IsDeleted],Special.[DateDeleted],Special.[RowVersion],Special.[FullText],
+      Special.[Tags],Special.[Caption],Special.[ApprovalId], ApprovalId.[Status] as ApprovalId_Status,ProductId.[Name] as ProductId_Name
+
+   from Deposits.SpecialDepositAccountApplication Special
+   left join [Security].Approval ApprovalId on ApprovalId.Id=Special.ApprovalId
+   left join [Deposits].DepositProduct ProductId on ProductId.Id=Special.DepositProductId
+
+   UNION select
+      ROW_NUMBER() OVER (ORDER BY Savings.[Id]) AS RowNumber,
+      Savings.[Id],Savings.[Description],Savings.[CustomerId],Savings.[ApplicationNo],Savings.[DepositProductId],'Savings Deposit' as [AccountType],Savings.[IsActive],Savings.[CreatedByUserId],Savings.[DateCreated],Savings.[UpdatedByUserId],
+      Savings.[DateUpdated],Savings.[DeletedByUserId],Savings.[IsDeleted],Savings.[DateDeleted],Savings.[RowVersion],Savings.[FullText],
+      Savings.[Tags],Savings.[Caption],Savings.[ApprovalId],ApprovalId.[Status] as ApprovalId_Status,ProductId.[Name] as ProductId_Name
+
+from Deposits.SavingsAccountApplication Savings
+   left join [Security].Approval ApprovalId on ApprovalId.Id=Savings.ApprovalId
+    left join [Deposits].DepositProduct ProductId on ProductId.Id=Savings.DepositProductId
+
+UNION select
+
+ROW_NUMBER() OVER (ORDER BY Fixed.[Id]) AS RowNumber,
+      Fixed.[Id],Fixed.[Description],Fixed.[CustomerId],Fixed.[ApplicationNo],Fixed.[DepositProductId],'Fixed Deposit' as [AccountType]
+      ,Fixed.[IsActive],Fixed.[CreatedByUserId],Fixed.[DateCreated],Fixed.[UpdatedByUserId],
+      Fixed.[DateUpdated],Fixed.[DeletedByUserId],Fixed.[IsDeleted],Fixed.[DateDeleted],Fixed.[RowVersion],Fixed.[FullText],
+      Fixed.[Tags],Fixed.[Caption],Fixed.[ApprovalId],ApprovalId.[Status] as ApprovalId_Status,ProductId.[Name] as ProductId_Name
+
+from Deposits.FixedDepositAccountApplication Fixed
+   left join [Security].Approval ApprovalId on ApprovalId.Id=Fixed.ApprovalId
+    left join [Deposits].DepositProduct ProductId on ProductId.Id=Fixed.DepositProductId
+GO

@@ -1,0 +1,81 @@
+﻿@page "/demo/form1"
+@layout AppUIMainLayout
+
+@inject IJSRuntime jsRuntime
+@inject NavigationManager navigationManager
+
+<section class="p-4 my-6 mx-4 bg-white rounded-lg shadow  md:p-3 xl:p-6 dark:bg-gray-800">
+
+    <h3>DemoForm1 w: @browserDimension?.Width, h: @browserDimension?.Height</h3>
+    <div>
+        <SfButton IsPrimary="true" OnClick="_ => showDrawer1()">Open</SfButton>
+
+        <Drawer @ref="@drawer1" Width="650" Closable="true" Visible="visible1" Title='("Multi-level drawer")' OnClose="_ => closeDrawer1()">
+            <SfButton IsPrimary="true" OnClick="_ => showDrawer2()">Two-level Drawer</SfButton>
+
+
+            <Drawer @ref=@drawer2 Width="550" Closable="true" Visible="visible2" Title='("two-level drawer")' OnClose="_ => closeDrawer2()">
+                <SfButton IsPrimary="true">This is two-level drawer</SfButton>
+            </Drawer>
+
+        </Drawer>
+    </div>
+
+</section>
+
+
+@code {
+
+    [Inject]
+    BrowserService BrowserService { get; set; }
+
+    bool visible1 = false;
+    bool visible2 = false;
+    int wdFirstLayer = 520;
+
+    Drawer drawer1;
+    Drawer drawer2;
+
+    // BrowserWindowSize browser = new BrowserWindowSize();
+    BrowserDimension browserDimension;
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            browserDimension = await BrowserService.GetDimensions();
+
+            drawer1.Width = (int)(browserDimension.Width * 0.90);
+            drawer2.Width = (int)(browserDimension.Width * 0.70);
+        }
+    }
+
+    void showDrawer1()
+    {
+        this.visible1 = true;
+    }
+
+    void showDrawer2()
+    {
+        this.visible2 = true;
+        wdFirstLayer += 260;
+    }
+
+    void closeDrawer1()
+    {
+        this.visible1 = false;
+    }
+
+    void closeDrawer2()
+    {
+        wdFirstLayer -= 260;
+        this.visible2 = false;
+    }
+
+
+}

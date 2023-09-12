@@ -1,0 +1,340 @@
+﻿@using AP.ChevronCoop.Entities.CoopCustomers.CustomerBankAccounts;
+@using AP.ChevronCoop.Entities.Deposits.DepositApplications;
+@using AP.ChevronCoop.Entities.Deposits.Products.DepositProductInterestRanges;
+@using AP.ChevronCoop.Entities.Deposits.Products.DepositProducts;
+
+
+@if (ShowAlertPage)
+{
+    <SuccessMessageModal Message="We'll notify you once this setup has been approved."
+                         showPopup="true"
+                         NavigateToPage="true"
+                         PageURL="/account/DepositProduct/Applications"
+                         Header="Your fixed deposit account application has been sent to Internal control for approval.">
+    </SuccessMessageModal>
+}
+
+
+<Drawer @ref="@addDrawer" Closable="true" Visible="showAddDrawer" Title='("Fixed Deposit Application")'
+        OnClose="onAddDone">
+
+
+<EditForm Model="@FixedDepositModel" OnValidSubmit="OnSave">
+<FluentValidationValidator @ref="_fluentValidationValidator"/>
+
+
+<div class="pb-20 flex flex-col justify-between h-full">
+
+<div class="grid grid-cols-6 gap-6">
+    <div class="col-span-6 sm:col-span-3">
+        <label for="input-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Membership number
+        </label>
+        <input type="input"
+               value="@Model.MemberId"
+               name="member-number"
+               id="member-number"
+               class="@Tailwind.TextBox_General"
+               placeholder=""
+               readonly
+               required/>
+        @*<ValidationMessage For="() => FixedDepositModel.MemberProfileId" class="@Tailwind.Validation_Red" />*@
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+
+        <label for="input-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Member name
+        </label>
+        <input type="input"
+               name="member-name"
+               id="member-name"
+               value="@Model.FirstName @Model.LastName"
+               class="@Tailwind.TextBox_General"
+               placeholder=""
+               readonly
+               required/>
+    </div>
+
+    <div class="col-span-6">
+        <label for="preferred-fixed-deposit"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Select preferred deposit product
+        </label>
+
+        <SfDropDownList TItem="DepositProduct" TValue="string" PopupHeight="auto" AllowFiltering=true CssClass="@Tailwind.ComboBox_General" DataSource="@DepositProductMasterViews">
+            <DropDownListEvents TItem="DepositProduct" ValueChange="GetInterestRate" TValue="string"></DropDownListEvents>
+            <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+        </SfDropDownList>
+        <ValidationMessage For="() => FixedDepositModel.DepositProductId" class="@Tailwind.Validation_Red"/>
+
+                    @if (DepositProductMasterViews.Count < 1)
+                    {
+                        <p class="@Tailwind.Validation_Red">No published products available. Contact customer support for assistance.</p>
+                    }
+
+    </div>
+
+    <div class="col-span-6 sm:col-span-3">
+        <label for="input-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Tenure Unit
+        </label>
+        <input type="input"
+               name="amount"
+               id="TenureUnit"
+               readonly
+               value="@tenureUnit"
+               class="@Tailwind.TextBox_General"
+               placeholder="Yearly"
+               required/>
+    </div>
+    <div class="col-span-6 sm:col-span-3">
+        <label for="input-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Tenure value
+        </label>
+        <input type="input"
+               name="interest-rate"
+               id="interest-rate"
+               readonly
+               value="@tenureValue"
+               class="@Tailwind.TextBox_General"
+               placeholder="e.g 1, 2, 3"
+               required/>
+    </div>
+
+    <div class="col-span-6 sm:col-span-3">
+        <br/>
+        <label for="input-name"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Interest rate (%)
+        </label>
+      
+
+                    <SfDropDownList TItem="DepositProductInterestRangeMasterView" TValue="string" PopupHeight="auto" AllowFiltering=true CssClass="@Tailwind.ComboBox_General" DataSource="@_DepositProductInterestRangeMasterView">
+                        <DropDownListEvents TItem="DepositProductInterestRangeMasterView" ValueChange="UpdateMinAndMax" TValue="string"></DropDownListEvents>
+                        <DropDownListFieldSettings Text="InterestRate" Value="Id"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                    <ValidationMessage For="() => FixedDepositModel.InterestRate" class="@Tailwind.Validation_Red" />
+
+                   
+
+    </div>
+
+
+    <div class="col-span-6 sm:col-span-3">
+        <label for="input-name"
+               class="block mb-2 text-sm font-medium dark:text-white">
+                        Fixed deposit amount <br />(min: ₦@minmumContribution.Value.ToString("N0") - ₦@maximumContribution.Value.ToString("N0"))
+        </label>
+
+        <SfNumericTextBox TValue="decimal" CssClass="@Tailwind.TextBox_General" @bind-Value="FixedDepositModel.Amount" Format="N2" Decimals=2 ShowSpinButton=false></SfNumericTextBox>
+        <ValidationMessage For="() => FixedDepositModel.Amount" class="mt-2 text-sm text-red-600 dark:text-red-500"/>
+    </div>
+
+
+    <div class="w-full col-span-6">
+        <label for="countries"
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Maturity Instruction
+        </label>
+
+
+        @{
+            var MaturityTypes = Enum.GetNames(typeof(MaturityInstructionType)).ToList();
+
+        }
+
+        <SfDropDownList id="Maturity" DataSource=@MaturityTypes TValue="MaturityInstructionType" TItem="string" CssClass="@Tailwind.DropDownList_blue"
+                        @bind-Value=@FixedDepositModel.MaturityInstructionType
+                        ShowClearButton=false AllowFiltering=false IgnoreAccent=false Placeholder="Select Maturity Instruction">
+        </SfDropDownList>
+
+    </div>
+
+
+    <div class="w-full col-span-6">
+
+        <p class="text-gray-900 font-medium text-sm my-4">
+            Select Withdrawal/Liquidation account
+        </p>
+
+        <div class="flex flex-row w-full justify-between">
+
+            <div class="flex items-center mb-4">
+                <SfRadioButton Label="Savings account" @onclick='(() => ShowLiquidation(WithdrawalAccountType.SAVINGS_ACCOUNT, "Select preferred savings account", "chevAccount", "Savings_Account"))'
+                               CssClass="@Tailwind.RadioButton" Name="options1"
+                               Value="Savings account" @bind-Checked="FundingSourceChecked">
+
+                </SfRadioButton>
+
+            </div>
+            <div class="flex items-center mb-4">
+
+                <SfRadioButton Label="Special deposit account" @onclick='(() => ShowLiquidation(WithdrawalAccountType.SPECIAL_DEPOSIT_ACCOUNT, "Select preferred special deposit account", "chevAccount", "Special_Deposit"))' CssClass="@Tailwind.RadioButton" Name="options1"
+                               Value="Special deposit account" @bind-Checked="FundingSourceChecked">
+
+                </SfRadioButton>
+
+            </div>
+
+            <div class="flex items-center mb-4">
+
+                <SfRadioButton Label="Existing Bank transfer account" @onclick='(() => ShowLiquidation(WithdrawalAccountType.EXISTING_BANK_ACCOUNT, "Select preferred existing bank account", "bankaccount", "bank"))' CssClass="@Tailwind.RadioButton" Name="options1"
+                               Value="Existing Bank transfer account" @bind-Checked="FundingSourceChecked">
+
+                </SfRadioButton>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    @if (LiquidationPage == "chevAccount")
+    {
+        <div class="col-span-6" id="viewBox-existingAccount">
+            <label for="preferred-fixed-deposit"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                @LiquidationHeader
+            </label>
+            <SfDropDownList TItem="DepositAccountsMasterView" TValue="string" PopupHeight="auto" AllowFiltering=true CssClass="@Tailwind.ComboBox_General" DataSource="@GetDepositAccountsMasterView">
+                <DropDownListEvents TItem="DepositAccountsMasterView" ValueChange="GetCoopAccount" TValue="string"></DropDownListEvents>
+                <DropDownListFieldSettings Value="Id" Text="Caption">
+
+                </DropDownListFieldSettings>
+            </SfDropDownList>
+        </div>
+    }
+
+    @if (LiquidationPage == "bankaccount")
+    {
+        <div class="col-span-6" id="viewBox-existingAccount">
+            <label for="preferred-fixed-deposit"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                @LiquidationHeader
+            </label>
+            <SfDropDownList TItem="CustomerBankAccountMasterView" TValue="string" PopupHeight="auto" AllowFiltering=true CssClass="@Tailwind.ComboBox_General" DataSource="@GetCustomerBankAccounts">
+                <DropDownListEvents TItem="CustomerBankAccountMasterView" ValueChange="GetRegularCustomerAccount" TValue="string"></DropDownListEvents>
+                <DropDownListFieldSettings Text="Details" Value="Id"></DropDownListFieldSettings>
+            </SfDropDownList>
+        </div>
+    }
+
+</div>
+
+<br />
+
+<div class="w-full">
+                <br />
+    <p class="text-gray-900 font-semibold text-lg">
+        Mode of payment
+    </p>
+
+    <div class="flex flex-row w-1/2 justify-between">
+
+        <div class="flex items-center mb-4">
+
+            <SfRadioButton Label="Special Deposit" @onclick='(() => ShowBankMenu("Special", DepositFundingSourceType.SPECIAL_DEPOSIT))' CssClass="@Tailwind.RadioButton" Name="options"
+                           Value="Special Deposit" @bind-Checked="FundingSourceChecked">
+
+            </SfRadioButton>
+
+        </div>
+        <div class="flex items-center mb-4">
+
+            <SfRadioButton Label="Bank transfer" @onclick='(() => ShowBankMenu("Bank", DepositFundingSourceType.BANK_TRANSFER))' CssClass="@Tailwind.RadioButton" Name="options"
+                           Value="Bank transfer" @bind-Checked="FundingSourceChecked">
+
+            </SfRadioButton>
+
+        </div>
+    </div>
+
+    @if (ShowBank == "Special")
+    {
+        <div class="col-span-6" id="viewBox-selectField">
+            <label for="preferred-fixed-deposit"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Select preferred fixed deposit product
+            </label>
+                        <SfDropDownList TItem="DepositAccountsMasterView" TValue="string" PopupHeight="auto" AllowFiltering=true CssClass="@Tailwind.ComboBox_General" DataSource="@_SpecialDepositModeofPayment">
+                <DropDownListEvents TItem="DepositAccountsMasterView" ValueChange=ModeofPaymentAccountID TValue="string"></DropDownListEvents>
+                <DropDownListFieldSettings Text="Caption" Value="Id"></DropDownListFieldSettings>
+            </SfDropDownList>
+        </div>
+    }
+    @if (ShowBank == "Bank")
+    {
+        <div class="col-span-6  space-y-4" id="viewBox-wrappers">
+            <div class="flex items-center flex-col justify-center rounded-lg px-16 py-4 border border-gray-300 bg-gray-50 text-center">
+                            <p class="test-base font-medium">@BankName (@AccountName)</p>
+                            <p class="text-2xl font-bold text-CEMCS-Blue-100">
+                                @AccountNumber
+                            </p>
+                <p class="text-sm text-bankCard font-normal">
+                    Use this account for this transaction only Account<br/>
+                </p>
+            </div>
+
+            <div class="col-span-6 sm:col-full">
+
+                <label for="Primary bank sort code"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Upload receipt
+                </label>
+
+
+                <SfUploader AutoUpload="true" AllowedExtensions=".png, .jpeg, .jpg, .pmb, .gif" AllowMultiple="false">
+                                <UploaderEvents OnRemove="@OnRemoveHandler" ValueChange="OnChangeDocumentUpload"></UploaderEvents>
+                </SfUploader>
+               
+
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                   id="file_input_help">
+                    Max file size: 10kb <br/>
+                    File type: PDF, PNG, JPG, JPEG
+                </p>
+
+                <ValidationMessage For="() => FixedDepositModel.ModeOfPayment" class="@Tailwind.Validation_Red"/>
+            </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+
+                            <img src="@UploadedImage" />
+
+                        </div>
+
+        </div>
+    }
+
+
+</div>
+
+<div>
+    <ValidationSummary class="@Tailwind.Validation_Red"/>
+</div>
+
+
+<div class="flex col-span-6 sm:col-full space-x-4 justify-end items-end">
+                <br /><br />
+    <button class="@Tailwind.Button_Cancel"
+            @onclick="onAddDone"
+            type="button">
+        Back
+    </button>
+    <button disabled="@IsButtonDisabled" id="updateProductButton"
+            class="@Tailwind.Button_Blue"
+            type="submit">
+        Submit
+    </button>
+</div>
+
+</div>
+
+</EditForm>
+
+</Drawer>

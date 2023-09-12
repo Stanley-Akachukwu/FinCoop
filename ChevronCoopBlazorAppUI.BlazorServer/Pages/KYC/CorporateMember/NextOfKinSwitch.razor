@@ -1,0 +1,90 @@
+﻿@page "/KYC/NOK-SWITCH"
+@using ChevronCoop.Web.AppUI.BlazorServer.Data;
+@layout AppUIMainLayout
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IEntityDataService DataService
+
+
+
+
+
+@code{
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var authenticated = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var Principal = authenticated.User.Identity.Name;
+
+        if (!string.IsNullOrEmpty(Principal))
+        {
+            var claims = authenticated.User.Claims;
+            if (claims.Any())
+            {
+    //if (authenticated.User.IsInRole("Regular") || authenticated.User.IsInRole("Coop Memeber"))
+    //{
+                var sid = claims.ElementAt(2).Value;
+
+    //var rsp = await DataService.GetMemberProfiles<IEnumerable<MemberProfileModel>>();
+                var rsp = await DataService.GetMemberProfileViewResult<IEnumerable<MemberProfileViewModelResult>>();
+
+
+                if (rsp.IsSuccessStatusCode)
+                {
+                    IEnumerable<MemberProfileViewModelResult> memberProfiles = rsp.Content;
+
+                    if (memberProfiles.Any())
+                    {
+                        var returnedProfile = memberProfiles.FirstOrDefault(p => p.applicationUserId == sid);
+
+                        if (returnedProfile != null)
+                        {
+    // await sessionStorage.SetAsync("UserProfileID", returnedProfile.id);
+                        }
+                    }
+                }
+                await ReloadGridAsync(sid);
+    //}
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/Identity/Account/LogIn");
+            }
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/Identity/Account/LogIn");
+        }
+    }
+
+    private async Task ReloadGridAsync(string sid)
+    {
+        var rsp = await DataService.GetMemberNextOfKinMasterView<IEnumerable<MemberNextOfKinViewResult>>();
+
+
+        if (rsp.IsSuccessStatusCode)
+        {
+            IEnumerable<MemberNextOfKinViewResult> memberNextOfKins = rsp.Content;
+
+            if (memberNextOfKins != null)
+            {
+                if (memberNextOfKins.Any())
+                {
+                    var returnedNextOfKins = memberNextOfKins.Where(p => p.profileId_ApplicationUserId == sid).ToList();
+
+                    if (returnedNextOfKins.Any())
+                    {
+                        NavigationManager.NavigateTo("/KYC/NEW-NEXT-OF-KIN", true);
+                    }
+                    else
+                    {
+                        NavigationManager.NavigateTo("/KYC/EMPTY-NEXT-OF-KIN", true);
+                    }
+                }
+            }
+        }
+    }
+
+}

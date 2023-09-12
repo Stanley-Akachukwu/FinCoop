@@ -1,0 +1,15 @@
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\bin\Debug\net7.0\AP.ChevronCoop.Infrastructure.deps.json
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\bin\Debug\net7.0\AP.ChevronCoop.Infrastructure.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\bin\Debug\net7.0\AP.ChevronCoop.Infrastructure.pdb
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\bin\Debug\net7.0\AP.ChevronCoop.Commons.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\bin\Debug\net7.0\AP.ChevronCoop.Commons.pdb
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\obj\Debug\net7.0\AP.ChevronCoop.Infrastructure.csproj.AssemblyReference.cache
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\obj\Debug\net7.0\AP.ChevronCoop.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\obj\Debug\net7.0\AP.ChevronCoop.Infrastructure.AssemblyInfoInputs.cache
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\obj\Debug\net7.0\AP.ChevronCoop.Infrastructure.AssemblyInfo.cs
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\obj\Debug\net7.0\AP.ChevronCoop.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\obj\Debug\net7.0\AP.ChevronCoop.Infrastructure.csproj.CopyComplete
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\obj\Debug\net7.0\AP.ChevronCoop.Infrastructure.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\obj\Debug\net7.0\refint\AP.ChevronCoop.Infrastructure.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\obj\Debug\net7.0\AP.ChevronCoop.Infrastructure.pdb
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Infrastructure\obj\Debug\net7.0\ref\AP.ChevronCoop.Infrastructure.dll

@@ -1,0 +1,48 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER   VIEW [Deposits].[DepositAccountsMasterView]
+as select
+     ROW_NUMBER() OVER (ORDER BY Special.[Id]) AS RowNumber,
+      Special.[Id],Special.[Description],Special.[CustomerId],[ApplicationId],Special.[DepositProductId],[AccountNo],DepositProductId.ProductType as [AccountType],
+      [FundingAmount] as Amount,LedgerAccountId.[AvailableBalance] as [AvailableBalance],LedgerAccountId.LedgerBalance as [LedgerBalance],
+       'APPROVED'as [Status],Special.[IsActive],Special.[CreatedByUserId],Special.[DateCreated],Special.[UpdatedByUserId],Special.[DateUpdated],
+      Special.[DeletedByUserId],Special.[IsDeleted],Special.[DateDeleted],Special.[RowVersion],Special.[FullText],Special.[Tags],
+      Special.[Caption],Special.[DepositAccountId] as LedgerAccountId,Special.FundingAmount as MonthlyContributionAmount
+
+
+   from Deposits.SpecialDepositAccount Special
+   left join [Accounting].LedgerAccount LedgerAccountId on LedgerAccountId.Id=Special.DepositAccountId
+    left join [Deposits].DepositProduct DepositProductId on DepositProductId.Id=Special.DepositProductId
+   left join [Deposits].SpecialDepositAccountApplication ApplicationId on ApplicationId.Id=Special.ApplicationId
+
+   UNION select
+ ROW_NUMBER() OVER (ORDER BY Savings.[Id]) AS RowNumber,
+
+    Savings.[Id],Savings.[Description],[CustomerId],[ApplicationId],[DepositProductId],[AccountNo],DepositProductId.ProductType as [AccountType],
+      Savings.[PayrollAmount] as Amount,LedgerDepositAccountId.[AvailableBalance] as [AvailableBalance],LedgerDepositAccountId.LedgerBalance as [LedgerBalance],
+       'APPROVED'as [Status],Savings.[IsActive],Savings.[CreatedByUserId],Savings.[DateCreated],Savings.[UpdatedByUserId],Savings.[DateUpdated],
+      Savings.[DeletedByUserId],Savings.[IsDeleted],Savings.[DateDeleted],Savings.[RowVersion],Savings.[FullText],Savings.[Tags],
+      Savings.[Caption],Savings.LedgerDepositAccountId as LedgerAccountId,Savings.PayrollAmount as MonthlyContributionAmount
+
+
+from Deposits.SavingsAccount Savings
+ left join [Accounting].LedgerAccount LedgerDepositAccountId on LedgerDepositAccountId.Id=Savings.LedgerDepositAccountId
+left join [Deposits].DepositProduct DepositProductId on DepositProductId.Id=Savings.DepositProductId
+
+UNION select
+
+ ROW_NUMBER() OVER (ORDER BY Fixed.[Id]) AS RowNumber,
+
+
+Fixed.[Id],Fixed.[Description],[CustomerId],[ApplicationId],[DepositProductId],[AccountNo],DepositProductId.ProductType as [AccountType],
+      [Amount] as Amount,LedgerAccountId.[AvailableBalance] as [AvailableBalance],LedgerAccountId.LedgerBalance as [LedgerBalance],
+       'APPROVED'as [Status],Fixed.[IsActive],Fixed.[CreatedByUserId],Fixed.[DateCreated],Fixed.[UpdatedByUserId],Fixed.[DateUpdated],
+      Fixed.[DeletedByUserId],Fixed.[IsDeleted],Fixed.[DateDeleted],Fixed.[RowVersion],Fixed.[FullText],Fixed.[Tags],
+      Fixed.[Caption],Fixed.[DepositAccountId] as LedgerAccountId ,0.00 as MonthlyContributionAmount
+
+from Deposits.FixedDepositAccount Fixed
+  left join [Accounting].LedgerAccount LedgerAccountId on LedgerAccountId.Id=Fixed.DepositAccountId
+left join [Deposits].DepositProduct DepositProductId on DepositProductId.Id=Fixed.DepositProductId
+GO

@@ -1,0 +1,663 @@
+﻿@page "/dashboard/user"
+@layout AppUIMainLayout
+
+<main>
+
+<div class="px-4 pt-6">
+<div class="mb-4">
+    <nav class="flex mb-5" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2">
+            <li class="inline-flex items-center">
+                <a href="#" class="inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-2.5 text-gray-500 transition duration-75 group-hover:text-sidebar-icons-active active:text-sidebar-icons-active group" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                    </svg>
+                    User Dashboard
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </li>
+
+        </ol>
+    </nav>
+</div>
+<div class="flex flex-row justify-between bg-dashboard-top-bg rounded-lg shadow ">
+
+    <img class=" h-full w-1/2" src="../images/chevron/dashboard/Mask group.svg" alt="pattern-icon"/>
+    <div class="pr-24 h-fit">
+        <img class="justified-end" src="../images/chevron/dashboard/Heros.svg" alt="dashboard-image"/>
+    </div>
+
+
+</div>
+
+
+<div class="grid grid-cols-1 gap-2 mt-4 w-full md:grid-cols-2 xl:grid-cols-4">
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4 ">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+
+            <svg class="" width="45" height="45" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30.0674" cy="30" r="30" fill="#1F82BD"/>
+                <path d="M32.7816 34.1262H26.7816" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M29.7816 31.1978V37.1978" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M30.8595 18.6218L30.8235 18.7058L27.3435 26.7818H23.9235C23.1075 26.7818 22.3275 26.9498 21.6195 27.2498L23.7195 22.2338L23.7675 22.1138L23.8515 21.9218C23.8755 21.8498 23.8995 21.7778 23.9355 21.7178C25.5075 18.0818 27.2835 17.2538 30.8595 18.6218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M37.3275 27.0218C36.7875 26.8538 36.2115 26.7818 35.6355 26.7818H27.3435L30.8235 18.7058L30.8595 18.6218C31.0395 18.6818 31.2075 18.7658 31.3875 18.8378L34.0395 19.9538C35.5155 20.5658 36.5475 21.2018 37.1715 21.9698C37.2915 22.1138 37.3875 22.2458 37.4715 22.4018C37.5795 22.5698 37.6635 22.7378 37.7115 22.9178C37.7595 23.0258 37.7955 23.1338 37.8195 23.2298C38.1435 24.2378 37.9515 25.4738 37.3275 27.0218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M41.4936 32.6382V34.9782C41.4936 35.2182 41.4816 35.4582 41.4696 35.6982C41.2416 39.8862 38.9016 41.9982 34.4616 41.9982H25.1016C24.8136 41.9982 24.5256 41.9742 24.2496 41.9382C20.4336 41.6862 18.3936 39.6462 18.1416 35.8302C18.1056 35.5542 18.0816 35.2662 18.0816 34.9782V32.6382C18.0816 30.2262 19.5456 28.1502 21.6336 27.2502C22.3536 26.9502 23.1216 26.7822 23.9376 26.7822H35.6496C36.2376 26.7822 36.8136 26.8662 37.3416 27.0222C39.7296 27.7542 41.4936 29.9862 41.4936 32.6382Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M23.7195 22.2339L21.6195 27.2499C19.5315 28.1499 18.0675 30.2259 18.0675 32.6379V29.1219C18.0675 25.7139 20.4915 22.8699 23.7195 22.2339Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M41.4899 29.1212V32.6372C41.4899 29.9972 39.7379 27.7532 37.3379 27.0332C37.9619 25.4732 38.1419 24.2492 37.8419 23.2292C37.8179 23.1212 37.7819 23.0132 37.7339 22.9172C39.9659 24.0692 41.4899 26.4332 41.4899 29.1212Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="flex flex-col justify-start ">
+                <div class="text-gray-500 text-sm">Special Deposit</div>
+                <div class="text-base font-bold">N4,250,345.85</div>
+            </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="flex items-center pt-3 border-t border-gray-200 gap-x-1 sm:pt-6 dark:border-gray-700">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.49998 2 1.99998 6.5 1.99998 12C1.99998 17.5 6.49998 22 12 22Z" stroke="#1F82BD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15.9965 12H16.0055" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11.9955 12H12.0045" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7.99451 12H8.00349" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="flex-shrink-0 text-sm">
+                More option
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4 ">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+
+            <svg class="" width="45" height="45" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30.0674" cy="30" r="30" fill="#1F82BD"/>
+                <path d="M32.7816 34.1262H26.7816" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M29.7816 31.1978V37.1978" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M30.8595 18.6218L30.8235 18.7058L27.3435 26.7818H23.9235C23.1075 26.7818 22.3275 26.9498 21.6195 27.2498L23.7195 22.2338L23.7675 22.1138L23.8515 21.9218C23.8755 21.8498 23.8995 21.7778 23.9355 21.7178C25.5075 18.0818 27.2835 17.2538 30.8595 18.6218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M37.3275 27.0218C36.7875 26.8538 36.2115 26.7818 35.6355 26.7818H27.3435L30.8235 18.7058L30.8595 18.6218C31.0395 18.6818 31.2075 18.7658 31.3875 18.8378L34.0395 19.9538C35.5155 20.5658 36.5475 21.2018 37.1715 21.9698C37.2915 22.1138 37.3875 22.2458 37.4715 22.4018C37.5795 22.5698 37.6635 22.7378 37.7115 22.9178C37.7595 23.0258 37.7955 23.1338 37.8195 23.2298C38.1435 24.2378 37.9515 25.4738 37.3275 27.0218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M41.4936 32.6382V34.9782C41.4936 35.2182 41.4816 35.4582 41.4696 35.6982C41.2416 39.8862 38.9016 41.9982 34.4616 41.9982H25.1016C24.8136 41.9982 24.5256 41.9742 24.2496 41.9382C20.4336 41.6862 18.3936 39.6462 18.1416 35.8302C18.1056 35.5542 18.0816 35.2662 18.0816 34.9782V32.6382C18.0816 30.2262 19.5456 28.1502 21.6336 27.2502C22.3536 26.9502 23.1216 26.7822 23.9376 26.7822H35.6496C36.2376 26.7822 36.8136 26.8662 37.3416 27.0222C39.7296 27.7542 41.4936 29.9862 41.4936 32.6382Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M23.7195 22.2339L21.6195 27.2499C19.5315 28.1499 18.0675 30.2259 18.0675 32.6379V29.1219C18.0675 25.7139 20.4915 22.8699 23.7195 22.2339Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M41.4899 29.1212V32.6372C41.4899 29.9972 39.7379 27.7532 37.3379 27.0332C37.9619 25.4732 38.1419 24.2492 37.8419 23.2292C37.8179 23.1212 37.7819 23.0132 37.7339 22.9172C39.9659 24.0692 41.4899 26.4332 41.4899 29.1212Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="flex flex-col justify-start ">
+                <div class="text-gray-500 text-sm">Savings</div>
+                <div class="text-base font-bold">N4,250,345.85</div>
+            </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="flex items-center pt-3 border-t border-gray-200 gap-x-1 sm:pt-6 dark:border-gray-700">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.49998 2 1.99998 6.5 1.99998 12C1.99998 17.5 6.49998 22 12 22Z" stroke="#1F82BD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15.9965 12H16.0055" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11.9955 12H12.0045" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7.99451 12H8.00349" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="flex-shrink-0 text-sm">
+                More option
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4 ">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+
+            <svg class="" width="45" height="45" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30.0674" cy="30" r="30" fill="#1F82BD"/>
+                <path d="M32.7816 34.1262H26.7816" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M29.7816 31.1978V37.1978" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M30.8595 18.6218L30.8235 18.7058L27.3435 26.7818H23.9235C23.1075 26.7818 22.3275 26.9498 21.6195 27.2498L23.7195 22.2338L23.7675 22.1138L23.8515 21.9218C23.8755 21.8498 23.8995 21.7778 23.9355 21.7178C25.5075 18.0818 27.2835 17.2538 30.8595 18.6218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M37.3275 27.0218C36.7875 26.8538 36.2115 26.7818 35.6355 26.7818H27.3435L30.8235 18.7058L30.8595 18.6218C31.0395 18.6818 31.2075 18.7658 31.3875 18.8378L34.0395 19.9538C35.5155 20.5658 36.5475 21.2018 37.1715 21.9698C37.2915 22.1138 37.3875 22.2458 37.4715 22.4018C37.5795 22.5698 37.6635 22.7378 37.7115 22.9178C37.7595 23.0258 37.7955 23.1338 37.8195 23.2298C38.1435 24.2378 37.9515 25.4738 37.3275 27.0218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M41.4936 32.6382V34.9782C41.4936 35.2182 41.4816 35.4582 41.4696 35.6982C41.2416 39.8862 38.9016 41.9982 34.4616 41.9982H25.1016C24.8136 41.9982 24.5256 41.9742 24.2496 41.9382C20.4336 41.6862 18.3936 39.6462 18.1416 35.8302C18.1056 35.5542 18.0816 35.2662 18.0816 34.9782V32.6382C18.0816 30.2262 19.5456 28.1502 21.6336 27.2502C22.3536 26.9502 23.1216 26.7822 23.9376 26.7822H35.6496C36.2376 26.7822 36.8136 26.8662 37.3416 27.0222C39.7296 27.7542 41.4936 29.9862 41.4936 32.6382Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M23.7195 22.2339L21.6195 27.2499C19.5315 28.1499 18.0675 30.2259 18.0675 32.6379V29.1219C18.0675 25.7139 20.4915 22.8699 23.7195 22.2339Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M41.4899 29.1212V32.6372C41.4899 29.9972 39.7379 27.7532 37.3379 27.0332C37.9619 25.4732 38.1419 24.2492 37.8419 23.2292C37.8179 23.1212 37.7819 23.0132 37.7339 22.9172C39.9659 24.0692 41.4899 26.4332 41.4899 29.1212Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="flex flex-col justify-start ">
+                <div class="text-gray-500 text-sm">Fixed Deposit</div>
+                <div class="text-base font-bold">N4,250,345.85</div>
+            </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="flex items-center pt-3 border-t border-gray-200 gap-x-1 sm:pt-6 dark:border-gray-700">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.49998 2 1.99998 6.5 1.99998 12C1.99998 17.5 6.49998 22 12 22Z" stroke="#1F82BD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15.9965 12H16.0055" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11.9955 12H12.0045" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7.99451 12H8.00349" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="flex-shrink-0 text-sm">
+                More option
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4 ">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+
+            <svg class="" width="45" height="45" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30.0674" cy="30" r="30" fill="#1F82BD"/>
+                <path d="M32.7816 34.1262H26.7816" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M29.7816 31.1978V37.1978" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M30.8595 18.6218L30.8235 18.7058L27.3435 26.7818H23.9235C23.1075 26.7818 22.3275 26.9498 21.6195 27.2498L23.7195 22.2338L23.7675 22.1138L23.8515 21.9218C23.8755 21.8498 23.8995 21.7778 23.9355 21.7178C25.5075 18.0818 27.2835 17.2538 30.8595 18.6218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M37.3275 27.0218C36.7875 26.8538 36.2115 26.7818 35.6355 26.7818H27.3435L30.8235 18.7058L30.8595 18.6218C31.0395 18.6818 31.2075 18.7658 31.3875 18.8378L34.0395 19.9538C35.5155 20.5658 36.5475 21.2018 37.1715 21.9698C37.2915 22.1138 37.3875 22.2458 37.4715 22.4018C37.5795 22.5698 37.6635 22.7378 37.7115 22.9178C37.7595 23.0258 37.7955 23.1338 37.8195 23.2298C38.1435 24.2378 37.9515 25.4738 37.3275 27.0218Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M41.4936 32.6382V34.9782C41.4936 35.2182 41.4816 35.4582 41.4696 35.6982C41.2416 39.8862 38.9016 41.9982 34.4616 41.9982H25.1016C24.8136 41.9982 24.5256 41.9742 24.2496 41.9382C20.4336 41.6862 18.3936 39.6462 18.1416 35.8302C18.1056 35.5542 18.0816 35.2662 18.0816 34.9782V32.6382C18.0816 30.2262 19.5456 28.1502 21.6336 27.2502C22.3536 26.9502 23.1216 26.7822 23.9376 26.7822H35.6496C36.2376 26.7822 36.8136 26.8662 37.3416 27.0222C39.7296 27.7542 41.4936 29.9862 41.4936 32.6382Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M23.7195 22.2339L21.6195 27.2499C19.5315 28.1499 18.0675 30.2259 18.0675 32.6379V29.1219C18.0675 25.7139 20.4915 22.8699 23.7195 22.2339Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M41.4899 29.1212V32.6372C41.4899 29.9972 39.7379 27.7532 37.3379 27.0332C37.9619 25.4732 38.1419 24.2492 37.8419 23.2292C37.8179 23.1212 37.7819 23.0132 37.7339 22.9172C39.9659 24.0692 41.4899 26.4332 41.4899 29.1212Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="flex flex-col justify-start ">
+                <div class="text-gray-500 text-sm">Liabilities</div>
+                <div class="text-base font-bold">N4,250,345.85</div>
+            </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="flex items-center pt-3 border-t border-gray-200 gap-x-1 sm:pt-6 dark:border-gray-700">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.49998 2 1.99998 6.5 1.99998 12C1.99998 17.5 6.49998 22 12 22Z" stroke="#1F82BD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15.9965 12H16.0055" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11.9955 12H12.0045" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7.99451 12H8.00349" stroke="#1F82BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="flex-shrink-0 text-sm">
+                More option
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Wallet session -->
+<div class="grid grid-cols-1 my-4 gap-2 2xl:grid-cols-3 md:grid-cols-2 xl:grid-cols-2">
+    <div class="flex flex-row justify-between items-center p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-4  2xl:col-span-2 xl:mb-0">
+        <div class="mb-4">
+            <h3 class="mb-3 text-lg font-bold text-gray-800 dark:text-white">
+                Add cash to your wallet
+            </h3>
+            <p class="text-sm font-normal  text-gray-500 dark:text-gray-400">About forwarding limits About forwarding limits About limits<br/> About forwarding limits About forwarding limits About </p>
+
+            <button type="submit" class="mt-4  py-2 px-8 w-full text-xs font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add Cash</button>
+        </div>
+
+
+        <!-- Card Footer -->
+
+        <svg width="100" height="100" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="60" fill="#1F82BD" fill-opacity="0.2"/>
+            <path d="M36 36C33.8783 36 31.8434 36.8429 30.3431 38.3431C28.8429 39.8434 28 41.8783 28 44V48H92V44C92 41.8783 91.1571 39.8434 89.6569 38.3431C88.1566 36.8429 86.1217 36 84 36H36Z" fill="#1F82BD"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M92 56H28V76C28 78.1217 28.8429 80.1566 30.3431 81.6569C31.8434 83.1571 33.8783 84 36 84H84C86.1217 84 88.1566 83.1571 89.6569 81.6569C91.1571 80.1566 92 78.1217 92 76V56ZM36 72C36 70.9391 36.4214 69.9217 37.1716 69.1716C37.9217 68.4214 38.9391 68 40 68H44C45.0609 68 46.0783 68.4214 46.8284 69.1716C47.5786 69.9217 48 70.9391 48 72C48 73.0609 47.5786 74.0783 46.8284 74.8284C46.0783 75.5786 45.0609 76 44 76H40C38.9391 76 37.9217 75.5786 37.1716 74.8284C36.4214 74.0783 36 73.0609 36 72ZM56 68C54.9391 68 53.9217 68.4214 53.1716 69.1716C52.4214 69.9217 52 70.9391 52 72C52 73.0609 52.4214 74.0783 53.1716 74.8284C53.9217 75.5786 54.9391 76 56 76H60C61.0609 76 62.0783 75.5786 62.8284 74.8284C63.5786 74.0783 64 73.0609 64 72C64 70.9391 63.5786 69.9217 62.8284 69.1716C62.0783 68.4214 61.0609 68 60 68H56Z" fill="#1F82BD"/>
+        </svg>
+    </div>
+
+    <div class="flex flex-row justify-between items-center p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-4  2xl:col-span-2 xl:mb-0">
+        <div class="mb-4">
+            <h3 class="mb-3 text-lg font-bold text-gray-800 dark:text-white">
+                Add cash to your wallet
+            </h3>
+            <p class="text-sm font-normal  text-gray-500 dark:text-gray-400">About forwarding limits About forwarding limits About limits<br/> About forwarding limits About forwarding limits About </p>
+
+            <button type="submit" class="mt-4  py-2 px-8 w-full text-xs font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add Cash</button>
+        </div>
+
+
+        <!-- Card Footer -->
+
+        <svg width="100" height="100" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="60" fill="#1F82BD" fill-opacity="0.2"/>
+            <path d="M53.5251 29.5251C54.1815 28.8687 55.0717 28.5 56 28.5H64C64.9283 28.5 65.8185 28.8687 66.4749 29.5251C67.1313 30.1815 67.5 31.0717 67.5 32C67.5 32.9283 67.1313 33.8185 66.4749 34.4749C65.8185 35.1313 64.9283 35.5 64 35.5H56C55.0717 35.5 54.1815 35.1313 53.5251 34.4749C52.8687 33.8185 52.5 32.9283 52.5 32C52.5 31.0717 52.8687 30.1815 53.5251 29.5251Z" fill="#1F82BD" stroke="#1F82BD"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M36 40C36 37.8783 36.8429 35.8434 38.3431 34.3431C39.8434 32.8429 41.8783 32 44 32C44 35.1826 45.2643 38.2348 47.5147 40.4853C49.7652 42.7357 52.8174 44 56 44H64C67.1826 44 70.2348 42.7357 72.4853 40.4853C74.7357 38.2348 76 35.1826 76 32C78.1217 32 80.1566 32.8429 81.6569 34.3431C83.1571 35.8434 84 37.8783 84 40V84C84 86.1217 83.1571 88.1566 81.6569 89.6569C80.1566 91.1571 78.1217 92 76 92H44C41.8783 92 39.8434 91.1571 38.3431 89.6569C36.8429 88.1566 36 86.1217 36 84V40ZM48 56C46.9391 56 45.9217 56.4214 45.1716 57.1716C44.4214 57.9217 44 58.9391 44 60C44 61.0609 44.4214 62.0783 45.1716 62.8284C45.9217 63.5786 46.9391 64 48 64H48.04C49.1009 64 50.1183 63.5786 50.8684 62.8284C51.6186 62.0783 52.04 61.0609 52.04 60C52.04 58.9391 51.6186 57.9217 50.8684 57.1716C50.1183 56.4214 49.1009 56 48.04 56H48ZM60 56C58.9391 56 57.9217 56.4214 57.1716 57.1716C56.4214 57.9217 56 58.9391 56 60C56 61.0609 56.4214 62.0783 57.1716 62.8284C57.9217 63.5786 58.9391 64 60 64H72C73.0609 64 74.0783 63.5786 74.8284 62.8284C75.5786 62.0783 76 61.0609 76 60C76 58.9391 75.5786 57.9217 74.8284 57.1716C74.0783 56.4214 73.0609 56 72 56H60ZM48 72C46.9391 72 45.9217 72.4214 45.1716 73.1716C44.4214 73.9217 44 74.9391 44 76C44 77.0609 44.4214 78.0783 45.1716 78.8284C45.9217 79.5786 46.9391 80 48 80H48.04C49.1009 80 50.1183 79.5786 50.8684 78.8284C51.6186 78.0783 52.04 77.0609 52.04 76C52.04 74.9391 51.6186 73.9217 50.8684 73.1716C50.1183 72.4214 49.1009 72 48.04 72H48ZM60 72C58.9391 72 57.9217 72.4214 57.1716 73.1716C56.4214 73.9217 56 74.9391 56 76C56 77.0609 56.4214 78.0783 57.1716 78.8284C57.9217 79.5786 58.9391 80 60 80H72C73.0609 80 74.0783 79.5786 74.8284 78.8284C75.5786 78.0783 76 77.0609 76 76C76 74.9391 75.5786 73.9217 74.8284 73.1716C74.0783 72.4214 73.0609 72 72 72H60Z" fill="#1F82BD"/>
+        </svg>
+
+    </div>
+
+
+</div>
+
+<!-- Product Section -->
+<div class="mb-4 p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <!-- Card Title -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+                Product
+            </h3>
+            <span class="text-base font-normal text-gray-500 dark:text-gray-400">
+                This is a list of
+                latest product
+            </span>
+        </div>
+        <div class="flex-shrink-0">
+            <a href="#"
+               class="p-2 text-sm font-medium rounded-lg text-primary-700 hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
+                View
+                all
+            </a>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-2 mt-4 w-full md:grid-cols-2 xl:grid-cols-4">
+
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-10 h-10 text-primary-100" viewBox="0 0 49 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.788589" width="48" height="48" rx="8" fill="#E1EFFE"/>
+                <path d="M23.1886 11.7C22.8969 11.7 22.6171 11.8158 22.4108 12.0221C22.2045 12.2284 22.0886 12.5082 22.0886 12.8C22.0886 13.0917 22.2045 13.3715 22.4108 13.5778C22.6171 13.7841 22.8969 13.9 23.1886 13.9H26.3886C26.6803 13.9 26.9601 13.7841 27.1664 13.5778C27.3727 13.3715 27.4886 13.0917 27.4886 12.8C27.4886 12.5082 27.3727 12.2284 27.1664 12.0221M23.1886 11.7L27.1664 12.0221M23.1886 11.7H26.3886C26.6803 11.7 26.9601 11.8158 27.1664 12.0221M23.1886 11.7L27.52 11.6686L27.1664 12.0221" fill="#1C64F2" stroke="#1C64F2"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1886 16C15.1886 15.1514 15.5257 14.3374 16.1258 13.7373C16.726 13.1372 17.5399 12.8 18.3886 12.8C18.3886 14.0731 18.8943 15.294 19.7945 16.1942C20.6946 17.0943 21.9155 17.6 23.1886 17.6H26.3886C27.6616 17.6 28.8825 17.0943 29.7827 16.1942C30.6829 15.294 31.1886 14.0731 31.1886 12.8C32.0373 12.8 32.8512 13.1372 33.4513 13.7373C34.0514 14.3374 34.3886 15.1514 34.3886 16V33.6C34.3886 34.4487 34.0514 35.2627 33.4513 35.8628C32.8512 36.4629 32.0373 36.8 31.1886 36.8H18.3886C17.5399 36.8 16.726 36.4629 16.1258 35.8628C15.5257 35.2627 15.1886 34.4487 15.1886 33.6V16ZM19.9886 22.4C19.5642 22.4 19.1573 22.5686 18.8572 22.8687C18.5572 23.1687 18.3886 23.5757 18.3886 24C18.3886 24.4244 18.5572 24.8314 18.8572 25.1314C19.1573 25.4315 19.5642 25.6 19.9886 25.6H20.0046C20.4289 25.6 20.8359 25.4315 21.136 25.1314C21.436 24.8314 21.6046 24.4244 21.6046 24C21.6046 23.5757 21.436 23.1687 21.136 22.8687C20.8359 22.5686 20.4289 22.4 20.0046 22.4H19.9886ZM24.7886 22.4C24.3642 22.4 23.9573 22.5686 23.6572 22.8687C23.3572 23.1687 23.1886 23.5757 23.1886 24C23.1886 24.4244 23.3572 24.8314 23.6572 25.1314C23.9573 25.4315 24.3642 25.6 24.7886 25.6H29.5886C30.0129 25.6 30.4199 25.4315 30.72 25.1314C31.02 24.8314 31.1886 24.4244 31.1886 24C31.1886 23.5757 31.02 23.1687 30.72 22.8687C30.4199 22.5686 30.0129 22.4 29.5886 22.4H24.7886ZM19.9886 28.8C19.5642 28.8 19.1573 28.9686 18.8572 29.2687C18.5572 29.5687 18.3886 29.9757 18.3886 30.4C18.3886 30.8244 18.5572 31.2314 18.8572 31.5314C19.1573 31.8315 19.5642 32 19.9886 32H20.0046C20.4289 32 20.8359 31.8315 21.136 31.5314C21.436 31.2314 21.6046 30.8244 21.6046 30.4C21.6046 29.9757 21.436 29.5687 21.136 29.2687C20.8359 28.9686 20.4289 28.8 20.0046 28.8H19.9886ZM24.7886 28.8C24.3642 28.8 23.9573 28.9686 23.6572 29.2687C23.3572 29.5687 23.1886 29.9757 23.1886 30.4C23.1886 30.8244 23.3572 31.2314 23.6572 31.5314C23.9573 31.8315 24.3642 32 24.7886 32H29.5886C30.0129 32 30.4199 31.8315 30.72 31.5314C31.02 31.2314 31.1886 30.8244 31.1886 30.4C31.1886 29.9757 31.02 29.5687 30.72 29.2687C30.4199 28.9686 30.0129 28.8 29.5886 28.8H24.7886Z" fill="#1C64F2"/>
+            </svg>
+            <a href="#">
+                <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">vehicle loan request</h5>
+            </a>
+            <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+            <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
+                Apply now
+            </a>
+        </div>
+
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-10 h-10" viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.970825" width="48" height="48" rx="8" fill="#DEF7EC"/>
+                <path d="M15.3708 14.3999C14.5221 14.3999 13.7082 14.737 13.1081 15.3372C12.508 15.9373 12.1708 16.7512 12.1708 17.5999V19.1999H37.7708V17.5999C37.7708 16.7512 37.4337 15.9373 36.8336 15.3372C36.2335 14.737 35.4195 14.3999 34.5708 14.3999H15.3708Z" fill="#057A55"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M37.7708 22.3999H12.1708V30.3999C12.1708 31.2486 12.508 32.0625 13.1081 32.6626C13.7082 33.2628 14.5221 33.5999 15.3708 33.5999H34.5708C35.4195 33.5999 36.2335 33.2628 36.8336 32.6626C37.4337 32.0625 37.7708 31.2486 37.7708 30.3999V22.3999ZM15.3708 28.7999C15.3708 28.3756 15.5394 27.9686 15.8395 27.6685C16.1395 27.3685 16.5465 27.1999 16.9708 27.1999H18.5708C18.9952 27.1999 19.4021 27.3685 19.7022 27.6685C20.0023 27.9686 20.1708 28.3756 20.1708 28.7999C20.1708 29.2242 20.0023 29.6312 19.7022 29.9313C19.4021 30.2313 18.9952 30.3999 18.5708 30.3999H16.9708C16.5465 30.3999 16.1395 30.2313 15.8395 29.9313C15.5394 29.6312 15.3708 29.2242 15.3708 28.7999ZM23.3708 27.1999C22.9465 27.1999 22.5395 27.3685 22.2395 27.6685C21.9394 27.9686 21.7708 28.3756 21.7708 28.7999C21.7708 29.2242 21.9394 29.6312 22.2395 29.9313C22.5395 30.2313 22.9465 30.3999 23.3708 30.3999H24.9708C25.3952 30.3999 25.8021 30.2313 26.1022 29.9313C26.4023 29.6312 26.5708 29.2242 26.5708 28.7999C26.5708 28.3756 26.4023 27.9686 26.1022 27.6685C25.8021 27.3685 25.3952 27.1999 24.9708 27.1999H23.3708Z" fill="#057A55"/>
+            </svg>
+            <a href="#">
+                <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">Short-term loan request</h5>
+            </a>
+            <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+            <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
+                Apply now
+            </a>
+        </div>
+
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-10 h-10" viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.174988" width="48" height="48" rx="8" fill="#D5F5F6"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M16.175 11.2C15.3263 11.2 14.5124 11.5371 13.9122 12.1372C13.3121 12.7373 12.975 13.5513 12.975 14.4V36.7999L18.575 33.5999L24.175 36.7999L29.775 33.5999L35.375 36.7999V14.4C35.375 13.5513 35.0378 12.7373 34.4377 12.1372C33.8376 11.5371 33.0237 11.2 32.175 11.2H16.175ZM23.7062 17.1312C23.9976 16.8294 24.1589 16.4252 24.1553 16.0057C24.1516 15.5862 23.9833 15.1849 23.6867 14.8882C23.39 14.5916 22.9887 14.4233 22.5692 14.4197C22.1497 14.416 21.7455 14.5773 21.4438 14.8688L16.6438 19.6688C16.3438 19.9688 16.1753 20.3757 16.1753 20.8C16.1753 21.2242 16.3438 21.6311 16.6438 21.9312L21.4438 26.7311C21.7455 27.0226 22.1497 27.1839 22.5692 27.1802C22.9887 27.1766 23.39 27.0083 23.6867 26.7117C23.9833 26.415 24.1516 26.0137 24.1553 25.5942C24.1589 25.1747 23.9976 24.7705 23.7062 24.4688L21.6374 22.4H24.175C25.448 22.4 26.6689 22.9057 27.5691 23.8058C28.4693 24.706 28.975 25.9269 28.975 27.2V28.7999C28.975 29.2243 29.1435 29.6313 29.4436 29.9313C29.7437 30.2314 30.1506 30.4 30.575 30.4C30.9993 30.4 31.4063 30.2314 31.7063 29.9313C32.0064 29.6313 32.175 29.2243 32.175 28.7999V27.2C32.175 25.0782 31.3321 23.0434 29.8318 21.5431C28.3315 20.0428 26.2967 19.2 24.175 19.2H21.6374L23.7062 17.1312Z" fill="#047481"/>
+            </svg>
+            <a href="#">
+                <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">Long-term loan request</h5>
+            </a>
+            <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+            <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
+                Apply now
+            </a>
+        </div>
+
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-10 h-10" viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.37915" width="48" height="48" rx="8" fill="#FDF6B2"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M37.1791 24C37.1791 27.3947 35.8305 30.6505 33.4301 33.0509C31.0296 35.4514 27.7739 36.7999 24.3791 36.7999C20.9843 36.7999 17.7286 35.4514 15.3281 33.0509C12.9277 30.6505 11.5791 27.3947 11.5791 24C11.5791 20.6052 12.9277 17.3494 15.3281 14.949C17.7286 12.5485 20.9843 11.2 24.3791 11.2C27.7739 11.2 31.0296 12.5485 33.4301 14.949C35.8305 17.3494 37.1791 20.6052 37.1791 24ZM27.5791 19.2C27.5791 20.0486 27.242 20.8626 26.6418 21.4627C26.0417 22.0628 25.2278 22.4 24.3791 22.4C23.5304 22.4 22.7165 22.0628 22.1164 21.4627C21.5162 20.8626 21.1791 20.0486 21.1791 19.2C21.1791 18.3513 21.5162 17.5373 22.1164 16.9372C22.7165 16.3371 23.5304 16 24.3791 16C25.2278 16 26.0417 16.3371 26.6418 16.9372C27.242 17.5373 27.5791 18.3513 27.5791 19.2ZM24.3791 25.6C22.8473 25.5996 21.3475 26.0391 20.0582 26.8662C18.7688 27.6933 17.744 28.8731 17.1055 30.2656C18.0058 31.3129 19.1219 32.1532 20.3774 32.7287C21.6329 33.3043 22.998 33.6015 24.3791 33.5999C25.7602 33.6015 27.1253 33.3043 28.3808 32.7287C29.6363 32.1532 30.7524 31.3129 31.6527 30.2656C31.0142 28.8731 29.9894 27.6933 28.7 26.8662C27.4107 26.0391 25.9109 25.5996 24.3791 25.6Z" fill="#9F580A"/>
+            </svg>
+            <a href="#">
+                <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">Home appliance loan request</h5>
+            </a>
+            <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+            <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
+                Apply now
+            </a>
+        </div>
+
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-10 h-10 text-pink-100" viewBox="0 0 49 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.788589" width="48" height="48" rx="8" fill="#FCE8F3"/>
+                <path d="M23.1886 11.7C22.8969 11.7 22.6171 11.8158 22.4108 12.0221C22.2045 12.2284 22.0886 12.5082 22.0886 12.8C22.0886 13.0917 22.2045 13.3715 22.4108 13.5778C22.6171 13.7841 22.8969 13.9 23.1886 13.9H26.3886C26.6803 13.9 26.9601 13.7841 27.1664 13.5778C27.3727 13.3715 27.4886 13.0917 27.4886 12.8C27.4886 12.5082 27.3727 12.2284 27.1664 12.0221M23.1886 11.7L27.1664 12.0221M23.1886 11.7H26.3886C26.6803 11.7 26.9601 11.8158 27.1664 12.0221M23.1886 11.7L27.52 11.6686L27.1664 12.0221" fill="#D61F69" stroke="#D61F69"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1886 16C15.1886 15.1514 15.5257 14.3374 16.1258 13.7373C16.726 13.1372 17.5399 12.8 18.3886 12.8C18.3886 14.0731 18.8943 15.294 19.7945 16.1942C20.6946 17.0943 21.9155 17.6 23.1886 17.6H26.3886C27.6616 17.6 28.8825 17.0943 29.7827 16.1942C30.6829 15.294 31.1886 14.0731 31.1886 12.8C32.0373 12.8 32.8512 13.1372 33.4513 13.7373C34.0514 14.3374 34.3886 15.1514 34.3886 16V33.6C34.3886 34.4487 34.0514 35.2627 33.4513 35.8628C32.8512 36.4629 32.0373 36.8 31.1886 36.8H18.3886C17.5399 36.8 16.726 36.4629 16.1258 35.8628C15.5257 35.2627 15.1886 34.4487 15.1886 33.6V16ZM19.9886 22.4C19.5642 22.4 19.1573 22.5686 18.8572 22.8687C18.5572 23.1687 18.3886 23.5757 18.3886 24C18.3886 24.4244 18.5572 24.8314 18.8572 25.1314C19.1573 25.4315 19.5642 25.6 19.9886 25.6H20.0046C20.4289 25.6 20.8359 25.4315 21.136 25.1314C21.436 24.8314 21.6046 24.4244 21.6046 24C21.6046 23.5757 21.436 23.1687 21.136 22.8687C20.8359 22.5686 20.4289 22.4 20.0046 22.4H19.9886ZM24.7886 22.4C24.3642 22.4 23.9573 22.5686 23.6572 22.8687C23.3572 23.1687 23.1886 23.5757 23.1886 24C23.1886 24.4244 23.3572 24.8314 23.6572 25.1314C23.9573 25.4315 24.3642 25.6 24.7886 25.6H29.5886C30.0129 25.6 30.4199 25.4315 30.72 25.1314C31.02 24.8314 31.1886 24.4244 31.1886 24C31.1886 23.5757 31.02 23.1687 30.72 22.8687C30.4199 22.5686 30.0129 22.4 29.5886 22.4H24.7886ZM19.9886 28.8C19.5642 28.8 19.1573 28.9686 18.8572 29.2687C18.5572 29.5687 18.3886 29.9757 18.3886 30.4C18.3886 30.8244 18.5572 31.2314 18.8572 31.5314C19.1573 31.8315 19.5642 32 19.9886 32H20.0046C20.4289 32 20.8359 31.8315 21.136 31.5314C21.436 31.2314 21.6046 30.8244 21.6046 30.4C21.6046 29.9757 21.436 29.5687 21.136 29.2687C20.8359 28.9686 20.4289 28.8 20.0046 28.8H19.9886ZM24.7886 28.8C24.3642 28.8 23.9573 28.9686 23.6572 29.2687C23.3572 29.5687 23.1886 29.9757 23.1886 30.4C23.1886 30.8244 23.3572 31.2314 23.6572 31.5314C23.9573 31.8315 24.3642 32 24.7886 32H29.5886C30.0129 32 30.4199 31.8315 30.72 31.5314C31.02 31.2314 31.1886 30.8244 31.1886 30.4C31.1886 29.9757 31.02 29.5687 30.72 29.2687C30.4199 28.9686 30.0129 28.8 29.5886 28.8H24.7886Z" fill="#D61F69"/>
+            </svg>
+            <a href="#">
+                <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">Executive loan</h5>
+            </a>
+            <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+            <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
+                Apply now
+            </a>
+        </div>
+
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-10 h-10" viewBox="0 0 49 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.970825" width="48" height="48" rx="8" fill="#EDEBFE"/>
+                <path d="M15.3708 14.3999C14.5221 14.3999 13.7082 14.737 13.1081 15.3372C12.508 15.9373 12.1708 16.7512 12.1708 17.5999V19.1999H37.7708V17.5999C37.7708 16.7512 37.4337 15.9373 36.8336 15.3372C36.2335 14.737 35.4195 14.3999 34.5708 14.3999H15.3708Z" fill="#7E3AF2"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M37.7708 22.3999H12.1708V30.3999C12.1708 31.2486 12.508 32.0625 13.1081 32.6626C13.7082 33.2628 14.5221 33.5999 15.3708 33.5999H34.5708C35.4195 33.5999 36.2335 33.2628 36.8336 32.6626C37.4337 32.0625 37.7708 31.2486 37.7708 30.3999V22.3999ZM15.3708 28.7999C15.3708 28.3756 15.5394 27.9686 15.8395 27.6685C16.1395 27.3685 16.5465 27.1999 16.9708 27.1999H18.5708C18.9952 27.1999 19.4021 27.3685 19.7022 27.6685C20.0023 27.9686 20.1708 28.3756 20.1708 28.7999C20.1708 29.2242 20.0023 29.6312 19.7022 29.9313C19.4021 30.2313 18.9952 30.3999 18.5708 30.3999H16.9708C16.5465 30.3999 16.1395 30.2313 15.8395 29.9313C15.5394 29.6312 15.3708 29.2242 15.3708 28.7999ZM23.3708 27.1999C22.9465 27.1999 22.5395 27.3685 22.2395 27.6685C21.9394 27.9686 21.7708 28.3756 21.7708 28.7999C21.7708 29.2242 21.9394 29.6312 22.2395 29.9313C22.5395 30.2313 22.9465 30.3999 23.3708 30.3999H24.9708C25.3952 30.3999 25.8021 30.2313 26.1022 29.9313C26.4023 29.6312 26.5708 29.2242 26.5708 28.7999C26.5708 28.3756 26.4023 27.9686 26.1022 27.6685C25.8021 27.3685 25.3952 27.1999 24.9708 27.1999H23.3708Z" fill="#7E3AF2"/>
+            </svg>
+            <a href="#">
+                <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">Target Loan</h5>
+            </a>
+            <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+            <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
+                Apply now
+            </a>
+        </div>
+
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-10 h-10" viewBox="0 0 49 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.174988" width="48" height="48" rx="8" fill="#E5EDFF"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M16.175 11.2C15.3263 11.2 14.5124 11.5371 13.9122 12.1372C13.3121 12.7373 12.975 13.5513 12.975 14.4V36.7999L18.575 33.5999L24.175 36.7999L29.775 33.5999L35.375 36.7999V14.4C35.375 13.5513 35.0378 12.7373 34.4377 12.1372C33.8376 11.5371 33.0237 11.2 32.175 11.2H16.175ZM23.7062 17.1312C23.9976 16.8294 24.1589 16.4252 24.1553 16.0057C24.1516 15.5862 23.9833 15.1849 23.6867 14.8882C23.39 14.5916 22.9887 14.4233 22.5692 14.4197C22.1497 14.416 21.7455 14.5773 21.4438 14.8688L16.6438 19.6688C16.3438 19.9688 16.1753 20.3757 16.1753 20.8C16.1753 21.2242 16.3438 21.6311 16.6438 21.9312L21.4438 26.7311C21.7455 27.0226 22.1497 27.1839 22.5692 27.1802C22.9887 27.1766 23.39 27.0083 23.6867 26.7117C23.9833 26.415 24.1516 26.0137 24.1553 25.5942C24.1589 25.1747 23.9976 24.7705 23.7062 24.4688L21.6374 22.4H24.175C25.448 22.4 26.6689 22.9057 27.5691 23.8058C28.4693 24.706 28.975 25.9269 28.975 27.2V28.7999C28.975 29.2243 29.1435 29.6313 29.4436 29.9313C29.7437 30.2314 30.1506 30.4 30.575 30.4C30.9993 30.4 31.4063 30.2314 31.7063 29.9313C32.0064 29.6313 32.175 29.2243 32.175 28.7999V27.2C32.175 25.0782 31.3321 23.0434 29.8318 21.5431C28.3315 20.0428 26.2967 19.2 24.175 19.2H21.6374L23.7062 17.1312Z" fill="#5850EC"/>
+            </svg>
+            <a href="#">
+                <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">Loan waiver request</h5>
+            </a>
+            <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+            <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
+                Apply now
+            </a>
+        </div>
+
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <svg class="w-10 h-10" viewBox="0 0 49 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.37915" width="48" height="48" rx="8" fill="#FEECDC"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M37.1791 24C37.1791 27.3947 35.8305 30.6505 33.4301 33.0509C31.0296 35.4514 27.7739 36.7999 24.3791 36.7999C20.9843 36.7999 17.7286 35.4514 15.3281 33.0509C12.9277 30.6505 11.5791 27.3947 11.5791 24C11.5791 20.6052 12.9277 17.3494 15.3281 14.949C17.7286 12.5485 20.9843 11.2 24.3791 11.2C27.7739 11.2 31.0296 12.5485 33.4301 14.949C35.8305 17.3494 37.1791 20.6052 37.1791 24ZM27.5791 19.2C27.5791 20.0486 27.242 20.8626 26.6418 21.4627C26.0417 22.0628 25.2278 22.4 24.3791 22.4C23.5304 22.4 22.7165 22.0628 22.1164 21.4627C21.5162 20.8626 21.1791 20.0486 21.1791 19.2C21.1791 18.3513 21.5162 17.5373 22.1164 16.9372C22.7165 16.3371 23.5304 16 24.3791 16C25.2278 16 26.0417 16.3371 26.6418 16.9372C27.242 17.5373 27.5791 18.3513 27.5791 19.2ZM24.3791 25.6C22.8473 25.5996 21.3475 26.0391 20.0582 26.8662C18.7688 27.6933 17.744 28.8731 17.1055 30.2656C18.0058 31.3129 19.1219 32.1532 20.3774 32.7287C21.6329 33.3043 22.998 33.6015 24.3791 33.5999C25.7602 33.6015 27.1253 33.3043 28.3808 32.7287C29.6363 32.1532 30.7524 31.3129 31.6527 30.2656C31.0142 28.8731 29.9894 27.6933 28.7 26.8662C27.4107 26.0391 25.9109 25.5996 24.3791 25.6Z" fill="#D03801"/>
+            </svg>
+            <a href="#">
+                <h5 class="my-3 text-base font-semibold tracking-tight text-gray-900 dark:text-white">Special deposit</h5>
+            </a>
+            <p class="mb-3 font-normal text-sm leading-6 text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+            <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
+                Apply now
+            </a>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+<!-- Card Title -->
+<div class="flex justify-between items-center mb-4">
+    <div>
+        <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+            Request
+        </h3>
+        <span class="text-base font-normal text-gray-500 dark:text-gray-400">
+            This is a list of
+            latest request
+        </span>
+    </div>
+    <div class="flex-shrink-0">
+        <a href="#"
+           class="p-2 text-sm font-medium rounded-lg text-primary-700 hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
+            View
+            all
+        </a>
+    </div>
+</div>
+<!-- Table -->
+<div class="flex flex-col mt-8">
+    <div class="overflow-x-auto rounded-lg">
+        <div class="inline-block min-w-full align-middle">
+            <div class="overflow-hidden shadow sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                        <th scope="col"
+                            class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                            Transaction
+                        </th>
+                        <th scope="col"
+                            class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                            Date & Time
+                        </th>
+                        <th scope="col"
+                            class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                            Amount
+                        </th>
+                        <th scope="col"
+                            class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                            Status
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800">
+                    <tr>
+                        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            Payment from <span class="font-semibold">Bonnie Green</span>
+                        </td>
+                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            Apr 23 ,2021
+                        </td>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            $2300
+                        </td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">Completed</span>
+                        </td>
+                    </tr>
+                    <tr class="bg-gray-50 dark:bg-gray-700">
+                        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            Payment refund to <span class="font-semibold">#00910</span>
+                        </td>
+                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            Apr 23 ,2021
+                        </td>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            -$670
+                        </td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">Completed</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            Payment failed from <span class="font-semibold">#087651</span>
+                        </td>
+                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            Apr 18 ,2021
+                        </td>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            $234
+                        </td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="bg-red-100 dark:bg-red-200 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">Cancelled</span>
+                        </td>
+                    </tr>
+                    <tr class="bg-gray-50 dark:bg-gray-700">
+                        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            Payment from <span class="font-semibold">Lana Byrd</span>
+                        </td>
+                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            Apr 15 ,2021
+                        </td>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            $5000
+                        </td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="bg-purple-100 dark:bg-purple-200 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">
+                                In
+                                progress
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            Payment from <span class="font-semibold">Jese Leos</span>
+                        </td>
+                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            Apr 15 ,2021
+                        </td>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            $2300
+                        </td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">Completed</span>
+                        </td>
+                    </tr>
+                    <tr class="bg-gray-50 dark:bg-gray-700">
+                        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            Payment from <span class="font-semibold">THEMESBERG LLC</span>
+                        </td>
+                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            Apr 11 ,2021
+                        </td>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            $560
+                        </td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">Completed</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            Payment from <span class="font-semibold">Lana Lysle</span>
+                        </td>
+                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            Apr 6 ,2021
+                        </td>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            $1437
+                        </td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">Completed</span>
+                        </td>
+                    </tr>
+                    <tr class="bg-gray-50 dark:bg-gray-700">
+                        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            Payment to <span class="font-semibold">Joseph Mcfall</span>
+                        </td>
+                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            Apr 1 ,2021
+                        </td>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            $980
+                        </td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">Completed</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            Payment from <span class="font-semibold">Alphabet LLC</span>
+                        </td>
+                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            Mar 23 ,2021
+                        </td>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            $11,436
+                        </td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="bg-purple-100 dark:bg-purple-200 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">
+                                In
+                                progress
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="bg-gray-50 dark:bg-gray-700">
+                        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            Payment from <span class="font-semibold">Bonnie Green</span>
+                        </td>
+                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            Mar 23 ,2021
+                        </td>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            $560
+                        </td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="bg-green-100 dark:bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md">Completed</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Card Footer -->
+<div class="flex justify-between items-center pt-3 sm:pt-6">
+    <div>
+        <button class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                type="button" data-dropdown-toggle="transactions-dropdown">
+            Last 7 days
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7">
+                </path>
+            </svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+             id="transactions-dropdown">
+            <div class="py-3 px-4" role="none">
+                <p class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                   role="none">
+                    Sep 16, 2021 - Sep 22, 2021
+                </p>
+            </div>
+            <ul class="py-1" role="none">
+                <li>
+                    <a href="#"
+                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                       role="menuitem">
+                        Yesterday
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                       role="menuitem">
+                        Today
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                       role="menuitem">
+                        Last 7 days
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                       role="menuitem">
+                        Last 30 days
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                       role="menuitem">
+                        Last 90 days
+                    </a>
+                </li>
+            </ul>
+            <div class="py-1" role="none">
+                <a href="#"
+                   class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                   role="menuitem">
+                    Custom...
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="flex-shrink-0">
+        <a href="#"
+           class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
+            Requests Report
+            <svg class="ml-1 w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
+                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 5l7 7-7 7">
+                </path>
+            </svg>
+        </a>
+    </div>
+</div>
+</div>
+</div>
+</main>
+
+@code {
+
+}

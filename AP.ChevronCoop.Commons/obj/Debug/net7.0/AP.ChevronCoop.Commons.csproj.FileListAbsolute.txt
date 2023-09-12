@@ -1,0 +1,12 @@
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\bin\Debug\net7.0\AP.ChevronCoop.Commons.deps.json
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\bin\Debug\net7.0\AP.ChevronCoop.Commons.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\bin\Debug\net7.0\AP.ChevronCoop.Commons.pdb
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\obj\Debug\net7.0\AP.ChevronCoop.Commons.csproj.AssemblyReference.cache
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\obj\Debug\net7.0\AP.ChevronCoop.Commons.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\obj\Debug\net7.0\AP.ChevronCoop.Commons.AssemblyInfoInputs.cache
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\obj\Debug\net7.0\AP.ChevronCoop.Commons.AssemblyInfo.cs
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\obj\Debug\net7.0\AP.ChevronCoop.Commons.csproj.CoreCompileInputs.cache
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\obj\Debug\net7.0\AP.ChevronCoop.Commons.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\obj\Debug\net7.0\refint\AP.ChevronCoop.Commons.dll
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\obj\Debug\net7.0\AP.ChevronCoop.Commons.pdb
+C:\Projects\AP\Repos\ChevronCoopDotnetCore\ChevronCoopDotnetCore\AP.ChevronCoop.Commons\obj\Debug\net7.0\ref\AP.ChevronCoop.Commons.dll

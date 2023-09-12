@@ -1,0 +1,214 @@
+<EditForm Model="@Model">
+<FluentValidationValidator/>
+
+
+<ValidationSummary/>
+
+<div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+
+
+    <div class="sm:col-span-2">
+        <label for="Title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Title
+        </label>
+        <SfTextBox Multiline="true" ID="Title" Placeholder="Title" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                   @bind-Value=@Model.Title OnBlur="OnBlur">
+        </SfTextBox>
+    </div>
+
+    <div class="w-full">
+        <label for="TransactionNo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Transaction No
+        </label>
+        <SfTextBox Multiline="false" ID="TransactionNo" Placeholder="TransactionNo" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                   @bind-Value=@Model.TransactionNo OnBlur="OnBlur">
+        </SfTextBox>
+    </div>
+
+    <div class="w-full">
+        <label for="DocumentRef" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Document Ref
+        </label>
+        <SfTextBox Multiline="false" ID="DocumentRef" Placeholder="DocumentRef" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                   @bind-Value=@Model.DocumentRef OnBlur="OnBlur">
+        </SfTextBox>
+    </div>
+
+
+    @* <div class="sm:col-span-2">
+        <label for="DocumentRefId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        DocumentRefId
+        </label>
+
+        <SfComboBox ID="DocumentRefId" TValue="long?" TItem="DocumentRefId" OnBlur="OnBlur"
+        @bind-Value=@Model.DocumentRefId Query="@Query_Combo_DocumentRefId"
+        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select">
+        <SfDataManager Url="@combobox_DocumentRefId_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+        <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+        </SfComboBox>
+        </div>*@
+
+
+    <div class="w-full">
+        <label for="PostingRef" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Posting Ref
+        </label>
+        <SfTextBox Multiline="false" ID="PostingRef" Placeholder="PostingRef" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                   @bind-Value=@Model.PostingRef OnBlur="OnBlur">
+        </SfTextBox>
+    </div>
+
+
+    @*<div class="sm:col-span-2">
+        <label for="PostingRefId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        PostingRefId
+        </label>
+
+        <SfComboBox ID="PostingRefId" TValue="long?" TItem="PostingRefId" OnBlur="OnBlur"
+        @bind-Value=@Model.PostingRefId Query="@Query_Combo_PostingRefId"
+        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select">
+        <SfDataManager Url="@combobox_PostingRefId_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+        <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+        </SfComboBox>
+        </div>*@
+
+
+    <div class="w-full">
+        <label for="EntityRef" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Entity Ref
+        </label>
+        <SfTextBox Multiline="false" ID="EntityRef" Placeholder="EntityRef" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                   @bind-Value=@Model.EntityRef OnBlur="OnBlur">
+        </SfTextBox>
+    </div>
+
+
+    @*<div class="sm:col-span-2">
+        <label for="EntityRefId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        EntityRefId
+        </label>
+
+        <SfComboBox ID="EntityRefId" TValue="long?" TItem="EntityRefId" OnBlur="OnBlur"
+        @bind-Value=@Model.EntityRefId Query="@Query_Combo_EntityRefId"
+        FilterType="Syncfusion.Blazor.DropDowns.FilterType.Contains"
+        ShowClearButton="true" AllowFiltering=true IgnoreAccent=true Placeholder="Select">
+        <SfDataManager Url="@combobox_EntityRefId_res" CrossDomain="true" Adaptor="Adaptors.ODataV4Adaptor"></SfDataManager>
+        <ComboBoxFieldSettings Text="Name" Value="Id"></ComboBoxFieldSettings>
+        </SfComboBox>
+        </div>*@
+
+
+    <div class="w-full">
+        <label for="TransactionDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Transaction Date
+        </label>
+
+        <SfDatePicker ID="TransactionDate" TValue="DateTime" @bind-Value="@Model.TransactionDate"></SfDatePicker>
+    </div>
+
+
+    <div class="w-full">
+        <label for="IsPosted" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Is Posted?
+        </label>
+
+        <SfSwitch ID="IsPosted" @bind-Checked="@Model.IsPosted" @onblur="@OnBlur"/>
+    </div>
+
+
+    <div class="w-full">
+        <label for="PostedByUserName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Posted By UserName
+        </label>
+        <SfTextBox Multiline="false" ID="PostedByUserName" Placeholder="PostedByUserName" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                   @bind-Value=@Model.PostedByUserName OnBlur="OnBlur">
+        </SfTextBox>
+    </div>
+
+    <div class="w-full">
+        <label for="DatePosted" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Date Posted
+        </label>
+
+        <SfDatePicker ID="DatePosted" TValue="DateTime?" @bind-Value="@Model.DatePosted"></SfDatePicker>
+    </div>
+
+
+    <div class="w-full">
+        <label for="IsReversed" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Is Reversed
+        </label>
+
+        <SfSwitch ID="IsReversed" @bind-Checked="@Model.IsReversed" @onblur="@OnBlur"/>
+    </div>
+
+
+    <div class="w-full">
+        <label for="ReversedByUserName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Reversed By UserName
+        </label>
+        <SfTextBox Multiline="false" ID="ReversedByUserName" Placeholder="ReversedByUserName" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                   @bind-Value=@Model.ReversedByUserName OnBlur="OnBlur">
+        </SfTextBox>
+    </div>
+
+    <div class="w-full">
+        <label for="ReversalDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Reversal Date
+        </label>
+
+        <SfDatePicker ID="ReversalDate" TValue="DateTime?" @bind-Value="@Model.ReversalDate"></SfDatePicker>
+    </div>
+
+
+    <div class="sm:col-span-2">
+        <label for="Memo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Memo
+        </label>
+        <SfTextBox Multiline="true" ID="Memo" Placeholder="Memo" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                   @bind-Value=@Model.Memo OnBlur="OnBlur">
+        </SfTextBox>
+    </div>
+
+
+    <div class="sm:col-span-2">
+        <label for="Description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Description
+        </label>
+        <SfTextBox Multiline="true" ID="Description" Placeholder="Description" CssClass="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                   @bind-Value=@Model.Description OnBlur="OnBlur">
+        </SfTextBox>
+    </div>
+
+
+    <div class="w-full">
+        <label for="IsActive" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Is Active
+        </label>
+
+        <SfSwitch ID="IsActive" @bind-Checked="@Model.IsActive" @onblur="@OnBlur"/>
+    </div>
+
+
+</div>
+<br/>
+
+<button type="button" @onclick="OnSave"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    Save
+</button>
+<button type="button" @onclick="OnCancel"
+        class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+    Cancel
+</button>
+
+</EditForm>
+
+
+<Modal Title="@("Notification")" Visible="@showPopup" DestroyOnClose="true"
+       OnOk="OnCancel" OkText="@("Ok")"
+       OnCancel="OnCancel" CancelText="@("Cancel")">
+    <p>@notificationText</p>
+</Modal>

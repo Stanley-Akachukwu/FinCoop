@@ -1,0 +1,80 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime jsRuntime
+@inject NavigationManager navigationManager
+@using System.Timers
+@using ChevronCoop.Web.AppUI.BlazorServer.Helper;
+@inject NavigationManager UriHelper
+
+
+
+<AdminHeader></AdminHeader>
+
+<div class="flex overflow-hidden pt-16 bg-gray-50 dark:bg-gray-900">
+
+    <AdminSidebar></AdminSidebar>
+
+    <div class="hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
+    <div id="main-content" class="overflow-y-auto w-full h-full bg-gray-50 dark:bg-gray-900 lg:ml-64">
+
+        <ErrorBoundary>
+                @Body
+        </ErrorBoundary>
+        <AdminFooter></AdminFooter>
+
+    </div>
+
+</div>
+
+@code {
+
+    [CascadingParameter]
+    private Task<AuthenticationState> stateAuthenticate { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+
+            //var module = await jsRuntime.InvokeAsync<IJSObjectReference>("import",
+            //navigationManager.ToAbsoluteUri("js/app.bundle2.js"));
+            //await module.InvokeVoidAsync("initFlowbiteJS");
+            //await module.InvokeVoidAsync("initFlowbiteJS");
+
+            //await jsRuntime.InvokeAsync<IJSObjectReference>("import",
+            //navigationManager.ToAbsoluteUri("js/app.bundle2.js"));
+            //await jsRuntime.InvokeVoidAsync("initFlowbiteJS");
+            //await jsRuntime.InvokeVoidAsync("initAppScripts");
+
+            await jsRuntime.InvokeVoidAsync("initFlowbiteJS");
+            await jsRuntime.InitializeInactivityTimer(DotNetObjectReference.Create(this));
+            base.OnAfterRender(firstRender);
+
+        }
+
+       
+        //return base.OnAfterRenderAsync(firstRender);
+    }
+
+    [JSInvokable]
+    public async Task Logout()
+    {
+        var authState = await stateAuthenticate;
+        if (authState.User.Identity.IsAuthenticated)
+        {
+
+             UriHelper.NavigateTo("/Identity/Account/LogOut", true);
+        }
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        // await jsRuntime.InvokeVoidAsync("initFlowbiteJS");
+    }
+}

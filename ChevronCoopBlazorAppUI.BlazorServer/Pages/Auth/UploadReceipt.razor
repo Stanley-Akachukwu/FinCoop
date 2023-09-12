@@ -1,0 +1,113 @@
+﻿@page "/upload-receipt"
+@layout LoginLayout
+<EditForm Model="@Model" OnValidSubmit="OnSave">
+    <div class="flex flex-col justify-center items-center px-6 pt-8 mx-auto  pt:mt-0 dark:bg-gray-900">
+
+        <!-- Card -->
+        <!-- <section class="py-8 bg-white dark:bg-gray-900 lg:py-0"> -->
+        <div class="p-12 justify-center items-center w-full bg-white rounded-lg shadow lg:flex  lg:max-w-xl dark:bg-gray-800">
+            <div class="flex items-center mx-auto md:w-[42rem] px-4 md:px-8 xl:px-0">
+                <div class="w-full">
+
+                    <ol class="flex items-center mb-6 text-sm font-medium text-center  dark:text-gray-400 lg:mb-12 sm:text-base">
+                        <li class="flex  items-center after:content-[''] after:w-12 after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+                            <div class="flex items-center text-blue-400  sm:block after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 dark:after:text-gray-500">
+                                <div class="text-xs flex justify-center items-center sm:mb-2 ">
+                                    <img src="../images/chevron/auth/successCheck.svg" class=""/>
+                                </div>
+                                Employee Info
+                            </div>
+                        </li>
+                        <li class="flex items-center after:content-[''] after:w-12 after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+                            <div class="flex items-center text-blue-400 sm:block after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 dark:after:text-gray-500">
+                                <div class="flex justify-center items-center mr-2 sm:mb-2 sm:mx-auto">
+                                    <img src="../images/chevron/auth/successCheck.svg" class=""/>
+                                </div>
+                                Account <span class="hidden sm:inline-flex">Info</span>
+                            </div>
+                        </li>
+                        <li class="flex items-center sm:block text-blue-400">
+                            <div class="mr-2  sm:mb-2 sm:mx-auto">3</div>
+                            Membership fee
+                        </li>
+                    </ol>
+                    <h1 class=" mb-4 text-2xl font-extrabold leading-tight tracking-tight text-gray-900 sm:mb-6 dark:text-white">
+                        Make Payment
+                    </h1>
+                    <div class="text-xl font-semibold mb-6 py-2">
+                        <span>Pay </span><span class="text-blue-400">NGN 10,000.00</span>
+                    </div>
+
+                    <div class="py-6 bg-accessbackgroundGray border rounded-lg border-accessborderGray flex items-center justify-center flex-col text-center">
+                        <h3 class="font-medium text-base text-gray-800">Access Bank</h3>
+                        <h2 class="my-2 text-2xl font-bold text-gray-800">2938473849</h2>
+                        <p class="max-w-xs mt-2 text-sm font-normal text-gray-400">
+                            Use this account for this transaction only Account
+                            expires in 15 minutes
+                        </p>
+                    </div>
+                    @* <form class="my-6 w-full" action="/signup-complete">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Upload file</label>
+                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 placeholder-green-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                    <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">Max file size: 10kb</div>
+
+                    </form>*@
+
+                    <div class="col-span-6 sm:col-full">
+                        <label for="Primary bank sort code"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Upload file<span class="text-red-500">*</span>
+                        </label>
+                        <SfUploader AutoUpload="true" OnRemove="@OnRemoveHandler" AllowedExtensions=".png, .jpeg, .jpg, .pmb, .gif" AllowMultiple="false">
+                            <UploaderEvents ValueChange="OnChangeDocumentUpload"></UploaderEvents>
+                        </SfUploader>
+                      
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+
+                        <img src="@UploadedImage" />
+
+                    </div>
+
+
+                    <button
+                            class="my-4 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                        Done
+                    </button>
+                </div>
+            </div>
+            <!-- </section> -->
+        </div>
+    </div>
+</EditForm>
+<Modal Visible="@showUploadSuccessful" Centered="true" Closable="false" DestroyOnClose="true" Footer="@("")"
+       class="overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <!-- Modal header -->
+            <div class="flex flex-col justify-center items-center p-10 mb-4 rounded-t sm:mb-5 dark:border-gray-600">
+                <svg width="79" height="80" viewBox="0 0 79 80" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M26.9305 39.9999L35.2639 48.3332L51.9305 31.6665M22.0764 9.5707C25.0651 9.33216 27.9025 8.15696 30.1847 6.21237C32.7635 4.01349 36.0415 2.80566 39.4305 2.80566C42.8195 2.80566 46.0976 4.01349 48.6764 6.21237C50.9585 8.15696 53.7959 9.33216 56.7847 9.5707C60.1628 9.83946 63.3346 11.3033 65.7309 13.6995C68.1271 16.0958 69.5909 19.2676 69.8597 22.6457C70.0982 25.6345 71.2734 28.4719 73.218 30.754C75.4169 33.3328 76.6247 36.6109 76.6247 39.9999C76.6247 43.3889 75.4169 46.6669 73.218 49.2457C71.2734 51.5279 70.0982 54.3653 69.8597 57.354C69.5909 60.7322 68.1271 63.9039 65.7309 66.3002C63.3346 68.6964 60.1628 70.1603 56.7847 70.429C53.7959 70.6676 50.9585 71.8428 48.6764 73.7874C46.0976 75.9863 42.8195 77.1941 39.4305 77.1941C36.0415 77.1941 32.7635 75.9863 30.1847 73.7874C27.9025 71.8428 25.0651 70.6676 22.0764 70.429C18.6982 70.1603 15.5265 68.6964 13.1302 66.3002C10.734 63.9039 9.27012 60.7322 9.00137 57.354C8.76282 54.3653 7.58762 51.5279 5.64303 49.2457C3.44415 46.6669 2.23633 43.3889 2.23633 39.9999C2.23633 36.6109 3.44415 33.3328 5.64303 30.754C7.58762 28.4719 8.76282 25.6345 9.00137 22.6457C9.27012 19.2676 10.734 16.0958 13.1302 13.6995C15.5265 11.3033 18.6982 9.83946 22.0764 9.5707Z"
+                          stroke="#0E9F6E" stroke-width="4" stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+
+                <p class="break-words text-center my-8">
+                    You’ve successfully upploaded the document.
+                </p>
+
+                <form class="w-full">
+                    <button @onclick="GoToLogin" type="button"
+                            class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+                        Done
+                    </button>
+                </form>
+            </div>
+            <!-- Modal body -->
+        </div>
+    </div>
+</Modal>
+

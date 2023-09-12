@@ -1,0 +1,92 @@
+﻿@page "/KYC/BENEFICIARY-SWITCH"
+@using ChevronCoop.Web.AppUI.BlazorServer.Data;
+@layout AppUIMainLayout
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IEntityDataService DataService
+
+
+
+
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+    //hello
+    //hello
+    //hello
+        await base.OnInitializedAsync();
+
+
+        var authenticated = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var Principal = authenticated.User.Identity.Name;
+
+        if (!string.IsNullOrEmpty(Principal))
+        {
+            var claims = authenticated.User.Claims;
+            if (claims.Any())
+            {
+    //if (authenticated.User.IsInRole("Regular")||(authenticated.User.IsInRole("Coop Memeber")))
+    //{
+                var sid = claims.ElementAt(2).Value;
+
+                var rsp1 = await DataService.GetMemberProfileViewResult<IEnumerable<MemberProfileViewModelResult>>();
+                if (rsp1.IsSuccessStatusCode)
+                {
+                    IEnumerable<MemberProfileViewModelResult> memberProfiles = rsp1.Content;
+                    if (memberProfiles.Any())
+                    {
+                        var returnedProfile = memberProfiles.FirstOrDefault(p => p.applicationUserId == sid);
+
+                        if (returnedProfile != null)
+                        {
+    // await sessionStorage.SetAsync("UserProfileID", returnedProfile.id);
+
+                            await ReloadGridAsync(returnedProfile.id);
+                        }
+                    }
+                }
+    //var rsp = await DataService.GetMemberBeneficiaries<IEnumerable<BeneficiaryViewResult>>();
+
+
+    //}
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/Identity/Account/LogIn");
+            }
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/Identity/Account/LogIn");
+        }
+    }
+
+    private async Task ReloadGridAsync(string profileId)
+    {
+        var rsp = await DataService.GetMemberBeneficiaries<IEnumerable<BeneficiaryViewResult>>();
+
+
+        if (rsp.IsSuccessStatusCode)
+        {
+            IEnumerable<BeneficiaryViewResult> memberBeneficiaries = rsp.Content;
+
+            if (memberBeneficiaries.Any())
+            {
+                var returnedBeneficiaries = memberBeneficiaries.Where(p => p.profileId == profileId).ToList();
+
+                if (returnedBeneficiaries.Any())
+                {
+                    NavigationManager.NavigateTo("/KYC/NEW-BENEFICIARY", true);
+                }
+                else
+                {
+                    NavigationManager.NavigateTo("/KYC/EMPTY-BENEFICIARY", true);
+                }
+            }
+        }
+    }
+
+
+}

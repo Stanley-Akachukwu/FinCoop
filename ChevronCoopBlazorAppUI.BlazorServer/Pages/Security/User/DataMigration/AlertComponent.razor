@@ -1,0 +1,37 @@
+﻿<div id="defaultModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 p-4  overflow-y-auto md:inset-0 h-modal md:h-full relative w-full h-full max-w-md md:h-auto relative bg-white rounded-lg shadow dark:bg-gray-700">
+    <div class="relative w-full h-full max-w-md md:h-auto">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <span class="sr-only">Close modal</span>
+            <div class="p-12 justify-center items-center w-full bg-white rounded-lg shadow lg:flex  lg:max-w-xl dark:bg-gray-800">
+                <div class="flex justify-center text-center flex-col items-center">
+                    <svg class="my-2" width="79" height="80" viewBox="0 0 79 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M26.9305 40L35.2639 48.3333L51.9305 31.6667M22.0764 9.57083C25.0651 9.33228 27.9025 8.15709 30.1847 6.2125C32.7635 4.01362 36.0415 2.80579 39.4305 2.80579C42.8195 2.80579 46.0976 4.01362 48.6764 6.2125C50.9585 8.15709 53.7959 9.33228 56.7847 9.57083C60.1628 9.83959 63.3346 11.3034 65.7309 13.6997C68.1271 16.0959 69.5909 19.2677 69.8597 22.6458C70.0982 25.6346 71.2734 28.472 73.218 30.7542C75.4169 33.333 76.6247 36.611 76.6247 40C76.6247 43.389 75.4169 46.667 73.218 49.2458C71.2734 51.528 70.0982 54.3654 69.8597 57.3542C69.5909 60.7323 68.1271 63.9041 65.7309 66.3003C63.3346 68.6966 60.1628 70.1604 56.7847 70.4292C53.7959 70.6677 50.9585 71.8429 48.6764 73.7875C46.0976 75.9864 42.8195 77.1942 39.4305 77.1942C36.0415 77.1942 32.7635 75.9864 30.1847 73.7875C27.9025 71.8429 25.0651 70.6677 22.0764 70.4292C18.6982 70.1604 15.5265 68.6966 13.1302 66.3003C10.734 63.9041 9.27012 60.7323 9.00137 57.3542C8.76282 54.3654 7.58762 51.528 5.64303 49.2458C3.44415 46.667 2.23633 43.389 2.23633 40C2.23633 36.611 3.44415 33.333 5.64303 30.7542C7.58762 28.472 8.76282 25.6346 9.00137 22.6458C9.27012 19.2677 10.734 16.0959 13.1302 13.6997C15.5265 11.3034 18.6982 9.83959 22.0764 9.57083Z" stroke="#1F82BD" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="my-4">File uploaded for Approval</p>
+
+                    <form class="my-6 w-full">
+
+                        <button type="button"
+                                @onclick="Onclose" class="my-2 py-3 px-5 w-full text-base font-medium text-center text-white rounded-lg bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 dark:bg-CEMCS-Blue-100 dark:hover:bg-CEMCS-Blue-100 dark:focus:ring-primary-800">
+
+                            Continue
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Inject]
+    NavigationManager NavigationManager { get; set; }
+
+    private async Task Onclose()
+    {
+        NavigationManager.NavigateTo("/Security/DataMigration", true);
+    }
+
+}

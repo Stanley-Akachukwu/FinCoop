@@ -1,0 +1,139 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.CommonViews;
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.Drawals
+
+<div class="grid grid-cols-1 gap-2  mb-4 w-full md:grid-cols-2 ">
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+
+            @((MarkupString)@SvgHelpers.AvailableBalance)
+
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Member Type</div>
+                <div class="text-base font-bold">@_FixedDepositAccountMasterView.CustomerId_MemberType</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Maturity Instruction Type </div>
+                <div class="text-base font-bold">@_FixedDepositAccountMasterView.MaturityInstructionType</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Liquidation Account Type</div>
+                <div class="text-base font-bold">@_FixedDepositAccountMasterView.LiquidationAccountType</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Product Name</div>
+                <div class="text-base font-bold">@_FixedDepositAccountMasterView.DepositProductId_Name</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Status</div>
+                <div class="text-base font-bold">
+                    @if (_FixedDepositAccountMasterView.IsClosed)
+                    {
+                        <span class="bg-red-100 dark:bg-red-200 text-red-800 text-xl font-semibold mr-2 px-2.5 py-0.5 rounded-md">
+                            Account Closed</span>
+                    }
+                    else
+                    {
+                        <span class="bg-green-100 dark:bg-green-200 text-green-800 text-xl font-semibold mr-2 px-2.5 py-0.5 rounded-md">
+                            Active</span>
+                    }
+               </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-4">
+        <div class="flex flex-row items-center gap-x-3 py-4">
+            @((MarkupString)@SvgHelpers.LedgerBalance)
+
+            <div class="flex flex-col justify-start">
+                <div class="text-gray-500 text-sm">Tenure</div>
+                <div class="text-base font-bold">
+                    @_FixedDepositAccountMasterView.TenureUnit
+                </div>
+            </div>
+        </div>
+
+    </div>
+  
+
+</div>
+
+
+<!-- Table -->
+<div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    @{
+        if (AccountsMasterView != null)
+        {
+            <!-- Table -->
+            <Descriptions Title="Deposit Account Details" Bordered Size=@DescriptionsSize.Small>
+            <DescriptionsItem Title="Deposit Account Number" Span="2">
+                @AccountsMasterView?.AccountNo
+            </DescriptionsItem>
+                
+            <DescriptionsItem Title="Customer Fullname" Span="2">@MemberProfile.FirstName  @MemberProfile.LastName</DescriptionsItem>
+            <DescriptionsItem Title="Customer Email" Span="2">@MemberProfile.PrimaryEmail</DescriptionsItem>
+            <DescriptionsItem Title="Ledger Balance" Span="2">@AccountsMasterView?.LedgerBalance.ToString("N2")</DescriptionsItem>
+            <DescriptionsItem Title="Account Type" Span="2">@AccountsMasterView?.AccountType</DescriptionsItem>
+            <DescriptionsItem Title="Status" Span="2">@AccountsMasterView?.Status</DescriptionsItem>
+            <DescriptionsItem Title="Caption" Span="2">@AccountsMasterView?.Caption</DescriptionsItem>
+                @if (IsAdmin)
+                {
+                    <DescriptionsItem Title="Charges Accrued Account Name" Span="2">@AccountsMasterView?.ChargesAccruedAccountId_Name</DescriptionsItem>
+                    <DescriptionsItem Title="Charges IncomeAccountId Account Type" Span="2">@AccountsMasterView?.ChargesIncomeAccountId_AccountType</DescriptionsItem>
+                    <DescriptionsItem Title="Charges Income Account Name" Span="2">@AccountsMasterView?.ChargesIncomeAccountId_Name</DescriptionsItem>
+                    <DescriptionsItem Title="Interest Earned Account Account Type" Span="2">@AccountsMasterView?.InterestEarnedAccountId_AccountType</DescriptionsItem>
+                    <DescriptionsItem Title="Interest Earned Account Name" Span="2">@AccountsMasterView?.InterestEarnedAccountId_Name</DescriptionsItem>
+                    <DescriptionsItem Title="Interest Payout Account Name" Span="2">@AccountsMasterView?.InterestPayoutAccountId_Name</DescriptionsItem>
+                    <DescriptionsItem Title="Charges Waived Account Name" Span="2">@AccountsMasterView?.ChargesWaivedAccountId_Name</DescriptionsItem>
+
+                }
+            <DescriptionsItem Title="Customer No" Span="2">@MemberProfile?.CustomerNo</DescriptionsItem>
+            <DescriptionsItem Title="Years Of Service" Span="2">@MemberProfile?.YearsOfService</DescriptionsItem>
+            <DescriptionsItem Title="Customer Status" Span="2">@MemberProfile?.Status</DescriptionsItem>
+            <DescriptionsItem Title="Customer MemberType" Span="2">@MemberProfile?.MemberType</DescriptionsItem>
+            <DescriptionsItem Title="Customer Gender" Span="2">@MemberProfile?.Gender</DescriptionsItem>
+            <DescriptionsItem Title="Date Created" Span="2">@AccountsMasterView?.DateCreated.GetValueOrDefault().ToString("dddd-MMMM-yyyy")</DescriptionsItem>
+
+            </Descriptions>
+        }
+    }
+
+
+</div>
+

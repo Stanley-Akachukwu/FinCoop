@@ -1,0 +1,142 @@
+﻿<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        When due for new loan
+    </h3>
+
+    <div class="grid grid-cols-6 gap-6">
+        <div class="col-span-6 sm:col-full">
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Enable waiting period</h2>
+                            @if (Model.EnableWaitingPeriod)
+                            {
+                                <p>Yes</p>
+                            }
+                            else
+                            {
+                                <p>No</p>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Min waiting period unit</h2>
+                            <p>@Model.WaitingPeriodUnit</p>
+                        </div>
+
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Min waiting period value</h2>
+                            <p>@Model.WaitingPeriodValue</p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </form>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+
+
+    <div class="grid grid-cols-6 gap-6">
+        <div class="col-span-6 sm:col-full">
+            <form action="">
+                <div class="grid grid-cols-6 gap-6">
+
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="flex items-center  gap-8">
+                            <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Enable charges for waiting period</h2>
+                            @if (Model.EnableWaitingPeriodCharge)
+                            {
+                                <p>Yes</p>
+                            }
+                            else
+                            {
+                                <p>No</p>
+                            }
+                        </div>
+
+                    </div>
+                    @if (Model.EnableWaitingPeriodCharge && Model.WaitingPeriodCharges.Count > 0)
+                    {
+                        <div class="col-span-6 sm:col-span-3">
+                            <div class="flex items-center  gap-8">
+                                <h2 class=" text-sm font-medium text-gray-900 dark:text-white">Charges for waiting period</h2>
+                             
+                                <div class="overflow-hidden">
+                                    <table class="min-w-full text-left text-sm font-light">
+                                        <thead class="border-b font-medium dark:border-neutral-500">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-4">Name</th>
+                                                <th scope="col" class="px-6 py-4">Code</th>
+                                                <th scope="col" class="px-6 py-4">Charge</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.WaitingPeriodCharges)
+                                            {
+                                                <tr class="border-b dark:border-neutral-500">
+                                                    <td class="whitespace-nowrap px-6 py-4">@item.Name</td>
+                                                    <td class="whitespace-nowrap px-6 py-4">@item.Code</td>
+                                                    <td class="whitespace-nowrap px-6 py-4">@item.Amount.ToString("N")</td>
+                                                </tr>
+
+
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                   
+
+
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<div class="col-span-6 sm:col-span-3 flex gap-2 mt-2">
+    <div class="col-span-3 sm:col-span-3">
+        <a href="javascript: void(0)" @onclick=OnPrevious>
+            <button class="text-CEMCS-Blue-100 border border-CEMCS-Blue-100 bg-white hover:bg-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Back
+            </button>
+        </a>
+
+    </div>
+    <div class="col-span-3 sm:col-span-3">
+        <a href="javascript: void(0)" @onclick=OnProceed>
+            <button class="text-white bg-CEMCS-Blue-100 hover:bg-CEMCS-Blue-100 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Next
+            </button>
+        </a>
+
+    </div>
+</div>
+
+@code {
+
+}

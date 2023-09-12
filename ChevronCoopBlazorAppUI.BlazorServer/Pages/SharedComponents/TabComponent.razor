@@ -1,0 +1,406 @@
+﻿
+@if(MenuToShow == "depositaccount")
+{
+
+    <div class="text-xs font-medium text-center text-gray-500  border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px">
+            <li class="mr-2">
+
+                <a href="javascript: void(0)" @onclick=@(e => onSelectedFilter("all"))
+                   class="inline-block p-4 text-gray-500 border-b-2 @All  dark:text-blue-500 dark:border-blue-500"
+                   aria-current="page">
+                    <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M14.4001 7.99961C14.4001 9.69699 13.7258 11.3249 12.5256 12.5251C11.3253 13.7253 9.69748 14.3996 8.0001 14.3996C6.30271 14.3996 4.67485 13.7253 3.47461 12.5251C2.27438 11.3249 1.6001 9.69699 1.6001 7.99961C1.6001 6.30222 2.27438 4.67436 3.47461 3.47413C4.67485 2.27389 6.30271 1.59961 8.0001 1.59961C9.69748 1.59961 11.3253 2.27389 12.5256 3.47413C13.7258 4.67436 14.4001 6.30222 14.4001 7.99961ZM9.6001 5.59961C9.6001 6.02396 9.43153 6.43092 9.13147 6.73098C8.83141 7.03104 8.42444 7.19961 8.0001 7.19961C7.57575 7.19961 7.16879 7.03104 6.86873 6.73098C6.56867 6.43092 6.4001 6.02396 6.4001 5.59961C6.4001 5.17526 6.56867 4.7683 6.86873 4.46824C7.16879 4.16818 7.57575 3.99961 8.0001 3.99961C8.42444 3.99961 8.83141 4.16818 9.13147 4.46824C9.43153 4.7683 9.6001 5.17526 9.6001 5.59961ZM8.0001 8.79961C7.23418 8.79945 6.48432 9.0192 5.83963 9.43273C5.19494 9.84626 4.68253 10.4362 4.3633 11.1324C4.81344 11.6561 5.37151 12.0762 5.99925 12.364C6.62699 12.6518 7.30954 12.8004 8.0001 12.7996C8.69065 12.8004 9.3732 12.6518 10.0009 12.364C10.6287 12.0762 11.1868 11.6561 11.6369 11.1324C11.3177 10.4362 10.8053 9.84626 10.1606 9.43273C9.51588 9.0192 8.76602 8.79945 8.0001 8.79961Z"
+                              fill="#1F82BD" />
+                    </svg>
+
+                    All
+                </a>
+
+            </li>
+            <li class="mr-2">
+
+                <a href="javascript: void(0)" @onclick=@(e => onSelectedFilter(DepositProductType.SAVINGS.ToString()))
+                   class="inline-block p-4 text-gray-500 border-b-2 @Savings  dark:text-blue-500 dark:border-blue-500"
+                   aria-current="page">
+                    <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.1999 1.59961C6.98773 1.59961 6.78425 1.68389 6.63422 1.83392C6.48419 1.98395 6.3999 2.18744 6.3999 2.39961C6.3999 2.61178 6.48419 2.81527 6.63422 2.96529C6.78425 3.11532 6.98773 3.19961 7.1999 3.19961H8.7999C9.01208 3.19961 9.21556 3.11532 9.36559 2.96529C9.51562 2.81527 9.5999 2.61178 9.5999 2.39961C9.5999 2.18744 9.51562 1.98395 9.36559 1.83392C9.21556 1.68389 9.01208 1.59961 8.7999 1.59961H7.1999Z"
+                              fill="#6B7280" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M3.19995 4.00039C3.19995 3.57604 3.36852 3.16908 3.66858 2.86902C3.96864 2.56896 4.3756 2.40039 4.79995 2.40039C4.79995 3.03691 5.05281 3.64736 5.5029 4.09745C5.95298 4.54753 6.56343 4.80039 7.19995 4.80039H8.79995C9.43647 4.80039 10.0469 4.54753 10.497 4.09745C10.9471 3.64736 11.2 3.03691 11.2 2.40039C11.6243 2.40039 12.0313 2.56896 12.3313 2.86902C12.6314 3.16908 12.8 3.57604 12.8 4.00039V12.8004C12.8 13.2247 12.6314 13.6317 12.3313 13.9318C12.0313 14.2318 11.6243 14.4004 11.2 14.4004H4.79995C4.3756 14.4004 3.96864 14.2318 3.66858 13.9318C3.36852 13.6317 3.19995 13.2247 3.19995 12.8004V4.00039ZM5.59995 7.20039C5.38778 7.20039 5.1843 7.28468 5.03427 7.43471C4.88424 7.58473 4.79995 7.78822 4.79995 8.00039C4.79995 8.21256 4.88424 8.41605 5.03427 8.56608C5.1843 8.7161 5.38778 8.80039 5.59995 8.80039H5.60795C5.82012 8.80039 6.02361 8.7161 6.17364 8.56608C6.32367 8.41605 6.40795 8.21256 6.40795 8.00039C6.40795 7.78822 6.32367 7.58473 6.17364 7.43471C6.02361 7.28468 5.82012 7.20039 5.60795 7.20039H5.59995ZM7.99995 7.20039C7.78778 7.20039 7.5843 7.28468 7.43427 7.43471C7.28424 7.58473 7.19995 7.78822 7.19995 8.00039C7.19995 8.21256 7.28424 8.41605 7.43427 8.56608C7.5843 8.7161 7.78778 8.80039 7.99995 8.80039H10.4C10.6121 8.80039 10.8156 8.7161 10.9656 8.56608C11.1157 8.41605 11.2 8.21256 11.2 8.00039C11.2 7.78822 11.1157 7.58473 10.9656 7.43471C10.8156 7.28468 10.6121 7.20039 10.4 7.20039H7.99995ZM5.59995 10.4004C5.38778 10.4004 5.1843 10.4847 5.03427 10.6347C4.88424 10.7847 4.79995 10.9882 4.79995 11.2004C4.79995 11.4126 4.88424 11.616 5.03427 11.7661C5.1843 11.9161 5.38778 12.0004 5.59995 12.0004H5.60795C5.82012 12.0004 6.02361 11.9161 6.17364 11.7661C6.32367 11.616 6.40795 11.4126 6.40795 11.2004C6.40795 10.9882 6.32367 10.7847 6.17364 10.6347C6.02361 10.4847 5.82012 10.4004 5.60795 10.4004H5.59995ZM7.99995 10.4004C7.78778 10.4004 7.5843 10.4847 7.43427 10.6347C7.28424 10.7847 7.19995 10.9882 7.19995 11.2004C7.19995 11.4126 7.28424 11.616 7.43427 11.7661C7.5843 11.9161 7.78778 12.0004 7.99995 12.0004H10.4C10.6121 12.0004 10.8156 11.9161 10.9656 11.7661C11.1157 11.616 11.2 11.4126 11.2 11.2004C11.2 10.9882 11.1157 10.7847 10.9656 10.6347C10.8156 10.4847 10.6121 10.4004 10.4 10.4004H7.99995Z"
+                              fill="#6B7280" />
+                    </svg>
+
+                    Savings Account
+                </a>
+
+            </li>
+
+            <li class="mr-2">
+                <a href="javascript: void(0)" @onclick=@(e => onSelectedFilter(DepositProductType.SPECIAL_DEPOSIT.ToString()))
+                   class="inline-block p-4 text-gray-500 @SpecialDeposit rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.2001 4.3002H2.7001V4.8002V8.97999C2.59841 8.9281 2.50451 8.86024 2.42228 8.77801C2.21599 8.57172 2.1001 8.29193 2.1001 8.0002V4.8002C2.1001 4.50846 2.21599 4.22867 2.42228 4.02238C2.62857 3.81609 2.90836 3.7002 3.2001 3.7002H9.6001C9.89184 3.7002 10.1716 3.81609 10.3779 4.02238C10.4601 4.10461 10.528 4.19851 10.5799 4.3002H3.2001ZM5.3001 8.0002C5.3001 7.70846 5.41599 7.42867 5.62228 7.22238C5.82857 7.01609 6.10836 6.9002 6.4001 6.9002H12.8001C13.0918 6.9002 13.3716 7.01609 13.5779 7.22238C13.7842 7.42867 13.9001 7.70846 13.9001 8.0002V11.2002C13.9001 11.4919 13.7842 11.7717 13.5779 11.978C13.3716 12.1843 13.0918 12.3002 12.8001 12.3002H6.4001C6.10836 12.3002 5.82857 12.1843 5.62228 11.978C5.41599 11.7717 5.3001 11.4919 5.3001 11.2002V8.0002ZM9.6001 11.7002C10.1571 11.7002 10.6912 11.4789 11.085 11.0851C11.4788 10.6913 11.7001 10.1572 11.7001 9.6002C11.7001 9.04324 11.4788 8.5091 11.085 8.11527C10.6912 7.72145 10.1571 7.5002 9.6001 7.5002C9.04314 7.5002 8.509 7.72145 8.11517 8.11527C7.72135 8.5091 7.5001 9.04324 7.5001 9.6002C7.5001 10.1572 7.72135 10.6913 8.11517 11.0851C8.509 11.4789 9.04314 11.7002 9.6001 11.7002Z"
+                              fill="#6B7280" stroke="#6B7280" />
+                    </svg>
+                    Special Deposit
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript: void(0)" @onclick=@(e => onSelectedFilter(DepositProductType.FIXED_DEPOSIT.ToString()))
+                   class="inline-block p-4 text-gray-500 @FixedDeposit rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    <svg class="inline mr-1" width="16" height="16" viewBox="0 0 16 16"
+                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.2001 4.3002H2.7001V4.8002V8.97999C2.59841 8.9281 2.50451 8.86024 2.42228 8.77801C2.21599 8.57172 2.1001 8.29193 2.1001 8.0002V4.8002C2.1001 4.50846 2.21599 4.22867 2.42228 4.02238C2.62857 3.81609 2.90836 3.7002 3.2001 3.7002H9.6001C9.89184 3.7002 10.1716 3.81609 10.3779 4.02238C10.4601 4.10461 10.528 4.19851 10.5799 4.3002H3.2001ZM5.3001 8.0002C5.3001 7.70846 5.41599 7.42867 5.62228 7.22238C5.82857 7.01609 6.10836 6.9002 6.4001 6.9002H12.8001C13.0918 6.9002 13.3716 7.01609 13.5779 7.22238C13.7842 7.42867 13.9001 7.70846 13.9001 8.0002V11.2002C13.9001 11.4919 13.7842 11.7717 13.5779 11.978C13.3716 12.1843 13.0918 12.3002 12.8001 12.3002H6.4001C6.10836 12.3002 5.82857 12.1843 5.62228 11.978C5.41599 11.7717 5.3001 11.4919 5.3001 11.2002V8.0002ZM9.6001 11.7002C10.1571 11.7002 10.6912 11.4789 11.085 11.0851C11.4788 10.6913 11.7001 10.1572 11.7001 9.6002C11.7001 9.04324 11.4788 8.5091 11.085 8.11527C10.6912 7.72145 10.1571 7.5002 9.6001 7.5002C9.04314 7.5002 8.509 7.72145 8.11517 8.11527C7.72135 8.5091 7.5001 9.04324 7.5001 9.6002C7.5001 10.1572 7.72135 10.6913 8.11517 11.0851C8.509 11.4789 9.04314 11.7002 9.6001 11.7002Z"
+                              fill="#6B7280" stroke="#6B7280" />
+                    </svg>
+                    Fixed Deposit
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+}
+else if(MenuToShow == "othertab1")
+{
+    <div class="text-sm w-full font-medium text-center text-gray-500  border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px">
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter("all"))
+                   class="inline-block p-4 @allTab  border-b-2  rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+
+                    All Requests
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(ApprovalStatus.APPROVED.ToString()))
+                   class="inline-block p-4 @approveTab border-b-2  rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+                   aria-current="page">
+
+                    Approved Requests
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(ApprovalStatus.PENDING_APPROVAL.ToString()))
+                   class="inline-block @pendingTab p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+
+                    Pending Requests
+                </a>
+
+            </li>
+
+              <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(ApprovalStatus.INITIATED.ToString()))
+                   class="inline-block p-4 @initiatedTab border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+
+                    Initiated
+                </a>
+            </li>
+
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(ApprovalStatus.REJECTED.ToString()))
+                   class="inline-block @rejectedTab p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+
+                    Rejected Requests
+                </a>
+            </li>
+
+          
+
+        </ul>
+    </div>
+}
+
+else if(MenuToShow == "othertab2")
+{
+    <div class="text-sm w-full font-medium text-center text-gray-500  border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px">
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter("all"))
+                   class="inline-block p-4 @allTab  rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    All
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(DepositAccountActionType.CASH_ADDITION.ToString()))
+                   class="inline-block p-4 @tab1 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+                   aria-current="page">
+
+                    Cash Addition
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter("Increase/Decrease"))
+                   class="inline-block p-4 @tab2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    Increase &amp; Decrease
+                </a>
+
+            </li>
+
+
+        </ul>
+    </div>
+}
+
+else if (MenuToShow == "othertab3")
+{
+    <div class="text-sm w-full font-medium text-center text-gray-500  border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px">
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter("all"))
+                   class="inline-block p-4 @allTab rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    All
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter("Change Maturity Instruction"))
+                   class="inline-block p-4 @tab1 rounded-t-lg dark:text-blue-500 dark:border-blue-500"
+                   aria-current="page">
+
+                    Change Maturity Instruction
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter("Liquidation"))
+                   class="inline-block p-4 @tab2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    Liquidation
+                </a>
+
+            </li>
+
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter("Fixed Deposit Investment"))
+                   class="inline-block p-4 @tab3 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    Fixed Deposit Investment
+                </a>
+
+            </li>
+
+
+        </ul>
+    </div>
+}
+
+else if (MenuToShow == "othertab4")
+{
+    <div class="text-sm w-full font-medium text-center text-gray-500  border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px">
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter("all"))
+                   class="inline-block p-4 @allTab text-blue-600 border-b-2 border-blue-600  rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    All
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(DepositAccountActionType.WITHDRAWAL.ToString()))
+                   class="inline-block p-4 @tab1 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+                   aria-current="page">
+
+                    Withdrawal
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(DepositAccountActionType.CASH_ADDITION.ToString()))
+                   class="inline-block p-4 @tab2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    Cash Addition
+                </a>
+
+            </li>
+
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(DepositAccountActionType.FUND_TRANSFER.ToString()))
+                   class="inline-block p-4 @tab3 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    Fund Transfer
+                </a>
+
+            </li>
+
+
+        </ul>
+    </div>
+
+}
+
+else if (MenuToShow == "othertab5")
+{
+    <div class="text-sm w-full font-medium text-center text-gray-500  border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px">
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter("all"))
+                   class="inline-block p-4 @allTab text-blue-600 border-b-2 border-blue-600  rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    All
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(CronJobStatus.PENDING.ToString()))
+                   class="inline-block p-4 @tab1 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+                   aria-current="page">
+
+                    Pending
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(CronJobStatus.STARTED.ToString()))
+                   class="inline-block p-4 @tab2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    Started
+                </a>
+
+            </li>
+
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(CronJobStatus.COMPLETED.ToString()))
+                   class="inline-block p-4 @tab3 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                  Completed
+                </a>
+
+            </li>
+            <li class="mr-2">
+                <a href="javascript:void(0)" @onclick=@(e => onSelectedFilter(CronJobStatus.FAILED.ToString()))
+                   class="inline-block p-4 @tab3 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+                    Failed
+                </a>
+
+            </li>
+
+        </ul>
+    </div>
+
+}
+
+
+@code {
+
+    [Parameter]
+    public EventCallback<string> OnUpdateChanged { get; set; }
+
+    string All { get; set; } = string.Empty;
+    string Savings { get; set; } = string.Empty;
+    string SpecialDeposit { get; set; } = string.Empty;
+    string FixedDeposit { get; set; } = string.Empty;
+    string Active { get; set; } = "text-blue-600 border-b-2 border-blue-600 active";
+    string Inactive { get; set; } = "border-b-2 border-transparent";
+
+    string selectedTab = "text-gray-500 border-blue-600";
+
+    string allTab, approveTab, pendingTab, rejectedTab, initiatedTab, createdTab = "text-blue-600";
+
+    string tab1, tab2, tab3, tab4, tab5 = "text-blue-600";
+
+    [Parameter] 
+    public string MenuToShow { get; set; } = "depositaccount";
+
+    public async void ResetAllTab()
+    {
+        All = Savings = SpecialDeposit = FixedDeposit = "border-b-2 border-transparent";
+
+        allTab = approveTab = pendingTab = rejectedTab = initiatedTab = createdTab = "text-blue-600";
+
+        tab1 = tab2 = tab3 = tab4 = tab5 = "text-blue-600";
+    }
+
+    async Task onSelectedFilter(string filter)
+    {
+        await OnUpdateChanged.InvokeAsync(filter);
+        ResetAllTab();
+        if (filter == "all")
+        {
+            All = Active;
+            allTab = selectedTab;
+        }
+        else if (filter == DepositProductType.SAVINGS.ToString())
+        {
+            Savings = Active;
+        }
+        else if (filter == DepositProductType.FIXED_DEPOSIT.ToString())
+        {
+            FixedDeposit = Active;
+        }
+        else if (filter == DepositProductType.SPECIAL_DEPOSIT.ToString())
+        {
+            SpecialDeposit = Active;
+        }
+        else if (filter.Contains("_"))
+        {
+            pendingTab = selectedTab;
+        }
+
+        //For Savings
+        else if (filter == DepositAccountActionType.CASH_ADDITION.ToString())
+        {
+            tab1 = selectedTab;
+        }
+        else if (filter == "Increase/Decrease")
+        {
+            tab2 = selectedTab;
+        }
+        //End of savings
+        else if (filter == ApprovalStatus.APPROVED.ToString())
+        {
+            approveTab = selectedTab;
+        }
+        else if (filter == ApprovalStatus.REJECTED.ToString())
+        {
+            rejectedTab = selectedTab;
+        }
+        else if (filter == ApprovalStatus.PENDING_APPROVAL.ToString())
+        {
+            pendingTab = selectedTab;
+        }
+        else if (filter == ApprovalStatus.CREATED.ToString())
+        {
+            createdTab = selectedTab;
+        }
+        else if (filter == CronJobStatus.PENDING.ToString())
+        {
+            tab1 = selectedTab;
+        }
+          else if (filter == CronJobStatus.STARTED.ToString())
+        {
+            tab2 = selectedTab;
+        }
+          else if (filter == CronJobStatus.COMPLETED.ToString())
+        {
+            tab3 = selectedTab;
+        }
+        else if (filter == CronJobStatus.FAILED.ToString())
+        {
+            tab4 = selectedTab;
+        }
+        
+        else if(filter.Contains("_"))
+        {
+            pendingTab = selectedTab;
+        }
+        else if (filter == "Change Maturity Instruction")
+        {
+            tab1 = selectedTab;
+        }
+        else if (filter == "Liquidation")
+        {
+            tab2 = selectedTab;
+        }
+        else if (filter == "Fixed Deposit Investment")
+        {
+            tab3 = selectedTab;
+        }
+
+        else if (filter == DepositAccountActionType.WITHDRAWAL.ToString())
+        {
+            tab1 = selectedTab;
+        }
+        else if (filter == DepositAccountActionType.CASH_ADDITION.ToString())
+        {
+            tab2 = selectedTab;
+        }
+        else if (filter == "Fixed Deposit Investment")
+        {
+            tab3 = selectedTab;
+        }
+    }
+
+}

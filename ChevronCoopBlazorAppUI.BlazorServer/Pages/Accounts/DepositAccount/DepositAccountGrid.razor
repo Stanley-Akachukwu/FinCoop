@@ -1,0 +1,119 @@
+﻿@page "/account/depositAccount"
+@using AP.ChevronCoop.Entities.Deposits.DepositApplications;
+@using ChevronCoop.Web.AppUI.BlazorServer.Helper;
+<main>
+
+    <div class="px-4 pt-12">
+
+        <div class="relative overflow-x-auto shadow mb-3  sm:rounded-lg">
+
+            <div class="py-6 px-4 flex w-full items-center font-semibold justify-between  ">
+                <h1>Deposit accounts </h1>
+
+                <NavLink href="/Account/NewDepositApplication">
+                    <button type="button"
+                            data-modal-toggle="add-product-modal"
+                            class="@Tailwind.GreenButton_Inline">
+                        @((MarkupString)@SvgHelpers.PlusSignIcon)
+                        Open new account
+                    </button>
+                </NavLink>
+            </div>
+            <div class="mb-4 flex w-full items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+
+                <div class="w-full">
+                    <div class="hidden md:flex">
+
+                        <TabComponent OnUpdateChanged="onFiltering" MenuToShow="@tabToShow"></TabComponent>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="flex justify-end gap-2 py-4 pr-4 w-full">
+
+                <div class="md:w-1/2">
+                    <div class="sm:col-span-2">
+                        <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                            <input type="search" id="default-search" @bind="@searchText" @oninput="SearchAccount"
+                                   class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search...">
+
+                            <button @onclick="OnSearch" class="text-white absolute right-0 bottom-0 top-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="relative overflow-x-auto shadow mb-3 sm:rounded-lg">
+
+                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                    <!-- Start coding here -->
+
+                    <span class="error p-2">@ErrorDetails</span>
+
+                    <div class="overflow-x-auto">
+                        <SfGrid ID="gridDepositAccount" TValue="DepositAccountsMasterView" EnablePersistence="false"
+
+                                DataSource="DepositAccountsMasterViewSrc"
+                                AllowPaging="true" AllowFiltering="true" AllowSelection="true" EnableAltRow="true"
+                                AllowResizing="true" ShowColumnChooser="true" ShowColumnMenu="true" Width="100%" 
+                                AllowExcelExport="true" AllowPdfExport="true" AllowTextWrap="false" AllowSorting="true"
+                                AllowMultiSorting="true" AllowGrouping="true" AllowReordering="true" AllowRowDragAndDrop="false" Toolbar="@(new List<string>() { "ExcelExport", "PdfExport" })">
+
+                            <GridPageSettings PageCount="10" PageSize="20" PageSizes="new int[] { 5, 10, 15, 20, 30, 50 }"></GridPageSettings>
+
+                            <GridEvents TValue="DepositAccountsMasterView"></GridEvents>
+
+                            <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Menu" ShowFilterBarStatus="true">
+
+                            </GridFilterSettings>
+                           
+                            <GridColumns>
+                                <GridColumn HeaderText="S/N" AutoFit="true">
+                                    <Template Context="context">
+                                        <span>@SortSerialNumber.GetSerialNumber(context)</span>
+                                    </Template>
+                                </GridColumn>
+                                <GridColumn Field=@nameof(DepositAccountsMasterView.AccountNo) HeaderText="ACCOUNT NO" AutoFit="true"></GridColumn>
+                                <GridColumn Field=@nameof(DepositAccountsMasterView.DateCreated) HeaderText="DATE CREATED" Format="dd MMM yyyy hh:mm tt" Type="ColumnType.Date" AutoFit="true"></GridColumn>
+                                <GridColumn Field=@nameof(DepositAccountsMasterView.AccountType) HeaderText="ACCOUNT TYPE" AutoFit="true"></GridColumn>
+                                <GridColumn Field=@nameof(DepositAccountsMasterView.LedgerBalance) HeaderText="ACCOUNT BALANCE" TextAlign="TextAlign.Right" Type="ColumnType.Number" Format="N2" AutoFit="false"></GridColumn>
+                                <GridColumn Field=@nameof(DepositAccountsMasterView.MonthlyContributionAmount) HeaderText="MONTHLY CONTRIBUTION" TextAlign="TextAlign.Right" Type="ColumnType.Number" Format="N2" AutoFit="false"></GridColumn>
+                                <GridColumn HeaderText="Action" AutoFit="true" HeaderTextAlign="TextAlign.Right" TextAlign=TextAlign.Center Width="50">
+                                    <Template>
+
+                                        @{
+                                            var row = (context as DepositAccountsMasterView);
+
+                                            <a href="/DepositAccountDetails/@row.AccountType.ToLower()/@row.Id/@row.CustomerId"
+                                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                View Details
+                                            </a>
+                                        }
+
+                                    </Template>
+                                </GridColumn>
+                            </GridColumns>
+                        </SfGrid>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</main>

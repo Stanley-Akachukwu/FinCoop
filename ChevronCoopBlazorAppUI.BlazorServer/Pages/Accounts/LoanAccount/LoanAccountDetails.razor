@@ -1,0 +1,472 @@
+﻿@page "/LoanAccountDetails/{Id}/"
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.FixedDeposit
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.SavingsAccount
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.DepositAccount.SpecialDeposit
+@using ChevronCoop.Web.AppUI.BlazorServer.Pages.Accounts.LoanAccount.LoanAccountDashboard;
+
+<main>
+
+<div class="px-4 pt-6">
+<div class="col-span-3 sm:col-span-3 mb-6 flex gap-2  items-center">
+    <a href="/account/loanproductsapplications">
+        <button class="@Tailwind.Back_Button"
+                type="submit">
+            @((MarkupString)SvgHelpers.BackArrowIcon) Back
+        </button>
+    </a>
+    <h1 class="font-semibold">@PageTitle</h1>
+</div>
+
+
+<!-- Request Tabs -->
+
+<div class="w-full flex items-center shadow mb-3 sm:gap-0 gap-8 bg-white  sm:rounded-lg p-4 flex-wrap">
+    <div class="flex sm:flex-row flex-col gap-2 justify-start items-center grow-0 shrink-0 sm:basis-1/3 sm:max-w-1/3 basis-full  max-w-1/3 ">
+                <div class="relative h-16 w-16">
+                    <img src="@CustomerImage" alt="@CustomerImage" class="rounded-full h-full w-full object-cover" />
+                </div>
+        <div class="flex flex-col items-center justify-center">
+            <div class="md:text-left text-center">
+                <h3 class="text-base text-gray-500">Account name</h3>
+                <p class="font-semibold text-xl">@CustomerFullName</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="flex flex-col items-start justify-center items-center  border-r-2 border-l-2 border-gray-200 grow-0 shrink-0 sm:basis-1/3 sm:max-w-1/3 basis-full  max-w-1/3">
+        <div class="md:text-left text-center ">
+            <h3 class="text-base text-gray-500">Account number</h3>
+            <p class="font-semibold text-xl">@CustomerAccountNumber</p>
+        </div>
+    </div>
+    <div class="flex flex-col items-start justify-center items-center grow-0 shrink-0 sm:basis-1/3 sm:max-w-1/3 basis-full  max-w-1/3">
+        <div class="md:text-left text-center ">
+            <h3 class="text-base text-gray-500">Account type</h3>
+            <p class="font-semibold text-xl">@CustomerAccountType</p>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 px-2 pt-6 xl:grid-cols-9 xl:gap-2 xl:space-x-10 dark:bg-gray-900">
+<div class="col-span-2 mb-4">
+    <div class="bg-white  rounded-lg shadow   dark:bg-gray-800">
+
+                    @*Executive Loan Menu*@
+
+                    @if (showExecutiveLoan)
+                    {
+                        <a @onclick='(() => ChangeMenu("executive_loan"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Dashboard
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("transaction"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Transactions
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("top-up"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Loan Top Up
+                                </h3>
+                            </div>
+                        </a>
+
+                        <a @onclick='(() => ChangeMenu("offset"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.CashAddition) Loan Offset
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("repayment-schedule"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Repayment Schedule
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("ledger_accounts"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Ledger Accounts
+                                </h3>
+                            </div>
+                        </a>
+                    }
+
+
+                    @*Target Loan Menu*@
+
+                    @if (showTargetLoan)
+                    {
+                        <a @onclick='(() => ChangeMenu("target_loan"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Dashboard
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("transaction"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Transactions
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("top-up"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Top Up
+                                </h3>
+                            </div>
+                        </a>
+
+                        <a @onclick='(() => ChangeMenu("offset"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.CashAddition) Loan Offset
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("repayment-schedule"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Repayment Schedule
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("ledger_accounts"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Ledger Accounts
+                                </h3>
+                            </div>
+                        </a>
+                    }
+
+
+                    @*Long Term Loan*@
+
+                    @if (showLongTermLoan)
+                    {
+                        <a @onclick='(() => ChangeMenu("long_term_loan"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Dashboard
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("transaction"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Transactions
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("top-up"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Top Up
+                                </h3>
+                            </div>
+                        </a>
+
+                        <a @onclick='(() => ChangeMenu("offset"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.CashAddition) Loan Offset
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("repayment-schedule"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Repayment Schedule
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("ledger_accounts"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Ledger Accounts
+                                </h3>
+                            </div>
+                        </a>
+                    }
+
+                    @*Long Term Loan*@
+
+                    @if (showShortTermLoan)
+                    {
+                        <a @onclick='(() => ChangeMenu("short_term_loan"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Dashboard
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("transaction"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Transactions
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("top-up"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Loan Top Up
+                                </h3>
+                            </div>
+                        </a>
+
+                        <a @onclick='(() => ChangeMenu("offset"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.CashAddition) Loan Offset
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("repayment-schedule"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Repayment Schedule
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("ledger_accounts"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Ledger Accounts
+                                </h3>
+                            </div>
+                        </a>
+                    }
+                    @*Short Term Loan*@
+
+                    @if (showCarLoan)
+                    {
+                        <a @onclick='(() => ChangeMenu("car_loan"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Dashboard
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("transaction"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Transactions
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("top-up"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Loan Top Up
+                                </h3>
+                            </div>
+                        </a>
+
+                        <a @onclick='(() => ChangeMenu("offset"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.CashAddition) Loan Offset
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("repayment-schedule"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Repayment Schedule
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("ledger_accounts"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Ledger Accounts
+                                </h3>
+                            </div>
+                        </a>
+                    }
+                    @if (showHouseApplience)
+                    {
+                        <a @onclick='(() => ChangeMenu("house_appliance_loan"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Dashboard
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("transaction"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Transactions
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("top-up"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Loan Top Up
+                                </h3>
+                            </div>
+                        </a>
+
+                        <a @onclick='(() => ChangeMenu("offset"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.CashAddition) Loan Offset
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("repayment-schedule"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.TopUpIcon) Repayment Schedule
+                                </h3>
+                            </div>
+                        </a>
+                        <a @onclick='(() => ChangeMenu("ledger_accounts"))'>
+                            <div class="items-start hover:bg-blue-200 cursor-pointer justify-center p-4 flex flex-col xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                                <h3 class=" text-gray-900 font-semibold text-base">
+                                    @((MarkupString)@SvgHelpers.SavingsDashboard) Ledger Accounts
+                                </h3>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-span-7">
+
+                @if (MenuToShow == "executive_loan")
+                {
+                    <LoanApplicationDashboard LoanBalance="@LoanBalance" LoanAmount="@LoanAmount" 
+                               TotalAmountRepaid="@TotalAmountRepaid"
+                                NextRepaymentAmount="@NextRepaymentAmount"
+                               CustomerID="@CustomerId"
+                                              LoanAccountId="@AccountsMasterView.Id"
+                               LoanAccountNumber="@AccountsMasterView.AccountNo"
+                               MembersName="@CustomerFullName"
+                               MembersNumber="@CustomerAccountNumber" />
+                }
+                else if (MenuToShow == "target_loan")
+                {
+                    <LoanApplicationDashboard LoanBalance="@LoanBalance" LoanAmount="@LoanAmount"
+                                              TotalAmountRepaid="@TotalAmountRepaid"
+                                              NextRepaymentAmount="@NextRepaymentAmount"
+                                              CustomerID="@CustomerId"
+                                              LoanAccountId="@AccountsMasterView.Id"
+                                              LoanAccountNumber="@AccountsMasterView.AccountNo"
+                                              MembersName="@CustomerFullName"
+                                              MembersNumber="@CustomerAccountNumber" />
+                }
+                else if (MenuToShow == "long_term_loan")
+                {
+                    <LoanApplicationDashboard LoanBalance="@LoanBalance" LoanAmount="@LoanAmount"
+                                              TotalAmountRepaid="@TotalAmountRepaid"
+                                              NextRepaymentAmount="@NextRepaymentAmount"
+                                              CustomerID="@CustomerId"
+                                              LoanAccountId="@AccountsMasterView.Id"
+                                              LoanAccountNumber="@AccountsMasterView.AccountNo"
+                                              MembersName="@CustomerFullName"
+                                              MembersNumber="@CustomerAccountNumber" />
+                }
+                else if (MenuToShow == "short_term_loan")
+                {
+                    <LoanApplicationDashboard LoanBalance="@LoanBalance" LoanAmount="@LoanAmount"
+                                              TotalAmountRepaid="@TotalAmountRepaid"
+                                              NextRepaymentAmount="@NextRepaymentAmount"
+                                              CustomerID="@CustomerId"
+                                              LoanAccountId="@AccountsMasterView.Id"
+                                              LoanAccountNumber="@AccountsMasterView.AccountNo"
+                                              MembersName="@CustomerFullName"
+                                              MembersNumber="@CustomerAccountNumber" />
+                }
+                else if (MenuToShow == "car_loan")
+                {
+                    <LoanApplicationDashboard LoanBalance="@LoanBalance" LoanAmount="@LoanAmount"
+                                              TotalAmountRepaid="@TotalAmountRepaid"
+                                              NextRepaymentAmount="@NextRepaymentAmount"
+                                              CustomerID="@CustomerId"
+                                              LoanAccountId="@AccountsMasterView.Id"
+                                              LoanAccountNumber="@AccountsMasterView.AccountNo"
+                                              MembersName="@CustomerFullName"
+                                              MembersNumber="@CustomerAccountNumber" />
+                }
+                else if (MenuToShow == "house_appliance_loan")
+                {
+                    <LoanApplicationDashboard LoanBalance="@LoanBalance" LoanAmount="@LoanAmount"
+                                              TotalAmountRepaid="@TotalAmountRepaid"
+                                              NextRepaymentAmount="@NextRepaymentAmount"
+                                              CustomerID="@CustomerId"
+                                              LoanAccountId="@AccountsMasterView.Id"
+                                              LoanAccountNumber="@AccountsMasterView.AccountNo"
+                                              MembersName="@CustomerFullName"
+                                              MembersNumber="@CustomerAccountNumber" />
+                }
+                else if (MenuToShow == "transaction")
+                {
+                    <LoanTransactionDashboard LoanBalance="@LoanBalance" LoanAmount="@LoanAmount"
+                                              TotalAmountRepaid="@TotalAmountRepaid"
+                                              NextRepaymentAmount="@NextRepaymentAmount"
+                                              CustomerID="@CustomerId"
+                                              LoanApplicationId="@AccountsMasterView.LoanApplicationId"
+                                              LoanAccountNumber="@AccountsMasterView.AccountNo"
+                                              MembersName="@CustomerFullName"
+                                              MembersNumber="@CustomerAccountNumber" />
+                }
+                else if (MenuToShow == "top-up")
+                {
+                    <LoanTopUpAccountDashboard LoanBalance="@LoanBalance" LoanAmount="@LoanAmount"
+                                TotalAmountRepaid="@TotalAmountRepaid"
+                                NextRepaymentAmount="@NextRepaymentAmount" CustomerID="@CustomerId"
+                                 LoanAccountID="@AccountsMasterView.Id"
+                                 LonaAccountNumber="@AccountsMasterView.AccountNo"
+                                 MembersName="@CustomerFullName"
+                                 MembersNumber="@CustomerAccountNumber" 
+                                 IsActiveLoanAccount = "@IsActiveLoanAccount"/>
+                }
+                else if (MenuToShow == "offset")
+                {
+                    <LoanOffsetAccountDashboard LoanBalance="@LoanBalance" LoanAmount="@LoanAmount"
+                                                TotalAmountRepaid="@TotalAmountRepaid"
+                                                NextRepaymentAmount="@NextRepaymentAmount" CustomerID="@CustomerId"
+                                               LoanAccountID="@AccountsMasterView.Id"
+                                               LonaAccountNumber="@AccountsMasterView.AccountNo"
+                                               MembersName="@CustomerFullName"
+                                               MembersNumber="@CustomerAccountNumber"
+                                               IsActiveLoanAccount="@IsActiveLoanAccount" />
+                }
+                else if (MenuToShow == "ledger_accounts")
+                {
+                    <LoanLedgerAccounts LoanBalance="@LoanBalance" LoanAmount="@LoanAmount"
+                                                TotalAmountRepaid="@TotalAmountRepaid"
+                                                NextRepaymentAmount="@NextRepaymentAmount" CustomerID="@CustomerId"
+                                                LoanAccountID="@AccountsMasterView.Id"
+                                                LonaAccountNumber="@AccountsMasterView.AccountNo"
+                                                MembersName="@CustomerFullName"
+                                                MembersNumber="@CustomerAccountNumber" />
+                }
+                else if (MenuToShow == "repayment-schedule")
+                {
+                    <LoanRepaymentSchedule LoanBalance="@LoanBalance" LoanAmount="@LoanAmount"
+                                        TotalAmountRepaid="@TotalAmountRepaid"
+                                        NextRepaymentAmount="@NextRepaymentAmount" CustomerID="@CustomerId"
+                                        MembersName="@CustomerFullName"
+                                        LoanAccountID="@AccountsMasterView.Id"
+                                        MembersNumber="@CustomerAccountNumber" />
+                }
+            </div>
+        </div>
+
+</div>
+
+</main>

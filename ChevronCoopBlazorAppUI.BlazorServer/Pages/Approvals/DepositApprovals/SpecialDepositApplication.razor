@@ -1,0 +1,170 @@
+﻿@using AP.ChevronCoop.Entities.Deposits.SpecialDeposits;
+@using System.Globalization;
+@using AP.ChevronCoop.Entities.Deposits.SpecialDeposits.SpecialDepositAccountApplications;
+
+<div class="p-4 mb-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
+    <h3 class="mb-4 text-xl font-bold dark:text-white">
+        @ApprovalType.Replace("_", " ")
+    </h3>
+
+    @foreach (var item in _SpecialDepositAccountApplicationMasterView)
+    {
+        <form action="">
+            <div class="grid grid-cols-6 gap-6">
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Product Name
+                        </h2>
+                        <p>@item.DepositProductId_Name</p>
+                    </div>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Description
+                        </h2>
+                        <p>@item.Description</p>
+                    </div>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Application Number
+                        </h2>
+                        <p>@item.ApplicationNo</p>
+                    </div>
+
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Type of Account
+                        </h2>
+                        <p>@item.Tags</p>
+                    </div>
+
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Customer Type
+                        </h2>
+                        <p>@item.CustomerId_MemberType</p>
+                    </div>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Customer Type
+                        </h2>
+                        <p>@item.ModeOfPayment</p>
+                    </div>
+
+                </div>
+                   <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Caption
+                        </h2>
+                        <p>@item.Caption</p>
+                    </div>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Customer No
+                        </h2>
+                        <p>@item.CustomerId_CustomerNo</p>
+                    </div>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Customer Name
+                        </h2>
+                        <p>@item.CustomerId_FirstName @item.CustomerId_LastName</p>
+                    </div>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Customer Phone Number
+                        </h2>
+                        <p>@item.CustomerId_PrimaryPhone</p>
+                    </div>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Product Tenure
+                        </h2>
+                        <p>@item.DepositProductId_Tenure</p>
+                    </div>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Product Tenure Value
+                        </h2>
+                        <p>@item.DepositProductId_TenureValue</p>
+                    </div>
+                </div>
+
+
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Deposit Amount
+                        </h2>
+                        <p>@item.Amount.ToString("N2", new CultureInfo("en-US"))</p>
+                    </div>
+
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-black dark:text-white w-1/2">
+                            Date Created
+                        </h2>
+                        <p>@item.DateCreated.GetValueOrDefault().ToString("M/d/yyyy")</p>
+                    </div>
+
+                </div>
+             @*   <div class="col-span-6 sm:col-span-6">
+                    <div class="flex items-center  gap-8">
+                        <h2 class=" text-sm font-medium text-gray-400 dark:text-white w-1/2">
+                            Uploaded
+                        </h2>
+
+                        <img src="@item.CustomerId_ProfileImageUrl" />
+                    </div>
+
+                </div>*@
+            </div>
+        </form>
+    }
+
+
+</div>
+
+
+@code {
+
+    [Parameter] public string ApprovalType { get; set; } = "";
+
+    [Parameter]
+    public List<SpecialDepositAccountApplicationMasterView> _SpecialDepositAccountApplicationMasterView { get; set; } = new List<SpecialDepositAccountApplicationMasterView>();
+
+
+}
